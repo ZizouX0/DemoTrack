@@ -18,12 +18,22 @@ seeds the in-app Label Discovery library (Phase 3, spec §11).
 
 | Metric | Value |
 |---|---|
-| Labels recorded | **291** |
-| Contactable now (have a real demo channel) | 276 / 291 |
-| High confidence (official page or ≥2 sources) | 148 |
-| Medium confidence (single secondary source — re-verify) | 120 |
-| Low confidence (channel unconfirmed / window-only) | 23 |
-| Tier mix | 12 ELITE · 91 A · 188 B |
+| Labels recorded | **288** |
+| Contactable now (have a real demo channel) | 272 / 288 |
+| High confidence (official page or ≥2 sources) | 183 |
+| Medium confidence (single secondary source — re-verify) | 76 |
+| Low confidence (channel unconfirmed / window-only) | 29 |
+| Tier mix | 12 ELITE · ~91 A · ~185 B |
+
+### Batch 9 — verification pass over all medium-confidence records
+Re-checked all 120 medium records via a parallel 6-agent pass against each label's own
+official source: **35 promoted to high**, **27 channels corrected** (e.g. Suara →
+`labelmanagement@suara-music.com`, Nervous → Trackstack + `andrew@nervousnyc.com`,
+Hottrax/Hot Creations → `soundcloud.com/allhcdemos`, Last Night On Earth →
+`demos@lnoearth.com`, Abode → Trackstack, ec2a → `demos@ec2aworldwide.com`),
+**6 dropped to low** (no confirmable channel), and **3 removed** — Good Enuff &
+Let's Play House (dormant) and ATW Records (UK garage, off-genre). High-confidence
+records are now the majority of the database (183 of 288).
 
 ### Batch 8 — full 6-agent regional sweep (resumed after rate-limit)
 Six parallel agents swept the regions/niches and added **+72 verified** labels
