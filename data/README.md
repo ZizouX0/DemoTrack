@@ -11,23 +11,28 @@ seeds the in-app Label Discovery library (Phase 3, spec §11).
 
 ## Status (2026-06-01)
 - **Batch 1:** the 17 curated seed labels from spec §11.
-- **Batch 2:** +13 additional career-changing, mostly cold-demo-friendly house/tech-house
-  labels (expansion toward the ~170 target in §12).
+- **Batch 2:** +13 career-changing house/tech-house labels.
+- **Batch 3:** +15 more (expansion toward the ~170 target in §12).
 
 | Metric | Value |
 |---|---|
-| Labels recorded | 30 |
-| Contactable now (have a real demo channel) | 27 / 30 |
-| High confidence (official page or ≥2 sources) | 21 |
-| Medium confidence (single secondary source — re-verify) | 6 |
+| Labels recorded | 45 |
+| Contactable now (have a real demo channel) | 42 / 45 |
+| High confidence (official page or ≥2 sources) | 31 |
+| Medium confidence (single secondary source — re-verify) | 11 |
 | Low confidence (no channel found / window-only) | 3 (Hellbent, Country Club Disco, Night Bass) |
+| Tier mix | 4 ELITE · 19 A · 22 B |
 
-**Batch 2 additions:** Glasgow Underground, Snatch! Records, Crosstown Rebels,
-Saved Records, Moon Harbour, Desert Hearts, Box of Cats, Cuttin' Headz,
-Country Club Disco, Anjunadeep, Confession, Higher Ground, Night Bass.
+**Batch 2:** Glasgow Underground, Snatch! Records, Crosstown Rebels, Saved Records,
+Moon Harbour, Desert Hearts, Box of Cats, Cuttin' Headz, Country Club Disco,
+Anjunadeep, Confession, Higher Ground, Night Bass.
 
-Deliberately skipped this round (quality bar / accuracy): **Elrow Music** (no
-verifiable demo channel found), **Realm** (conflicting addresses across sources),
+**Batch 3:** Diynamic, Get Physical, Rekids, Yoshitoshi Recordings, Lost Records,
+All Day I Dream, Under No Illusion, Roush Label, Abode Records, Eastenderz,
+PIV Records, Heldeep, Perfect Havoc, Nervous Records, Hottrax.
+
+Deliberately skipped (quality bar / accuracy): **Elrow Music** & **Kaluki Musik**
+(no verifiable demo channel found), **Realm** (conflicting addresses across sources),
 **Rawthentic** (appears dormant — last release ~10 years ago).
 
 ## Method (the spec's research loop)

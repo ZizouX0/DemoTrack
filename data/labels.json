@@ -1125,6 +1125,543 @@
       ],
       "last_verified": "2026-06-01",
       "confidence": "low"
+    },
+    {
+      "name": "Diynamic",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "melodic house",
+        "tech house"
+      ],
+      "key_people": [
+        "Solomun"
+      ],
+      "why_it_belongs": "Solomun's label — one of the most prestigious melodic/tech house brands, with major booking and streaming reach.",
+      "submission": {
+        "method": "email",
+        "email": "solomundemo@diynamic.com",
+        "url": "https://www.diynamic.com/demos/",
+        "formats": [
+          "320kbps MP3"
+        ],
+        "requirements": [
+          "320kbps MP3",
+          "Do not send more than 3 tracks at once",
+          "Promos go to solomunpromo@diynamic.com (not demos)"
+        ],
+        "notes": ""
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.diynamic.com/demos/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Get Physical",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "house",
+        "tech house"
+      ],
+      "key_people": [
+        "M.A.N.D.Y."
+      ],
+      "why_it_belongs": "Three-decade Berlin house/tech house institution with deep catalogue and scene respect.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://www.labelradar.com/labels/getphysical/portal",
+        "formats": [],
+        "requirements": [
+          "Demo submissions ONLY via the LabelRadar portal"
+        ],
+        "notes": ""
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.labelradar.com/labels/getphysical/portal",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Rekids",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "techno",
+        "tech house"
+      ],
+      "key_people": [
+        "Radio Slave"
+      ],
+      "why_it_belongs": "Radio Slave's respected UK label (since 2006) — strong underground techno/house credibility.",
+      "submission": {
+        "method": "email",
+        "email": "rekid@me.com",
+        "url": null,
+        "formats": [],
+        "requirements": [
+          "Send new, ideally sample-free music"
+        ],
+        "notes": "Demo address confirmed via the label's official channel."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/rekids.official/posts/920949167963266/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://labelsbase.net/rekids",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Yoshitoshi Recordings",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "house",
+        "tech house"
+      ],
+      "key_people": [
+        "Deep Dish"
+      ],
+      "why_it_belongs": "Long-running, highly respected house/tech house label (Deep Dish) with global reach.",
+      "submission": {
+        "method": "email",
+        "email": "demos@yoshitoshi.com",
+        "url": "https://www.label-worx.com/",
+        "formats": [],
+        "requirements": [
+          "Demo email demos@yoshitoshi.com (a Label-Worx form is also referenced)"
+        ],
+        "notes": "General: info@yoshitoshi.com (not demos)."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.yoshitoshi.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://labelsbase.net/yoshitoshi-recordings",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Lost Records",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "melodic house",
+        "tech house"
+      ],
+      "key_people": [
+        "CamelPhat"
+      ],
+      "why_it_belongs": "CamelPhat's label — a fast-rising melodic/tech house brand with big chart presence.",
+      "submission": {
+        "method": "email",
+        "email": "demos@lostrecords.co.uk",
+        "url": null,
+        "formats": [
+          "SoundCloud link"
+        ],
+        "requirements": [
+          "SoundCloud links ONLY"
+        ],
+        "notes": ""
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://flowmusic.one/camelphat-want-your-demos/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://labelsbase.net/lost-records",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "All Day I Dream",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "organic house",
+        "melodic house"
+      ],
+      "key_people": [
+        "Lee Burridge"
+      ],
+      "why_it_belongs": "Lee Burridge's label — the defining organic/melodic house brand and event series.",
+      "submission": {
+        "method": "email",
+        "email": "music@alldayidream.com",
+        "url": null,
+        "formats": [],
+        "requirements": [],
+        "notes": "Demo email confirmed by a directory and the label's own social; cross-check before bulk use."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://labelsbase.net/all-day-i-dream",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://soundcloud.com/alldayidream",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Under No Illusion",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "tech house",
+        "techno"
+      ],
+      "key_people": [
+        "Eli Brown"
+      ],
+      "why_it_belongs": "Eli Brown's label — one of the hottest current tech house/techno crossover names.",
+      "submission": {
+        "method": "email",
+        "email": "ki@undernoillusionrecordings.com",
+        "url": null,
+        "formats": [],
+        "requirements": [
+          "'All demos to' the demo email"
+        ],
+        "notes": ""
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://soundcloud.com/undernoillusion",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Roush Label",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "tech house"
+      ],
+      "key_people": [
+        "Ramiro Lopez"
+      ],
+      "why_it_belongs": "Consistent tech house imprint with reliable Beatport presence; openly demo-friendly.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "http://www.roushlabel.com/demos",
+        "formats": [],
+        "requirements": [
+          "Submit up to 5 tracks via the on-site demo portal (15-day window)"
+        ],
+        "notes": ""
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "http://www.roushlabel.com/demos",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Abode Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "tech house",
+        "house"
+      ],
+      "key_people": [],
+      "why_it_belongs": "Strong UK tech house party brand and label; actively solicits demos.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": null,
+        "formats": [],
+        "requirements": [
+          "Submit via the ABODE Records Trackstack portal"
+        ],
+        "notes": "Trackstack portal promoted on socials; capture the exact link when verifying."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.instagram.com/abodeparties/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Eastenderz",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "tech house",
+        "minimal"
+      ],
+      "key_people": [
+        "East End Dubs"
+      ],
+      "why_it_belongs": "East End Dubs' label — a leader in the minimal/tech house ('minimal dub') wave.",
+      "submission": {
+        "method": "email",
+        "email": "music@eastenddubs.co.uk",
+        "url": null,
+        "formats": [],
+        "requirements": [],
+        "notes": "Bookings: bookings@futureartists.agency; management: aytek@eastenddubs.co.uk (not demos)."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.eastenddubs.co.uk/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://labelsbase.net/eastenderz",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "PIV Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "tech house",
+        "deep house"
+      ],
+      "key_people": [
+        "Pirate Copy",
+        "Locklead"
+      ],
+      "why_it_belongs": "Amsterdam tech/deep house label (since 2014) with a distinctive, well-regarded sound.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://www.labelradar.com/labels/pivrecords/profile",
+        "formats": [],
+        "requirements": [
+          "Submit via the LabelRadar portal"
+        ],
+        "notes": "General: info@pivrecords.com (not demos)."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.labelradar.com/labels/pivrecords/profile",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Heldeep",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "house",
+        "future house",
+        "tech house"
+      ],
+      "key_people": [
+        "Oliver Heldens"
+      ],
+      "why_it_belongs": "Oliver Heldens' label — high-profile, with major streaming and festival reach.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://www.labelradar.com/labels/heldeeprecords/profile",
+        "formats": [
+          "mp3"
+        ],
+        "requirements": [
+          "Drop an MP3 via the LabelRadar 'Drop Your Demo' portal"
+        ],
+        "notes": ""
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.labelradar.com/labels/heldeeprecords/profile",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Perfect Havoc",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "house",
+        "dance pop"
+      ],
+      "key_people": [],
+      "why_it_belongs": "UK house/dance-pop label with a track record of breaking new artists (e.g. Joel Corry).",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://www.perfecthavoc.com/demos",
+        "formats": [],
+        "requirements": [
+          "Upload via the on-site portal",
+          "They listen to everything but cannot reply to each"
+        ],
+        "notes": "Also on LabelRadar (labelradar.com/labels/PerfectHavoc/portal)."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.perfecthavoc.com/demos",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.labelradar.com/labels/PerfectHavoc/portal",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Nervous Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "house"
+      ],
+      "key_people": [],
+      "why_it_belongs": "Iconic NYC house institution (since 1991) — deep heritage and ongoing releases.",
+      "submission": {
+        "method": "email",
+        "email": "info@nervousnyc.com",
+        "url": null,
+        "formats": [],
+        "requirements": [
+          "Check the label site for current submission guidelines before sending"
+        ],
+        "notes": "Label has signalled it is 'flooded' at this address — follow guidelines closely."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.nervousrecords.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.instagram.com/nervousrecords/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Hottrax",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "tech house",
+        "house"
+      ],
+      "key_people": [
+        "Jamie Jones"
+      ],
+      "why_it_belongs": "Jamie Jones' more club-focused label (sister to Hot Creations) — actively scouts producers.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": null,
+        "formats": [],
+        "requirements": [
+          "Submit via the Hottrax Trackstack portal (linked from the label's socials)"
+        ],
+        "notes": "NEEDS the exact Trackstack link captured on next verification pass."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.instagram.com/hottraxofficial/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     }
   ]
 }
