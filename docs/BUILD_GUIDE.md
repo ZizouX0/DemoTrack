@@ -32,6 +32,30 @@ House & Tech House · Independent Artist Toolkit · Tunis, Tunisia · 2026
 
 ---
 
+## Design principles (apply to every module)
+
+The whole app exists to remove friction, so manual data entry is the enemy.
+These rules are non-negotiable when building any feature:
+
+1. **Derive, don't ask.** If a number can be computed from existing data, never
+   make the user type it. Times-contacted, goal progress, demos-sent-today, the
+   funnel — all are **Postgres views** over `submissions`/`tracks`, not stored
+   fields you keep in sync.
+2. **One-tap over typing.** Anything that can't be derived should be a single tap:
+   reply status, mood, send confirmation. Free-text is reserved for the **only
+   three things a human genuinely must write — the `{hook}`, A&R intel notes, and
+   feedback text.** Everything else is derived or tapped.
+3. **Silence is data.** A demo going unanswered past the overdue window is an
+   outcome the app logs automatically — the user types nothing.
+4. **Structural privacy over careful config.** Where private and public data
+   coexist (the press kit), expose public data through a narrow whitelisted path
+   (a slug RPC), not by trusting an RLS policy to be perfect.
+
+> Standing review question for each module: *"Can this be derived or made
+> one-tap?"* If yes, do that instead.
+
+---
+
 ## 1. What DemoTrack is & why it exists
 
 DemoTrack is a personal command center for breaking through as an unknown
@@ -83,24 +107,26 @@ private to your account. (Single-user today; RLS keeps it safe and future-proof.
 
 | Table | Holds | Key changes vs v2 |
 |-------|-------|-------------------|
-| `contacts` | Your personal CRM — labels/DJs/A&Rs/curators/blogs/promoters/radio. | + `relationship_stage`, + `access_path` |
-| `tracks` | Catalogue + status (`idea → demo-ready → submitted → signed`). | + `exclusive_hold_contact_id`, + `hold_until`, + readiness checklist fields |
-| `submissions` | Every demo sent (track ↔ contact); follow-up dates & tracking. | + `method` (email/form/dm), + `tracking_enabled` |
-| `feedback` | Every response, tied to track + contact. | + treat **silence** as an explicit logged signal |
+| `contacts` | Your personal CRM — labels/DJs/A&Rs/curators/blogs/promoters/radio. | + `relationship_stage`, + `access_path`, + `label_id` (back-ref to the Discovery master) |
+| `tracks` | Catalogue + status (`idea → demo-ready → submitted → signed`). | + `exclusive_hold_contact_id`, + `hold_until`, + `listen_link`, + `link_type` (`soundcloud-private`/`dropbox`/`other`), + readiness checklist fields |
+| `submissions` | Every demo sent (track ↔ contact); follow-up dates. | + `method` (email/form/dm), + **`status`** (`sent → opened → replied → considering → signed → passed`) — drives the queue & one-tap reply logging |
+| `feedback` | Every response, tied to track + contact. | + **silence auto-logged** as a `no-response` record once overdue |
 | `templates` | Your preset email & follow-up skeletons with `{merge_fields}` + one `{hook}` slot. | now first-class (preset-driven sends) |
 | `ar_intel` | Research notes, one record per contact. | — |
-| `work_sessions` | Studio time logs (time, work, demos, mood). | — |
-| `goals` | Targets + live progress. | — |
-| `link_events` | Each click on a tracked demo link (timestamp, repeat count, country). | — |
-| `press_kit` | Public EPK profile, one row per user. | — |
+| `work_sessions` | Studio time logs. | inputs reduced to **hours + one-tap mood**; "demos sent" auto-derived |
+| `goals` | Targets; **progress derived, not stored**. | progress = a Postgres view over `submissions`/`tracks` |
+| `link_events` | Each click on a tracked link (timestamp, repeat count, country). | **deferred to Phase 11, Form/DM links only** — not email |
+| `press_kit` | Public EPK profile, one row per user. | + `is_public`; served via a slug RPC, never direct table reads |
 | `labels` | Curated discovery library (separate from CRM). | + `access_path`, + `genre_tags[]` (controlled vocab), + `last_verified`, + `sources[]`, + `parent_label_id` / sub-label links, + `submission_requirements` |
-| `notifications` *(new)* | Queued/sent reminders & digests; user prefs (channel, cadence). | **New** — powers the habit loop |
+| `notifications` *(new)* | Queued/sent reminders & digests; user prefs (channel, cadence). | **New** — fired by `pg_cron` |
 
 **Relationships:** your account owns everything. A contact has many submissions;
-each submission can have link_events and feedback. A track has many submissions
-and feedback, and at most one active exclusive hold. `press_kit` is 1:1 with you.
-`labels` is the read-only library seeding Discovery; pursued labels become
-`contacts` rows.
+each submission can have feedback (and, later, link_events). A track has many
+submissions and feedback, and at most one active exclusive hold. `press_kit` is
+1:1 with you. `labels` is the read-only master; **"Add to my CRM" copies a label
+into `contacts` with `label_id` pointing back** — you maintain personal data on
+the contact, the master keeps the verified route, and Discovery flags your copy
+"source updated — review" when the master changes. No live sync.
 
 **No scoring table.** "Times contacted" is a **derived count** of `submissions`
 per contact, not a stored or computed score — there is nothing to recalculate or
@@ -205,13 +231,20 @@ by tier. Stale labels (no re-verify in ~6 months) get a freshness badge. That's
 the whole prioritizer — nothing to compute, nothing to debug, nothing that breaks
 on day one.
 
-### Follow-up timing
+### Follow-up timing & reply visibility
+The app sends from your own Gmail, so **it can't see replies** — the queue is
+driven by a `submissions.status` you advance with one tap, never by reading your
+inbox.
 - **7 days silence** → gentle first-nudge queued.
-- **14 days** → flagged overdue.
-- **Opened, no reply** (from link tracking) → smart prompt (interest proven,
-  timing ideal).
-- All of the above is **pushed to you via the notifications digest**, not just
-  parked in an in-app queue.
+- **14 days** → flagged overdue; a `no-response` feedback record is **auto-logged**
+  (silence becomes data with zero typing).
+- The queue shows only `status = sent/opened` submissions, each with two taps:
+  **"Got a reply"** (opens a 5-second feedback log → moves to `replied`) and
+  **"Still silent"** (keeps nudging). No more nagging someone who already answered.
+- All of this is **pushed via the notifications digest** (fired by `pg_cron`), not
+  just parked in-app.
+- *("Opened, no reply" smart prompts depend on link tracking, which is deferred to
+  Phase 11 and scoped to Form/DM only — see §7.)*
 
 ---
 
@@ -221,14 +254,17 @@ on day one.
 |------|------|
 | React 19 + Vite | UI + fast dev/build. **Mobile-first, installable PWA.** |
 | Tailwind CSS 4 | Styling system. |
-| Supabase (PostgreSQL) | DB + auth + RLS. 12 tables. |
-| Anthropic API (Claude) | The 3 AI features. Sonnet-class balances quality/cost. |
-| Gmail OAuth (or `mailto:` deep link) | Cold-email sending **as you** — protects deliverability. *(Changed.)* |
-| Edge Functions (Deno) | Link-tracking redirect **and** the scheduled notifications digest. |
+| **Vercel** | Hosting/deploy for the app + the public press-kit pages; handles the subdomains. |
+| Supabase (PostgreSQL) | DB + **magic-link** auth + RLS. 12 tables. |
+| Supabase **Storage** | One bucket, for the press-kit photo only. Audio is **never hosted** (external links). |
+| Supabase **pg_cron** + Scheduled Edge Function | Fires the daily/weekly digest and the 7/14-day follow-up triggers. |
+| Anthropic API (Claude) | AI features. With email trimmed to the `{hook}`, usage (and cost) is tiny. |
+| `mailto:` / Gmail compose deep link | Demo email opens **prefilled in your own inbox** — no relay, no send engine, no deliverability risk. |
+| Edge Function (Deno) | Phase 11 link-tracking redirect (Form/DM only) **+** the slug RPC that serves the public press kit. |
 
 Domains: `demotrack.app` (app) · `press.demotrack.app/{slug}` (EPK) ·
-`track.demotrack.app` (tracking redirects — used mainly for Form/DM sends and
-follow-ups to avoid touching email reputation).
+`track.demotrack.app` (Phase-11 redirects — **Form/DM links only**, never email,
+to keep tracked links away from inbox reputation).
 
 ---
 
@@ -284,23 +320,23 @@ sub-labels; 1 Repopulate Mars ≈ 3), add new qualified contacts.
 **Parallel track (throughout):** _Phase 0 — Contact DB research_ (ongoing).
 
 ### MVP — get the loop running fast
-1. **Foundation** — Supabase project · 12-table schema · email auth · RLS · React+Vite+Tailwind PWA shell + routing. _Done: you can log in, data secured._
-2. **Track Vault** — add/edit/list tracks · status · listen link · notes · readiness checklist · hold field. _Done: tracks stored with status._
+1. **Foundation** — Supabase project · 12-table schema · **magic-link** auth · RLS · React+Vite+Tailwind PWA shell + routing · **Vercel deploy**. _Done: you can log in, data secured, deployed._
+2. **Track Vault** — add/edit/list tracks · status · `listen_link` + `link_type` (**audio stays external — unlisted SoundCloud recommended**) · notes · readiness checklist · hold field. _Done: tracks stored with status._
 3. **Contacts CRM** — 7 categories · method + links · `relationship_stage` · `access_path` · seed 17 labels · history view. _Done: label list lives in-app._
-4. **Send Demo** — pick track+contact · choose a preset · auto-fill merge fields · 3 methods (email opens your inbox prefilled / form / DM) · pre-send checklist + hold warning · record to history. **← first usable milestone.**
+4. **Send Demo** — pick track+contact · choose a preset · auto-fill merge fields · 3 methods (email opens your inbox prefilled / form / DM) · pre-send checklist + hold warning · record to history with `status`. **← first usable milestone.**
 5. **Email presets + AI hook** — preset CRUD with `{merge_fields}` · auto-fill from track/contact/profile · wire Claude to suggest the `{hook}` (guardrails: ≤30 words, no fabrication, required, no-duplicate warning) · `mailto:`/Gmail prefill. _Done: a tailored, personal demo email in ~1 minute, sent from your own inbox._
-6. **Follow-up + Notifications digest** — template engine · 7/14-day rules · overdue queue · **scheduled email/push digest.** _Done: the app tells you who to follow up — and reminds you when it's closed._
+6. **Follow-up + Notifications digest** — preset follow-ups · 7/14-day `pg_cron` rules · **one-tap reply status** ("Got a reply" / "Still silent") · auto-logged silence · overdue queue · **scheduled email digest.** _Done: it tells you who to follow up, you close the loop in one tap, and it reminds you when the app is shut._
 
 ### Intelligence — make every send smarter
-7. **Feedback Log** — responses + silence against submissions · types · link back to track/contact. _Done: every reply (and non-reply) captured._
+7. **Feedback Log** — one-tap reply logging from the queue · response types · **auto `no-response` records** on overdue · link back to track/contact. _Done: every reply and non-reply captured with almost no typing._
 8. **A&R Intel & prioritization** — A&R intel records per contact · show "times contacted" on every label · Discovery sorts untried + cold-demo-friendly first. **(No weighted score.)** _Done: each label shows your history at a glance and untried targets surface first._
 9. **Dashboard + Funnel** — aggregate signals · sent→opened→replied→considering→signed funnel · response-rate by genre/tier · streak · CSV export. _Done: home screen answers "what now?"_
 
 ### Advanced (v3) — the unfair advantages
-10. **Demo Link Tracking** — Edge Function redirect · unique hash · `link_events` · open/repeat triggers → follow-up.
-11. **Label Discovery** — browse/filter the `labels` table (genre/BPM/method/response/tier/access_path) · "have I submitted?" · freshness warnings · sub-label reach hints.
-12. **Work Sessions & Goals** — session logging · goal types/timeframes/progress.
-13. **Artist Press Kit** — profile fields · public page + slug · AI bio (3 tones) · auto-attach toggle into Send Demo.
+10. **Label Discovery** — browse/filter the `labels` master (genre/BPM/method/tier/access_path) · **"Add to my CRM"** promotion (copies to `contacts` with `label_id` back-ref) · "have I submitted?" · freshness/"source updated" warnings · sub-label reach hints.
+11. **Demo Link Tracking** *(optional)* — Edge Function redirect · unique hash · `link_events` · **Form/DM links only, never email** · open/repeat triggers → follow-up. _Lower priority: SoundCloud play counts already give a listen signal for free._
+12. **Work Sessions & Goals** — **goal progress is a derived view** (counts from `submissions`/`tracks`, you only set targets) · sessions reduced to **hours + one-tap mood**, demos-sent auto-filled.
+13. **Artist Press Kit** — profile fields · manual stats + **"updated {date}" stamp** · public page served by a **slug RPC returning only whitelisted fields** (no direct table exposure) · AI bio (3 tones) · auto-attach toggle into Send Demo.
 
 ---
 
