@@ -155,3 +155,28 @@ Collected with the Firecrawl CLI (search + scrape of public pages). The API key 
 out of git (`.firecrawl.env`, gitignored); raw scrape cache lives in `.firecrawl/` (also
 gitignored). Only public, lawful sources were used; role/business demo channels were
 preferred over personal contact data.
+
+---
+
+## Promotional contacts (Spec §12, the other half)
+`promo_contacts.json` / `promo_contacts.csv` — **74 verified non-label outlets** that
+get an unknown house/tech-house artist PLAYS and exposure (not signings). Built by a
+parallel 5-agent sweep, deduped, with each submission channel verified and a **cost flag**
+so free organic routes are easy to prioritise.
+
+| | |
+|---|---|
+| Total | **74** |
+| Confidence | 57 high · 17 medium |
+| Cost | 36 free · 10 freemium · 28 paid |
+| Categories | radio 16 · playlist-curator 14 · blog 10 · podcast 10 · youtube 9 · pr 7 · magazine 6 · repost-network 2 |
+
+Highlights: Rinse FM, Defected Radio, Proton (Bedroom Bedlam), NTS, BBC Introducing,
+Data Transmission, DJ Mag, Mixmag, Resident Advisor, Magnetic, Spotify-for-Artists pitch,
+SubmitHub, Groover, Selected., MrRevillz, HMWL, Deeper Shades of House. Pay-to-play shows
+and paid PR/playlist services are flagged `paid`. Excluded: major-label-locked playlists
+(Filtr/Topsify/Digster), dormant blogs (Stamp The Wax), and label-only podcasts.
+
+**Wiring:** `supabase/promo_contacts.sql` creates a standalone read-only `promo_contacts`
+master table (mirrors the `labels` RLS pattern) and seeds all 74 — validated against a real
+Postgres (loads clean, idempotent upsert on `lower(name)`).

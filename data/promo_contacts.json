@@ -1,0 +1,2879 @@
+{
+  "_meta": {
+    "dataset": "DemoTrack — non-label promotional contacts (Spec §12)",
+    "generated": "2026-06-01",
+    "categories": "radio | blog | magazine | playlist-curator | repost-network | youtube | podcast | pr | dj-support",
+    "cost": "free | freemium | paid (flagged so you can prioritise free organic routes)",
+    "note": "Outlets that promote music (plays/exposure), NOT record labels. Verify channel + cost before use."
+  },
+  "contacts": [
+    {
+      "name": "Data Transmission",
+      "category": "blog",
+      "platform": "web",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "deep tech",
+        "techno"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "grahame@datatransmission.co",
+        "url": "https://datatransmission.co/contact/",
+        "requirements": [
+          "Private SoundCloud link preferred",
+          "Include press release and artist bio",
+          "House / Tech House / Deep Tech / Techno only for this contact"
+        ],
+        "notes": "Grahame Farmer handles house/tech-house/deep-tech/techno premieres specifically. Shelley Dodds (shelley@datatransmission.co) handles DnB. Confirmed on official contact page."
+      },
+      "cost": "free",
+      "reach": "100k+ monthly site visitors; large SoundCloud following",
+      "why_it_belongs": "One of the UK's leading online dance music authorities with a dedicated premieres section for house and tech house. Grahame Farmer personally curates house/tech-house premieres, giving unknown acts a real editorial slot with SoundCloud upload and site coverage.",
+      "sources": [
+        {
+          "url": "https://datatransmission.co/contact/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatportal.com/articles/655232-interview-grahame-farmer-founder-data-transmission",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Magnetic Magazine",
+      "category": "magazine",
+      "platform": "web",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "techno",
+        "deep house"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "will@magneticmag.com",
+        "url": "https://magneticmag.com/contact/",
+        "requirements": [
+          "Press release",
+          "High-res press photos",
+          "Private streaming link",
+          "Artist bio and social links"
+        ],
+        "notes": "Will Vance (Managing Editor) runs this inbox. reviews@magneticmag.com also reaches all staff writers/editors. demo@magneticmag.com for their in-house label submissions. Confirmed on official contact page."
+      },
+      "cost": "free",
+      "reach": "500k+ monthly unique visitors",
+      "why_it_belongs": "US-based music and culture magazine with dedicated tech-house track roundups published monthly in 2025. Features premieres and reviews; actively accepts submissions from independent artists and labels. Monthly 'Best Tech House Tracks' columns give rising artists real visibility.",
+      "sources": [
+        {
+          "url": "https://magneticmag.com/contact/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://magneticmag.com/2025/05/the-15-best-tech-house-tracks-of-april-2025/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "DJ Mag",
+      "category": "magazine",
+      "platform": "web",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "techno",
+        "electronic"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "olivia.stock@djmag.com",
+        "url": "https://djmag.com/information/how-pitch-dj-mag",
+        "requirements": [
+          "Press release",
+          "High-res artist photo and packshot",
+          "Artist bio and social links",
+          "Private SoundCloud link with downloads enabled (320kbps) or fatdrop link — no Dropbox/WeTransfer",
+          "Pre-order or buy link if applicable",
+          "Suggested run date",
+          "Pitch window: no earlier than 3 weeks before release; no later than 2 days before"
+        ],
+        "notes": "Olivia Stock (Digital Staff Writer) confirmed as the premiere contact via official pitch guide at djmag.com. All genres go to her. Include Q&A material if possible. Due to high volume, not all pitches receive a reply."
+      },
+      "cost": "free",
+      "reach": "3M+ monthly site visitors; global print and digital readership",
+      "why_it_belongs": "The world's most widely read DJ and dance music magazine. Premieres one track per day online, featuring lesser-known acts alongside established names. A premiere slot here signals credibility to bookers and labels globally.",
+      "sources": [
+        {
+          "url": "https://djmag.com/information/how-pitch-dj-mag",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://djmag.com/press",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Mixmag Australia / NZ",
+      "category": "magazine",
+      "platform": "web",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "techno",
+        "electronic"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "editorial@mixmag.net.au",
+        "url": "https://mixmag.net.au/page/contact-mixmag",
+        "requirements": [
+          "Brief pitch explaining desired coverage type (premiere / review / playlist / mix)",
+          "Private streaming link",
+          "Press release and bio"
+        ],
+        "notes": "editorial@mixmag.net.au confirmed on official ANZ contact page and in their open call-for-music article. Curates a monthly SoundCloud premieres playlist (confirmed active in 2025). Accepts unknown artists explicitly."
+      },
+      "cost": "free",
+      "reach": "Mixmag global brand; ANZ SoundCloud premiere playlists active 2025",
+      "why_it_belongs": "Active offshoot of the world's biggest dance music brand, explicitly calling for music submissions from any artist — known or unknown — for premieres, playlists, mixes, and reviews. Lower bar than UK flagship but carries global Mixmag brand weight and publishes monthly SoundCloud premiere playlists.",
+      "sources": [
+        {
+          "url": "https://mixmag.net.au/page/contact-mixmag",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://mixmag.net.au/read/mixmag-australia-nz-is-calling-out-for-music-music",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Mixmag (UK / Global)",
+      "category": "magazine",
+      "platform": "web",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "techno",
+        "electronic"
+      ],
+      "submission": {
+        "method": "email",
+        "email": null,
+        "url": "https://mixmag.net/page/contact-mixmag",
+        "requirements": [
+          "Press release",
+          "High-res photos",
+          "Private streaming link",
+          "Artist bio and socials",
+          "Pitch 1 to 3 weeks before release"
+        ],
+        "notes": "Contact page returned 403 during direct verification. Known email format is firstname@mixmag.net. Staff handling music includes Megan Townsend and Patrick Hinton (Editor). Best approached via a PR firm or by starting with Mixmag ANZ. Confidence set to medium as submission email could not be confirmed from the official page during this research session."
+      },
+      "cost": "free",
+      "reach": "5M+ monthly unique visitors; 1.4M+ Instagram followers",
+      "why_it_belongs": "The flagship global dance music magazine reaching 5M+ monthly visitors. Being premiered or reviewed on Mixmag.net is among the most valuable press placements for any house/tech-house artist. Active in 2025 with weekly new music coverage.",
+      "sources": [
+        {
+          "url": "https://mixmag.net/page/contact-mixmag",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://muckrack.com/media-outlet/mixmag",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "medium",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "When We Dip",
+      "category": "blog",
+      "platform": "web",
+      "genre_focus": [
+        "house",
+        "deep house",
+        "progressive house",
+        "melodic techno"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "promo@whenwedip.com",
+        "url": "https://whenwedip.com/contact-us/",
+        "requirements": [
+          "SoundCloud track link preferred",
+          "Press release or brief pitch",
+          "Desired premiere date"
+        ],
+        "notes": "promo@whenwedip.com confirmed via RocketReach email-format data and multiple secondary sources. Web contact form also available. Active premiere series confirmed throughout 2025. Leans toward progressive/melodic house rather than peak-time tech house."
+      },
+      "cost": "free",
+      "reach": "Established underground readership; active SoundCloud and social channels",
+      "why_it_belongs": "Active dance music magazine (Montreal / Dublin / Berlin) running frequent exclusive premieres of independent house and progressive tracks. Well-regarded in the underground scene with consistent editorial output throughout 2025. A premier here reaches a tuned-in global audience.",
+      "sources": [
+        {
+          "url": "https://whenwedip.com/contact-us/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://whenwedip.com/premieres/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "medium",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Deep House Amsterdam",
+      "category": "blog",
+      "platform": "web",
+      "genre_focus": [
+        "deep house",
+        "house"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "lex@deephouseamsterdam.com",
+        "url": "https://www.deephouseamsterdam.com/contact/",
+        "requirements": [
+          "SoundCloud link only (Dropbox not accepted)",
+          "Listen to DHA AM and DHA FM channels first to understand their sound direction"
+        ],
+        "notes": "Lex van Aken (Founder/MD) confirmed as submission contact on official contact page. They respond only if interested. Deep house and melodic deep house focus — straightforward tech house may not fit."
+      },
+      "cost": "free",
+      "reach": "400k+ YouTube subscribers; 200k+ SoundCloud followers",
+      "why_it_belongs": "Leading Amsterdam-based deep house blog with 400k+ YouTube subscribers and 200k+ SoundCloud followers across DHA AM and DHA FM channels. Features exclusive premieres and label showcases. Active site with 2026 content confirmed. Ideal for deep-leaning house tracks.",
+      "sources": [
+        {
+          "url": "https://www.deephouseamsterdam.com/contact/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://soundcloud.com/deep-house-amsterdam",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "The Groove Cartel",
+      "category": "blog",
+      "platform": "web",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "techno",
+        "deep house",
+        "progressive house"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "press@thegroovecartel.com",
+        "url": "https://thegroovecartel.com/submit-music/",
+        "requirements": [
+          "Track link",
+          "Artist bio",
+          "Social links",
+          "SubmitHub preferred for guaranteed 48-hour response and feedback"
+        ],
+        "notes": "press@thegroovecartel.com confirmed via official submission page. SubmitHub profile also available: submithub.com/blog/the-groove-cartel. Also has a Groover profile for paid submission route. Active in 2025."
+      },
+      "cost": "paid",
+      "reach": "50k+ unique monthly visitors; Google News indexed",
+      "why_it_belongs": "Quintessential electronic music blog and network with 50k+ unique monthly visitors, indexed on Google News. Actively accepts submissions from unknown artists via SubmitHub (guaranteed feedback within 48 hours) and direct email. Strong fit for tech house specifically.",
+      "sources": [
+        {
+          "url": "https://thegroovecartel.com/submit-music/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.submithub.com/blog/the-groove-cartel",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "EARMILK",
+      "category": "blog",
+      "platform": "web",
+      "genre_focus": [
+        "electronic",
+        "house",
+        "deep house",
+        "dance"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": null,
+        "url": "https://www.submithub.com/blog/earmilk",
+        "requirements": [
+          "Submit via SubmitHub or Pillargram only",
+          "No direct email submissions accepted — filtered automatically"
+        ],
+        "notes": "Exclusively accepts via SubmitHub (submithub.com/blog/earmilk) or Pillargram (pillargram.com/refer-curator?referCode=EARMILK). Confirmed on earmilk.com/submit-music/. Active site with 2025 content confirmed."
+      },
+      "cost": "free",
+      "reach": "Millions of global readers across 110+ countries",
+      "why_it_belongs": "Global music blog active since late 2000s reaching millions of readers in 110+ countries. Covers electronic dance music with a dedicated electronic section and premieres new tracks. Submission via SubmitHub is straightforward and open to all artists.",
+      "sources": [
+        {
+          "url": "https://earmilk.com/submit-music/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://earmilk.com/music/electronic/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Decoded Magazine",
+      "category": "magazine",
+      "platform": "web",
+      "genre_focus": [
+        "house",
+        "techno",
+        "deep house",
+        "progressive house",
+        "melodic techno"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "submit@decodedmagazine.com",
+        "url": "https://www.decodedmagazine.com/contact/",
+        "requirements": [
+          "Include artist bio and press release",
+          "Mark clearly as a premiere request in subject line",
+          "Address to Ian French for A&R/Editorial/Premiere pitches",
+          "Note: they do NOT accept mixes or unreleased material via submit@ — for premieres, pitch to Ian French directly"
+        ],
+        "notes": "submit@decodedmagazine.com confirmed on official contact page. Ian French is named A&R/Editorial/Premieres contact; Damion Pell is Editor/MD. Site active as of June 2026. Mix of the Month competition also open monthly for unknowns."
+      },
+      "cost": "free",
+      "reach": "Established underground readership; active YouTube, SoundCloud, and social channels",
+      "why_it_belongs": "Underground electronic music magazine with a dedicated premieres section, Mix of the Month competition open to unknowns, and a Discord community for submissions. Active with premieres confirmed through June 2026. Ian French handles A&R, editorial, and premieres.",
+      "sources": [
+        {
+          "url": "https://www.decodedmagazine.com/contact/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.decodedmagazine.com/category/premieres/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Le Visiteur Online",
+      "category": "blog",
+      "platform": "web",
+      "genre_focus": [
+        "house",
+        "deep house",
+        "disco house",
+        "nu-disco",
+        "boogie"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": null,
+        "url": "https://www.submithub.com/blog/le-visiteur-online",
+        "requirements": [
+          "Submit via SubmitHub only — direct submissions no longer accepted",
+          "Must be house, disco house, nu-disco, or boogie in style"
+        ],
+        "notes": "Direct submissions discontinued per SoundCloud profile. SubmitHub at submithub.com/blog/le-visiteur-online is the current active channel. Best suited for deep, disco-leaning house; less so for peak-time tech house."
+      },
+      "cost": "free",
+      "reach": "Thousands of unique weekly visitors; large SoundCloud following",
+      "why_it_belongs": "One of the internet's biggest house and disco authorities, run by UK DJ/producer/blogger John Hutchison. Receives thousands of unique visitors weekly. Features premieres, interviews, and mixes. SubmitHub is now the only submission route.",
+      "sources": [
+        {
+          "url": "https://www.submithub.com/blog/le-visiteur-online",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://soundcloud.com/levisiteuronline",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "medium",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Resident Advisor (RA)",
+      "category": "magazine",
+      "platform": "web",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "techno",
+        "electronic"
+      ],
+      "submission": {
+        "method": "form",
+        "email": "feedback@ra.co",
+        "url": "https://ra.co/pitch/feature",
+        "requirements": [
+          "RA account login required for the feature pitch form",
+          "For release reviews: pitch via feedback@ra.co specifying which release and why it is noteworthy",
+          "For feature pitches: use ra.co/pitch/feature with a 4 to 5 sentence explanation of the artist/topic's relevance",
+          "Long-form features, release reviews, opinion pieces, and video essays accepted"
+        ],
+        "notes": "feedback@ra.co confirmed on ra.co/about/contribute for review pitches. Feature form at ra.co/pitch/feature requires login. RA is highly selective and skews toward established acts for main features; singles reviews and Breaking Through series are more realistic for unknowns. Active open to pitches as of April 2025."
+      },
+      "cost": "paid",
+      "reach": "8M+ monthly unique visitors; definitive global underground electronic music authority",
+      "why_it_belongs": "The world's leading electronic music magazine and event platform. RA singles reviews, features, and premieres carry enormous credibility globally. Open to pitches for release reviews and features from anyone. The 'Singles Reviews' section and 'Breaking Through' series are the most accessible entry points for unknown artists.",
+      "sources": [
+        {
+          "url": "https://ra.co/about/contribute",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/pitch/feature",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "medium",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "6AM Group",
+      "category": "blog",
+      "platform": "web",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "techno"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "services@6amgroup.com",
+        "url": "https://6amgroup.com/services/content-promo",
+        "requirements": [
+          "High-quality original house or techno track",
+          "Allow at least 2 weeks for completion",
+          "Paid service: Basic Premiere $49 (SoundCloud upload only), Standard Premiere $99 (SoundCloud + site post + social), Press/Editorial Feature $39"
+        ],
+        "notes": "PAID promo service — not free editorial. services@6amgroup.com confirmed on official services page. No refunds per their terms. Contact form on About page also available for organic inquiries. Flagged: budget required."
+      },
+      "cost": "freemium",
+      "reach": "Large social following; active Discord community; established underground audience",
+      "why_it_belongs": "US-based underground electronic media platform featuring premieres, interviews, guest mixes, and editorial coverage of house and techno. Content-promo service routes tracks to their editorial team and SoundCloud channel. Paid tier makes placement predictable with a modest budget.",
+      "sources": [
+        {
+          "url": "https://6amgroup.com/services/content-promo",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://6amgroup.com/about",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "House Music With Love (HMWL)",
+      "category": "blog",
+      "platform": "web",
+      "genre_focus": [
+        "deep house",
+        "afro house",
+        "organic house",
+        "melodic house",
+        "melodic techno"
+      ],
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://www.housemusicwithlove.com/submit-a-hmwl-premiere-or-upload/",
+        "requirements": [
+          "SoundCloud or Dropbox link only",
+          "Specify release date for premiere requests",
+          "Must fit: Afro House, Organic House, Deep House, Melodic House & Techno, or Electronica"
+        ],
+        "notes": "Embedded web form on official submission page — no email listed. Confirmed active with HMWL Podcasts 2025 playlist on SoundCloud. Also runs HMWL Records label imprints. Pure tech house without melodic/organic elements may not fit their aesthetic."
+      },
+      "cost": "free",
+      "reach": "Claims 12M+ followers across channels; active Spotify playlists and SoundCloud",
+      "why_it_belongs": "Swedish house music blog, record label, and repost network active since 2008. Offers blog reviews, YouTube/SoundCloud premieres, and Spotify playlist placements to a self-described 12M+ follower audience. An accessible launch platform for deep/melodic house and organic house tracks from completely unknown artists.",
+      "sources": [
+        {
+          "url": "https://www.housemusicwithlove.com/submit-a-hmwl-premiere-or-upload/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://soundcloud.com/hmwl/sets/hmwl-podcasts-2025",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "This Song Is Sick",
+      "category": "blog",
+      "platform": "web",
+      "genre_focus": [
+        "electronic",
+        "house",
+        "deep house",
+        "dance",
+        "indie"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": null,
+        "url": "https://www.submithub.com/blog/thissongissick-com",
+        "requirements": [
+          "Submit via SubmitHub only — no direct email accepted",
+          "Electronic, house, indie, hip-hop accepted"
+        ],
+        "notes": "SubmitHub is the only submission channel, confirmed on thissongissick.com. Site active with premieres through May 2025. Broader editorial focus — house tracks with a strong hook or distinctive identity will stand out."
+      },
+      "cost": "free",
+      "reach": "Global readership in 110+ countries; long-running social presence",
+      "why_it_belongs": "Established US music discovery blog active since 2010 with a dedicated premieres section and global readership in 110+ countries. Covers electronic, house, and dance music alongside indie and hip-hop. Most recent premiere confirmed May 2025. SubmitHub submission is open to all artists.",
+      "sources": [
+        {
+          "url": "https://thissongissick.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://thissongissick.com/section/premieres/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "We Rave You",
+      "category": "blog",
+      "platform": "web",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "techno",
+        "electronic"
+      ],
+      "submission": {
+        "method": "form",
+        "email": "general@weraveyou.com",
+        "url": "https://weraveyou.com/contact/",
+        "requirements": [
+          "Artist name",
+          "Email address",
+          "Track URL",
+          "Brief message describing the track and request"
+        ],
+        "notes": "Artist submission form confirmed on official contact page. general@weraveyou.com also active. They claim 5-hour response time and assign a specialist. Active House & Techno Picks series confirmed as of June 2025."
+      },
+      "cost": "free",
+      "reach": "35M+ monthly content reach; 1M+ followers",
+      "why_it_belongs": "Large-scale electronic music media brand with 35M+ monthly content reach and 1M+ followers. Runs a recurring 'House & Techno Picks' editorial series (confirmed June 2025) showcasing independent artists. Artist submission form on contact page assigns a dedicated consultant per submission.",
+      "sources": [
+        {
+          "url": "https://weraveyou.com/contact/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://weraveyou.com/2025/06/we-rave-you-presents-house-techno-picks-featuring-daijo-ward-andrews-more/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Spotify for Artists — Editorial Pitch",
+      "category": "playlist-curator",
+      "platform": "Spotify",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "electronic"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": null,
+        "url": "https://artists.spotify.com",
+        "requirements": [
+          "Music must be distributed to Spotify via any distributor",
+          "Must pitch at least 7 days before release date (28 days strongly recommended for unknowns)",
+          "Only unreleased tracks eligible — pitch disappears once track is live",
+          "One track pitch per release; cannot pitch compilations or featured-artist slots",
+          "Complete pitch form: genre, mood, instruments, 500-character story about the song",
+          "Artist profile must be complete — bio, press photo, linked socials"
+        ],
+        "notes": "Completely free. No middleman. After release, eligible artists can pin the pitched song to their 'This Is' playlist for up to 28 days. Placement is not guaranteed; editorial team selects roughly 1-in-5 pitched tracks industry-wide."
+      },
+      "cost": "free",
+      "reach": "Editorial playlists range from thousands to millions of followers; Release Radar reaches every artist follower",
+      "why_it_belongs": "The only official, free route to Spotify's in-house editorial team. A placement on a Spotify editorial playlist (e.g. 'Mint', 'Dance Brandneu') can deliver tens of thousands of streams overnight and kick-start the algorithm for an unknown artist.",
+      "sources": [
+        {
+          "url": "https://support.spotify.com/us/artists/article/pitching-music-to-playlist-editors/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.chartlex.com/blog/streaming/spotify-playlist-pitching-guide-2025",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "SubmitHub — Playlist Curator Network",
+      "category": "playlist-curator",
+      "platform": "Spotify / SoundCloud / Apple Music",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "techno",
+        "electronic"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": null,
+        "url": "https://www.submithub.com",
+        "requirements": [
+          "Create a free artist account on submithub.com",
+          "Upload or link Spotify/SoundCloud track",
+          "Filter curators by genre (techno-house, deep tech, electronic)",
+          "Write a 200-character pitch for each submission",
+          "Free submissions: curators have 20 days to respond, no feedback obligation",
+          "Premium credits ($0.79–$3 each, bulk discounts): 48-hr response + written feedback guaranteed"
+        ],
+        "notes": "PAID for premium tier. 10 credits = $10; 100 credits = $80. Platform-wide approval rate ~5–8% for premium. Tech house / electronic genres see 8–12% approval rates, which is above average. Free tier response rate has dropped to under 10%. Over 4.5 million submissions processed in 2025."
+      },
+      "cost": "freemium",
+      "reach": "6,000+ active curators; individual playlists range from 1K to 500K+ followers",
+      "why_it_belongs": "Largest curator marketplace with 6,000+ active curators. Has a dedicated tech house / techno-house filter, making it one of the most targeted discovery tools for an unknown house producer. Free tier available; paid tier guarantees 48-hr feedback.",
+      "sources": [
+        {
+          "url": "https://www.submithub.com/playlister/techno-house",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.musicpulse.app/blog/is-submithub-still-worth-it-in-2026-an-honest-review",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://loopsolitaire.co.uk/blog/how-to-use-submithub-2025/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Groover — House & Tech House Curators",
+      "category": "playlist-curator",
+      "platform": "Spotify / SoundCloud / other",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "afro house",
+        "deep house",
+        "melodic house"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": null,
+        "url": "https://groover.co/en/influencer/list/tags/tech-house/playlist/",
+        "requirements": [
+          "Create a Groover account at groover.co",
+          "Purchase Grooviz credits (€46 starter pack = 46 Grooviz; bulk saves up to 24%)",
+          "Each curator contact costs 2 Grooviz (~€2); premium curators 4–6 Grooviz",
+          "Select curators filtered by 'tech-house' or 'house music' tags",
+          "Submit track link and write a short pitch",
+          "Response guaranteed within 7 days — refund issued if curator fails to respond"
+        ],
+        "notes": "PAID. Standard rate: ~€2 per curator contact. Most successful campaigns contact 50+ curators (€100+ investment). Credits never expire. Average answer rate >85%. Top-tier curators on the platform include playlist channels, radio hosts, and label A&Rs who review the same submission."
+      },
+      "cost": "paid",
+      "reach": "141+ house-tagged curators; 76+ tech-house-tagged curators; individual contacts vary from micro-playlists to 100K+ follower channels",
+      "why_it_belongs": "Paris-based platform with 4,000+ music pros. Has an explicit tech-house curator filter and a dedicated 'HOUSE 2025 | Tech House & Club Music' Spotify-certified playlist. Every submission is guaranteed a written reply within 7 days or credits are refunded — de-risks spending for an unknown artist.",
+      "sources": [
+        {
+          "url": "https://groover.co/en/influencer/profile/0.house-2023-tech-house-club-music",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://groover.co/en/lp/pricing/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://groover.co/en/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Playlist Push — Spotify Curator Campaigns",
+      "category": "playlist-curator",
+      "platform": "Spotify",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "electronic",
+        "EDM"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": null,
+        "url": "https://playlistpush.com",
+        "requirements": [
+          "Create account at playlistpush.com",
+          "Submit track details: Spotify link, genre, mood, language, release date, short description",
+          "Select campaign size — minimum $285 for Spotify campaigns",
+          "Pre-release campaigns available up to 14 days before drop date",
+          "Track must be on Spotify (released or scheduled)"
+        ],
+        "notes": "PAID. Campaigns start at $285; average is $400–$450; large campaigns can exceed $1,000. Pricing scales with number of curator matches. $285 campaign may yield ~500–3,000 streams over 30 days. $450 campaign: ~2,000–8,000 streams. Electronic and house genres have high curator density, which can push pricing up slightly. 45,000+ artists have used the platform."
+      },
+      "cost": "paid",
+      "reach": "1,000+ curators; total combined reach ~23 million Spotify listeners",
+      "why_it_belongs": "Vetted network of 1,000+ independent Spotify playlist curators with verified organic engagement. Campaigns run for two weeks, matching the track to genre-relevant curators. Pre-release campaigns can drive saves/streams in the critical first 48 hours of release — very important for Spotify's algorithm.",
+      "sources": [
+        {
+          "url": "https://playlistpush.com/pricing",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://playlistpush.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.chartlex.com/blog/streaming/playlist-push-review-2026",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Soundplate — House / Electronic Playlist Submission",
+      "category": "playlist-curator",
+      "platform": "Spotify",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "deep house",
+        "electronic",
+        "dance"
+      ],
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://soundplate.com/new-spotify-playlists1/electronic-dance/",
+        "requirements": [
+          "Browse curated playlists at soundplate.com/new-spotify-playlists1/electronic-dance/",
+          "Listen to playlists first to confirm genre fit",
+          "Click 'Submit Music' on chosen playlist page",
+          "Sign in with Spotify to submit (platform auto-follows the playlist)",
+          "Submit one track at a time — quality over quantity"
+        ],
+        "notes": "Completely FREE. Soundplate also runs its own 'Official Soundplate' playlists updated with hot electronic tracks — submit at soundplate.com/new-spotify-playlists1/official-soundplate-playlists/. Additional free tools available: pre-save campaigns, Spotify track analyzer, playlist analyzer."
+      },
+      "cost": "freemium",
+      "reach": "Hundreds of independent Spotify curators on platform; individual playlists range from 500 to 100K+ followers",
+      "why_it_belongs": "Free platform dedicated to connecting electronic / house music artists with independent Spotify curators. Has a specific 'House / Electronic / Dance Music' submission section with dozens of curators. No account needed for basic discovery; Spotify login required to submit. Ideal low-barrier starting point for an unknown artist with no budget.",
+      "sources": [
+        {
+          "url": "https://soundplate.com/new-spotify-playlists1/electronic-dance/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://soundplate.com/submit-music-spotify-playlists/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://soundplate.com/15-dance-music-spotify-curators-submit-your-music-free/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Daily Playlists — Spotify Curator Marketplace",
+      "category": "playlist-curator",
+      "platform": "Spotify",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "techno",
+        "electronic",
+        "dance"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": null,
+        "url": "https://dailyplaylists.com/submit-song/add-song",
+        "requirements": [
+          "Create free account at dailyplaylists.com",
+          "Connect Spotify account via Spotify authenticator",
+          "Search/paste Spotify track URL",
+          "Filter playlists by genre (house, tech house, electronic)",
+          "Use 20 free Standard credits per week (reset every Monday)",
+          "Premium credits available for purchase for larger campaigns"
+        ],
+        "notes": "FREE tier: 20 credits/week, no charge. Premium credits available for paid campaigns. Platform has facilitated over 7 million playlist placements since 2017 launch. Curators include active playlists with 50K–190K+ followers specifically in house/tech house (e.g. 'Techno House Top #1 Hits' 190K followers; '★ HOUSE 2025 ★' 114K followers; 'TECH HOUSE MAFIA 2025' 159K followers)."
+      },
+      "cost": "freemium",
+      "reach": "18,000+ playlists; 40,000+ curators; top house playlists on platform: 60K–190K followers",
+      "why_it_belongs": "One of the largest free playlist submission networks (18,000+ playlists, 40,000+ curators). Hands out 20 free Standard credits per week per artist — meaning an unknown producer can start submitting at zero cost. Has a dedicated house genre filter and actively lists curated top-10 house playlists available for free submission.",
+      "sources": [
+        {
+          "url": "https://dailyplaylists.com/en/blog/spotify-top-10-free-house-playlists-2025/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://dailyplaylists.com/blog/submit-music-spotify-playlists-independent-curators-guide/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "SoundCampaign (SoundCamps) — Spotify Curator Matching",
+      "category": "playlist-curator",
+      "platform": "Spotify",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "electronic"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": null,
+        "url": "https://soundcamps.com",
+        "requirements": [
+          "Create account at soundcamps.com",
+          "Set a campaign budget (no minimum stated; ~£150 to reach ~21 curators typical)",
+          "Select genre and sub-genre to narrow curator matching",
+          "Platform auto-matches and distributes track to curators",
+          "Only pay when curator reviews the submission or a TikTok video is delivered"
+        ],
+        "notes": "PAID. Budget-flexible — you set the spending cap. Typical campaign: ~£150 for 21 curators; ~10–20% add your track to a playlist. Curators are paid per review, driving accountability. Real campaign example: $300 budget, 21 curators, 5 playlist adds, 4,223 streams. No monthly fee."
+      },
+      "cost": "paid",
+      "reach": "Curated network of verified Spotify playlist curators; typical campaign reaches 15–50 curators",
+      "why_it_belongs": "Transparent, budget-controlled platform that auto-matches tracks to Spotify playlist curators and only charges when submissions are reviewed. Sub-genre selection available, so a house/tech house producer can narrow targeting. Curators are compensated for reviews, which keeps response rates high. Good secondary platform to diversify beyond SubmitHub and Groover.",
+      "sources": [
+        {
+          "url": "https://soundcamps.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://melodicmind.co/soundcampaign-review/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://skopemag.com/2025/08/18/which-one-is-the-best-music-promotion-platforms-submithub-one-submit-playlist-push-and-soundcampaign",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "One Submit — Spotify Playlist & Blog Promotion",
+      "category": "playlist-curator",
+      "platform": "Spotify",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "electronic",
+        "techno"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": null,
+        "url": "https://www.one-submit.com/spotify-promotion",
+        "requirements": [
+          "Create account at one-submit.com",
+          "Select Spotify track link",
+          "Choose playlist size tier: up to 8K followers = $3; 8K–20K = $6 per submission",
+          "Each campaign runs for 10 days",
+          "Refund issued if curator does not respond within 10 days"
+        ],
+        "notes": "PAID. Per-submission pricing scaled by playlist size. Guarantees written feedback from curators. Described as 'much cheaper than Playlist Push' by platform. Supports multiple genres; curators include house, tech house, afro house channels. Also offers music blog and TikTok influencer submissions on same platform."
+      },
+      "cost": "paid",
+      "reach": "2,200+ curators on platform; individual playlist curators range from 1K to 100K+ followers",
+      "why_it_belongs": "Pay-per-submission platform with 2,200+ Spotify playlist curators. Artists choose playlists by follower size and only pay for what they target. Has a tech-house-to-Afro-house cross-genre submission route verified on the site ('Submit Tech House to Afrohouse Chill Sunset'). Ranked best Spotify promotion service by several music industry outlets in 2025.",
+      "sources": [
+        {
+          "url": "https://www.one-submit.com/curator/submit-tech-house-to-afrohouse-chill-sunset-spotify-promotion",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.one-submit.com/spotify-promotion",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://skopemag.com/2025/08/18/which-one-is-the-best-music-promotion-platforms-submithub-one-submit-playlist-push-and-soundcampaign",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Electronic Radar — House & Tech House Submission",
+      "category": "playlist-curator",
+      "platform": "Spotify",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "deep tech",
+        "techno",
+        "afro house",
+        "jackin house"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "info@electronicradar.com",
+        "url": "https://www.electronicradar.com/submit-music/",
+        "requirements": [
+          "Send Spotify link only (no other platform links)",
+          "Track must be released in 2025 or 2026 (current year)",
+          "Electronic music genres only — house, tech house, techno and subgenres",
+          "Free submission — no charge"
+        ],
+        "notes": "FREE. Accepted tracks are first placed on 'Electronic Radar Last Submissions' playlist, then considered for main genre playlists. Curator self-describes as 'small but with big things in mind'. Also active on Mixcloud, Instagram, YouTube, and SoundCloud. Great for early traction with a genre-focused audience."
+      },
+      "cost": "free",
+      "reach": "17 curated Spotify playlists; overall scale is small/emerging but genre-targeted",
+      "why_it_belongs": "Small but genre-focused independent curator running 17 Spotify playlists specifically for techno and house subgenres including 'House Radar', 'Tech House Radar', 'Deep Tech', 'Jackin House', 'Afro Energy'. Accepts free email submissions from any indie artist with a 2025 Spotify release — exactly the kind of niche, accessible outlet an unknown artist needs.",
+      "sources": [
+        {
+          "url": "https://www.electronicradar.com/submit-music/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Indiemono — Pop / EDM & Chill Playlist Submission",
+      "category": "playlist-curator",
+      "platform": "Spotify / Deezer / Apple Music",
+      "genre_focus": [
+        "electronic",
+        "house (chill)",
+        "deep house",
+        "dance",
+        "EDM"
+      ],
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://indiemono.com/music-submit/",
+        "requirements": [
+          "Submit via form at indiemono.com/music-submit/",
+          "Choose the genre box that best fits your track (Pop/EDM or Chill for house music)",
+          "Submit once — Indiemono routes internally across multiple playlists",
+          "Track to Spotify for Artists to monitor placement"
+        ],
+        "notes": "Completely FREE. No individual feedback provided due to volume. Indiemono explicitly states: 'We don't sell placements and won't accept transactions to be included in any playlist.' House/tech house may not fit all their boxes; best fit is Chill or Pop/EDM categories. Also manages an 'EDM Remixes, Phonk & House 2025' Spotify playlist. Demo submission available for unreleased tracks."
+      },
+      "cost": "freemium",
+      "reach": "100+ playlists; 3M+ combined playlist followers across Spotify, Deezer, and Apple Music",
+      "why_it_belongs": "Free, editorial submission system across 100+ curated playlists with 3M+ playlist followers. Covers Chill Deep House and Dance/EDM categories that intersect with house music. Submission is free, editorial, and requires zero marketing spend — a safe no-cost channel for any unknown artist to attempt.",
+      "sources": [
+        {
+          "url": "https://indiemono.com/music-submit/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://indiemono.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://open.spotify.com/playlist/5MA2NuCMiDEdV6edU5GpO7",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Tech Me Home — House & Techno Promotion",
+      "category": "playlist-curator",
+      "platform": "Spotify / DJ platforms",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "techno",
+        "afro house",
+        "minimal",
+        "melodic house"
+      ],
+      "submission": {
+        "method": "form",
+        "email": "contact@techmehomechannel.com",
+        "url": "https://www.techmehomechannel.com/submit-your-song",
+        "requirements": [
+          "Complete submission form at techmehomechannel.com/submit-your-song",
+          "House, techno, and underground electronic music only",
+          "Response within 48 hours (up to 72 hours during busy periods)"
+        ],
+        "notes": "Pricing not publicly listed on the submission page — expect a paid service based on service scope (Inflyte DJ campaigns, Spotify playlisting, press campaigns are professional services). Free initial submission inquiry via form. Response time guaranteed within 48 hrs. Also offers Hypeddit free-download campaigns."
+      },
+      "cost": "freemium",
+      "reach": "Network of DJs, radio hosts and producers on Inflyte; curated Spotify playlists for house/techno audience",
+      "why_it_belongs": "Dedicated house/techno promotion service offering Spotify playlisting, Inflyte DJ campaigns, and press services. Minimum 28-day playlist placement per track. Specialist in underground electronic genres with direct DJ outreach — useful for an artist trying to get tracks into professional DJ sets as well as playlists.",
+      "sources": [
+        {
+          "url": "https://www.techmehomechannel.com/submit-your-song",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.techmehomechannel.com/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "medium",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Apple Music Pitch (via Distributor / Apple Music Connect)",
+      "category": "playlist-curator",
+      "platform": "Apple Music",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "electronic"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": null,
+        "url": "https://musicconnect.apple.com/support/5575-apple-music-pitch",
+        "requirements": [
+          "Music distributed to Apple Music via a distributor partner with Apple Music Connect access",
+          "Pitch submitted by distributor at least 10 days before release (7-day minimum for late adds)",
+          "Provide: content format, track name, mood, genre, language, release date, campaign details",
+          "Note any focus/feeler track if part of an EP or album",
+          "Artist biography not required — campaign context is more important"
+        ],
+        "notes": "FREE (built into distributor workflow). Independent artists cannot pitch directly — must go through their distributor. Check with your distributor (TuneCore, DistroKid, CD Baby, Amuse etc.) whether they offer Apple Music Pitch as part of release setup. Organic buzz and placement on user-generated playlists can also attract editorial attention independently."
+      },
+      "cost": "freemium",
+      "reach": "Apple Music editorial playlists can reach millions of subscribers globally; 'A-List: Electronic' is a top-tier flagship playlist",
+      "why_it_belongs": "Apple Music's editorial team curates high-profile playlists (e.g. 'A-List: Electronic'). While direct access is restricted to distributor partners, many indie distributors (TuneCore, DistroKid, Amuse, CD Baby) now offer Apple Music editorial pitching as part of their release flow — making this accessible to a solo artist with any reputable distributor.",
+      "sources": [
+        {
+          "url": "https://musicconnect.apple.com/support/5575-apple-music-pitch",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://playlistpush.com/blog/how-to-get-on-apple-music-playlists-a-guide-for-independent-artists/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://imusician.pro/en/products/editorial-playlist-pitching",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "MusoSoup — Music Promotion Marketplace",
+      "category": "playlist-curator",
+      "platform": "Spotify / blogs / social",
+      "genre_focus": [
+        "electronic",
+        "house",
+        "indie electronic"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": null,
+        "url": "https://musosoup.com/",
+        "requirements": [
+          "Create artist account at musosoup.com",
+          "Pay one-off campaign fee from £42",
+          "Upload release details (up to 90 days before release date)",
+          "Curators browse and send offers — accept or decline paid/free coverage",
+          "No ongoing subscription needed"
+        ],
+        "notes": "PAID one-off fee (from £42 per campaign). Curators on platform are independent bloggers, playlist curators, radio stations, and social creators. House/electronic music coverage depends on which curators are active on the platform at time of submission — genre coverage is broader indie-electronic than specialist underground house. Good supplementary channel for press + playlist combo."
+      },
+      "cost": "freemium",
+      "reach": "Hundreds of verified curators; covers Spotify playlists, blogs, radio, and social features across multiple genres",
+      "why_it_belongs": "Unique reverse-pitch model: curators browse and contact artists they like, rather than artists cold-pitching. A single one-off fee gives 90 days of visibility to the curator pool. Covers Spotify playlists, blog reviews, radio airplay, and social media features — broader than playlist-only platforms.",
+      "sources": [
+        {
+          "url": "https://musosoup.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://musosoup.com/artists-how-it-works",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://twostorymelody.com/musosoup-review/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "medium",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Beatport / Beatportal — Editorial Pitching for DJ Store",
+      "category": "playlist-curator",
+      "platform": "Beatport",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "techno",
+        "deep house"
+      ],
+      "submission": {
+        "method": "none-public",
+        "email": null,
+        "url": "https://greenroom.beatport.com/artists",
+        "requirements": [
+          "Distribute to Beatport via TuneCore, DistroKid, or MusicHub (no label required)",
+          "Pitch for editorial features through your distributor's label manager contact at Beatport",
+          "Pitch 3–4 weeks before release for full editorial consideration",
+          "Can enter remix contests via LabelRadar (free)",
+          "Apply annually for Beatport Next artist development program",
+          "Social Spotlight (Drop of the Week, Studio Jam) can be pitched via Beatport's social channels"
+        ],
+        "notes": "Distribution is standard-cost via distributor. Editorial pitching itself is free but must go via distributor label manager. Beatport Hype chart ranks emerging artists specifically — getting into Hype Top 100 for Tech House is a significant credibility signal. No direct artist-to-editorial email publicly listed."
+      },
+      "cost": "free",
+      "reach": "Millions of DJs and electronic music fans globally; Tech House Top 100 and Hype charts are watched by working DJs worldwide",
+      "why_it_belongs": "Beatport is the #1 download store for DJs and the definitive platform for house/tech-house discovery by professional DJs. Editorial features on Beatportal (Artist of Month, Playlist of Week, track breakdowns) directly influence DJ chart picks and festival bookings. Beatport Hype chart is specifically for emerging artists. Independent artists can distribute to Beatport without a label via TuneCore, DistroKid, or MusicHub.",
+      "sources": [
+        {
+          "url": "https://greenroom.beatport.com/artists",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/genre/tech-house/11/hype-100",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "medium",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Deeper Shades of House",
+      "category": "podcast",
+      "platform": "Mixcloud / SoundCloud / web",
+      "genre_focus": [
+        "deep house",
+        "afro house",
+        "house"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "lars@deepershades.net",
+        "url": "https://www.deepershades.net/submit-a-guest-mix.html",
+        "requirements": [
+          "Contact Lars first via the site form with links to recent mixes and a bio before sending the full mix",
+          "Mix must be EXCLUSIVE — not broadcast or uploaded elsewhere before or after",
+          "WAV, AIFF, or 320kbps MP3 minimum; minimum 60 minutes",
+          "At least 4dB headroom (do not peak at 0dB)",
+          "No AI-produced music in the mix",
+          "No voiceovers, jingles, or station IDs",
+          "Full tracklist in format: Artist – Title (Remix) – Label",
+          "Short bio, social/website links, two high-quality photos",
+          "File named: DJName-MixTitle.mp3 with ID3 tags"
+        ],
+        "notes": "Paid: No. Guest mixes are unpaid exposure. High submission volume; Lars personally reviews."
+      },
+      "cost": "paid",
+      "reach": "500k+ podcast subscribers; 140k+ Mixcloud followers",
+      "why_it_belongs": "Long-running weekly podcast (900+ episodes) hosted by Lars Behrenroth; actively invites guest mixes from lesser-known producers via a public submission page — one of the few major house podcasts with an explicit open-submission policy for unknowns.",
+      "sources": [
+        {
+          "url": "https://www.deepershades.net/submit-a-guest-mix.html",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "When We Dip – Prima Lux Mix Series",
+      "category": "podcast",
+      "platform": "SoundCloud / web / Spotify",
+      "genre_focus": [
+        "melodic house",
+        "deep house",
+        "house"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "promo@whenwedip.com",
+        "url": "https://whenwedip.com/contact-us/",
+        "requirements": [
+          "Submit mix link (SoundCloud/streaming) and bio",
+          "Relevant to deep/melodic house spectrum",
+          "Original, exclusive or premiere-quality mix preferred"
+        ],
+        "notes": "Prima Lux series is specifically designed for emerging artists. Contact form also at whenwedip.com/contact-us/. Paid: No."
+      },
+      "cost": "paid",
+      "reach": "Magazine readership 50k+; active global social following; SoundCloud Prima Lux playlist 5k+ followers",
+      "why_it_belongs": "Active dance music magazine (Montreal/Dublin/Berlin) running the 'Prima Lux' dedicated emerging-artist mix series — episodes published as recently as May 2026, confirming the series actively curates lesser-known DJs. The main When We Dip Mix series (episodes 170-188+ in 2025-2026) runs in parallel for more established names.",
+      "sources": [
+        {
+          "url": "https://www.whenwedip.com/podcasts/prima-lux/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://new.whenwedip.com/2026/05/prima-lux-sideral/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "medium",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "6AM Group (SIX AM) – Guest Mix Series",
+      "category": "podcast",
+      "platform": "web / SoundCloud / YouTube",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "techno",
+        "electronic"
+      ],
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://6amgroup.com/about",
+        "requirements": [
+          "Submit inquiry via the contact form on the About page at 6amgroup.com/about",
+          "Include mix link, bio, and social media profiles",
+          "Mix should showcase a unique sound"
+        ],
+        "notes": "No dedicated submission email found on the site; editorial contact via the web form. Instagram DM @6amgroup also a viable approach. Paid: No for editorial placement."
+      },
+      "cost": "paid",
+      "reach": "Major US EDM media platform; 100k+ social followers across channels",
+      "why_it_belongs": "Weekly guest mix series on a major US electronic music media platform; features a wide range of emerging artists (Nikka Lorak, Konrad James, DJ Nikadeemas, Angel Parilli) alongside established names — accessible to unknowns willing to pitch via contact form or social DM.",
+      "sources": [
+        {
+          "url": "https://6amgroup.com/articles/music-guest-mixes",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://6amgroup.com/about",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "medium",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Proton Radio – Bedroom Bedlam / Guest Mix",
+      "category": "podcast",
+      "platform": "web / SoundCloud / Spotify",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "progressive house",
+        "techno",
+        "minimal"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "demos@protonradio.com",
+        "url": "https://intercom.help/proton-radio/en/articles/2872691-how-do-i-get-a-mix-or-radio-show-on-proton",
+        "requirements": [
+          "Private SoundCloud link to your mix with downloads enabled",
+          "Tracklist formatted as: 01. Artist - Track (Mix) [Label]",
+          "Send to demos@protonradio.com"
+        ],
+        "notes": "Alternative path: contact existing Proton residents via SoundCloud to request a guest slot on their show. Label-distributed artists: support@protonradio.com. Paid: No."
+      },
+      "cost": "paid",
+      "reach": "Global underground EDM audience; 200+ shows; 50k+ SoundCloud followers",
+      "why_it_belongs": "Long-standing internet radio station dedicated to underground dance music with 200+ shows; 'Bedroom Bedlam' is an open-submission vehicle specifically designed to introduce lesser-known talent; successful demos can lead to ongoing residencies. Active tech house genre page confirmed 2025.",
+      "sources": [
+        {
+          "url": "https://intercom.help/proton-radio/en/articles/2872691-how-do-i-get-a-mix-or-radio-show-on-proton",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.protonradio.com/genres/2/tech-house",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Frisky Radio – Feelin' Frisky Broadcasts",
+      "category": "podcast",
+      "platform": "web / frisky.fm",
+      "genre_focus": [
+        "house",
+        "deep house",
+        "progressive house",
+        "techno"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "submit@friskyradio.com",
+        "url": "https://www.friskyradio.com/show/feelin_frisky",
+        "requirements": [
+          "Email submit@friskyradio.com with a WeTansfer or streaming link in the email body",
+          "Include name, email, genre of the mix, and a brief bio",
+          "MP3 only — no WAV files, no email attachments",
+          "Do not contact via social media — email only",
+          "No guaranteed reply — only hear back if selected"
+        ],
+        "notes": "Heavily curated. Successful mixes can lead to a full recurring residency. Paid: No."
+      },
+      "cost": "paid",
+      "reach": "Specialist underground radio audience; active since 2000; 30k+ social following",
+      "why_it_belongs": "Underground electronic music radio station with a curated 1-hour guest mix slot ('Feelin' Frisky') explicitly open to unsolicited submissions from DJs — one of the clearest open-door submission paths in the underground electronic space.",
+      "sources": [
+        {
+          "url": "https://www.friskyradio.com/show/feelin_frisky",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://frisky.fm/about",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Data Transmission – Spotlight Mix Series",
+      "category": "podcast",
+      "platform": "SoundCloud / web / Mixcloud",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "deep tech",
+        "techno"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "grahame@datatransmission.co",
+        "url": "https://datatransmission.co/contact/",
+        "requirements": [
+          "Email Grahame Farmer (Editor-in-Chief) at grahame@datatransmission.co",
+          "Specify genre (house, tech house, deep tech, or techno)",
+          "Include streaming link to your mix and an artist bio",
+          "Longer interview/feature pitches also accepted separately"
+        ],
+        "notes": "Paid repost service also exists separately at datatransmission.co/submit-your-repost/. Editorial spotlight mixes are unpaid. Paid: No for editorial mix slot."
+      },
+      "cost": "paid",
+      "reach": "Major dance music media site; 50k+ SoundCloud followers; global readership",
+      "why_it_belongs": "Established online dance music authority with a regularly updated Spotlight Mix Series (active through Sept 2025) featuring artists from emerging to established; editorial contact is public and directly accessible to independent artists.",
+      "sources": [
+        {
+          "url": "https://datatransmission.co/contact/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.1001tracklists.com/tracklist/btr0p6k/channe-data-transmission-spotlight-mix-2025-09-17.html",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Magnetic Magazine – Guest Podcast Series",
+      "category": "podcast",
+      "platform": "SoundCloud / web",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "techno",
+        "electronic"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "info@magneticmag.com",
+        "url": "https://magneticmag.com/submission-policy/",
+        "requirements": [
+          "Submit a streaming link to your mix (no MP3 attachments)",
+          "Include full contact details",
+          "Fresh, original-angle pitches preferred",
+          "Editorial team curates — not all submissions published"
+        ],
+        "notes": "Also accepts track premieres and artist features via same email. Content is editorially selected. Paid: No."
+      },
+      "cost": "paid",
+      "reach": "Global EDM readership 100k+; 200k+ social following",
+      "why_it_belongs": "US-based electronic music magazine (Beverly Hills) with an established guest podcast series; submission policy is publicly documented and allows emerging artist pitches via email with a streaming link — no attachment required.",
+      "sources": [
+        {
+          "url": "https://magneticmag.com/submission-policy/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.magneticmag.com/tag/podcast/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "NTS Radio – Supporter Radio Mix Programme",
+      "category": "podcast",
+      "platform": "web / nts.live / Spotify",
+      "genre_focus": [
+        "house",
+        "techno",
+        "electronic",
+        "experimental"
+      ],
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://www.nts.live/projects/supporter-radio",
+        "requirements": [
+          "Must be an NTS Supporter (membership from £3.99/month or ~£54/year)",
+          "Watch for submission window announcements via newsletter and @nts_radio Instagram",
+          "Mix strictly 55–60 minutes long, submitted as an MP3",
+          "No genre restrictions — any electronic style welcome",
+          "Only one mix per applicant selected if multiple submitted"
+        ],
+        "notes": "Paid: Yes — NTS Supporter membership required (from £3.99/month). Submissions are evaluated by the programming team; no individual feedback for rejected mixes. 3–4 submission rounds per year. Next round reportedly opening summer 2026."
+      },
+      "cost": "paid",
+      "reach": "Global audience; NTS streams to 6M+ listeners per month; archived mixes remain on site",
+      "why_it_belongs": "London-based broadcaster NTS opens a mix-submission programme several times per year exclusively to its supporters (paying members); selected mixes broadcast live and archived alongside resident programming — a legitimate, structured route for an unknown to get a mix on a globally respected radio platform.",
+      "sources": [
+        {
+          "url": "https://www.nts.live/projects/supporter-radio",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ntslive.freshdesk.com/support/solutions/articles/77000570080-submitting-a-mix",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.nts.live/supporters",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Electronic Groove – EG Podcast",
+      "category": "podcast",
+      "platform": "Mixcloud / SoundCloud / web / Apple Podcasts",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "techno",
+        "progressive house",
+        "deep house"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "contact@electronicgroove.com",
+        "url": "https://electronicgroove.com/series/eg-podcast/",
+        "requirements": [
+          "Email contact@electronicgroove.com with a streaming link to your mix and artist bio",
+          "Note your pitch is for the EG Podcast guest slot",
+          "No dedicated submission form — general contact email used for editorial pitches"
+        ],
+        "notes": "Note: Electronic Groove also offers paid track premiere packages ($40–$80) at electronicgroove.com/submission/ — these are separate from editorial podcast features. Paid: No for editorial podcast slot."
+      },
+      "cost": "paid",
+      "reach": "1072+ episodes; Mixcloud followers 30k+; Apple Podcasts listed; global electronic music readership",
+      "why_it_belongs": "Long-running electronic music magazine podcast (1072+ episodes as of June 2026) that regularly features both established and emerging artists (e.g. Diass, Lannka, Adapter, Charles Meyer alongside Steve Lawler, Cattáneo); general contact email accepted for guest mix pitches.",
+      "sources": [
+        {
+          "url": "https://electronicgroove.com/series/eg-podcast/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://electronicgroove.com/submission/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "medium",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "MIL-MGMT (Music Is Love Management)",
+      "category": "pr",
+      "platform": "web",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "techno",
+        "electronic"
+      ],
+      "submission": {
+        "method": "form",
+        "email": "info@mil-mgmt.com",
+        "url": "https://mil-mgmt.com/contact/",
+        "requirements": [
+          "Submit private link or download of track(s)",
+          "Provide release date, label and catalog details, and campaign objectives",
+          "Submit at least 6 weeks before release date",
+          "Select and pay for campaign tier via website checkout"
+        ],
+        "notes": "PAID service. Pricing: DJ Only £110 (EP)/£220 (Album); DJ+Radio £160/£265; Full Campaign (DJ+Radio+Press) £295.99–£449.99 for 6-week EP or 12-week Album campaigns. Use code 'decade' for 10% off. Includes weekly reporting and real-time DJ feedback."
+      },
+      "cost": "paid",
+      "reach": "Network of DJs, specialist radio shows, press outlets, and playlist curators in house/techno space",
+      "why_it_belongs": "Manchester-based PR firm with 10+ years specialising exclusively in house, techno and electronic music; offers tiered campaigns (DJ promo, radio plugging, press coverage) designed for independent artists and labels — the most accessible entry-level pricing in the sector (£110 for DJ-only EP campaign).",
+      "sources": [
+        {
+          "url": "https://mil-mgmt.com/house-music-pr/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://mil-mgmt.com/contact/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Reach Promo",
+      "category": "pr",
+      "platform": "web",
+      "genre_focus": [
+        "deep house",
+        "tech house",
+        "techno",
+        "minimal"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "info@reach-promo.agency",
+        "url": "https://reach-promo.agency/promo-pool-services/",
+        "requirements": [
+          "Email info@reach-promo.agency to check if music fits their service",
+          "Music must fit deep house / tech house / techno/minimal genres",
+          "Submit private streaming link for review before purchasing campaign"
+        ],
+        "notes": "PAID service. Pricing: Basic Campaign €80 (30 days, DJ outreach only, up to 2 tracks); Medium Campaign €100 (30 days, DJs+magazines+radio+3 news items, up to 2 tracks). Upfront payment required. Previous clients include Carl Cox, Spektre, Thomas Schumacher. Labels: Terminal M, Elevate, Trax Records, Tronic."
+      },
+      "cost": "paid",
+      "reach": "Curated pool of DJs, radio shows, and blogs in deep house/tech house/techno scene globally",
+      "why_it_belongs": "Italy-based specialist PR agency and promo pool focused exclusively on deep house, tech house, and techno/minimal; affordable tiered campaigns (from €80) covering DJ outreach, radio promotion, blog/magazine pitching, and Spotify playlist submission — lowest entry cost among verified house-specific PR agencies.",
+      "sources": [
+        {
+          "url": "https://reach-promo.agency/promo-pool-services/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://reach-promo.agency/promo-pr-agency-promo-pool/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Infectious PR",
+      "category": "pr",
+      "platform": "web",
+      "genre_focus": [
+        "dance",
+        "electronic",
+        "house",
+        "pop"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "newbiz@infectiouspr.com",
+        "url": "https://infectiouspr.com/",
+        "requirements": [
+          "Email newbiz@infectiouspr.com with artist info and a streaming link to your music",
+          "Briefly describe your project and campaign goals"
+        ],
+        "notes": "PAID service — rates quoted on inquiry. UK-based, international reach. Team selects projects based on artistic fit ('Do we like it?'). Genre scope is broad dance/electronic."
+      },
+      "cost": "paid",
+      "reach": "Global media network; BBC, Forbes, Billboard, Apple Music, Spotify coverage capacity",
+      "why_it_belongs": "Bristol-based marketing and PR agency (founded 2009, 30 years combined experience) with global media network including BBC, Forbes, Billboard, Apple Music, and Spotify; explicitly invites new project inquiries from emerging artists via their public new-business email.",
+      "sources": [
+        {
+          "url": "https://infectiouspr.com/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Motormouthmedia",
+      "category": "pr",
+      "platform": "web",
+      "genre_focus": [
+        "electronic",
+        "indie electronic",
+        "underground dance"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "submissions@motormouthmedia.com",
+        "url": "http://www.motormouthmedia.com/contact",
+        "requirements": [
+          "Email submissions@motormouthmedia.com with project info and a streaming link",
+          "High submission volume — no reply indicates project is not a fit"
+        ],
+        "notes": "PAID service — rates quoted on inquiry. Selective boutique firm; evaluates based on artistic quality. Best fit for leftfield or underground electronic artists rather than mainstream commercial house."
+      },
+      "cost": "paid",
+      "reach": "US and international indie/electronic tastemaker press; established booking and label contacts",
+      "why_it_belongs": "LA/Brooklyn boutique PR firm (founded late 1990s) that has championed underground electronic acts since the beginning — was the first American independent PR firm to represent Warp Records, Ninja Tune, Planet Mu; broke Four Tet, Caribou, Flying Lotus from day one; accepts new inquiries.",
+      "sources": [
+        {
+          "url": "http://www.motormouthmedia.com/contact",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "http://www.motormouthmedia.com/about",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Dispersion PR",
+      "category": "pr",
+      "platform": "web",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "techno",
+        "electronic"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "info@dispersionpr.com",
+        "url": "https://www.dispersionpr.com/",
+        "requirements": [
+          "Email info@dispersionpr.com with artist/release info",
+          "Include streaming link and campaign goals",
+          "Specify release date and label context"
+        ],
+        "notes": "PAID service — rates quoted on inquiry. One of the most connected UK underground electronic music PR agencies. BBC Radio 1 Dance placement track record."
+      },
+      "cost": "paid",
+      "reach": "UK and European press, radio, and club circuit; BBC Radio 1 Dance history",
+      "why_it_belongs": "UK specialist electronic music PR firm (founded 2007 by Julian Shay and Dean Muhsin) offering press, radio, and club promo for artists and labels. Client history includes Hot Creations, Crosstown Rebels, Cocoon, Defected, Laurent Garnier, Michael Bibi, Chris Liebing — working with Dispersion signals credibility in the underground house/techno circuit.",
+      "sources": [
+        {
+          "url": "https://www.dispersionpr.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://rocketreach.co/dispersion-pr-profile_b5d36282f42e46a9",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "medium",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "MCPR (Matt Caldwell PR)",
+      "category": "pr",
+      "platform": "web",
+      "genre_focus": [
+        "electronic",
+        "house",
+        "techno",
+        "dance"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "info@mattcaldwell.co.uk",
+        "url": "https://www.mattcaldwell.co.uk/contact/",
+        "requirements": [
+          "Email info@mattcaldwell.co.uk or use the contact form at mattcaldwell.co.uk/contact/",
+          "Include project details, streaming link, and campaign scope"
+        ],
+        "notes": "PAID service — rates quoted on inquiry. London-based (Covent Garden). Phone: +44 800 689 4723. Integrated services beyond PR include social media, creative, brand partnerships, radio."
+      },
+      "cost": "paid",
+      "reach": "International electronic music press, radio, and industry network; 12+ years established",
+      "why_it_belongs": "Full-service 360-degree electronic music agency (12+ years, global presence) offering PR, radio promo, social media, A&R consultancy, and artist progression — contact email and phone publicly listed; targets both emerging and established electronic artists.",
+      "sources": [
+        {
+          "url": "https://www.mattcaldwell.co.uk/contact/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.mattcaldwell.co.uk/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Prescription Music PR",
+      "category": "pr",
+      "platform": "web",
+      "genre_focus": [
+        "electronic",
+        "ambient",
+        "house",
+        "dance"
+      ],
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://www.prescriptionmusicpruk.com/general-enquiries",
+        "requirements": [
+          "Submit via the general enquiries form at prescriptionmusicpruk.com/general-enquiries",
+          "Include artist info, release details, and campaign objectives"
+        ],
+        "notes": "PAID service — pricing on inquiry. UK-based with European and Irish PR coverage. Phone: +44 (0)1223 505328 Mon–Fri 9am–6pm."
+      },
+      "cost": "paid",
+      "reach": "UK, European, and Irish music press and radio",
+      "why_it_belongs": "Leading UK electronic and ambient music PR agency with offices in London, Cambridge, and Manchester; explicitly lists electronic music PR among services and has a public inquiry form for new campaign submissions — accessible to independent artists.",
+      "sources": [
+        {
+          "url": "https://www.prescriptionmusicpruk.com/electronic-music-pr",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.prescriptionmusicpruk.com/contact-us",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Groove Magazin – Resident Podcast",
+      "category": "podcast",
+      "platform": "SoundCloud / Mixcloud / web",
+      "genre_focus": [
+        "techno",
+        "house",
+        "electronic"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "max@groove.de",
+        "url": "https://www.groove.de/category/podcast/groove-resident-podcast/",
+        "requirements": [
+          "Email max@groove.de (Events/Podcast contact: Maximilian Fritz)",
+          "Pitch yourself as a club resident or party organizer in a specific city/venue",
+          "Include streaming link to your mix and relevant club/party context",
+          "Note: primary focus is German-speaking regions and Eastern Europe — Tunis-based artists should pitch their regional/local residency angle if applicable"
+        ],
+        "notes": "Paid: No. Series is editorially curated and specifically oriented toward club residents in a defined geographic scope — an unknown Tunisian producer should pitch a specific residency or event angle rather than a generic mix. Low probability but possible if framed correctly."
+      },
+      "cost": "paid",
+      "reach": "Established German-language electronic music magazine; Mixcloud 50k+ followers; SoundCloud Resident Podcast playlist active",
+      "why_it_belongs": "Berlin-based bi-monthly podcast (episode 064 published June 2026, confirming active status) featuring grassroots underground residents from clubs in German-speaking countries and Eastern Europe — focuses on local club culture figures rather than superstars. Podcast contact is publicly available via editorial email.",
+      "sources": [
+        {
+          "url": "https://groove.de/impressum/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.groove.de/category/podcast/groove-resident-podcast/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "medium",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Rinse FM",
+      "category": "radio",
+      "platform": "FM / web / SoundCloud",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "dubstep",
+        "grime",
+        "electronica"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "thelinkup@rinse.fm",
+        "url": null,
+        "requirements": [
+          "Private SoundCloud link only (no file attachments)",
+          "Include brief artist bio and genre info"
+        ],
+        "notes": "Individual show hosts also run their own submission inboxes; contact show hosts directly via social for specific shows."
+      },
+      "cost": "free",
+      "reach": "Online + 103.7 FM London; global streaming audience; tens of thousands weekly listeners",
+      "why_it_belongs": "Rinse FM is the UK's most influential underground radio station with 30+ years of history. Its shows are curated by individual DJs who actively seek fresh tracks — emailing thelinkup@rinse.fm with a private SoundCloud link is a direct route to DJ inboxes that spin house and tech house.",
+      "sources": [
+        {
+          "url": "https://labelsbase.net/rinse",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.rinse.fm/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Defected Radio",
+      "category": "radio",
+      "platform": "web / Spotify / SoundCloud / podcast",
+      "genre_focus": [
+        "house",
+        "deep house",
+        "soulful house"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": "demos@defected.com",
+        "url": "https://www.labelradar.com/labels/defected/portal",
+        "requirements": [
+          "Streaming link with download option",
+          "Brief bio (1 paragraph)",
+          "Social media links",
+          "No attachments — streaming link only",
+          "Track must be original, not a bootleg or mashup"
+        ],
+        "notes": "LabelRadar is the primary portal. demos@defected.com also accepted. Submission considered for all Defected sub-labels including Glitterbox, DFTD, D4 Dance."
+      },
+      "cost": "free",
+      "reach": "2M+ SoundCloud followers; Spotify editorial placement; syndicated to 70+ stations",
+      "why_it_belongs": "Defected Radio is the world's most-listened-to house music radio show, syndicated globally. Sending a promo to Defected's demos portal (LabelRadar) is the official route to reaching their A&R and radio team — tracks featured can go on air and to their 2M+ SoundCloud followers.",
+      "sources": [
+        {
+          "url": "https://defected.com/demos",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.labelradar.com/labels/defected/portal",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatportal.com/articles/155155-defected-records-is-now-open-for-demo-submissions-via-labelradar",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Proton Radio — Bedroom Bedlam",
+      "category": "radio",
+      "platform": "web / SoundCloud / Mixcloud",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "deep house",
+        "progressive house",
+        "breaks",
+        "techno"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "demos@protonradio.com",
+        "url": "https://intercom.help/proton-radio/en/articles/2872691-how-do-i-get-a-mix-or-radio-show-on-proton",
+        "requirements": [
+          "Private SoundCloud link with downloads enabled",
+          "Tracklist formatted as: 01. Artist - Track (Mix) [Label]",
+          "Include artist bio and genre info"
+        ],
+        "notes": "Bedroom Bedlam airs on Proton Radio and accepts sets across electronic genres including house. Successful guest spots can lead to recurring invitations. Label-distributed artists can also contact support@protonradio.com."
+      },
+      "cost": "free",
+      "reach": "200+ exclusive shows; global internet radio audience; SoundCloud/Mixcloud archive",
+      "why_it_belongs": "Proton Radio is one of the longest-running underground electronic internet radio networks with 200+ exclusive shows. 'Bedroom Bedlam' is specifically the submission-friendly show that airs sets from emerging DJs — it is the documented front door for unknowns.",
+      "sources": [
+        {
+          "url": "https://intercom.help/proton-radio/en/articles/2872691-how-do-i-get-a-mix-or-radio-show-on-proton",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.protonradio.com/shows/321/bedroom-bedlam",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Frisky Radio — Feelin' Frisky",
+      "category": "radio",
+      "platform": "web / SoundCloud / Mixcloud / podcast",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "progressive house",
+        "deep house",
+        "techno"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "submit@friskyradio.com",
+        "url": "https://frisky.fm/",
+        "requirements": [
+          "MP3 only (no WAV)",
+          "320 kbps quality",
+          "Upload to WeTransfer — do NOT use SoundCloud, Mediafire or similar",
+          "Include: your name, email, genre of mix, and brief bio",
+          "Full 1-hour set required"
+        ],
+        "notes": "FRISKY uses a vetting process. Feelin' Frisky broadcasts are limited 1-hour slots. Strong sets may lead to residency offers."
+      },
+      "cost": "paid",
+      "reach": "One of the largest underground electronic internet radio platforms; global audience; podcast distribution",
+      "why_it_belongs": "Frisky Radio is a globally-streamed curated electronic music internet radio. 'Feelin' Frisky' is their dedicated guest slot for emerging DJs — it is the official, documented submission route for artists without an existing residency. A successful set can lead to a full residency offer.",
+      "sources": [
+        {
+          "url": "https://frisky.fm/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.friskyradio.com/about/faq",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Foundation FM",
+      "category": "radio",
+      "platform": "web / SoundCloud / Mixcloud",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "deep house",
+        "electronic",
+        "garage"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "ana@foundation.fm",
+        "url": "https://foundation.fm/info",
+        "requirements": [
+          "Show/mix proposal describing your concept",
+          "SoundCloud or Mixcloud demo link recommended",
+          "Include artist bio and social links"
+        ],
+        "notes": "Show submissions go to ana@foundation.fm and angelica@foundation.fm. Creative/partnership enquiries go to beckytong@foundation.fm. General enquiries to hello@foundation.fm."
+      },
+      "cost": "free",
+      "reach": "London-based online station with growing global listenership; active SoundCloud and Mixcloud presence",
+      "why_it_belongs": "Foundation FM is a female-led independent London station championing underrepresented voices and emerging artists in underground electronic music. It actively curates new talent via a dedicated show submissions contact and has a track record of platforming unknowns.",
+      "sources": [
+        {
+          "url": "https://foundation.fm/info",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://soundcloud.com/foundation-fm",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "NTS Radio — Show Proposal / Supporter Radio",
+      "category": "radio",
+      "platform": "web / SoundCloud / Mixcloud",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "electronic",
+        "experimental",
+        "all genres"
+      ],
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://www.nts.live/contact",
+        "requirements": [
+          "Show proposal: describe concept in up to 600 characters, list up to 5 genres, provide up to 3 demo links (SoundCloud/Mixcloud/YouTube)",
+          "Supporter Radio: must be NTS Supporter (paid subscriber); 55–60 minute mix as MP3; submissions align with an announced theme"
+        ],
+        "notes": "Show proposal form at nts.live/contact. Supporter Radio rounds open a few times per year — follow @ntslive on Instagram for announcements. No direct submission email listed."
+      },
+      "cost": "freemium",
+      "reach": "Millions of monthly listeners globally; 24/7 streaming; extensive archive",
+      "why_it_belongs": "NTS is one of the world's top independent online radio stations broadcasting 24/7. It has two documented entry routes for unknowns: (1) free show proposals via their website form, and (2) NTS Supporter Radio — a paid subscription scheme that opens mix submission rounds several times per year, with selected mixes broadcast and archived.",
+      "sources": [
+        {
+          "url": "https://ntslive.freshdesk.com/support/solutions/articles/77000570099-show-proposals",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.nts.live/projects/supporter-radio",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ntslive.freshdesk.com/support/solutions/articles/77000570080-submitting-a-mix",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Worldwide FM",
+      "category": "radio",
+      "platform": "web / SoundCloud / Mixcloud",
+      "genre_focus": [
+        "house",
+        "deep house",
+        "soul",
+        "jazz",
+        "world",
+        "electronic"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "info@worldwidefm.net",
+        "url": "https://www.worldwidefm.net/contact",
+        "requirements": [
+          "Detailed show proposal: concept, planned guests for 6 months, specialty, genre focus, why it is original",
+          "Music submission via streaming link",
+          "Show must offer something distinct from existing programming"
+        ],
+        "notes": "Contact via email or website contact form. Station actively looks for shows highlighting underrepresented global scenes — a Tunisian/North African house perspective has strong pitch angle."
+      },
+      "cost": "free",
+      "reach": "Global online audience; associated with Gilles Peterson's worldwide network; Mixcloud archive",
+      "why_it_belongs": "Worldwide FM (Gilles Peterson) champions underground and global music culture. Their contact page invites show proposals and music submissions. The station has a history of platforming emerging artists and international talent, making it realistic for a Tunisian producer to pitch a culturally distinctive show concept.",
+      "sources": [
+        {
+          "url": "https://www.worldwidefm.net/contact",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.worldwidefm.net/about",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Ibiza Live Radio — New Talent Show",
+      "category": "radio",
+      "platform": "web / FM Ibiza",
+      "genre_focus": [
+        "house",
+        "deep house",
+        "tech house",
+        "electronic"
+      ],
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://www.ibizaliveradio.com/music/demo",
+        "requirements": [
+          "Upload mix or demo track via upload portal at ibizaliveradio.affekt.de/upload-area",
+          "Include artist info and project description",
+          "Mix/set format preferred"
+        ],
+        "notes": "Monthly competition. Winning artist broadcast as guest on Ibiza Live Radio. Station covers house, electronic, deep, and tech genres."
+      },
+      "cost": "free",
+      "reach": "Online + Ibiza FM; growing international listenership; active social media",
+      "why_it_belongs": "Ibiza Live Radio runs a monthly 'New Talent Show' competition specifically for unknown DJs and producers — the winning mix gets broadcast and the artist is featured as a guest. This is one of the most direct, documented routes for an unknown to get airplay on an Ibiza-branded station.",
+      "sources": [
+        {
+          "url": "https://www.ibizaliveradio.com/music/demo",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.ibizaliveradio.com/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Ibiza Global Radio",
+      "category": "radio",
+      "platform": "FM / web / SoundCloud",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "electronic",
+        "Ibiza club sounds"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "info@ibizaglobalradio.com",
+        "url": "https://www.ibizaglobalradio.com/contacts.html",
+        "requirements": [
+          "DJ mix or show proposal via email",
+          "Include artist bio, SoundCloud/streaming link",
+          "Specify genre and concept"
+        ],
+        "notes": "No dedicated submission portal found; general contact email is the documented contact route. Approach professionally with a mix link and brief pitch. Active as of 2025 (Ibiza Global Festival 2025 referenced)."
+      },
+      "cost": "free",
+      "reach": "100.8 FM Ibiza + global web streaming; 186K+ Instagram followers; international syndication",
+      "why_it_belongs": "Ibiza Global Radio is a 24/7 broadcast station (100.8 FM Ibiza) streaming the best international DJs and electronic music. Reaching them via their contact email is a real route to pitch DJ mix shows or promos to their programming team.",
+      "sources": [
+        {
+          "url": "https://www.ibizaglobalradio.com/contacts.html",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.ibizaglobalradio.com/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "medium",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Passion Ibiza Radio",
+      "category": "radio",
+      "platform": "web / Mixcloud / SoundCloud",
+      "genre_focus": [
+        "house",
+        "soulful house",
+        "disco",
+        "tech house",
+        "deep house",
+        "afro house",
+        "melodic house"
+      ],
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://passionibizaradio.com/submit-a-demo/",
+        "requirements": [
+          "60-minute pre-recorded show or continuous mix",
+          "MP3 at 320 kbps",
+          "SoundCloud download link",
+          "Include name, email, optional Facebook/Instagram links"
+        ],
+        "notes": "Response within a few days if accepted. Website notes limited show slots available. Form-based submission — no email address listed."
+      },
+      "cost": "free",
+      "reach": "Online radio with Mixcloud/SoundCloud presence; Ibiza-focused audience; active as of June 2025",
+      "why_it_belongs": "Passion Ibiza Radio has a fully open, documented demo submission form for emerging DJs — one of the most directly accessible Ibiza-branded stations. They actively seek quality house DJs and presenters and accept continuous mix submissions.",
+      "sources": [
+        {
+          "url": "https://passionibizaradio.com/submit-a-demo/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.mixcloud.com/passionibizaradio/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "BBC Introducing",
+      "category": "radio",
+      "platform": "FM / BBC Radio 1 / BBC Radio 6 Music / web",
+      "genre_focus": [
+        "house",
+        "electronic",
+        "all genres (routed by region/genre)"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": null,
+        "url": "https://www.bbc.co.uk/introducing",
+        "requirements": [
+          "Create a free BBC account",
+          "Upload WAV or MP3 file (up to 2 tracks per upload cycle)",
+          "Complete artist profile: name, genre, postcode, bio, photo (1920x1080px recommended)",
+          "Upload clean version only — no explicit lyrics",
+          "Add PRS Tunecode if applicable"
+        ],
+        "notes": "Upload limit: 2 tracks every 30 days. Can take up to 6 months or more to be heard due to volume. Artists must be UK-based or have a UK postcode connection. Tracks routed to appropriate regional and national shows."
+      },
+      "cost": "free",
+      "reach": "BBC Radio 1, Radio 6 Music, 1Xtra, 2, and regional stations; millions of listeners",
+      "why_it_belongs": "BBC Introducing is the official BBC pathway for unsigned/emerging artists to reach BBC Radio 1, Radio 6 Music, 1Xtra, and regional BBC stations. Uploaded tracks are reviewed by producers and can be broadcast nationally. The upload portal is free and open to all UK-based or UK-connected artists. Dance/electronic tracks are routed to relevant shows including Radio 1 Dance.",
+      "sources": [
+        {
+          "url": "https://dittomusic.com/en/blog/how-to-get-your-music-played-on-bbc-introducing",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/BBC_Music_Introducing",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Netil Radio",
+      "category": "radio",
+      "platform": "web / Mixcloud",
+      "genre_focus": [
+        "house",
+        "electronic",
+        "underground",
+        "experimental"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "hello@netilradio.com",
+        "url": "https://netilradio.com/",
+        "requirements": [
+          "Show proposal describing concept and music policy",
+          "Demo mix link (Mixcloud or SoundCloud)",
+          "Artist bio and background"
+        ],
+        "notes": "Email hello@netilradio.com with show proposal. Station is community-led and actively curates new residents. Active as of 2025."
+      },
+      "cost": "free",
+      "reach": "Online streaming; Mixcloud archive; London underground music community audience",
+      "why_it_belongs": "Netil Radio is a Hackney community station broadcasting from a converted shipping container at Netil Market. It actively platforms emerging and underground artists and accepts show proposals via a documented email address. Its community-first ethos makes it more accessible than major stations.",
+      "sources": [
+        {
+          "url": "https://netilradio.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://streema.com/radios/Netil_Radio",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "medium",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Toolroom Radio",
+      "category": "radio",
+      "platform": "web / Mixcloud / podcast (Apple, Spotify)",
+      "genre_focus": [
+        "tech house",
+        "house",
+        "techno"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": null,
+        "url": "https://toolroomrecords.com/demos/",
+        "requirements": [
+          "Upload demo via portal at toolroomrecords.com/demos/",
+          "Original productions only (not bootlegs)",
+          "Label does not reply to all submissions but will contact if interested"
+        ],
+        "notes": "Toolroom Radio frequently features tracks from Toolroom Records releases, so getting a track on the label is the primary route to radio play. For PR, contact charlie@toolroomrecords.com. Guest mix slots not publicly advertised."
+      },
+      "cost": "free",
+      "reach": "Global podcast; Apple Podcasts, Spotify; Mixcloud archive; 775+ episodes as of 2025",
+      "why_it_belongs": "Toolroom Radio (presented by Mark Knight) is one of the most respected weekly tech house/house radio shows, broadcast globally with guest mix slots. Submitting demos to Toolroom Records via their online portal is the official route to getting tracks featured on the show.",
+      "sources": [
+        {
+          "url": "https://toolroomrecords.com/radio/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://toolroomrecords.com/demos/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Cr2 Live & Direct Radio Show",
+      "category": "radio",
+      "platform": "web / SoundCloud / podcast / 70+ FM stations",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "techno"
+      ],
+      "submission": {
+        "method": "email",
+        "email": null,
+        "url": "https://cr2records.com/contact/",
+        "requirements": [
+          "Contact via Cr2 Records general contact page",
+          "Include streaming link, release info, and artist bio",
+          "Original house/tech house tracks suitable for a global radio audience"
+        ],
+        "notes": "No dedicated promo submission email found on official pages. Contact via cr2records.com/contact/ or reach the production team at theboyinthecorner.co.uk. Approach is via the label/production team. Sample Tools by Cr2 (sampletoolsbycr2.com/opportunities/demo-submission/) also accepts demo submissions tied to the wider Cr2 ecosystem."
+      },
+      "cost": "free",
+      "reach": "18M+ weekly listeners; 70+ FM stations; 50+ countries; SoundCloud/podcast",
+      "why_it_belongs": "Mark Brown's Cr2 Live & Direct show reaches 18M+ weekly listeners across 70+ stations in 50+ countries — one of the most syndicated house radio shows globally. Promos submitted and featured here get extraordinary reach for an unknown.",
+      "sources": [
+        {
+          "url": "https://cr2records.com/radio/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://cr2records.com/contact/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "medium",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Kaluki Radio",
+      "category": "radio",
+      "platform": "podcast (Apple Podcasts) / SoundCloud",
+      "genre_focus": [
+        "tech house",
+        "house",
+        "techno"
+      ],
+      "submission": {
+        "method": "email",
+        "email": "info@kaluki.co.uk",
+        "url": "https://www.kaluki.co.uk/",
+        "requirements": [
+          "Include a SoundCloud or streaming link to your track or mix",
+          "Keep the pitch concise — who you are, what you're sending",
+          "Original tech house/house productions"
+        ],
+        "notes": "Kaluki released music in 2026 (confirmed active). Radio show available on Apple Podcasts. This is a label contact that doubles as a route to radio feature."
+      },
+      "cost": "free",
+      "reach": "Dedicated tech house fanbase; Apple Podcasts; global streaming; Ibiza presence",
+      "why_it_belongs": "Kaluki is a Manchester-based independent tech house label and events brand (est. 2006) whose weekly radio podcast is an established community touchpoint. Reaching the label via info@kaluki.co.uk is a direct line to label boss Pirate Copy, who runs the show.",
+      "sources": [
+        {
+          "url": "https://www.kaluki.co.uk/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://podcasts.apple.com/us/podcast/kaluki-radio/id1436583791",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "medium",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Glitterbox Radio",
+      "category": "radio",
+      "platform": "web / Mixcloud / podcast",
+      "genre_focus": [
+        "house",
+        "disco house",
+        "soulful house",
+        "classic house"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": null,
+        "url": "https://www.labelradar.com/labels/glitterbox/portal",
+        "requirements": [
+          "Submit via LabelRadar at labelradar.com/labels/glitterbox/portal",
+          "Streaming link with download option",
+          "Brief bio and social links",
+          "Track should fit Glitterbox's disco/house/soulful aesthetic"
+        ],
+        "notes": "Glitterbox is a Defected sub-label; submissions via LabelRadar are reviewed by the wider Defected A&R team. Active as of 2025 (show episode 450 confirmed, BBC Radio 1 Dance x Glitterbox collaboration in June 2025)."
+      },
+      "cost": "free",
+      "reach": "Defected network audience; Mixcloud/SoundCloud; BBC Radio 1 Dance collaborations; global reach",
+      "why_it_belongs": "Glitterbox Radio (run by Simon Dunmore / Defected sub-brand) is a weekly show celebrating the best in house, disco and dance music, broadcast globally. Submitting via the Defected/LabelRadar portal is the documented route for getting tracks considered for Glitterbox Radio airplay.",
+      "sources": [
+        {
+          "url": "https://www.labelradar.com/labels/glitterbox/portal",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://defected.com/glitterbox",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.ibiza-spotlight.com/magazine/2025/06/glitterbox-and-bbc-radio-1-dance-x-reel-house-music-legends-30th-anniversary",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Selected.",
+      "category": "youtube",
+      "platform": "YouTube / SoundCloud / Spotify",
+      "genre_focus": [
+        "house",
+        "deep house",
+        "melodic house"
+      ],
+      "submission": {
+        "method": "form",
+        "email": "inbox@selectedbase.com",
+        "url": "https://selectedbase.com/submit",
+        "requirements": [
+          "Streamable links only (SoundCloud, YouTube, Dropbox, Google Drive)",
+          "Unreleased tracks preferred",
+          "Do not chase for a response"
+        ],
+        "notes": "Both the web form and email inbox@selectedbase.com are listed officially on selectedbase.com/submit"
+      },
+      "cost": "free",
+      "reach": "Multiple millions of YouTube plays; large SoundCloud following",
+      "why_it_belongs": "Berlin-founded music blog and label with millions of YouTube views; curates high-quality house tracks for an engaged electronic audience and accepts demos directly from unknowns via its submit page.",
+      "sources": [
+        {
+          "url": "https://selectedbase.com/submit",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.youtube.com/channel/UCFZ75Bg73NJnJgmeUX9l62g",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "MrRevillz",
+      "category": "youtube",
+      "platform": "YouTube / SoundCloud / Spotify",
+      "genre_focus": [
+        "house",
+        "deep house",
+        "dance",
+        "electronic"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": "info@MrRevillz.com",
+        "url": "https://music.mrrevillz.com/Submissions",
+        "requirements": [
+          "Submit via the portal (not email for tracks)",
+          "Receive email updates on verdict",
+          "House, dance, and electronic genres"
+        ],
+        "notes": "Dedicated portal at music.mrrevillz.com/Submissions is the primary channel; info@MrRevillz.com is for business inquiries only"
+      },
+      "cost": "paid",
+      "reach": "3M+ YouTube subscribers; 2B+ total views",
+      "why_it_belongs": "One of the most established house/dance YouTube channels with 3M+ subscribers and 2B+ total views; runs a dedicated submission portal with feedback to all submitters — very accessible for unknowns.",
+      "sources": [
+        {
+          "url": "https://music.mrrevillz.com/Submissions",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.submithub.com/blog/mrrevillz",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.youtube.com/channel/UCd3TI79UTgYvVEq5lTnJ4uQ",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "House Nation",
+      "category": "youtube",
+      "platform": "YouTube / SoundCloud",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "deep house"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": "dylan@nations.io",
+        "url": "https://www.labelradar.com/labels/housenation/profile",
+        "requirements": [
+          "Submit via LabelRadar portal",
+          "House, tech house, and adjacent electronic genres"
+        ],
+        "notes": "LabelRadar is the official submission portal. Contact email dylan@nations.io also cited (secondary source). isac.jivhed@nations.io also referenced."
+      },
+      "cost": "free",
+      "reach": "~3.92M YouTube subscribers; 1B+ total views",
+      "why_it_belongs": "Premier YouTube destination for cutting-edge house music with ~3.9M subscribers and daily uploads; accepts music submissions via LabelRadar portal — one of the clearest open submission routes for independent house producers.",
+      "sources": [
+        {
+          "url": "https://www.labelradar.com/labels/housenation/profile",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.youtube.com/channel/UCj_Y-xJ2DRDGP4ilfzplCOQ",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://youtube.fandom.com/wiki/House_Nation",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "The Vibe Guide",
+      "category": "youtube",
+      "platform": "YouTube / SoundCloud",
+      "genre_focus": [
+        "house",
+        "deep house",
+        "indie dance",
+        "nu disco",
+        "electronic"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": "tvgsubmissions@gmail.com",
+        "url": "https://submit.thevibeguide.net/",
+        "requirements": [
+          "House, electronic, indie dance, nu disco, downtempo genres",
+          "Submit via portal or email"
+        ],
+        "notes": "Primary portal: submit.thevibeguide.net (returned 503 at time of fetch — may be temporarily unavailable); backup email tvgsubmissions@gmail.com confirmed via thevibeguide.net/contact and multiple secondary sources"
+      },
+      "cost": "free",
+      "reach": "Large established YouTube audience; active since 2012",
+      "why_it_belongs": "One of the leading music curators on YouTube since 2012 with a multi-genre scope including house; maintains an open submission portal and email specifically for track submissions by artists at any level.",
+      "sources": [
+        {
+          "url": "https://thevibeguide.net/contact/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://submit.thevibeguide.net/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.submithub.com/blog/the-vibe-guide",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "La Belle Musique",
+      "category": "youtube",
+      "platform": "YouTube / SoundCloud / Spotify / Twitch",
+      "genre_focus": [
+        "house",
+        "deep house",
+        "chill house",
+        "melodic"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": "rubin@labellemusique.co",
+        "url": "https://groover.co/en/influencer/profile/0.la-belle-musique/",
+        "requirements": [
+          "Submit via Groover (fee-based per submission)",
+          "Beautiful, chill, soulful house vibes preferred",
+          "Curators are described as 'very selective'"
+        ],
+        "notes": "Groover is the official submission route; rubin@labellemusique.co is a promo contact cited by multiple secondary sources. Groover fees apply per submission."
+      },
+      "cost": "paid",
+      "reach": "Millions of YouTube views; active on SoundCloud and Spotify",
+      "why_it_belongs": "Active since 2013, creates visually immersive house music compilations with large YouTube and SoundCloud audiences; accepts track submissions via Groover (paid, transparent) with a direct promo email as a fallback.",
+      "sources": [
+        {
+          "url": "https://groover.co/en/influencer/profile/0.la-belle-musique/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.youtube.com/channel/UCXKr4vbqJkg4cXmdvaAEjYw",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.submithub.com/blog/la-belle-musique",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Suprafive Music",
+      "category": "youtube",
+      "platform": "YouTube / SoundCloud / Spotify",
+      "genre_focus": [
+        "house",
+        "deep house",
+        "melodic house",
+        "electronic"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": "simeon@suprafivemusic.com",
+        "url": "https://www.submithub.com/to/suprafive-music",
+        "requirements": [
+          "Submit via SubmitHub (credits required)",
+          "House, deep house, melodic electronic genres",
+          "Quality-focused; limited upload volume"
+        ],
+        "notes": "SubmitHub is primary submission channel; simeon@suprafivemusic.com is direct contact email; suprafive@gmail.com is for bookings and remix inquiries only"
+      },
+      "cost": "paid",
+      "reach": "Individual tracks/remixes with 20M–40M YouTube views; active Spotify playlist",
+      "why_it_belongs": "Quality-over-quantity YouTube music blog/label with tracks hitting tens of millions of plays; accepts demos via SubmitHub (credits-based, transparent feedback) and direct email — approachable for unknowns.",
+      "sources": [
+        {
+          "url": "https://www.submithub.com/blog/suprafive-music",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.youtube.com/c/suprafive",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://soundcloud.com/suprafive",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Future House Cloud",
+      "category": "youtube",
+      "platform": "YouTube / SoundCloud / Spotify",
+      "genre_focus": [
+        "future house",
+        "deep house",
+        "house"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": "contact@futurehousecloud.com",
+        "url": "https://www.labelradar.com/labels/futurehousecloud/profile",
+        "requirements": [
+          "Future house and deep house genres",
+          "Submit via LabelRadar or email"
+        ],
+        "notes": "contact@futurehousecloud.com confirmed via multiple sources including ZoomInfo and search results. LabelRadar portal also listed as official route."
+      },
+      "cost": "free",
+      "reach": "Active YouTube and SoundCloud channel; Spotify playlisting via SubmitHub",
+      "why_it_belongs": "Independent YouTube label and promo channel focused on future and deep house for emerging artists; has a LabelRadar submission portal and contact email, making it fully open to unknowns.",
+      "sources": [
+        {
+          "url": "https://www.labelradar.com/labels/futurehousecloud/profile",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.youtube.com/channel/UCO0sfpPwj3PGVVH_jiqBA6A",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://soundcloud.com/future-house-cloud",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Artist Intelligence Agency (AIA)",
+      "category": "repost-network",
+      "platform": "SoundCloud / Spotify / YouTube",
+      "genre_focus": [
+        "house",
+        "deep house",
+        "electronic",
+        "EDM"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": null,
+        "url": "https://www.labelradar.com/labels/aia/portal",
+        "requirements": [
+          "Submit via LabelRadar portal",
+          "House, deep house, electronic genres"
+        ],
+        "notes": "Primary submission portal is LabelRadar (labelradar.com/labels/aia/portal). SoundCloud: soundcloud.com/aiagency. Also on SubmitHub. No direct public email found."
+      },
+      "cost": "free",
+      "reach": "Multiple SoundCloud brand accounts with millions of combined followers across EDM, DeepSounds, IvoryOasis, Future, and other brand channels",
+      "why_it_belongs": "Operates a matrix of multiple SoundCloud tastemaker brand accounts (EDM, DeepSounds, IvoryOasis, Future, etc.) with millions of combined followers; open demo submissions via LabelRadar portal giving unknowns direct access to a wide repost network.",
+      "sources": [
+        {
+          "url": "https://www.labelradar.com/labels/aia/portal",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://soundcloud.com/aiagency",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.submithub.com/label/artist-intelligence-agency",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Proximity",
+      "category": "youtube",
+      "platform": "YouTube / Spotify",
+      "genre_focus": [
+        "melodic house",
+        "melodic techno",
+        "progressive house",
+        "electronic"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": null,
+        "url": "https://demos.prxmusic.com/",
+        "requirements": [
+          "Electronic, melodic house, melodic techno, progressive house",
+          "Submit via demos.prxmusic.com",
+          "High competition: approximately 1-in-500 acceptance rate",
+          "Do not send unfinished tracks; avoid multiple submissions per week"
+        ],
+        "notes": "demos.prxmusic.com is the official submission portal per prxmusic.com; portal returned 503 at time of fetch (may be temporarily unavailable — check directly). prxmusic.com confirmed active."
+      },
+      "cost": "free",
+      "reach": "9M YouTube subscribers; 243K Spotify followers; 513 label releases across three labels",
+      "why_it_belongs": "One of the largest electronic music YouTube channels globally (9M subscribers); runs three labels and accepts demos via a dedicated portal — a massive reach platform for melodic and progressive house tracks.",
+      "sources": [
+        {
+          "url": "https://www.prxmusic.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://demos.prxmusic.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.youtube.com/channel/UC3ifTl5zKiCAhHIBQYcaTeg",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "medium",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "Tech Me Home",
+      "category": "youtube",
+      "platform": "YouTube / Spotify / SoundCloud",
+      "genre_focus": [
+        "tech house",
+        "house",
+        "deep house",
+        "techno"
+      ],
+      "submission": {
+        "method": "form",
+        "email": "contact@techmehomechannel.com",
+        "url": "https://www.techmehomechannel.com/submit-your-song",
+        "requirements": [
+          "Tech house, house, deep house, techno genres",
+          "Complete the submissions form on their website",
+          "Response within 48-72 hours"
+        ],
+        "notes": "contact@techmehomechannel.com confirmed via official techmehomechannel.com website. Also offers DJ delivery via Inflyte, Spotify playlisting, and Hypeddit download campaigns as add-ons."
+      },
+      "cost": "paid",
+      "reach": "Active growing YouTube and Spotify promotion channel for underground electronic music",
+      "why_it_belongs": "Dedicated tech house and house promotion channel with an explicit open submission form and a 48-72 hour response commitment — one of the most accessible and responsive channels in the tech house space for emerging artists.",
+      "sources": [
+        {
+          "url": "https://www.techmehomechannel.com/submit-your-song",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.techmehomechannel.com/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    },
+    {
+      "name": "RepostExchange",
+      "category": "repost-network",
+      "platform": "SoundCloud",
+      "genre_focus": [
+        "house",
+        "tech house",
+        "deep house",
+        "electronic"
+      ],
+      "submission": {
+        "method": "portal",
+        "email": null,
+        "url": "https://repostexchange.com/",
+        "requirements": [
+          "Connect SoundCloud account",
+          "Select a public track and choose target genres including house and tech house",
+          "Earn credits by reposting others, or purchase credits",
+          "New members get 30 free credits (approx 3,000 SoundCloud user reach)"
+        ],
+        "notes": "Free to use; operated by Audiu Ltd (UK, est. 2014). Official SoundCloud partner as of Q1 2026. Genre targeting includes house and tech house. Managed Campaigns (paid) also available for wider reach."
+      },
+      "cost": "freemium",
+      "reach": "Thousands of active SoundCloud members; algorithm targets genre-matched audiences",
+      "why_it_belongs": "Official SoundCloud partner platform (as of Q1 2026) providing free, genre-targeted SoundCloud reposts via a credit economy — the most accessible organic repost tool for any unknown house/tech house producer with a SoundCloud account.",
+      "sources": [
+        {
+          "url": "https://repostexchange.com/welcome",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://repostexchange.com/managed-campaigns",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "confidence": "high",
+      "last_verified": "2026-06-01"
+    }
+  ]
+}
