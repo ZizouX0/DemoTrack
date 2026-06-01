@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>DemoTrack — Project Specification</title>
+<style>
+  body { font-family: 'Liberation Sans', Arial, sans-serif; color: #1c2230; font-size: 11pt; line-height: 1.5; margin: 2.2cm 2cm; }
+  h1 { font-size: 30pt; color: #5b3df5; margin: 0 0 2pt 0; }
+  h2 { font-size: 17pt; color: #5b3df5; border-bottom: 2px solid #5b3df5; padding-bottom: 3px; margin-top: 26px; page-break-after: avoid; }
+  h3 { font-size: 13pt; color: #2a2f45; margin-top: 18px; margin-bottom: 4px; page-break-after: avoid; }
+  h4 { font-size: 11.5pt; color: #5b3df5; margin: 12px 0 2px 0; }
+  p { margin: 6px 0; }
+  .sub { font-size: 13pt; color: #6a26d9; font-style: italic; margin: 0 0 14px 0; }
+  .meta { font-size: 9.5pt; color: #6b7280; margin-bottom: 4px; }
+  .pitch { background: #f3f0ff; border-left: 4px solid #5b3df5; padding: 10px 14px; margin: 14px 0; font-size: 11.5pt; }
+  .callout { background: #fff8e6; border-left: 4px solid #e0a800; padding: 9px 13px; margin: 12px 0; }
+  .note { background: #eef6ff; border-left: 4px solid #2b7fff; padding: 9px 13px; margin: 12px 0; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 9.8pt; }
+  th { background: #5b3df5; color: #fff; text-align: left; padding: 6px 8px; }
+  td { border: 1px solid #d6d9e0; padding: 5px 8px; vertical-align: top; }
+  tr:nth-child(even) td { background: #f7f7fb; }
+  code { background: #eceaf6; padding: 1px 4px; border-radius: 3px; font-family: 'Liberation Mono', monospace; font-size: 9.5pt; }
+  pre { background: #1c2230; color: #e8e6f5; padding: 12px 14px; border-radius: 6px; font-family: 'Liberation Mono', monospace; font-size: 9pt; line-height: 1.45; overflow-x: auto; white-space: pre-wrap; }
+  ul, ol { margin: 6px 0 6px 0; padding-left: 22px; }
+  li { margin: 3px 0; }
+  .stat-row { width:100%; margin: 18px 0 6px 0; }
+  .stat-row td { border: none; text-align: center; background: none; }
+  .stat-n { font-size: 22pt; color: #5b3df5; font-weight: bold; }
+  .stat-l { font-size: 8.5pt; color: #6b7280; text-transform: uppercase; letter-spacing: .5px; }
+  .tag { display: inline-block; background: #5b3df5; color: #fff; font-size: 8pt; padding: 1px 6px; border-radius: 8px; }
+  .pagebreak { page-break-before: always; }
+  .tier-elite { color: #b8860b; font-weight: bold; white-space: nowrap; }
+  .badge-g { color: #1a7f37; font-weight: bold; }
+  .badge-a { color: #b8860b; font-weight: bold; }
+  .badge-b { color: #2b7fff; font-weight: bold; }
+  hr { border: none; border-top: 1px solid #d6d9e0; margin: 22px 0; }
+  .foot { font-size: 8.5pt; color: #9aa0ab; text-align: center; margin-top: 30px; }
+</style>
+</head>
+<body>
+
+<h1>DemoTrack</h1>
+<p class="sub">Your silent manager.</p>
+<p class="meta">Project Specification &middot; v3.1 (final) &middot; House &amp; Tech House &middot; Independent Artist Toolkit &middot; Tunis, Tunisia &middot; 2026</p>
+
+<p>A career-management app for a solo house &amp; tech-house producer with no team.
+It strips the friction out of getting your music to the right labels — turning
+demo submission from a thing you keep meaning to do into a <b>weekly habit that
+compounds.</b></p>
+
+<table class="stat-row">
+<tr>
+  <td><div class="stat-n">13</div><div class="stat-l">Modules</div></td>
+  <td><div class="stat-n">12</div><div class="stat-l">Data Tables</div></td>
+  <td><div class="stat-n">13</div><div class="stat-l">Build Phases</div></td>
+  <td><div class="stat-n">17</div><div class="stat-l">Labels Seeded</div></td>
+  <td><div class="stat-n">3</div><div class="stat-l">AI Features</div></td>
+</tr>
+</table>
+
+<div class="note"><b>How to read this document.</b> It explains, in plain terms,
+<i>what</i> DemoTrack is, <i>how</i> it works, the data behind it, the technology,
+and the order it gets built in. Every design choice traces back to one idea: a
+solo artist's bottleneck is <b>effort and consistency</b>, not talent — so the
+whole app is engineered to remove friction and manufacture momentum.</div>
+
+<h2>1. What it is &amp; why it exists</h2>
+
+<p>DemoTrack is a personal command center for breaking through as an unknown
+producer. It does the job a manager would do for a signed artist — holding the
+accountability, the memory, and the workflow — because you don't have a manager.</p>
+
+<h3>The problem</h3>
+<p>Getting signed is mostly an outreach game: finding the right labels, sending
+demos the right way, following up at the right moment, and learning from every
+response. The work isn't intellectually hard — it's tedious, repetitive, and very
+easy to skip. The typical pattern: a producer sends a burst of demos once, hears
+nothing for a few weeks, gets discouraged, and the pipeline goes cold. No system,
+no memory, no momentum.</p>
+
+<div class="callout"><b>The core insight that shaped everything.</b> The
+bottleneck isn't talent and usually isn't even contacts — it's effort and
+consistency. If sending a polished, tailored demo takes 3 minutes instead of 30,
+and the app proactively tells you who to follow up with today, you will actually
+do the work.</div>
+
+<div class="pitch"><b>One-line pitch:</b> "Find good labels, send great demos in
+minutes, never lose track of a follow-up, and learn from every reply —
+automatically."</div>
+
+<h3>The quality-over-quantity rule</h3>
+<p>Only labels that can genuinely change your trajectory belong in the system. A
+label clears the bar only if it meets <b>at least 3 of 5</b> tests: Beatport chart
+presence &middot; booking impact &middot; streaming credibility &middot; scene
+respect &middot; accessible to unknown artists. This filter is applied to every
+seeded label.</p>
+
+<h2>2. How it works — the core loop</h2>
+<p>Everything serves one repeating cycle. You run this loop for every track you
+want to place. The app makes each step faster and remembers the state, so nothing
+falls through the cracks.</p>
+
+<pre>1 DISCOVER  ->  2 PREPARE  ->  3 GENERATE  ->  4 SEND  ->  5 TRACK  ->  6 FOLLOW-UP  ->  7 LEARN
+  find labels    track + kit   preset+hook    &lt;3 min    opens/seen   right time      log + patterns
+                                                                              &#8627; back to 1 with the next track</pre>
+
+<p><b>The loop is the product.</b> Modules are just the tools that make each step
+effortless.</p>
+
+<h2>3. The structure — four layers</h2>
+<table>
+<tr><th>Layer</th><th>What lives there</th><th>Purpose</th></tr>
+<tr><td><b>🎵 Music</b></td><td>Track Vault, Feedback Log</td><td>Your catalogue and its memory — what you're shopping and how it lands.</td></tr>
+<tr><td><b>📨 Outreach</b><br/><span class="meta">the heart</span></td><td>Contacts CRM, Send Demo, Email Presets + AI Hook, Follow-up, A&amp;R Intel, Label Discovery, (optional) Link Tracking</td><td>Where demos go out, get tracked, and get followed up.</td></tr>
+<tr><td><b>👤 You</b></td><td>Artist Press Kit, Work Sessions, Goals</td><td>The solo-operator backbone — your EPK, accountability, and targets.</td></tr>
+<tr><td><b>📊 Dashboard</b></td><td>Home screen + Notifications digest</td><td>Pulls signals from every module and answers "what should I do right now?"</td></tr>
+</table>
+
+<div class="note"><b>Note on prioritization:</b> there is <b>no weighted "contact
+score."</b> A computed score has a cold-start problem (almost no data early) and is
+false precision you'd never trust. Instead, each label simply shows a
+<b>"times contacted" count</b> (derived from your send history) and an
+<b>access path</b> (how reachable it realistically is). Untried, cold-demo-friendly
+labels surface first. Nothing to compute, nothing that breaks on day one.</div>
+
+<h2 class="pagebreak">4. The 13 modules in detail</h2>
+
+<h4>Music Layer</h4>
+<h3>01 · Track Vault</h3>
+<p>Your library of finished and in-progress tracks, each with a status:
+<code>idea &rarr; demo-ready &rarr; submitted &rarr; signed</code>.</p>
+<ul>
+<li><b>Key fields:</b> title, genre tags, BPM, key, status, a private listen link + link type, notes, readiness checklist, exclusive-hold (which label is considering it, until when).</li>
+<li><b>Audio is never hosted by the app</b> — you store a link (unlisted SoundCloud recommended, which also gives you free play counts). Keeps infrastructure light.</li>
+<li><b>Why it matters:</b> the single source of truth for "what am I shopping right now." Every submission and every piece of feedback links back to a track here.</li>
+</ul>
+
+<h3>02 · Feedback Log</h3>
+<p>Captures every response a track gets — yes, no, "not for us," constructive
+notes, or silence — tied to the track and the contact.</p>
+<ul>
+<li><b>Silence is data:</b> if a demo goes unanswered past the overdue window, the app <b>auto-logs a "no-response" record</b> — you type nothing.</li>
+<li><b>Real replies</b> are logged in one tap from the follow-up queue (a response-type dropdown + optional pasted text).</li>
+<li><b>Why it matters:</b> over time the AI reads across all your feedback and surfaces patterns ("your darker, peak-time tracks get more replies than your melodic ones"). That tells you what to make next and who to send it to.</li>
+</ul>
+
+<h4>Outreach Layer</h4>
+<h3>03 · Contacts CRM</h3>
+<p>Every label and industry contact in one place, across 7 categories: Labels,
+DJs, A&amp;Rs, Curators, Blogs, Promoters, Radio.</p>
+<ul>
+<li><b>Key fields:</b> name, category, submission method, email/portal/DM link, relationship stage (<code>cold &rarr; engaged &rarr; responded &rarr; relationship</code>), access path, last contacted, full history, and a back-reference to the Discovery master it came from.</li>
+<li><b>Why it matters:</b> knows who you've already contacted so you never double-send or forget someone. This is the backbone the entire outreach layer reads from.</li>
+</ul>
+
+<h3>04 · Send Demo</h3>
+<p>The submission flow and the most important screen in the app. Pick a track,
+pick a contact, choose a preset, the app auto-fills the email, you send — under 3
+minutes.</p>
+<ul>
+<li><b>Adapts to the method</b> (see Section 6): Email opens prefilled in your own inbox; Form opens the portal; DM opens the profile. You confirm so every send is logged with a status.</li>
+<li><b>Pre-send checklist:</b> the target's submission requirements (file format, unreleased-only, single-not-album, etc.) render as a checklist, and the app <b>warns if the track is on exclusive hold elsewhere.</b></li>
+<li><b>Why it matters:</b> this is the friction-killer the whole product is built around. If this flow is fast and pleasant, you'll submit weekly.</li>
+</ul>
+
+<h3>05 · Email Presets + AI Hook</h3>
+<p>The email is <b>not</b> AI-written end-to-end. You keep your own preset
+templates; the app auto-fills everything mechanical, and AI suggests only the one
+personalized sentence that earns a reply. Detailed in Section 7.</p>
+
+<h3>06 · Follow-up Workflows</h3>
+<p>Automatically queues the right follow-up at the right time.</p>
+<ul>
+<li><b>Timing:</b> 7-day silence nudge &middot; 14-day overdue flag.</li>
+<li><b>One-tap reply status:</b> because the app sends from your own inbox and can't read replies, the queue shows each open send with two taps — <b>"Got a reply"</b> or <b>"Still silent."</b> No nagging someone who already answered.</li>
+<li><b>Why it matters:</b> following up is where demos actually get signed — and it's the single easiest thing to forget.</li>
+</ul>
+
+<h3>07 · A&amp;R Intel</h3>
+<p>Research notes on each label — who runs it, what they sign, recent releases,
+submission preferences, and any personal angle. One record per contact. This is
+also what feeds the AI's personalized hook. Context turns a generic blast into
+informed outreach.</p>
+
+<h3>08 · Label Discovery</h3>
+<p>A browsable, filterable database of career-changing labels — separate from your
+personal CRM — so you always know your next target.</p>
+<ul>
+<li><b>Filters:</b> genre, BPM range, submission method, tier, access path, last-verified date.</li>
+<li><b>"Add to my CRM"</b> copies a label into your contacts with a link back to the master; if the master is re-verified, your copy is flagged "source updated — review."</li>
+<li><b>Why it matters:</b> removes "who do I send to next?" as a blocker.</li>
+</ul>
+
+<h3>09 · Demo Link Tracking <span class="tag">OPTIONAL · Phase 11</span></h3>
+<p>Wraps demo links so you can see when a label opens your demo. <b>Scoped to
+Form/DM links only — never email</b> (email open-tracking is unreliable and hurts
+deliverability). Lower priority because unlisted SoundCloud already gives you a
+real listen signal for free.</p>
+
+<h4>You Layer</h4>
+<h3>10 · Artist Press Kit</h3>
+<p>A public EPK page at <code>press.demotrack.app/{your-slug}</code> with bio,
+links, releases, and stats — plus AI bio generation in 3 tones.</p>
+<ul>
+<li><b>Stats are manual</b> with an "updated {date}" stamp (no fragile third-party integrations).</li>
+<li><b>Served safely:</b> the public page is rendered through a narrow slug endpoint that returns only whitelisted fields — your private CRM and tracks can never leak.</li>
+<li><b>Auto-attach toggle</b> adds the kit link to every demo by default.</li>
+</ul>
+
+<h3>11 · Work Sessions</h3>
+<p>Logs studio time — but kept to <b>hours + a one-tap mood</b> (fire / good / ok /
+low); "demos sent that day" is auto-filled. The gentle accountability a manager
+would otherwise provide, with almost no friction.</p>
+
+<h3>12 · Goals</h3>
+<p>Targets with live progress — e.g. "send 4 demos/month." <b>Progress is derived
+automatically</b> from your real activity (you only set the target). Turns vague
+ambition into measurable habits the dashboard can hold you to.</p>
+
+<h3>★ Dashboard</h3>
+<p>The home screen and connective tissue. Shows: demos to send, follow-ups due
+today, recently seen demos, goal progress, recent feedback, your work-session
+streak, and a <b>funnel</b> (sent &rarr; opened &rarr; replied &rarr; considering
+&rarr; signed) so you can see your real conversion and stay realistic.</p>
+
+<h2 class="pagebreak">5. The three AI features</h2>
+<p>Claude is used in three specific, high-leverage places — to remove the exact
+tasks that block a solo producer, not as a gimmick.</p>
+<table>
+<tr><th>Feature</th><th>What it does</th><th>Guardrails</th></tr>
+<tr><td><b>1. Email hook suggestion</b></td><td>Writes only the single tailored sentence ("why this track fits this label") that slots into your preset.</td><td>≤30 words; never fabricates a release/stat/angle; required; warns on duplicates.</td></tr>
+<tr><td><b>2. Artist bio generation</b></td><td>Writes the press-kit bio in 3 selectable tones from your profile facts.</td><td>Facts only — no invented numbers or accolades.</td></tr>
+<tr><td><b>3. Feedback pattern detection</b></td><td>Reads across your whole feedback log and surfaces which sounds/labels/approaches get the best response.</td><td>Needs a minimum number of responses before claiming a pattern; cites its evidence; counts silence.</td></tr>
+</table>
+<div class="callout"><b>Why AI here specifically.</b> Each of these is a task that
+is boring, repeatable, and easy to put off — exactly the kind of work that stalls
+a solo artist. With email trimmed to just the hook, AI usage and cost stay tiny.</div>
+
+<h2>6. How outreach works</h2>
+<h3>Three submission methods</h3>
+<table>
+<tr><th>Method</th><th>Badge</th><th>Flow</th></tr>
+<tr><td>Email</td><td><span class="badge-g">🟢 Green</span></td><td>Pick preset &rarr; app auto-fills merge fields &rarr; AI suggests the hook (you tweak) &rarr; <b>opens your own Gmail / mail app, prefilled</b> &rarr; you send &rarr; confirm logged. <b>No in-app relay</b> = no spam risk.</td></tr>
+<tr><td>Form only</td><td><span class="badge-a">🟡 Amber</span></td><td>App opens the portal/platform in a new tab &rarr; you submit manually &rarr; confirm in the app so it's logged.</td></tr>
+<tr><td>DM only</td><td><span class="badge-b">🔵 Blue</span></td><td>App opens the profile &rarr; you send the DM &rarr; confirm so it's tracked.</td></tr>
+</table>
+
+<h3>Prioritization — two honest signals, zero cold-start</h3>
+<ul>
+<li><b>Access path</b> — who's even worth a cold send. Discovery shows <code>cold-demo-friendly</code> first; <code>relationship-only</code> elites go to a separate "long game" list.</li>
+<li><b>Times contacted</b> — a simple count per label. <code>0</code> = your next target; a high count with no reply = change the track or move on.</li>
+</ul>
+<p><b>Default sort:</b> cold-demo-friendly + untried first, then by tier. Stale
+labels get a freshness badge.</p>
+
+<h3>Follow-up timing &amp; reply visibility</h3>
+<ul>
+<li><b>7 days silence</b> &rarr; gentle first-nudge queued.</li>
+<li><b>14 days</b> &rarr; flagged overdue; a "no-response" feedback record auto-logged.</li>
+<li>The queue is driven by a send <b>status</b> you advance with one tap — never by reading your inbox.</li>
+<li>All of it is pushed to you in a <b>scheduled email digest</b>, not just parked in-app.</li>
+</ul>
+
+<h2 class="pagebreak">7. Email presets + AI hook — in detail</h2>
+<p>This is the most-used flow, so it's worth understanding fully. A preset is a
+<b>skeleton with merge fields</b> the app fills automatically, plus <b>exactly one
+slot you personalize.</b></p>
+
+<pre>Subject: {genre} demo — "{track_title}" for {label}
+
+Hi {first_name},
+
+I'm {artist_name}, a house &amp; tech house producer from Tunis. {hook}
+
+"{track_title}" — {bpm} BPM, {key}. Private listen: {listen_link}
+More on me: {press_kit_link}
+
+Would love your thoughts. Thanks for listening.
+{artist_name}</pre>
+
+<p>Everything in <code>{...}</code> auto-fills from the track, the contact, and
+your profile — <b>except <code>{hook}</code>.</b> AI proposes that one sentence
+(e.g. <i>"Your recent Cloonee EP on Hellbent is exactly the lane this track sits
+in"</i>); you confirm or tweak it, and the filled email opens in your own inbox to
+send. A send becomes: <b>pick track &rarr; pick label &rarr; confirm one sentence
+&rarr; send.</b></p>
+<p><b>Anti-mass-blast guardrail:</b> the hook is required and the app warns if it's
+empty or identical to a recent send. Suggested starter presets: <i>cold email</i>,
+<i>DM</i> (shorter), <i>warm follow-up</i>, <i>form-portal note</i>.</p>
+
+<h2>8. Design principles (apply to every module)</h2>
+<p>The whole app exists to remove friction, so manual data entry is the enemy.
+These rules are non-negotiable:</p>
+<ol>
+<li><b>Derive, don't ask.</b> If a number can be computed from existing data, never make the user type it (times contacted, goal progress, demos-sent, the funnel are all computed).</li>
+<li><b>One-tap over typing.</b> Reply status, mood, send confirmation are single taps. Free text is reserved for the only three things a human must write: the <b>hook</b>, <b>A&amp;R intel notes</b>, and <b>feedback text.</b></li>
+<li><b>Silence is data.</b> An unanswered demo past the overdue window is logged automatically.</li>
+<li><b>Structural privacy.</b> Public data (the press kit) is exposed through a narrow whitelisted endpoint, not by trusting a permission rule to be perfect.</li>
+</ol>
+
+<h2>9. The data model — 12 tables</h2>
+<p>All data is stored in Supabase (PostgreSQL) with Row-Level Security, so every
+row is private to your account.</p>
+<table>
+<tr><th>Table</th><th>Holds</th></tr>
+<tr><td><code>contacts</code></td><td>Your personal CRM — every label/DJ/A&amp;R/curator. Carries relationship stage, access path, and a back-reference to the Discovery master.</td></tr>
+<tr><td><code>tracks</code></td><td>Your catalogue and each track's status, listen link + type, readiness checklist, and any exclusive hold.</td></tr>
+<tr><td><code>submissions</code></td><td>Every demo sent (links a track to a contact); method, follow-up dates, and a <b>status</b> (sent → opened → replied → considering → signed → passed).</td></tr>
+<tr><td><code>feedback</code></td><td>Every response, tied to a track and contact. Silence is auto-logged as a no-response record.</td></tr>
+<tr><td><code>templates</code></td><td>Your preset email &amp; follow-up skeletons with merge fields and one hook slot.</td></tr>
+<tr><td><code>ar_intel</code></td><td>Research notes — one record per contact.</td></tr>
+<tr><td><code>work_sessions</code></td><td>Studio time logs (hours + one-tap mood; demos-sent auto-filled).</td></tr>
+<tr><td><code>goals</code></td><td>Your targets. Progress is a derived view, not a stored number.</td></tr>
+<tr><td><code>link_events</code></td><td>Each click on a tracked Form/DM link (Phase 11, optional).</td></tr>
+<tr><td><code>press_kit</code></td><td>Your public EPK profile — one row per user; served via a whitelisted slug endpoint.</td></tr>
+<tr><td><code>labels</code></td><td>The curated discovery library (separate from your CRM): access path, genre tags, last-verified, sources, sub-label links, submission requirements.</td></tr>
+<tr><td><code>notifications</code></td><td>Queued/sent reminders &amp; digests, fired by a scheduler.</td></tr>
+</table>
+<p><b>How they connect:</b> your account owns everything. A contact has many
+submissions; each submission can have feedback (and, later, link events). A track
+has many submissions and feedback, and at most one active hold. The press kit is
+one-to-one with you. The labels library is read-only and seeds Discovery; labels
+you pursue become contacts. "Times contacted" is just a count of submissions —
+there is no scoring table.</p>
+
+<h2 class="pagebreak">10. The tech stack</h2>
+<p>A lean, modern stack chosen so one person can build and run it without a team.</p>
+<table>
+<tr><th>Technology</th><th>Role &amp; why</th></tr>
+<tr><td>React 19 + Vite</td><td>The interface + a fast dev/build environment. Mobile-first, installable PWA (the habit happens on a phone).</td></tr>
+<tr><td>Tailwind CSS 4</td><td>Styling system — consistent, quick, no CSS sprawl.</td></tr>
+<tr><td>Vercel</td><td>Hosting/deploy for the app and the public press-kit pages; handles the subdomains.</td></tr>
+<tr><td>Supabase (PostgreSQL)</td><td>Database + magic-link auth + Row-Level Security in one. 12 tables.</td></tr>
+<tr><td>Supabase Storage</td><td>One bucket, for the press-kit photo only. Audio is never hosted.</td></tr>
+<tr><td>Supabase pg_cron + Scheduled Edge Function</td><td>Fires the daily/weekly digest and the 7/14-day follow-up triggers.</td></tr>
+<tr><td>Anthropic API (Claude)</td><td>Powers the 3 AI features. With email trimmed to the hook, usage and cost are tiny.</td></tr>
+<tr><td>mailto: / Gmail compose deep link</td><td>Demo email opens prefilled in your own inbox — no relay, no send engine, no deliverability risk.</td></tr>
+<tr><td>Edge Function (Deno)</td><td>The optional Phase-11 link-tracking redirect (Form/DM only) and the slug endpoint serving the public press kit.</td></tr>
+</table>
+<p><b>Domains:</b> <code>demotrack.app</code> (the app) &middot;
+<code>press.demotrack.app</code> (public press kit) &middot;
+<code>track.demotrack.app</code> (Phase-11 redirects, Form/DM links only).</p>
+
+<h2>11. The seed database — 17 curated labels</h2>
+<p>Loaded in Phase 3. Every one clears the quality bar. <b>Tier</b> reflects
+prestige; <b>access path</b> reflects how realistically reachable it is for an
+unknown — they are different axes.</p>
+<table>
+<tr><th>Label &amp; tier</th><th>Access path</th><th>Why it belongs</th></tr>
+<tr><td><b>Drumcode</b> <span class="tier-elite">· ELITE</span></td><td>relationship-only</td><td>Adam Beyer. Scene-defining — a long game, not a cold target.</td></tr>
+<tr><td><b>Experts Only</b> <span class="tier-elite">· ELITE</span></td><td>needs-warm-intro</td><td>John Summit. Peak of the scene.</td></tr>
+<tr><td><b>Black Book</b> <span class="tier-elite">· ELITE</span></td><td>needs-warm-intro</td><td>Chris Lake. A Beatport #1 machine.</td></tr>
+<tr><td><b>Catch &amp; Release</b> <span class="tier-elite">· ELITE</span></td><td>needs-warm-intro</td><td>Fisher. Massive reach and chart dominance.</td></tr>
+<tr><td><b>Repopulate Mars</b> <span class="badge-a">· A</span></td><td>cold-demo-friendly</td><td>Lee Foss. Where Mau P broke through. Open to demos.</td></tr>
+<tr><td><b>Dirtybird</b> <span class="badge-a">· A</span></td><td>cold-demo-friendly</td><td>Claude VonStroke. Fun, quirky lane; launches careers.</td></tr>
+<tr><td><b>Hellbent</b> <span class="badge-a">· A</span></td><td>cold-demo-friendly</td><td>Cloonee. Built for unknowns; charts constantly.</td></tr>
+<tr><td><b>Three Six Zero</b> <span class="badge-a">· A</span></td><td>cold-demo-friendly</td><td>Dom Dolla. Open submissions; growing fast.</td></tr>
+<tr><td><b>Hot Creations</b> <span class="badge-a">· A</span></td><td>needs-warm-intro</td><td>Jamie Jones. Deep scene credibility.</td></tr>
+<tr><td><b>Solid Grooves</b> <span class="badge-a">· A</span></td><td>cold-demo-friendly</td><td>Michael Bibi. UK tech house institution.</td></tr>
+<tr><td><b>Sola</b> <span class="badge-a">· A</span></td><td>cold-demo-friendly</td><td>Solardo. Consistent charting; email demos welcome.</td></tr>
+<tr><td><b>Toolroom</b> <span class="badge-b">· B</span></td><td>cold-demo-friendly</td><td>Mark Knight. Solid distribution; long track record.</td></tr>
+<tr><td><b>Defected</b> <span class="badge-b">· B</span></td><td>cold-demo-friendly</td><td>Huge catalogue; one send covers ~11 sub-labels.</td></tr>
+<tr><td><b>Knee Deep In Sound</b> <span class="badge-b">· B</span></td><td>cold-demo-friendly</td><td>Hot Since 82. A less-competitive melodic lane.</td></tr>
+<tr><td><b>Suara</b> <span class="badge-b">· B</span></td><td>cold-demo-friendly</td><td>Coyu. Darker tech house niche.</td></tr>
+<tr><td><b>Club Sweat</b> <span class="badge-b">· B</span></td><td>cold-demo-friendly</td><td>Australian reach; good for emerging artists.</td></tr>
+<tr><td><b>Space Yacht</b> <span class="badge-b">· B</span></td><td>open-window-only</td><td>Reviews demos live on Twitch — the most transparent route in the scene.</td></tr>
+</table>
+<p class="meta">Access-path values are starting suggestions to verify during
+research — demo windows open and close.</p>
+
+<h2 class="pagebreak">12. Building the contact database — a parallel track</h2>
+<p>The database is the <b>fuel</b>; the app is the <b>engine.</b> Finding,
+verifying, and qualifying contacts that can actually change your career is a
+research workstream in its own right. It runs <b>alongside</b> the build, not
+after, and is never fully "done."</p>
+<p><b>Research loop per contact:</b> Source &rarr; Verify (2 independent sources)
+&rarr; Qualify (the ≥3/5 bar) &rarr; Tier + access path + priority &rarr; Record
+(rules, links, sources, A&amp;R note) &rarr; Maintain (stamp last-verified;
+Discovery flags stale entries).</p>
+<p><b>What already exists:</b> ≈170 verified labels and ≈98 non-label promotional
+contacts (radio, blogs, YouTube/Spotify curators, repost networks, podcasts,
+editorial, PR), with the 17-label in-app seed selected from them. <b>Ongoing:</b>
+migrate into the labels table, keep verifications fresh, capture sub-label
+efficiency multipliers (1 Defected ≈ 11 sub-labels; 1 Repopulate Mars ≈ 3), and
+add new qualified contacts as the scene moves.</p>
+
+<h2>13. The build plan — phases</h2>
+<p>Built in this order so the app is usable early and grows in value. Each phase
+is independently deployable. <b>By the end of Phase 4 you can send and record a
+real demo.</b></p>
+
+<h4>Parallel track — runs throughout</h4>
+<p><b>Phase 0 · Contact Database Research</b> (ongoing) — run the research loop;
+migrate the verified contacts into the labels table; keep verifications fresh.</p>
+
+<h4>MVP — reach your first real send</h4>
+<table>
+<tr><th>Phase</th><th>What you build</th><th>Done when…</th></tr>
+<tr><td><b>1 · Foundation</b></td><td>Supabase project, 12-table schema, magic-link auth, Row-Level Security, React+Vite+Tailwind PWA shell, Vercel deploy.</td><td>You can log in, your data is secured and deployed.</td></tr>
+<tr><td><b>2 · Track Vault</b></td><td>Add/edit/list tracks, status, external listen link + type, notes, readiness checklist, hold field.</td><td>You can store your tracks and see their status.</td></tr>
+<tr><td><b>3 · Contacts CRM</b></td><td>Contact profiles across 7 categories, method + links, relationship stage, access path, seed the 17 labels, history view.</td><td>Your label list lives in the app with submission details.</td></tr>
+<tr><td><b>4 · Send Demo</b></td><td>The submission flow — pick track + contact, choose preset, all 3 methods, pre-send checklist + hold warning, record to history.</td><td><b>You can send a demo and it's recorded. ← first usable milestone</b></td></tr>
+<tr><td><b>5 · Email Presets + AI Hook</b></td><td>Preset CRUD with merge fields, auto-fill, Claude hook suggestion with guardrails, mailto/Gmail prefill.</td><td>A tailored, personal demo email in ~1 minute, from your own inbox.</td></tr>
+<tr><td><b>6 · Follow-up + Digest</b></td><td>Preset follow-ups, 7/14-day rules via pg_cron, one-tap reply status, auto-logged silence, overdue queue, scheduled email digest.</td><td>The app tells you who to follow up — and reminds you when it's closed.</td></tr>
+</table>
+
+<h4>Intelligence — make every send smarter</h4>
+<table>
+<tr><th>Phase</th><th>What you build</th></tr>
+<tr><td><b>7 · Feedback Log</b></td><td>One-tap reply logging, response types, auto no-response records, links back to track &amp; contact.</td></tr>
+<tr><td><b>8 · A&amp;R Intel &amp; Prioritization</b></td><td>Intel records per contact, "times contacted" on every label, untried + cold-demo-friendly sort. (No weighted score.)</td></tr>
+<tr><td><b>9 · Dashboard + Funnel</b></td><td>Aggregate signals, the conversion funnel, response-rate by genre/tier, streak, CSV export.</td></tr>
+</table>
+
+<h4>Advanced — the unfair advantages</h4>
+<table>
+<tr><th>Phase</th><th>What you build</th></tr>
+<tr><td><b>10 · Label Discovery</b></td><td>Browse/filter the labels master, "Add to my CRM" promotion, "have I submitted?" indicator, freshness warnings, sub-label reach hints.</td></tr>
+<tr><td><b>11 · Demo Link Tracking</b> <span class="tag">optional</span></td><td>Edge Function redirect, unique hash, link events — Form/DM links only.</td></tr>
+<tr><td><b>12 · Work Sessions &amp; Goals</b></td><td>Sessions (hours + one-tap mood, demos auto-filled); goals with derived progress.</td></tr>
+<tr><td><b>13 · Artist Press Kit</b></td><td>Profile fields, manual stats + updated stamp, public page via slug endpoint, AI bio (3 tones), auto-attach toggle.</td></tr>
+</table>
+
+<h2 class="pagebreak">14. What success looks like</h2>
+<p>The app only matters if it changes your behavior. These are the real measures —
+not vanity metrics:</p>
+<ul>
+<li>You submit demos <b>weekly</b>, not "whenever I get around to it."</li>
+<li>You <b>actually follow up</b> on demos you've sent (because the digest reaches you).</li>
+<li>You always know which labels you <b>haven't tried</b> yet.</li>
+<li>Sending a demo takes <b>under 3 minutes.</b></li>
+<li>You get a response from at least one label <b>within 3 months</b> of consistent use.</li>
+<li>The longer-term target: <b>one signing within 6 months</b> of using it consistently.</li>
+</ul>
+<div class="callout"><b>A note on expectations.</b> Cold-demo reply rates in this
+scene are realistically in the 5–15% range, and "we'll consider it" → an actual
+signing is a fraction of that. That is precisely why every send is engineered to
+cost 3 minutes: the math only closes when friction is near zero. The funnel view
+is built to read a quiet month as "keep going," not "this is broken."</div>
+
+<h2>15. The unfair advantages</h2>
+<ul>
+<li><b>AI woven into the loop</b> — the hook, bios, and feedback patterns remove the exact tasks that stall solo artists, at near-zero cost.</li>
+<li><b>A curated, not exhaustive, label database</b> — only labels that can change your career, kept fresh, with honest access paths and submission rules built in.</li>
+<li><b>Friction engineered out</b> — own-inbox sending, derived data, one-tap everything, and a reminder that reaches you. The app does the manager's remembering so you only have to do the music.</li>
+</ul>
+
+<p class="foot">DemoTrack &middot; Project Specification v3.1 &middot; Built for one
+producer. One purpose. Ship your music. &middot; Tunis, 2026</p>
+
+</body>
+</html>
