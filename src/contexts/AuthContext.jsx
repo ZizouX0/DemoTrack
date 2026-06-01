@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { supabase } from '../lib/supabase'
 
 const AuthContext = createContext(null)
@@ -28,22 +28,28 @@ export function AuthProvider({ children }) {
     }
   }, [])
 
+  // Stable function identities so consumers don't re-render on every auth event.
+  const signInWithEmail = useCallback(
+    (email) =>
+      supabase.auth.signInWithOtp({
+        email,
+        options: {
+          emailRedirectTo: import.meta.env.VITE_SITE_URL || window.location.origin,
+        },
+      }),
+    []
+  )
+  const signOut = useCallback(() => supabase.auth.signOut(), [])
+
   const value = useMemo(
     () => ({
       session,
       user: session?.user ?? null,
       loading,
-      // Passwordless magic-link sign-in (Supabase auth).
-      signInWithEmail: (email) =>
-        supabase.auth.signInWithOtp({
-          email,
-          options: {
-            emailRedirectTo: import.meta.env.VITE_SITE_URL || window.location.origin,
-          },
-        }),
-      signOut: () => supabase.auth.signOut(),
+      signInWithEmail,
+      signOut,
     }),
-    [session, loading]
+    [session, loading, signInWithEmail, signOut]
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

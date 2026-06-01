@@ -309,11 +309,16 @@ end $$;
 
 -- Derived views (no stored scores / counts) -----------------------------------
 -- "times contacted" per contact = count of submissions. Pure derivation.
-create or replace view contact_send_counts as
+-- security_invoker=true so the caller's RLS on contacts/submissions applies —
+-- without it a view runs as its owner and bypasses RLS (cross-user leak). The
+-- explicit user_id filter is belt-and-suspenders defense-in-depth.
+create or replace view contact_send_counts
+  with (security_invoker = true) as
 select c.id as contact_id, c.user_id, count(s.id)::int as times_contacted,
        max(s.sent_at) as last_sent_at
 from contacts c
 left join submissions s on s.contact_id = c.id
+where c.user_id = auth.uid()
 group by c.id, c.user_id;
 
 -- ============================================================================

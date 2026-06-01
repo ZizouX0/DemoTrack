@@ -1,16 +1,18 @@
 import { useState } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { isSupabaseConfigured } from '../lib/supabase'
 import { Wordmark } from '../components/Splash'
 
 export default function Login() {
   const { user, signInWithEmail } = useAuth()
+  const location = useLocation()
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState('idle') // idle | sending | sent | error
   const [error, setError] = useState('')
 
-  if (user) return <Navigate to="/" replace />
+  // Return to wherever the guard sent them from, falling back to home.
+  if (user) return <Navigate to={location.state?.from?.pathname || '/'} replace />
 
   async function handleSubmit(e) {
     e.preventDefault()
