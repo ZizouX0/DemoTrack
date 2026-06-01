@@ -21,3 +21,6 @@ npm-debug.log*
 
 # vite pwa generated
 dev-dist/
+
+# firecrawl CLI scrape cache
+.firecrawl/
