@@ -1,0 +1,189 @@
+{
+  "_meta": {
+    "dataset": "DemoTrack — curated label discovery database (seed: 17 labels)",
+    "schema_version": 1,
+    "maps_to_table": "labels (DemoTrack_Specification-2.pdf §9)",
+    "selection_rule": "Every label clears the >=3-of-5 quality bar: Beatport chart presence, booking impact, streaming credibility, scene respect, accessible to unknown artists.",
+    "verification_rule": "Submission details verified against the label's own page where available, cross-checked with a second source. Provenance + fetch date recorded per record. Unverified/single-source fields flagged via confidence.",
+    "generated": "2026-06-01",
+    "field_notes": {
+      "tier": "ELITE | A | B (prestige axis, from spec)",
+      "access_path": "relationship-only | needs-warm-intro | cold-demo-friendly | open-window-only (reachability axis)",
+      "access_path_verified": "what current public evidence actually shows; differs from spec where a public portal exists",
+      "submission.method": "email | form | dm | open-window | none-public | unknown",
+      "confidence": "high (official page or 2 independent sources) | medium (single secondary source) | low (unverified / no channel found)"
+    }
+  },
+  "labels": [
+    {
+      "name": "Drumcode", "tier": "ELITE",
+      "access_path": "relationship-only", "access_path_verified": "relationship-only",
+      "genre_tags": ["techno"], "key_people": ["Adam Beyer"],
+      "why_it_belongs": "Scene-defining techno institution (est. 1996). A long game, not a cold target.",
+      "submission": { "method": "none-public", "email": null, "url": null, "formats": [], "requirements": [], "notes": "No public demo channel; managed by Adam Beyer. Reach via relationship/established A&R only." },
+      "sub_labels": [], "sub_label_multiplier": 1,
+      "sources": [ {"url": "https://www.drumcode.se/", "fetched": "2026-06-01"}, {"url": "https://labelsbase.net/drumcode", "fetched": "2026-06-01"} ],
+      "last_verified": "2026-06-01", "confidence": "high"
+    },
+    {
+      "name": "Experts Only", "tier": "ELITE",
+      "access_path": "needs-warm-intro", "access_path_verified": "cold-demo-friendly",
+      "genre_tags": ["tech house", "house"], "key_people": ["John Summit"],
+      "why_it_belongs": "John Summit's label — peak of the current scene.",
+      "submission": { "method": "form", "email": null, "url": "https://tstack.app/expertsonly", "formats": ["mp3", "wav"], "requirements": ["Submit via the Trackstack portal linked from expertsonlyrecs.com"], "notes": "DISCREPANCY: spec lists needs-warm-intro, but a public 'Send Demo' Trackstack portal is live on the official site — effectively cold-demo-friendly." },
+      "sub_labels": [], "sub_label_multiplier": 1,
+      "sources": [ {"url": "https://www.expertsonlyrecs.com/", "fetched": "2026-06-01"}, {"url": "https://www.beatport.com/label/experts-only/103008", "fetched": "2026-06-01"} ],
+      "last_verified": "2026-06-01", "confidence": "high"
+    },
+    {
+      "name": "Black Book", "tier": "ELITE",
+      "access_path": "needs-warm-intro", "access_path_verified": "cold-demo-friendly",
+      "genre_tags": ["tech house", "house"], "key_people": ["Chris Lake"],
+      "why_it_belongs": "Chris Lake's label — a Beatport #1 machine.",
+      "submission": { "method": "form", "email": null, "url": "https://www.blackbookrecs.com/pages/demo-submissions", "formats": ["mp3", "wav"], "requirements": ["Send up to 5 tracks via the on-site Trackstack portal"], "notes": "DISCREPANCY: spec lists needs-warm-intro, but a public demo-submission portal (Trackstack) is live on blackbookrecs.com." },
+      "sub_labels": [], "sub_label_multiplier": 1,
+      "sources": [ {"url": "https://www.blackbookrecs.com/pages/demo-submissions", "fetched": "2026-06-01"} ],
+      "last_verified": "2026-06-01", "confidence": "high"
+    },
+    {
+      "name": "Catch & Release", "tier": "ELITE",
+      "access_path": "needs-warm-intro", "access_path_verified": "cold-demo-friendly",
+      "genre_tags": ["tech house"], "key_people": ["Fisher"],
+      "why_it_belongs": "Fisher's label — massive reach and chart dominance.",
+      "submission": { "method": "form", "email": null, "url": "https://followthefishtv.com/pages/music", "formats": ["mp3", "wav"], "requirements": ["Send up to 5 tracks via the Trackstack portal on followthefishtv.com (the DEMOS page)"], "notes": "DISCREPANCY: spec lists needs-warm-intro, but a public Trackstack demo portal is live." },
+      "sub_labels": [], "sub_label_multiplier": 1,
+      "sources": [ {"url": "https://followthefishtv.com/pages/music", "fetched": "2026-06-01"} ],
+      "last_verified": "2026-06-01", "confidence": "high"
+    },
+    {
+      "name": "Repopulate Mars", "tier": "A",
+      "access_path": "cold-demo-friendly", "access_path_verified": "cold-demo-friendly",
+      "genre_tags": ["tech house", "house"], "key_people": ["Lee Foss"],
+      "why_it_belongs": "Where Mau P broke through. Openly accepts demos.",
+      "submission": { "method": "email", "email": "demos@repopulatemars.com", "url": "https://www.repopulatemars.com/demos", "formats": ["private SoundCloud link", "Dropbox link"], "requirements": ["Private SoundCloud or Dropbox links ONLY (no Google Drive / WeTransfer)", "Max 4 demos at once; use a private playlist for multiple", "Turn downloads ON", "Prefer extended/full mixes over radio edits"], "notes": "One submission covers Repopulate Mars, South Of Saturn, and North Of Neptune." },
+      "sub_labels": ["South Of Saturn", "North Of Neptune"], "sub_label_multiplier": 3,
+      "sources": [ {"url": "https://www.repopulatemars.com/demos", "fetched": "2026-06-01"}, {"url": "https://www.facebook.com/hello.demo/posts/7569159419825555", "fetched": "2026-06-01"} ],
+      "last_verified": "2026-06-01", "confidence": "high"
+    },
+    {
+      "name": "Dirtybird", "tier": "A",
+      "access_path": "cold-demo-friendly", "access_path_verified": "cold-demo-friendly",
+      "genre_tags": ["tech house", "house"], "key_people": ["Claude VonStroke"],
+      "why_it_belongs": "Fun, quirky lane; a known career-launcher.",
+      "submission": { "method": "form", "email": null, "url": "https://www.label-worx.com/demo/dirtybird", "formats": ["mp3", "wav"], "requirements": ["Upload via the Label-Worx 'DIRTYBIRD DemoBox' page", "No feedback offered on all demos; they contact you if signing"], "notes": "Official demo channel is the Label-Worx DemoBox portal." },
+      "sub_labels": [], "sub_label_multiplier": 1,
+      "sources": [ {"url": "https://www.label-worx.com/demo/dirtybird", "fetched": "2026-06-01"}, {"url": "https://www.scribd.com/document/883776772/DIRTYBIRD-DemoBox", "fetched": "2026-06-01"} ],
+      "last_verified": "2026-06-01", "confidence": "high"
+    },
+    {
+      "name": "Hellbent", "tier": "A",
+      "access_path": "cold-demo-friendly", "access_path_verified": "unverified",
+      "genre_tags": ["tech house"], "key_people": ["Cloonee"],
+      "why_it_belongs": "Cloonee's label — built for unknowns; charts constantly.",
+      "submission": { "method": "unknown", "email": null, "url": null, "formats": [], "requirements": [], "notes": "NEEDS VERIFICATION: no public demo portal found on hellbentrecs.com (a Shopify store) as of 2026-06-01. Past 'first release' contests referenced on Reddit. Check Cloonee's socials / a LabelRadar or Trackstack portal before recording a channel." },
+      "sub_labels": [], "sub_label_multiplier": 1,
+      "sources": [ {"url": "https://hellbentrecs.com/", "fetched": "2026-06-01"} ],
+      "last_verified": "2026-06-01", "confidence": "low"
+    },
+    {
+      "name": "Three Six Zero", "tier": "A",
+      "access_path": "cold-demo-friendly", "access_path_verified": "cold-demo-friendly",
+      "genre_tags": ["tech house", "house"], "key_people": ["Dom Dolla"],
+      "why_it_belongs": "Open submissions; growing fast (Dom Dolla's home).",
+      "submission": { "method": "form", "email": null, "url": "https://www.labelradar.com/labels/threesixzero/portal", "formats": ["mp3", "wav"], "requirements": ["Submit via the LabelRadar portal"], "notes": "General/management contacts info@threesixzero.com and hi@threesixzero.com exist but are NOT demo channels — use the LabelRadar portal for demos." },
+      "sub_labels": [], "sub_label_multiplier": 1,
+      "sources": [ {"url": "https://www.labelradar.com/labels/threesixzero/portal", "fetched": "2026-06-01"}, {"url": "https://www.threesixzero.com/connecting", "fetched": "2026-06-01"} ],
+      "last_verified": "2026-06-01", "confidence": "high"
+    },
+    {
+      "name": "Hot Creations", "tier": "A",
+      "access_path": "needs-warm-intro", "access_path_verified": "cold-demo-friendly",
+      "genre_tags": ["tech house", "house"], "key_people": ["Jamie Jones"],
+      "why_it_belongs": "Jamie Jones's label — deep scene credibility.",
+      "submission": { "method": "dm", "email": null, "url": "https://soundcloud.com/hotcreationsdemos", "formats": ["private SoundCloud link"], "requirements": ["Historically: send a private SoundCloud link to the 'hotcreationsdemos' account"], "notes": "NEEDS RE-VERIFICATION of current policy — single source (the public 'hotcreationsdemos' SoundCloud account). Confirm before relying on it." },
+      "sub_labels": [], "sub_label_multiplier": 1,
+      "sources": [ {"url": "https://soundcloud.com/hotcreationsdemos", "fetched": "2026-06-01"} ],
+      "last_verified": "2026-06-01", "confidence": "medium"
+    },
+    {
+      "name": "Solid Grooves", "tier": "A",
+      "access_path": "cold-demo-friendly", "access_path_verified": "cold-demo-friendly",
+      "genre_tags": ["tech house", "techno"], "key_people": ["Michael Bibi"],
+      "why_it_belongs": "UK tech house institution (est. 2015, London).",
+      "submission": { "method": "email", "email": "demos@solidgrooves.co.uk", "url": null, "formats": [], "requirements": [], "notes": "Email confirmed by two independent directories (labelsbase + findmylabels); not yet cross-checked against the label's own site." },
+      "sub_labels": [], "sub_label_multiplier": 1,
+      "sources": [ {"url": "https://labelsbase.net/solid-grooves-records", "fetched": "2026-06-01"}, {"url": "https://findmylabels.com/solid-grooves-records/", "fetched": "2026-06-01"} ],
+      "last_verified": "2026-06-01", "confidence": "medium"
+    },
+    {
+      "name": "Sola", "tier": "A",
+      "access_path": "cold-demo-friendly", "access_path_verified": "cold-demo-friendly",
+      "genre_tags": ["tech house"], "key_people": ["Solardo"],
+      "why_it_belongs": "Solardo's label (Manchester, UK) — consistent charting; email demos welcome.",
+      "submission": { "method": "email", "email": "demos@solarecords.com", "url": null, "formats": ["SoundCloud / Spotify link", "downloadable link"], "requirements": [], "notes": "Single secondary source (findmylabels) for the email; verify against an official channel before bulk use." },
+      "sub_labels": [], "sub_label_multiplier": 1,
+      "sources": [ {"url": "https://findmylabels.com/sola-records/", "fetched": "2026-06-01"}, {"url": "https://soundcloud.com/solamusicuk", "fetched": "2026-06-01"} ],
+      "last_verified": "2026-06-01", "confidence": "medium"
+    },
+    {
+      "name": "Toolroom", "tier": "B",
+      "access_path": "cold-demo-friendly", "access_path_verified": "cold-demo-friendly",
+      "genre_tags": ["tech house", "house"], "key_people": ["Mark Knight"],
+      "why_it_belongs": "Solid distribution and a long track record (Mark Knight).",
+      "submission": { "method": "form", "email": null, "url": "https://toolroomrecords.com/demos/", "formats": ["mp3", "wav"], "requirements": ["Upload via the on-site portal (powered by LabelRadar)", "They listen to everything but cannot reply to each; contact you if interested"], "notes": "Role emails on the contact page (events/licensing/PR/store) are NOT demo channels." },
+      "sub_labels": [], "sub_label_multiplier": 1,
+      "sources": [ {"url": "https://toolroomrecords.com/demos/", "fetched": "2026-06-01"}, {"url": "https://www.labelradar.com/labels/toolroomrecords/portal", "fetched": "2026-06-01"} ],
+      "last_verified": "2026-06-01", "confidence": "high"
+    },
+    {
+      "name": "Defected", "tier": "B",
+      "access_path": "cold-demo-friendly", "access_path_verified": "cold-demo-friendly",
+      "genre_tags": ["house"], "key_people": [],
+      "why_it_belongs": "Huge catalogue; one submission effectively covers ~11 sub-labels.",
+      "submission": { "method": "email", "email": "demos@defected.com", "url": "https://defected.com/demos", "formats": ["WAV only", "streamable links: SoundCloud / Dropbox / WeTransfer"], "requirements": ["Streamable links only", "WAV format only", "Do NOT include artwork or promo materials", "Submissions not following the guidelines are auto-deleted"], "notes": "A LabelRadar portal also exists, but the official site directs demos to email." },
+      "sub_labels": [], "sub_label_multiplier": 11,
+      "sources": [ {"url": "https://defected.com/demos", "fetched": "2026-06-01"}, {"url": "https://www.labelradar.com/labels/defected/portal", "fetched": "2026-06-01"} ],
+      "last_verified": "2026-06-01", "confidence": "high"
+    },
+    {
+      "name": "Knee Deep In Sound", "tier": "B",
+      "access_path": "cold-demo-friendly", "access_path_verified": "cold-demo-friendly",
+      "genre_tags": ["melodic house", "tech house"], "key_people": ["Hot Since 82"],
+      "why_it_belongs": "Hot Since 82's label — a less-competitive melodic lane.",
+      "submission": { "method": "email", "email": "demos@hotsince82.com", "url": null, "formats": [], "requirements": [], "notes": "Licensing/management is craig@anglomanagement.co.uk — demos go to demos@hotsince82.com." },
+      "sub_labels": [], "sub_label_multiplier": 1,
+      "sources": [ {"url": "https://www.facebook.com/KneeDeepInSound/", "fetched": "2026-06-01"}, {"url": "https://labelsbase.net/knee-deep-in-sound", "fetched": "2026-06-01"} ],
+      "last_verified": "2026-06-01", "confidence": "high"
+    },
+    {
+      "name": "Suara", "tier": "B",
+      "access_path": "cold-demo-friendly", "access_path_verified": "cold-demo-friendly",
+      "genre_tags": ["tech house", "techno"], "key_people": ["Coyu"],
+      "why_it_belongs": "Coyu's label — darker tech house niche.",
+      "submission": { "method": "email", "email": "demos@suara-music.com", "url": null, "formats": ["private SoundCloud link", "mp3 320kbps"], "requirements": ["Private SoundCloud links only", "No sendspace / yousendit / wetransfer links"], "notes": "From the label's official Facebook; re-verify as the post is not recent." },
+      "sub_labels": [], "sub_label_multiplier": 1,
+      "sources": [ {"url": "https://www.facebook.com/suaramusic/", "fetched": "2026-06-01"} ],
+      "last_verified": "2026-06-01", "confidence": "medium"
+    },
+    {
+      "name": "Club Sweat", "tier": "B",
+      "access_path": "cold-demo-friendly", "access_path_verified": "cold-demo-friendly",
+      "genre_tags": ["house", "tech house"], "key_people": [],
+      "why_it_belongs": "Sweat It Out's house imprint — Australian reach; good for emerging artists.",
+      "submission": { "method": "form", "email": null, "url": "https://sweatitout.droptrack.com/demo/", "formats": [], "requirements": ["Submit via the Sweat It Out DropTrack portal"], "notes": "Portal covers Sweat It Out releases including Club Sweat." },
+      "sub_labels": [], "sub_label_multiplier": 1,
+      "sources": [ {"url": "https://sweatitout.droptrack.com/demo/", "fetched": "2026-06-01"} ],
+      "last_verified": "2026-06-01", "confidence": "high"
+    },
+    {
+      "name": "Space Yacht", "tier": "B",
+      "access_path": "open-window-only", "access_path_verified": "cold-demo-friendly + open-window",
+      "genre_tags": ["tech house", "house", "bass house"], "key_people": [],
+      "why_it_belongs": "Reviews demos live on Twitch — the most transparent route in the scene.",
+      "submission": { "method": "form", "email": null, "url": "https://www.labelradar.com/labels/spaceyacht/portal", "formats": [], "requirements": ["Submit via the LabelRadar portal", "Also: tracks reviewed live on twitch.tv/spaceyacht and on the 'Tune Reactor' on-air reaction series"], "notes": "Both an always-open LabelRadar portal and the live Twitch review window exist." },
+      "sub_labels": [], "sub_label_multiplier": 1,
+      "sources": [ {"url": "https://www.labelradar.com/labels/spaceyacht/portal", "fetched": "2026-06-01"}, {"url": "https://www.twitch.tv/spaceyacht", "fetched": "2026-06-01"} ],
+      "last_verified": "2026-06-01", "confidence": "high"
+    }
+  ]
+}
