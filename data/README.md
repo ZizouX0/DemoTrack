@@ -11,18 +11,82 @@ seeds the in-app Label Discovery library (Phase 3, spec §11).
 
 ## Status (2026-06-01)
 - **Batches 1–3:** the 17 spec seed labels + 28 hand-researched additions (45).
-- **Batch 4:** a parallel **6-agent sweep** across the house/tech-house universe
-  (tech house UK/EU · mainstream/festival · melodic/progressive/organic · deep/soulful/
-  classic/disco · bass/G-house · afro/Latin), merged and de-duplicated → **+95 labels**.
+- **Batch 4:** a parallel **6-agent sweep** of the house/tech-house universe → +95 (140).
+- **Batch 5:** imported a user-provided master list (175 entries, stamped May 2025),
+  then **re-verified every import label-by-label** with a parallel 5-agent pass against
+  each label's own official source → **+65 verified** (and **22 rejected**).
 
 | Metric | Value |
 |---|---|
-| Labels recorded | **140** |
-| Contactable now (have a real demo channel) | 135 / 140 |
-| High confidence (official page or ≥2 sources) | 78 |
-| Medium confidence (single secondary source — re-verify) | 53 |
-| Low confidence (channel unconfirmed / window-only) | 9 |
-| Tier mix | 11 ELITE · 65 A · 64 B |
+| Labels recorded | **288** |
+| Contactable now (have a real demo channel) | 272 / 288 |
+| High confidence (official page or ≥2 sources) | 183 |
+| Medium confidence (single secondary source — re-verify) | 76 |
+| Low confidence (channel unconfirmed / window-only) | 29 |
+| Tier mix | 12 ELITE · ~91 A · ~185 B |
+
+### Batch 9 — verification pass over all medium-confidence records
+Re-checked all 120 medium records via a parallel 6-agent pass against each label's own
+official source: **35 promoted to high**, **27 channels corrected** (e.g. Suara →
+`labelmanagement@suara-music.com`, Nervous → Trackstack + `andrew@nervousnyc.com`,
+Hottrax/Hot Creations → `soundcloud.com/allhcdemos`, Last Night On Earth →
+`demos@lnoearth.com`, Abode → Trackstack, ec2a → `demos@ec2aworldwide.com`),
+**6 dropped to low** (no confirmable channel), and **3 removed** — Good Enuff &
+Let's Play House (dormant) and ATW Records (UK garage, off-genre). High-confidence
+records are now the majority of the database (183 of 288).
+
+### Batch 8 — full 6-agent regional sweep (resumed after rate-limit)
+Six parallel agents swept the regions/niches and added **+72 verified** labels
+(76 raw − 4 cross-slice dups). Highlights by slice:
+- **Spain/Italy/PT:** Sincopat, Mood Funk, Hell Yeah, Pornostar, Be One, Apparel Music…
+- **DE/Benelux/Nordics:** Poker Flat, Sublease, Upon.You, Great Stuff, Parquet, Cécille…
+- **UK/IE:** UTTU, Hot Haus, Banoffee Pies, Lost Palms, **Edible Records** (channel finally found), ec2a…
+- **North America:** Trax, DJ International, Guesthouse, My Favorite Robot, Wolf + Lamb, Crew Love, Turbo…
+- **LATAM/Africa:** Soul Candi, Kunye (Shimza), Cafe De Anatolia, Make The Girls Dance, Area Verde, Nulu…
+- **Sub-niche/artist:** Midnight Riot, Sol Selectas, Public Possession, STEREOHYPE (James Hype), Maccabi House…
+
+Confirmed-and-excluded (so they're settled, not gaps): **Sosumi** (royalty-free
+content music, not a real label), **G-Town** (4-release vanity outlet), **Yoruba**
+("WE DO NOT ACCEPT DEMOS"), Steel City Dance Discs (NO DEMOS), Mau P's label
+(announced, not launched), plus dormant/off-region names.
+
+### Batch 7 — "no good label left behind" sweep
+Targeted the regions/niches still thin (Spain/Italy, Germany/Benelux/Nordics, UK/IE,
+North America, LATAM/Africa, sub-niches + artist labels). Added 8 verified:
+**Suol, Katermukke, 3000 Grad Records, Natura Viva, Lapsus Music, Só Track Boa,
+Warung Recordings, Time Is Now**. Confirmed-but-excluded: **Steel City Dance Discs**
+("⚠ NO DEMOS" stated on its own channels). Still no verifiable demo channel (left as
+open leads): Edible, Sosumi, G-Town, UTTU, Poker Flat, Sol Selectas, Public Possession,
+Apparel Music, Lump Records — real labels, but no current public demo route found.
+(A broader 6-agent pass was cut short by a model rate-limit; can be resumed to extend
+coverage further.)
+
+### Batch 6 — major-label coverage check
+Ran a gap analysis against a checklist of canonical house/tech-house labels. Coverage
+was already strong; filled the remaining true gaps with verified additions:
+**Strictly Rhythm** (`strictlyrec.com/demos/`), **Kittball Records**, **Lone Romantic**
+(Maceo Plex), **STMPD RCRDS** (already present), **Do Not Sleep**, **Ovum Recordings**
+(Josh Wink), **8Bit Records**. Deliberately *not* added: Cocoon / Soma / Intec / Truesoul
+(techno, out of scope); **Edible** and **Sosumi** (real labels, but no current demo
+channel could be verified — left as open gaps to revisit).
+
+### Batch 5 — the master-list import was NOT trusted blindly
+The uploaded file (`labelsdatabasemaster.js`) had a JS syntax error, a header/row
+mismatch (claimed 175, parsed 170), an internal duplicate, and a uniform "May 2025"
+stamp. A spot-check showed its contact details were **wrong/stale ~half the time**
+(e.g. Skint, Running Back, CUFF all had bad addresses). So every candidate was
+re-verified before keeping:
+- **66** were already in our DB (incl. sub-label aliases) → skipped.
+- **8** techno/off-genre and **7** sub-label-of-parent redundancies → dropped pre-merge.
+- **87** new in-scope candidates were merged `pending`, then re-checked individually:
+  **65 kept** (channels corrected where the file was wrong), **22 rejected** —
+  off-genre techno (Truesoul, Intec, Soma, Cocoon Recordings, Minus, Odd Recordings,
+  Senso, Arcane), commercial/other-genre (Kontor, Enhanced, Futuristica, Get The Sound),
+  dormant (Tsuba, Leftroom), or phantom/unverifiable (Muse, Coco, Criterio, Tactile,
+  NOXU Deep, Rejected, Odd Mob, Rebel Rave).
+- Common corrections applied: Skint → `skint.demos@bmg.com`, Running Back →
+  `demos@running-back.com`, Keinemusik → `drop@keinemusik.com`, CUFF → Trackstack,
+  Mobilee → LabelRadar portal, Relief → `bruce@cajual.com`, Nite Grooves → King Street.
 
 **Batch 4 coverage by slice:** tech house EU 17 · mainstream/festival 18 ·
 melodic/progressive 20 · deep/soulful/disco 19 · afro/Latin 13 · bass/G-house 10
