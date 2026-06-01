@@ -10,15 +10,25 @@ seeds the in-app Label Discovery library (Phase 3, spec §11).
 - `labels.csv` — flat export of the same data for quick import/seeding.
 
 ## Status (2026-06-01)
-First batch: the **17 curated seed labels** from spec §11, each researched and verified.
+- **Batch 1:** the 17 curated seed labels from spec §11.
+- **Batch 2:** +13 additional career-changing, mostly cold-demo-friendly house/tech-house
+  labels (expansion toward the ~170 target in §12).
 
 | Metric | Value |
 |---|---|
-| Labels recorded | 17 / 17 seed |
-| Contactable now (have a real demo channel) | 15 / 17 |
-| High confidence (official page or ≥2 sources) | 12 |
-| Medium confidence (single secondary source — re-verify) | 4 |
-| Low confidence (no channel found yet) | 1 (Hellbent) |
+| Labels recorded | 30 |
+| Contactable now (have a real demo channel) | 27 / 30 |
+| High confidence (official page or ≥2 sources) | 21 |
+| Medium confidence (single secondary source — re-verify) | 6 |
+| Low confidence (no channel found / window-only) | 3 (Hellbent, Country Club Disco, Night Bass) |
+
+**Batch 2 additions:** Glasgow Underground, Snatch! Records, Crosstown Rebels,
+Saved Records, Moon Harbour, Desert Hearts, Box of Cats, Cuttin' Headz,
+Country Club Disco, Anjunadeep, Confession, Higher Ground, Night Bass.
+
+Deliberately skipped this round (quality bar / accuracy): **Elrow Music** (no
+verifiable demo channel found), **Realm** (conflicting addresses across sources),
+**Rawthentic** (appears dormant — last release ~10 years ago).
 
 ## Method (the spec's research loop)
 `Source → Verify (≥2 independent sources) → Qualify (≥3/5 bar) → Tier + access path →
@@ -34,11 +44,16 @@ Record (rules, links, sources, fetch date) → Maintain (stamp last-verified)`
 ## Things to re-verify before bulk use
 - **Hellbent (low):** no public demo portal found on hellbentrecs.com (a Shopify store).
   Confirm via Cloonee's socials / a LabelRadar or Trackstack portal.
+- **Night Bass (low):** only a general contact (`info@nightbassrecords.com`) found; the
+  dedicated demo channel isn't confirmed.
+- **Country Club Disco (low):** demo form opens periodically (the "Caddyshack" window);
+  confirm the current live link.
 - **Hot Creations (medium):** the `hotcreationsdemos` SoundCloud account is the only
   signal; confirm the current policy.
 - **Sola (medium):** `demos@solarecords.com` is from a single directory.
-- **Solid Grooves / Suara (medium):** confirmed by directories / an older official post —
-  cross-check against the live site.
+- **Solid Grooves / Suara / Snatch! / Crosstown Rebels (medium):** confirmed by
+  directories / an older official post — cross-check against the live site. Crosstown's
+  address differs between sources (`demos@` vs `info@`).
 
 ## Discrepancies vs. the spec's access-path guesses
 The spec notes access-path values are "starting suggestions to verify." Three ELITE
