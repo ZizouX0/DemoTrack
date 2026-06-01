@@ -26,3 +26,4 @@ dev-dist/
 # firecrawl CLI scrape cache + transient collection scratch
 .firecrawl/
 data/_agent_*.json
+data/_promo_*.json
