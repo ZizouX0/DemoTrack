@@ -10,30 +10,32 @@ seeds the in-app Label Discovery library (Phase 3, spec §11).
 - `labels.csv` — flat export of the same data for quick import/seeding.
 
 ## Status (2026-06-01)
-- **Batch 1:** the 17 curated seed labels from spec §11.
-- **Batch 2:** +13 career-changing house/tech-house labels.
-- **Batch 3:** +15 more (expansion toward the ~170 target in §12).
+- **Batches 1–3:** the 17 spec seed labels + 28 hand-researched additions (45).
+- **Batch 4:** a parallel **6-agent sweep** across the house/tech-house universe
+  (tech house UK/EU · mainstream/festival · melodic/progressive/organic · deep/soulful/
+  classic/disco · bass/G-house · afro/Latin), merged and de-duplicated → **+95 labels**.
 
 | Metric | Value |
 |---|---|
-| Labels recorded | 45 |
-| Contactable now (have a real demo channel) | 42 / 45 |
-| High confidence (official page or ≥2 sources) | 31 |
-| Medium confidence (single secondary source — re-verify) | 11 |
-| Low confidence (no channel found / window-only) | 3 (Hellbent, Country Club Disco, Night Bass) |
-| Tier mix | 4 ELITE · 19 A · 22 B |
+| Labels recorded | **140** |
+| Contactable now (have a real demo channel) | 135 / 140 |
+| High confidence (official page or ≥2 sources) | 78 |
+| Medium confidence (single secondary source — re-verify) | 53 |
+| Low confidence (channel unconfirmed / window-only) | 9 |
+| Tier mix | 11 ELITE · 65 A · 64 B |
 
-**Batch 2:** Glasgow Underground, Snatch! Records, Crosstown Rebels, Saved Records,
-Moon Harbour, Desert Hearts, Box of Cats, Cuttin' Headz, Country Club Disco,
-Anjunadeep, Confession, Higher Ground, Night Bass.
+**Batch 4 coverage by slice:** tech house EU 17 · mainstream/festival 18 ·
+melodic/progressive 20 · deep/soulful/disco 19 · afro/Latin 13 · bass/G-house 10
+(97 raw → 95 after dropping cross-slice duplicates REALM Records & Permanent Vacation).
+Batch 4 also resolved the earlier **REALM** ambiguity — it's Gorgon City's label, now
+verified — and added **elrow Music** and **Kaluki Musik** (channels found this round).
 
-**Batch 3:** Diynamic, Get Physical, Rekids, Yoshitoshi Recordings, Lost Records,
-All Day I Dream, Under No Illusion, Roush Label, Abode Records, Eastenderz,
-PIV Records, Heldeep, Perfect Havoc, Nervous Records, Hottrax.
-
-Deliberately skipped (quality bar / accuracy): **Elrow Music** & **Kaluki Musik**
-(no verifiable demo channel found), **Realm** (conflicting addresses across sources),
-**Rawthentic** (appears dormant — last release ~10 years ago).
+Each agent applied the same rules: ≥3/5 quality bar, verify the demo channel, record
+provenance + confidence, skip dormant labels (~2+ yrs no release) and ambiguous ones.
+Notable **deliberate skips** (kept out for accuracy): Strictly Rhythm & Madhouse/MadTech
+(legacy/dormant), Phonica (a shop, not a signing label), Main Course & Psycho Disco!
+(dormant), Bassrush/Basscon (not house), plus several names that couldn't be confirmed
+as active labels with a real channel.
 
 ## Method (the spec's research loop)
 `Source → Verify (≥2 independent sources) → Qualify (≥3/5 bar) → Tier + access path →
@@ -47,18 +49,22 @@ Record (rules, links, sources, fetch date) → Maintain (stamp last-verified)`
   rather than guessing.
 
 ## Things to re-verify before bulk use
-- **Hellbent (low):** no public demo portal found on hellbentrecs.com (a Shopify store).
-  Confirm via Cloonee's socials / a LabelRadar or Trackstack portal.
-- **Night Bass (low):** only a general contact (`info@nightbassrecords.com`) found; the
-  dedicated demo channel isn't confirmed.
-- **Country Club Disco (low):** demo form opens periodically (the "Caddyshack" window);
-  confirm the current live link.
-- **Hot Creations (medium):** the `hotcreationsdemos` SoundCloud account is the only
-  signal; confirm the current policy.
-- **Sola (medium):** `demos@solarecords.com` is from a single directory.
-- **Solid Grooves / Suara / Snatch! / Crosstown Rebels (medium):** confirmed by
-  directories / an older official post — cross-check against the live site. Crosstown's
-  address differs between sources (`demos@` vs `info@`).
+**Low confidence (9) — channel unconfirmed or window-only:** Hellbent, Night Bass,
+Country Club Disco, Heist Recordings, Lobster Theremin, Wolf Music Recordings,
+Whippin Records, Vatos Locos, Afterlife. Treat these as leads, not ready-to-send.
+
+**Relationship-only / prestige (don't expect cold-demo success):** Drumcode, Innervisions,
+Afterlife — listed for completeness; realistic only via a warm intro.
+
+**Medium confidence (53):** mostly an email or portal from a single secondary directory
+(labelsbase.net / findmylabels.com) or one official social post. Cross-check against the
+label's own site before any bulk use. Known specifics to nail down:
+- **REALM Records:** sources disagree on the address (a `demos@realm-records.com` /
+  `realmrecordsdemos@gmail.com` / Trackstack all appear) — confirm the current one.
+- **Crosstown Rebels:** `demos@` vs `info@crosstownrebels.com` across sources.
+- **Hot Creations / Sola / Suara / Snatch!:** confirm against the live official channel.
+- Batch-4 entries flagged by agents (site unreachable on fetch / JS-gated portal):
+  Late Checkout, Colorize, Future House Music, SKINK, Zerothree — re-fetch the portal.
 
 ## Discrepancies vs. the spec's access-path guesses
 The spec notes access-path values are "starting suggestions to verify." Three ELITE
