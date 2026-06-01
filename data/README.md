@@ -18,12 +18,27 @@ seeds the in-app Label Discovery library (Phase 3, spec §11).
 
 | Metric | Value |
 |---|---|
-| Labels recorded | **219** |
-| Contactable now (have a real demo channel) | 206 / 219 |
-| High confidence (official page or ≥2 sources) | 110 |
-| Medium confidence (single secondary source — re-verify) | 89 |
-| Low confidence (channel unconfirmed / window-only) | 20 |
-| Tier mix | 11 ELITE · 69 A · 139 B |
+| Labels recorded | **291** |
+| Contactable now (have a real demo channel) | 276 / 291 |
+| High confidence (official page or ≥2 sources) | 148 |
+| Medium confidence (single secondary source — re-verify) | 120 |
+| Low confidence (channel unconfirmed / window-only) | 23 |
+| Tier mix | 12 ELITE · 91 A · 188 B |
+
+### Batch 8 — full 6-agent regional sweep (resumed after rate-limit)
+Six parallel agents swept the regions/niches and added **+72 verified** labels
+(76 raw − 4 cross-slice dups). Highlights by slice:
+- **Spain/Italy/PT:** Sincopat, Mood Funk, Hell Yeah, Pornostar, Be One, Apparel Music…
+- **DE/Benelux/Nordics:** Poker Flat, Sublease, Upon.You, Great Stuff, Parquet, Cécille…
+- **UK/IE:** UTTU, Hot Haus, Banoffee Pies, Lost Palms, **Edible Records** (channel finally found), ec2a…
+- **North America:** Trax, DJ International, Guesthouse, My Favorite Robot, Wolf + Lamb, Crew Love, Turbo…
+- **LATAM/Africa:** Soul Candi, Kunye (Shimza), Cafe De Anatolia, Make The Girls Dance, Area Verde, Nulu…
+- **Sub-niche/artist:** Midnight Riot, Sol Selectas, Public Possession, STEREOHYPE (James Hype), Maccabi House…
+
+Confirmed-and-excluded (so they're settled, not gaps): **Sosumi** (royalty-free
+content music, not a real label), **G-Town** (4-release vanity outlet), **Yoruba**
+("WE DO NOT ACCEPT DEMOS"), Steel City Dance Discs (NO DEMOS), Mau P's label
+(announced, not launched), plus dormant/off-region names.
 
 ### Batch 7 — "no good label left behind" sweep
 Targeted the regions/niches still thin (Spain/Italy, Germany/Benelux/Nordics, UK/IE,

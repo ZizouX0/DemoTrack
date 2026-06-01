@@ -9133,6 +9133,3279 @@
       ],
       "last_verified": "2026-06-01",
       "confidence": "high"
+    },
+    {
+      "name": "Apparel Music",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "deep house",
+        "jazzy house",
+        "house",
+        "nu-disco"
+      ],
+      "key_people": [
+        "Giuseppe D'Alessandro (aka Kisk) – founder & A&R"
+      ],
+      "why_it_belongs": "Milan-based independent label founded in 2009 by Kisk; pioneered the jazz-meets-deep-house sound. Over 15 years of releases with genuine global distribution (Beatport, Traxsource). Released 15th anniversary compilation in Aug 2025 featuring artists from Italy, USA, Australia, Spain and Germany. Plausible career launchpad for an unknown with a soulful, jazz-inflected sound.",
+      "submission": {
+        "method": "email",
+        "email": "demo@apparelmusic.com",
+        "url": null,
+        "formats": [],
+        "requirements": [],
+        "notes": "General contact: info@apparelmusic.com. Sub-label Apparel Tronic handles more electronic/downtempo material."
+      },
+      "sub_labels": [
+        "Apparel Tronic"
+      ],
+      "sub_label_multiplier": 2,
+      "sources": [
+        {
+          "url": "https://www.apparelmusic.com/about/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://labelsbase.net/apparel-music",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/apparel-music/14885/releases",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://apparelmusic.bandcamp.com/album/apparel-music-b-day-15",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Jackies Music Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "house",
+        "deep house",
+        "soulful house"
+      ],
+      "key_people": [
+        "Steve – label management"
+      ],
+      "why_it_belongs": "Independent Barcelona house label launched June 2023 with 34+ releases to date. Closely linked to the Off Sónar ecosystem – released an Off Barcelona 2025 Sampler. Has signed Moon Boots, Piero Pirupa, DJ Lora and Keys N Krates, demonstrating real curator credibility. Young label hungry for new talent in the Barcelona house scene.",
+      "submission": {
+        "method": "email",
+        "email": "demos@jackiesmusic.com",
+        "url": null,
+        "formats": [],
+        "requirements": [],
+        "notes": "Official label page also lists steve@jackiesmusic.com as the label management contact. Both emails appear valid for submissions."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://jackiesmusic.com/label/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://jackiesmusicrecords.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/24917",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://demolist.app/label_profile/jackies-music-records",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Sincopat",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "tech house",
+        "deep house",
+        "progressive house",
+        "electronica"
+      ],
+      "key_people": [
+        "AFFKT – founder & artistic director"
+      ],
+      "why_it_belongs": "Valencia, Spain-based label founded 2010 by AFFKT; widely regarded as one of Spain's finest avant-garde electronic imprints with 100+ releases. Active in 2025 with seasonal compilations (Day / Night collections). Has collaborated with LabelRadar for remix contests indicating openness to unknown talent. Strong Beatport/Traxsource presence. Can genuinely shift a career for an artist in the experimental tech-house space.",
+      "submission": {
+        "method": "email",
+        "email": "demos@sincopat.com",
+        "url": "https://www.labelradar.com/labels/sincopat/portal",
+        "formats": [],
+        "requirements": [
+          "Private SoundCloud links only"
+        ],
+        "notes": "Also has a LabelRadar portal. General contact: info@sincopat.com."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://labelsbase.net/sincopat",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.sincopat.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/4493",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://essentialhouse.club/2024/12/va-2024-day-collection-on-sincopat/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Pornostar Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "funky house",
+        "nu-disco",
+        "afro house",
+        "jackin house",
+        "house"
+      ],
+      "key_people": [],
+      "why_it_belongs": "Spain-based (Barcelona-affiliated) house label ranked #1 Funky House label on BeatStats with 410,708+ points. Releases weekly across Beatport and Traxsource covering Funky House, Nu Disco, Tribal and Afro House. Roster includes Block & Crown, Crazibiza, Nicola Fasano. Released annual 'Funky House Annual 2025' and 'Funky House Annual 2026' compilations showing consistent output. High viability for funky/jackin-house adjacent demos.",
+      "submission": {
+        "method": "email",
+        "email": "demo@pornostarrecords.com",
+        "url": null,
+        "formats": [],
+        "requirements": [
+          "SoundCloud links only"
+        ],
+        "notes": "Official website: pornostarrecords.com. Instagram: @psrrecords."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://pornostarrecords.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatstats.com/labels/house-call/91154-12months-genre81",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/release/funky-house-annual-2025/4848713",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://volt.fm/label/74922/pornostar-records",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Mood Funk Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "jackin house",
+        "funky house",
+        "house",
+        "tech house"
+      ],
+      "key_people": [
+        "Angelo Ferreri – founder"
+      ],
+      "why_it_belongs": "Italian (Sicily) house label founded by Angelo Ferreri; focuses on Funky-Tech-House with 600+ artist roster and global DJ support (Carl Cox, Roger Sanchez et al.). Actively releasing in 2025 with tracks by Joaquin Phunk, Hiva, Diego Serrao. Has a dedicated submission form on official website plus email. Established enough to give unknown artists real dancefloor exposure.",
+      "submission": {
+        "method": "form",
+        "email": "demos@moodfunkrecords.com",
+        "url": "https://www.moodfunkrecords.com/contacts/",
+        "formats": [],
+        "requirements": [],
+        "notes": "Official site has a 'Submit Your Demo' form. Also accepts emails with SoundCloud private links. General info: info@moodfunkrecords.com."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.moodfunkrecords.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.moodfunkrecords.com/contacts/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.traxsource.com/label/26419/mood-funk-records",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/13318",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Hell Yeah Recordings",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "balearic house",
+        "nu-disco",
+        "minimal",
+        "tech house",
+        "electronica"
+      ],
+      "key_people": [
+        "Marco Gallerani (peeDoo) – founder"
+      ],
+      "why_it_belongs": "Italian label (Ferrara) founded 2006 by Marco 'peeDoo' Gallerani; descended from Mantra Vibes, one of Italy's leading dance labels. Active releases in 2025 including 'File Under Balearic Gabba Vol 2' (March 2025) and 'Recess EP' by Johan Blende (December 2025). Known for eclectic Balearic, modern-disco-ish sound. Featured in Juno Daily label focus March 2025. A real launchpad for artists with a Balearic/disco-house sensibility.",
+      "submission": {
+        "method": "dm",
+        "email": null,
+        "url": "https://hellyeahrec.bandcamp.com/contact?b=1113807547&n=Hell%20Recordings",
+        "formats": [],
+        "requirements": [],
+        "notes": "No public email found. Contact via Bandcamp contact form at hellyeahrec.bandcamp.com. Also reachable via Facebook @hellyeahrecordings and Instagram."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://hellyeahrec.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/1136",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.juno.co.uk/junodaily/2025/03/26/label-focus-hell-yeah/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://banbantonton.com/2025/03/21/file-under-balearic-gabba-volume-2-hell-yeah-recordings/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Polifonic Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "house",
+        "melodic house",
+        "electronica",
+        "organic house"
+      ],
+      "key_people": [],
+      "why_it_belongs": "Puglia (Itria Valley), Italy-based label born from the acclaimed annual Polifonic festival (since 2017). Label launched 2021 and released 9 titles including vinyl. Active in 2025 with 'Magnolia EP' by Damiano Von Erckert (July 2025). Releases span house, acid and electronica with a strong Puglian/Italian identity. The festival connection gives signed artists rare event placement and press opportunities.",
+      "submission": {
+        "method": "email",
+        "email": "hello@polifonic.it",
+        "url": null,
+        "formats": [],
+        "requirements": [],
+        "notes": "Email is the general/all-purpose contact per the official label page (polifonic.it/label/). No separate demo address listed."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.polifonic.it/label/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://polifonic.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/news/74652",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Memento Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "minimal",
+        "deep house",
+        "house"
+      ],
+      "key_people": [
+        "Idriss D – founder"
+      ],
+      "why_it_belongs": "Italian label (Mantua/Bologna area) founded 2006 by Algerian-Italian DJ Idriss D; 56+ catalog numbers with releases through September 2024 (EP Memento052). Operates from the fertile Pianura Padana music region. Known for discovering local Italian talent. Active in the minimal/deep house space, respected within the European underground circuit.",
+      "submission": {
+        "method": "email",
+        "email": "hello@mementolabel.com",
+        "url": null,
+        "formats": [],
+        "requirements": [
+          "Private SoundCloud links only"
+        ],
+        "notes": "Same email for both demo A&R and general contact per labelsbase.net."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://labelsbase.net/memento",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://mementorecords.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/5341",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.traxsource.com/label/54448/memento-records",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Be One Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "tech house",
+        "minimal",
+        "house",
+        "afro house"
+      ],
+      "key_people": [
+        "Ruiz dB – founder & owner"
+      ],
+      "why_it_belongs": "Spain-based (Granada/Barcelona) label run by producer-DJ Ruiz dB. Active on Beatport and Traxsource with a 'Best of 2024' compilation released. Focuses on tech house, minimal and afro house. Has a dedicated demos page and email. Entry-level label within the Spanish underground scene that can provide a release credit and distribution footprint for an unknown artist.",
+      "submission": {
+        "method": "email",
+        "email": "demos@beonerecords.com",
+        "url": "http://beonerecords.com/demos",
+        "formats": [],
+        "requirements": [],
+        "notes": "Submission form at beonerecords.com/demos. General contact: admin@beonerecords.co."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://labelsbase.net/be-one-records",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/8830",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/be-one-records/19923",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Prospect Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "tech house",
+        "techno",
+        "deep house",
+        "minimal"
+      ],
+      "key_people": [
+        "Hollen – founder & A&R"
+      ],
+      "why_it_belongs": "Naples, Italy-based label founded 2011 by respected Italian DJ/producer Hollen; releases span tech house, minimal and techno. Demonstrably active in 2024-2025 with Hollen 'Feel Alive' (Jan 2024), 'Just Be' (Oct 2024), and 'Night Trip' (Jan 2025). Has a public domain email for demos. Italian underground credibility with Beatport and Traxsource distribution. Can launch an unknown artist in the Italian/European tech house circuit.",
+      "submission": {
+        "method": "email",
+        "email": "demo@prospectrec.it",
+        "url": null,
+        "formats": [],
+        "requirements": [
+          "Private SoundCloud links only"
+        ],
+        "notes": "General contact: info@prospectrec.it. Label website and Bandcamp: prospectrec.bandcamp.com."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://labelsbase.net/prospect-records",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://prospectrec.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/6223",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.traxsource.com/label/14404/prospect-records",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Poker Flat Recordings",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "deep house",
+        "minimal",
+        "tech house",
+        "house"
+      ],
+      "key_people": [
+        "Steve Bug"
+      ],
+      "why_it_belongs": "Steve Bug's 25-year Berlin institution; one of Germany's most respected underground house / minimal labels, artists like Sebo K, Isolée and Huxley came through here. Has a direct demo email on the official site, 2024–2025 active with Best Of 2024 compilation and new collabs in May 2025.",
+      "submission": {
+        "method": "email",
+        "email": "demos@pokerflat-recordings.com",
+        "url": "https://www.pokerflat-recordings.com/",
+        "formats": [
+          "private streaming link"
+        ],
+        "requirements": [
+          "Private streaming link only — no download links, no public links",
+          "No feedback guaranteed if material does not fit"
+        ],
+        "notes": "Label receives many demos daily; response not guaranteed. Send via private SoundCloud / Dropbox link only."
+      },
+      "sub_labels": [
+        "Sublease Music"
+      ],
+      "sub_label_multiplier": 2,
+      "sources": [
+        {
+          "url": "https://www.pokerflat-recordings.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://909originals.com/2024/09/03/steve-bug-on-25-years-of-poker-flat-and-the-challenges-facing-up-and-coming-electronic-artists/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://pokerflatrecordings.bandcamp.com/album/best-of-poker-flat-recordings-2024",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Sublease Music",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "deep house",
+        "minimal",
+        "tech house",
+        "house"
+      ],
+      "key_people": [
+        "Steve Bug"
+      ],
+      "why_it_belongs": "Poker Flat's sub-label for 'reduced, hypnotic, raw' club cuts; explicitly created to break new talent alongside Poker Flat main roster. Active: Sublease Music Vol.04 Dec 2024, Vol.05 2025, Steve Bug & Hervé Solar 'Lift Off' March 2025. Has its own dedicated demo email separate from Poker Flat.",
+      "submission": {
+        "method": "email",
+        "email": "subleasedemo@pokerflat-recordings.com",
+        "url": "https://subleasemusic.bandcamp.com/",
+        "formats": [
+          "private streaming link"
+        ],
+        "requirements": [
+          "Private SoundCloud links preferred"
+        ],
+        "notes": "Sub-label of Poker Flat Recordings. Focused on deeper, more tracky, club-ready material. Strong new-talent mandate."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://electronicgroove.com/steve-bug-presents-new-label-sublease-music/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://essentialhouse.club/2025/03/steve-bug-herve-solar-lift-off-on-sublease-music/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://subleasemusic.bandcamp.com/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Upon.You Records",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "tech house",
+        "minimal",
+        "deep house"
+      ],
+      "key_people": [
+        "Marco Resmann",
+        "Hawks Grunert"
+      ],
+      "why_it_belongs": "Respected Berlin institution (est. 2007) run by Marco Resmann and Hawks Grunert; launched Cari Golden, Luna City Express, HYPOXIA LDN and many others. Active December 2024 (Algorithm Anniversary Mix with Cari Golden) and June 2025 (Dance Ma Sense Cocolino Remix). Consistent quality bar for underground Berlin tech house/minimal.",
+      "submission": {
+        "method": "email",
+        "email": "demo@uponyou-records.com",
+        "url": "http://www.uponyou-records.com/",
+        "formats": [
+          "private streaming link"
+        ],
+        "requirements": [
+          "Private SoundCloud links only"
+        ],
+        "notes": "General contact info@uponyou-records.com. Booking: booking@uponyou-records.com. Phone: +49 (0) 30 4208 4573."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://labelsbase.net/upon-you-records",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.electrobuzz.net/2024/12/marco-resmann-cari-golden-the-algorithm-anniversary-mix-on-upon-you-records/662168/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "http://www.uponyou-records.com/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Great Stuff Recordings",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "tech house",
+        "house",
+        "minimal / deep tech"
+      ],
+      "key_people": [
+        "Tomcraft",
+        "Erik May"
+      ],
+      "why_it_belongs": "Munich-based label est. 2003, part of Housesession label group; one of Germany's highest-volume tech house labels (1400+ Beatport tracks). Active across 2024–2025 with Amsterdam 2024 compilation, 'Gems of 2025' VA, and Summer Anthems 2025 Vol.2. Official Trackstack portal confirmed from their own Facebook post.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://tstack.app/great-stuff-recordings",
+        "formats": [],
+        "requirements": [],
+        "notes": "Verified Trackstack portal from official Great Stuff Facebook post: 'Send your demos to https://tstack.app/great-stuff-recordings'. General contact also: mail@greatstuff.eu."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/GreatStuffRec/posts/get-involved-send-your-demos-to-httpststackappgreat-stuff-recordings/1146478717043041/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.electrobuzz.net/2025/12/va-the-gems-of-2025-on-great-stuff-recordings/834050/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://greatstuffrec.bandcamp.com/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Parquet Recordings",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "deep house",
+        "melodic house",
+        "tech house",
+        "progressive house"
+      ],
+      "key_people": [
+        "Solee (Normen Flaskamp)"
+      ],
+      "why_it_belongs": "Solee's German label est. 2006; 200+ releases, Beatport 'Label of the Month', regular Beatport Progressive/Deep House Top 10s. Active February 2025 (AYU - Reach the Sky release) and returning 2025 with stated new direction into melodic house & techno. Accessible to unknown artists through direct demo email listed on labelsbase.",
+      "submission": {
+        "method": "email",
+        "email": "demos@parquet-recordings.com",
+        "url": null,
+        "formats": [
+          "private streaming link"
+        ],
+        "requirements": [
+          "Private SoundCloud links only"
+        ],
+        "notes": "General contact info@parquet-recordings.com. Booking: booking@parquet-recordings.com. Label focuses on melodic, intelligent, accessible deep/tech house and progressive elements."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://labelsbase.net/parquet-recordings",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatportal.com/articles/188488-label-of-the-month-parquet-recordings",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/parquet-recordings/3824/releases",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Uncanny Valley",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "house",
+        "minimal",
+        "deep house",
+        "acid house",
+        "funk"
+      ],
+      "key_people": [
+        "Credit 00"
+      ],
+      "why_it_belongs": "Dresden label est. 2010; grown from a friends collective to a respected international underground network with 100+ releases. Active May 2025 ('Put The Funk Back In 2 Techno'), March 2025 ('14 Years of Uncanny Valley' comp), Feb 2025 ('La Bomba'). Honest, accessible submission policy.",
+      "submission": {
+        "method": "email",
+        "email": "info@uncannyvalley.de",
+        "url": "https://www.uncannyvalley.de/",
+        "formats": [
+          "private streaming link (SoundCloud)"
+        ],
+        "requirements": [
+          "Send SoundCloud link to info@uncannyvalley.de",
+          "Be patient — team has limited time due to other employment"
+        ],
+        "notes": "Label also prefers in-person introductions at events in Dresden and beyond. No response should not be taken personally. Sub-labels: shtum Records, credit00ratlife."
+      },
+      "sub_labels": [
+        "shtum Records",
+        "credit00ratlife"
+      ],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.uncannyvalley.de/about#about-contact",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.traxsource.com/title/2490518/14-years-of-uncanny-valley",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://uncannyvalleyrec.bandcamp.com/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Cécille Records",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "tech house",
+        "minimal",
+        "deep house",
+        "house"
+      ],
+      "key_people": [
+        "Nick Curly",
+        "Marc Scholl"
+      ],
+      "why_it_belongs": "Mannheim label est. 2008; defined the 'Mannheim Sound' with Nick Curly, Leon, Sidney Charles, Reboot. Active 2024–2025 (Reboot 'Red House' EP, Leyo debut album, Fleur Shore first vinyl, Cécille Summer 2025 Compilation, CECSEASON003 July 2025). Official site has dedicated Demo Submission page in navigation.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://www.cecille-records.de/",
+        "formats": [],
+        "requirements": [
+          "Navigate to DEMO SUBMISSION section on official website cecille-records.de"
+        ],
+        "notes": "Dedicated Demo Submission section confirmed in site navigation. Exact form not accessible via static scrape — visit cecille-records.de directly. Also listed on DemoList.app with verified demo contact info."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.cecille-records.de/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://linktr.ee/cecillerecords",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://minitech.house/archives/186451",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Moonbootique Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "house",
+        "electro house",
+        "tech house",
+        "melodic house"
+      ],
+      "key_people": [
+        "Moonbootica (KoweSix / Tobitob)"
+      ],
+      "why_it_belongs": "Hamburg label est. 2001 by Moonbootica; one of Germany's longest-running independent house imprints. Active 2024–2025: 'Can't Stop Me' April 2025, 'Burning' December 2025, releases in 2026 confirmed. Artists include Township Rebellion, Ante Perry, Julian Wassermann, David Hasert. Submission email confirmed via multiple sources.",
+      "submission": {
+        "method": "email",
+        "email": "hello@moonbootique.com",
+        "url": "http://moonbootique.com/",
+        "formats": [
+          "private streaming link"
+        ],
+        "requirements": [
+          "Streaming links only — no MP3 attachments"
+        ],
+        "notes": "Simple email submission. No attachment policy enforced. Label prefers links over files."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://labelsbase.net/moonbootique",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/moonbootique/14080",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "http://moonbootique.com/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "LOSSLESS",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "deep house",
+        "minimal",
+        "melodic house"
+      ],
+      "key_people": [
+        "Mathias Schober",
+        "Thomas Herb"
+      ],
+      "why_it_belongs": "Berlin label est. 2014 run by Mathias Schober and Thomas Herb; known for elegant modern deep house with roster including Frankey & Sandrino, Manuel Tur, Love over Entropy, David Kochs. Active 2024–2025: catalog at LL1237/LL1238 (Jepe 'Sunny/Fantasia', Soudant 'Futility EP'). Boutique scale where a signed track has genuine scene impact.",
+      "submission": {
+        "method": "email",
+        "email": "hello@lossless.cc",
+        "url": "https://losslesscc.bandcamp.com/",
+        "formats": [],
+        "requirements": [],
+        "notes": "Contact: hello@lossless.cc. Instagram @lossless.cc, Twitter @thisislossless, website lossless.cc. Demos must fit label's elegant deep-house aesthetic. Demo email confirmed from multiple community sources."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://losslesscc.bandcamp.com/artists",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/11173",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://soundcloud.com/lossless-cc",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Snork Enterprises",
+      "tier": "B",
+      "access_path": "needs-warm-intro",
+      "access_path_verified": "needs-warm-intro",
+      "genre_tags": [
+        "minimal",
+        "tech house",
+        "minimal / deep tech"
+      ],
+      "key_people": [
+        "Christian Schachta (Syntax Error / Snork)"
+      ],
+      "why_it_belongs": "Hamburg label est. 2004 run by Christian Schachta; niche underground imprint with loyal following for atmospheric minimal-techhouse. Active July 2024 (Luis Luchetti 'Siqy', Chris Baumann 'State of Flux') and Feb 2025 (vinyl session at BaalSaal Hamburg). No public demo inbox — label is curated by owner personally.",
+      "submission": {
+        "method": "dm",
+        "email": null,
+        "url": "https://snorkenterprises.bandcamp.com/",
+        "formats": [],
+        "requirements": [],
+        "notes": "No verified public demo email found after thorough search. Approach via Bandcamp contact form or Instagram @snorkenterprises. Label owner handpicks tracks — warm introduction at Hamburg events preferred."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://snorkenterprises.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/1652",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://soundcloud.com/snorkenterprises",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Public Possession",
+      "tier": "A",
+      "access_path": "needs-warm-intro",
+      "access_path_verified": "needs-warm-intro",
+      "genre_tags": [
+        "house",
+        "disco",
+        "deep house",
+        "indie dance"
+      ],
+      "key_people": [
+        "Valentino Betz",
+        "Marvin Schuhmann"
+      ],
+      "why_it_belongs": "Munich label est. 2013 run by Valentino Betz and Marvin Schuhmann; internationally regarded for its eclectic house, disco and world-music-influenced releases. Event at Haus der Kunst May 2024; active releases ongoing. Boutique output where each release carries significant press and scene impact. No open demo inbox — relationship-driven.",
+      "submission": {
+        "method": "dm",
+        "email": null,
+        "url": "https://www.publicpossession.com/",
+        "formats": [],
+        "requirements": [],
+        "notes": "No public demo submission channel found after thorough search. Best path: visit physical store in Munich (Klenzestrasse), attend their events, or contact via Bandcamp message. Label is tight-knit — warm intro strongly preferred."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.publicpossession.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://publicpossession.bandcamp.com/music",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.hausderkunst.de/en/events/public-possession-party-70497",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Boogie Angst",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "nu-disco",
+        "indie dance",
+        "deep house",
+        "funk"
+      ],
+      "key_people": [
+        "Kraak & Smaak",
+        "Fouk"
+      ],
+      "why_it_belongs": "Netherlands label (Amsterdam area) with strong Kraak & Smaak and Fouk connection; known for nu-disco, funk-influenced electronic dance releases. Active 2024–2025: Edition Four March 2024, 'Heat' March 2025, 'Nothing Is Forever' July 2025, Moods 'Wildfire' Nov 2025. Good entry point for disco-house / nu-disco crossover material.",
+      "submission": {
+        "method": "email",
+        "email": "info@boogieangst.com",
+        "url": "https://boogieangst.com/",
+        "formats": [],
+        "requirements": [],
+        "notes": "General contact email — no dedicated demo inbox found. Genre leans nu-disco/funk more than pure tech house. Best fit for disco-house crossover material. Also reachable via Instagram and Facebook @boogieangst."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://boogieangst.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://boogieangst.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://essentialhouse.club/2025/11/moods-august-charles-wildfire-on-boogie-angst/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Unknown To The Unknown (UTTU)",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "deep house",
+        "UK bass",
+        "house",
+        "breaks",
+        "garage",
+        "jungle"
+      ],
+      "key_people": [
+        "DJ Haus"
+      ],
+      "why_it_belongs": "Seminal UK underground electronic label run by DJ Haus. Launched careers of Mall Grab, DJ Boring, VTSS and others. Sits at the intersection of UK bass, house, garage and breaks — a career-making imprint for an unknown artist breaking from the underground.",
+      "submission": {
+        "method": "email",
+        "email": "yo@uttu.club",
+        "url": "https://uttu.club",
+        "formats": [],
+        "requirements": [],
+        "notes": "Email verified directly from official uttu.club website. Hot Haus Recs shares the same contact. Label recently merged online presence to uttu.club."
+      },
+      "sub_labels": [
+        "Hot Haus Recs",
+        "Pre Rolled Joints"
+      ],
+      "sub_label_multiplier": 3,
+      "sources": [
+        {
+          "url": "https://uttu.club/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://unknowntotheunknown.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://soundcloud.com/uttuclub",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Hot Haus Recs",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "house",
+        "UK bass",
+        "bassline",
+        "deep house",
+        "bass house"
+      ],
+      "key_people": [
+        "DJ Haus",
+        "Mall Grab"
+      ],
+      "why_it_belongs": "Sister label to UTTU focused on rawer house, bass and UK-influenced sounds. Active with releases in 2024-2025 including John Heaven 'Ow' (Mar 2025), lau.ra 'Vibe' (Dec 2024), Frazer Ray & BRUX (Mar 2025). Has broken multiple unknown artists into the UK underground circuit.",
+      "submission": {
+        "method": "email",
+        "email": "yo@uttu.club",
+        "url": "https://uttu.club",
+        "formats": [],
+        "requirements": [],
+        "notes": "Shares submission contact with UTTU via official uttu.club site. Confirmed via direct fetch of uttu.club. Recent releases March 2025 (John Heaven 'Ow'), Dec 2024 (lau.ra 'Vibe')."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://uttu.club/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/hot-haus-recs/32923/releases",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/10275",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Banoffee Pies Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "deep house",
+        "lo-fi house",
+        "bass",
+        "electronica",
+        "experimental house"
+      ],
+      "key_people": [
+        "Ell Weston (DJ Autumn)"
+      ],
+      "why_it_belongs": "Bristol-born, now Berlin-based multi-medium label founded 2014 by Ell Weston. Distributed by !K7. Home to Ciel, D. Tiffany, Pugilist, Xades and others. One of the most respected underground deep/lo-fi labels in the UK-global circuit. Active Feb 2025 (Xades 'Vapour', BP027D).",
+      "submission": {
+        "method": "email",
+        "email": "banoffeepies.music@gmail.com",
+        "url": null,
+        "formats": [],
+        "requirements": [],
+        "notes": "Email sourced from official Facebook page (facebook.com/wearebanoffeepies/) and confirmed via multiple independent searches. Booking/general inquiries: info.banoffeepies@gmail.com. Distribution via !K7. Bandcamp contact form also available."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://banoffeepiesrecords.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.facebook.com/wearebanoffeepies/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/banoffee-pies-records/61526/releases",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Edible Records",
+      "tier": "A",
+      "access_path": "needs-warm-intro",
+      "access_path_verified": "needs-warm-intro",
+      "genre_tags": [
+        "house",
+        "tech house",
+        "disco house",
+        "bass house"
+      ],
+      "key_people": [
+        "Eats Everything (Dan Pearce)",
+        "Nick Harris"
+      ],
+      "why_it_belongs": "Bristol-based label co-founded by Eats Everything and former NRK boss Nick Harris (2015). Releases from Lord Leopard, Mele, Seb Zito, Waze & Odyssey, Illyus & Barrientos, Tony Romera 'La Police' (Jul 2025). One of the most profile-raising house labels in the UK.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://edible-music.bandcamp.com/",
+        "formats": [],
+        "requirements": [
+          "Use official Bandcamp contact form"
+        ],
+        "notes": "No publicly verified standalone demo email. graham@saharamusicgroup.com cited in Facebook comments but unconfirmed — likely management/sync, not demos. Bandcamp contact form confirmed active via Firecrawl scrape 2026-06-01. Warm intro strongly preferred given label stature."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://edible-music.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/14303",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/edible/52496",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Futureboogie Recordings",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "deep house",
+        "disco",
+        "house",
+        "nu-disco"
+      ],
+      "key_people": [
+        "Steve Nickolls",
+        "Dave Harvey"
+      ],
+      "why_it_belongs": "Bristol-based agency and club night turned label. Released Julio Bashmore's debut and consistently champions quality deep/disco house. Active through Jan 2025 (Enzio Etchaberri, release #144). Respected imprint that can meaningfully expose an unknown UK artist.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://futureboogie-recordings.bandcamp.com/",
+        "formats": [],
+        "requirements": [
+          "Contact via Bandcamp form or Instagram @futureboogierecordings"
+        ],
+        "notes": "No standalone verified email found via extensive searches. Bandcamp contact form is best available public channel. Label confirmed active with 2024-2025 releases. Founders: Steve Nickolls and Dave Harvey (also DJs as Futureboogie)."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://futureboogie-recordings.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/6103",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/futureboogie-recordings/19973/releases",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Warehouse Music",
+      "tier": "A",
+      "access_path": "needs-warm-intro",
+      "access_path_verified": "needs-warm-intro",
+      "genre_tags": [
+        "tech house",
+        "UK minimal",
+        "house",
+        "bassline"
+      ],
+      "key_people": [
+        "Mella Dee (Ryan Aitchison)"
+      ],
+      "why_it_belongs": "London-based imprint by Mella Dee, one of the UK's most respected underground tech house/UK minimal producers. WM001-WM024+ releases; roster includes Spencer Parker, L-Vis 1990, Joshua James, BLACK GIRL/WHITE GIRL. UK Minimal Vol. 1 & 2 (Oct-Dec 2025) confirms very strong activity.",
+      "submission": {
+        "method": "dm",
+        "email": null,
+        "url": "https://linktr.ee/warehousemusic",
+        "formats": [],
+        "requirements": [],
+        "notes": "No verified public demo email. Linktree (linktr.ee/warehousemusic) is official hub with all releases. Management: sarah@goodlife-management.com (bookings/management only). Best approached via Mella Dee social channels or management with warm intro. No explicit cold-submission channel confirmed."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://linktr.ee/warehousemusic",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/15235",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://melladee.bandcamp.com/music",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "ec2a",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "UK bass",
+        "tech house",
+        "house",
+        "bassline",
+        "UK garage-adjacent club"
+      ],
+      "key_people": [
+        "Dr Dubplate"
+      ],
+      "why_it_belongs": "London underground label operated by Dr Dubplate with tagline 'Making way for the new wave.' Rinse FM bi-monthly residency. Releases INVT, Soul Mass Transit System and others. UK bass/house crossover. Active 2024 with DJ Mag Vital Label feature and Corsica Studios event.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://ec2a.bandcamp.com/",
+        "formats": [],
+        "requirements": [
+          "Use Bandcamp contact form or reach via Instagram @ec2a_"
+        ],
+        "notes": "No verified standalone demo email found. Contact available via ec2aworldwide.com or Bandcamp form. Instagram: @ec2a_. Active 2024 releases confirmed. Label also sells vinyl and clothing at ec2aworldwide.com."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.ec2aworldwide.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ec2a.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.ec2aworldwide.com/blogs/news",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "E-Beamz",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "deep house",
+        "lo-fi house",
+        "house"
+      ],
+      "key_people": [
+        "DJ Haus",
+        "Mat Unearthed"
+      ],
+      "why_it_belongs": "UK South Coast label (est. 2016) co-founded by DJ Haus and Mat Unearthed. Launched DJ Boring's career with 'Winona'. Roster: DJ Boring, DJ Seinfeld, Hugo Massien, Settle Down, Tommy The Cat, Lake Haze. Last original releases 2023; 2024 activity was vinyl repress only. Included for historical weight; verify activity before submitting.",
+      "submission": {
+        "method": "email",
+        "email": "e.beamz.records@gmail.com",
+        "url": "https://e-beamz.bandcamp.com/",
+        "formats": [],
+        "requirements": [],
+        "notes": "Email e.beamz.records@gmail.com sourced from aggregator/community references, not directly from official site. Last confirmed original release 2023. 2024 activity was vinyl repress only. Low confidence on current activity — treat as possibly dormant and verify before submitting."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://e-beamz.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/14970",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://clone.nl/all/label/e-beamz+records",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "low"
+    },
+    {
+      "name": "2 B REAL",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "UK club",
+        "bass house",
+        "experimental house",
+        "UK garage adjacent",
+        "freaky club"
+      ],
+      "key_people": [
+        "Finn (Finn McCorry)",
+        "Local Action"
+      ],
+      "why_it_belongs": "Manchester-based experimental club label run by Finn and Local Action. Roster: Anz, Gage, Clemency, Iceboy Violet, Martyn Bootyspoon, aya. Cutting-edge UK bass-house crossover with DJ Mag coverage. Active Feb 2025 (Dismal House II: Dismal Inferno). North-West UK perspective.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://2-b-real.bandcamp.com/",
+        "formats": [],
+        "requirements": [
+          "Contact via Bandcamp form or reach Finn via social media"
+        ],
+        "notes": "No verified public demo email found. Best reached via 2-b-real.bandcamp.com contact form or Finn's social media. Deliberately small and artist-driven label — submit targeted, relevant music only."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://2-b-real.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/16786",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://djmag.com/news/finn-announces-new-tape-nine-manchester-house-jams-2-b-real",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Product London Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "house",
+        "tech house",
+        "techno"
+      ],
+      "key_people": [],
+      "why_it_belongs": "London-based label with a transparent, artist-friendly cold-submission process. Explicitly accepts all demos via web form, reviews weekly, and states all submitted demos are heard. Focused on house and techno. Active on Beatport with a growing catalog. Excellent entry-point for unknown UK producers.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://www.productlondon.com/send-us-demos/",
+        "formats": [
+          "private SoundCloud links preferred"
+        ],
+        "requirements": [
+          "Submit via web form at productlondon.com/send-us-demos/",
+          "Use private SoundCloud links — no download links",
+          "Listen to back catalogue first to confirm genre fit",
+          "Demos reviewed once per week — no reply means not a fit"
+        ],
+        "notes": "Demo submission form verified directly from productlondon.com/send-us-demos/ via WebFetch. Form requires: Name, Email, Message with track links, optional Phone. All demos heard per label statement."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.productlondon.com/send-us-demos/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/product-london-records/34542",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Hessle Audio",
+      "tier": "ELITE",
+      "access_path": "needs-warm-intro",
+      "access_path_verified": "needs-warm-intro",
+      "genre_tags": [
+        "deep house",
+        "UK bass",
+        "leftfield house",
+        "techno adjacent",
+        "experimental club"
+      ],
+      "key_people": [
+        "Ben UFO",
+        "Pearson Sound",
+        "Pangaea"
+      ],
+      "why_it_belongs": "Highly prestigious London/Leeds label (est. 2007) run by Ben UFO, Pearson Sound and Pangaea. Roster: Anz, Pangaea, Pearson Sound, Jasmín. Active with Pearson Sound 'Which Way Is Up' EP (Oct 2024). One of the most tastemaker-defining labels in UK underground dance — a career-defining placement.",
+      "submission": {
+        "method": "email",
+        "email": "info@hessleaudio.com",
+        "url": "https://music.hessleaudio.com/",
+        "formats": [],
+        "requirements": [],
+        "notes": "info@hessleaudio.com is the official A&R/general contact confirmed via hessleaudio.com contact page (now redirected to music.hessleaudio.com). Aggregator sources and community confirm this email. Extremely selective — warm intro strongly recommended despite public email. Not a realistic cold-demo target but an aspirational and career-defining label."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://music.hessleaudio.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "http://hessleaudio.com/contact",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/news/81219",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Pacific Rhythm",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "deep house",
+        "lo-fi house",
+        "organic house",
+        "electronica"
+      ],
+      "key_people": [
+        "Jesse Futerman"
+      ],
+      "why_it_belongs": "Vancouver-based label (est. 2013) with strong UK/European following and tastemaker status. Active with 10th anniversary sampler (Mar 2025) featuring LNRDCROY, Khotin, Active Surplus. Roster: D. Tiffany, Space Ghost, Flørist. Highly relevant for UK deep/lo-fi house producers seeking global placement. Investigated per slice instructions.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://pacificrhythm.org/",
+        "formats": [],
+        "requirements": [
+          "Contact via website (pacificrhythm.org) or Bandcamp contact form"
+        ],
+        "notes": "No standalone demo email found via multiple searches. Bandcamp contact form and website contact are available. NOTE: Pacific Rhythm is based in Vancouver, Canada — outside UK/Ireland geographically but investigated per slice instructions and is a strongly relevant target for UK deep-house producers."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://pacificrhythm.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://pacificrhythm.org/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/11647",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Innate Recordings",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "deep house",
+        "deep electronic",
+        "organic house"
+      ],
+      "key_people": [
+        "Owain K"
+      ],
+      "why_it_belongs": "Bristol-based deep electronic label (est. 2018) with a focused, quality-first catalog. Active with Innate 007 (Oct 2024) and upcoming Connective Zone 'Palm Palm' remaster (May 2025). Distributed by Juno. Specialises in 'deep electronic music with warmth and soul.' Excellent match for unknown UK deep house artists.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://innate-recordings.bandcamp.com/",
+        "formats": [],
+        "requirements": [
+          "Contact via Bandcamp form or Instagram @inn8media"
+        ],
+        "notes": "No standalone verified demo email found. Bandcamp contact form and website (inn8.net) are available channels. Instagram: @inn8media. Label confirmed active Oct 2024 and May 2025 releases."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://innate-recordings.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://inn8.net/record-label/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.traxsource.com/label/52680/innate",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Lost Palms",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "deep house",
+        "lo-fi house",
+        "house"
+      ],
+      "key_people": [
+        "Jimmy Asquith"
+      ],
+      "why_it_belongs": "Sub-label of Shall Not Fade (also in DB) focused on deeper, dustier house cuts. Roster: DJ Boring, Dylan Dylan, Alex Virgo, Subjoi, Justin Jay, Harrison BDP. Active through 2026. The demo form covers Lost Palms explicitly. A direct way to access the Shall Not Fade ecosystem for deeper house output.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://docs.google.com/forms/d/e/1FAIpQLScnxR3qcD4b-T2Om0iE0E124hLZYc1a_B51IM37OZUDHlvK9A/viewform?usp=sf_link",
+        "formats": [
+          "private SoundCloud playlist"
+        ],
+        "requirements": [
+          "Use the Shall Not Fade Google Form — explicitly selects Lost Palms as a target label",
+          "Provide artist name and Instagram handle",
+          "Submit private SoundCloud playlist with as many tracks as possible",
+          "List previous label release history"
+        ],
+        "notes": "Google Form retrieved from linktr.ee/shallnotfade (official Shall Not Fade Linktree). Form confirmed open Jun 2026. The form allows selection of Lost Palms as a target. Sub-label of Shall Not Fade; parent label is in DB but Lost Palms itself is not."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://linktr.ee/shallnotfade",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://docs.google.com/forms/d/e/1FAIpQLScnxR3qcD4b-T2Om0iE0E124hLZYc1a_B51IM37OZUDHlvK9A/viewform",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/15390",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Maya Records",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "house",
+        "tech house",
+        "deep house"
+      ],
+      "key_people": [
+        "Joeski"
+      ],
+      "why_it_belongs": "NYC-based house institution founded in 2000 by Joeski. Active through 2026 with confirmed releases: 'Chainless' (Jan 2026), 'Music Is Everything' (Feb 2026), 'Take You Higher' (Mar 2025), 'Spanglish' (Dec 2024), 'Aliens On Earth' (Apr 2024). Respected indie that breaks unknown artists within the New York/US underground house circuit. Two confirmed demo channels: Trackstack portal and direct email.",
+      "submission": {
+        "method": "form",
+        "email": "mayarecordings@gmail.com",
+        "url": "https://tstack.app/maya-records/send",
+        "formats": [
+          "private SoundCloud links"
+        ],
+        "requirements": [
+          "Private SoundCloud links only",
+          "Up to 5 tracks via Trackstack"
+        ],
+        "notes": "Two submission channels confirmed: Trackstack portal (official) and direct email (SoundCloud links only). Both sourced from label's own social pages and multiple music news sources."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://essentialhouse.club/2026/01/joeski-chainless-on-maya-records/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://essentialhouse.club/2026/02/joeski-music-is-everything-original-on-maya-records/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://whenwedip.com/2024/04/premiere-joeski-maya-records/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.electrobuzz.net/2025/01/joeski-spanglish-on-maya-records/667795/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Guesthouse Music",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "house",
+        "deep house",
+        "jackin house"
+      ],
+      "key_people": [
+        "DJ Mes (Jason Sutton)"
+      ],
+      "why_it_belongs": "Oakland, CA-based underground house label founded 2004. One of the US West Coast's premier independently distributed house imprints with 300+ vinyl/digital releases and 200+ artist roster. Released 'Best of 2024' and 'Best of 2025' compilations confirming active status. Anniversary party April 2025. DJ Mes is widely credited with keeping West Coast jackin' house alive.",
+      "submission": {
+        "method": "email",
+        "email": "info@guesthousemusic.com",
+        "url": null,
+        "formats": [
+          "private SoundCloud links"
+        ],
+        "requirements": [
+          "Private SoundCloud links only"
+        ],
+        "notes": "Email sourced from labelsbase.net profile for Guesthouse Music. Consistent with label's Bandcamp contact option. Active 2025 confirmed via anniversary party April 2025 and Best of 2025 compilation."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://labelsbase.net/guesthouse-music",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.guesthousemusic.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/guesthouse-music/3189",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Trax Records",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "house",
+        "deep house",
+        "classic house",
+        "jackin house"
+      ],
+      "key_people": [
+        "Screamin' Rachael Cain",
+        "Larry Sherman"
+      ],
+      "why_it_belongs": "The original home of house music, Chicago, est. 1985. Active 40th anniversary in 2025 with new vinyl (RISING AGAIN, 500-copy limited edition) and digital releases, pairing legends (Frankie Knuckles, Marshall Jefferson) with contemporary artists (Hiroko Yamamura, Analog 87, Jacques x Gregory). Accepting demos via both LabelRadar and direct email. A release on Trax is one of the most historically significant stamps a US house producer can earn.",
+      "submission": {
+        "method": "form",
+        "email": "traxrecordschicago@gmail.com",
+        "url": "https://www.labelradar.com/labels/TraxRecords/portal",
+        "formats": [
+          "SoundCloud links",
+          "streaming links"
+        ],
+        "requirements": [
+          "Submit via LabelRadar portal or email",
+          "Streaming/SoundCloud links preferred"
+        ],
+        "notes": "Email confirmed from official traxrecords.com/contact-us page under DEMOS CONTACT section. LabelRadar portal confirmed at labelradar.com/labels/TraxRecords/portal. Trackstack also listed at tstack.app/trax-records per Instagram bio."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.traxrecords.com/contact-us",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.labelradar.com/labels/TraxRecords/portal",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://edmidentity.com/2025/06/22/trax-records-the-40th-anniversary-collection/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/news/82685",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "DJ International Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "house",
+        "classic house",
+        "deep house"
+      ],
+      "key_people": [
+        "Rocky Jones"
+      ],
+      "why_it_belongs": "Chicago's legendary founding house label, est. 1985 — home to Frankie Knuckles, Steve Silk Hurley, Farley Jackmaster Funk, Marshall Jefferson. Relaunched 2021 under Last Man Music with Rocky Jones. Actively releasing with catalog on Beatport and historical significance second only to Trax Records in the Chicago house pantheon. A release here carries enormous cultural weight and credibility.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://tstack.app/djinternationalrecords",
+        "formats": [],
+        "requirements": [
+          "Submit via Trackstack portal"
+        ],
+        "notes": "Trackstack portal URL sourced from music industry contact lists and confirmed via online references. Email not publicly confirmed. Relaunched 2021 per DJ Mag. Releases on Beatport at /label/dj-international-records/88915."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://djmag.com/news/legendary-chicago-house-label-dj-international-records-relaunches",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/dj-international-records/88915",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "My Favorite Robot Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "tech house",
+        "deep house",
+        "electronica"
+      ],
+      "key_people": [
+        "Jared Simms",
+        "Voytek Korab",
+        "James Teej"
+      ],
+      "why_it_belongs": "Toronto, Canada-based tech house / deep house imprint founded 2008 by duo My Favorite Robot (Jared Simms + Voytek Korab). Active 2024-2025 on Beatport with 208 tech house releases, 252 deep house releases. One of Canada's leading underground tech-house imprints with real credibility in North American and European markets.",
+      "submission": {
+        "method": "email",
+        "email": "greaseme@myfavoriterobotrecords.com",
+        "url": null,
+        "formats": [
+          "private SoundCloud links"
+        ],
+        "requirements": [
+          "Private SoundCloud links only"
+        ],
+        "notes": "Demo email and requirement sourced from labelsbase.net/my-favorite-robot-records. Active Beatport releases through 2025 confirmed."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://labelsbase.net/my-favorite-robot-records",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/my-favorite-robot-records/12460",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Interstellar Recordings (Insomniac)",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "melodic house",
+        "progressive house",
+        "deep house",
+        "melodic techno"
+      ],
+      "key_people": [],
+      "why_it_belongs": "Los Angeles-based imprint under Insomniac Music Group, launched March 2024 as a sanctuary for melodic house, progressive house, deep house and melodic techno. First release by Jeremy Olander. Active 2024-2026 on Beatport with Marsh, Alex Kennon, Just Her, Eynka, Layla Benitez. Insomniac's scale means excellent distribution, sync, and event placement. The Label Engine form is a confirmed open submission portal.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://labelinterstellarrecords.label-engine.com/demos",
+        "formats": [
+          "MP3"
+        ],
+        "requirements": [
+          "Up to 5 tracks via Label Engine form",
+          "Artist name, email, and track titles required",
+          "Optional social links and 500-char artist message"
+        ],
+        "notes": "Label Engine form confirmed live and functional. Insomniac also has parent LabelRadar portal (labelradar.com/labels/insomniac/portal). Launched March 2024. Also distinct from older 'Interstellar Records' label on Beatport ID 80354."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://labelinterstellarrecords.label-engine.com/demos",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.insomniacmusicgroup.com/label/interstellar/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://freshmusicfreaks.com/exploring-new-horizons-insomniac-records-launches-interstellar-label-for-melodic-house-and-beyond/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/interstellar-recordings-insomniac/120105",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Wolf + Lamb Records",
+      "tier": "A",
+      "access_path": "needs-warm-intro",
+      "access_path_verified": "needs-warm-intro",
+      "genre_tags": [
+        "deep house",
+        "house",
+        "indie dance",
+        "nu-disco"
+      ],
+      "key_people": [
+        "Zev Eisenberg (Wolf)",
+        "Gadi Mizrahi (Lamb / Baby Prince)"
+      ],
+      "why_it_belongs": "Brooklyn, NY label founded ~2005. Home to Lorenzo Dada, No Regular Play, Nick Monaco, PillowTalk. Active through early 2024 with release 'Lost In This Moment' (Aug 2023) and re-release on Bleep (Mar 2024). The Brooklyn underground deep house sound they pioneered remains highly influential and is a clear trajectory-changer. No open demo portal — relationship-driven access but worth including for its brand power.",
+      "submission": {
+        "method": "dm",
+        "email": null,
+        "url": "https://wolflambrecords.bandcamp.com/",
+        "formats": [],
+        "requirements": [
+          "Contact via Bandcamp 'Contact Wolf + Lamb Records' email link",
+          "No public demo process — DM or industry intro preferred"
+        ],
+        "notes": "No verified public demo email or portal found. Booking contact (not demos): inbal@prismaartists.com. Bandcamp contact form is the best cold approach. Last confirmed release Aug 2023 / Bleep reissue Mar 2024."
+      },
+      "sub_labels": [
+        "Double Standard Records",
+        "Crew Love Records"
+      ],
+      "sub_label_multiplier": 3,
+      "sources": [
+        {
+          "url": "https://wolflambrecords.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://bleep.com/label/2709-wolf-lamb-records",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/1763",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Double Standard Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "deep house",
+        "house",
+        "nu-disco"
+      ],
+      "key_people": [
+        "Gadi Mizrahi (Baby Prince)"
+      ],
+      "why_it_belongs": "Brooklyn/NYC deep house label founded 2010 by Gadi Mizrahi (Baby Prince), off-shoot of Wolf + Lamb. Houses the Wolf + Lamb movement's funkier, deep-house-forward output, with artists like Soul Clap, Greg Paulus and Edwin Esco. Active with Bandcamp presence and Beatport catalog. Part of the Crew Love coalition. NYC deep house touchstone label.",
+      "submission": {
+        "method": "email",
+        "email": null,
+        "url": "https://doublestandardrecords.bandcamp.com/",
+        "formats": [],
+        "requirements": [
+          "Contact via Bandcamp 'Send an email to Double Standard Records' link"
+        ],
+        "notes": "No standalone public demo email found. Bandcamp contact confirmed as the recommended cold approach. Parent label Wolf + Lamb shares contact ecosystem. Low confidence on active response rate — small boutique operation."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://doublestandardrecords.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/13148",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "low"
+    },
+    {
+      "name": "Crew Love Records",
+      "tier": "B",
+      "access_path": "needs-warm-intro",
+      "access_path_verified": "needs-warm-intro",
+      "genre_tags": [
+        "deep house",
+        "house",
+        "indie dance",
+        "nu-disco"
+      ],
+      "key_people": [
+        "Wolf + Lamb",
+        "Soul Clap",
+        "Baby Prince (Gadi Mizrahi)"
+      ],
+      "why_it_belongs": "Brooklyn-based collaborative label from Wolf + Lamb, Soul Clap, and Double Standard. Active 2022-2026 on Beatport spanning deep house, house, indie dance, nu-disco. Artists: No Regular Play, PillowTalk, Nick Monaco, Life on Planets, Navid Izadi, Slow Hands. A curated, quality-first imprint that is part of the NYC deep house ecosystem. Access is through the Wolf + Lamb / Soul Clap artist network.",
+      "submission": {
+        "method": "dm",
+        "email": null,
+        "url": "https://crewlove.bandcamp.com/",
+        "formats": [],
+        "requirements": [
+          "No public demo channel — target via affiliated labels (Soul Clap: records@soulclap.us) or DM artists on social media"
+        ],
+        "notes": "No standalone public demo submission channel found. Joint venture of Wolf + Lamb, Soul Clap, and Double Standard. Active releases confirmed 2026 on Beatport. Best approach: submit to Soul Clap Records first."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://ra.co/labels/13148",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://crewlove.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/crew-love-records/53693",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "low"
+    },
+    {
+      "name": "Turbo Recordings",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "tech house",
+        "house",
+        "indie dance",
+        "electronica"
+      ],
+      "key_people": [
+        "Tiga Sontag"
+      ],
+      "why_it_belongs": "Montreal, Canada imprint founded 1998 by Tiga, named Beatport Label of the Month August 2024. Active through 2024-2025 with releases: Dense & Pika 'It House' (Nov 2024), Extrawelt 'Grindmaster' (Dec 2024), Kenny Glasgow (Jan 2025). A prestigious Canadian label with real industry clout across tech house, indie dance, and experimental electronic music. Confirmed public demo email.",
+      "submission": {
+        "method": "email",
+        "email": "demos@turborecordings.com",
+        "url": null,
+        "formats": [
+          "private SoundCloud links"
+        ],
+        "requirements": [
+          "Private SoundCloud links only"
+        ],
+        "notes": "Demo email sourced from labelsbase.net/turbo-recordings. Genre listed as 'Techno' on labelsbase but actual Beatport catalog confirms active house, tech house, indie dance releases in 2024-2025. Lean toward house/tech house releases when submitting."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://labelsbase.net/turbo-recordings",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatportal.com/articles/582055-label-of-the-month-turbo-recordings",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/turbo-recordings/507",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Phunk Junk Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "house",
+        "tech house",
+        "deep house"
+      ],
+      "key_people": [
+        "SALADIN (Lary Saladin)"
+      ],
+      "why_it_belongs": "Chicago-based label founded 2012 by producer SALADIN. Active 2024-2025 with releases including 'Get On The Floor' (Jun 2024, Tech House) and 'Dance With Me' (Jan 2025, Bass House) on Beatport. A platform rooted in the birthplace of house music, Chicago, with open and confirmed demo submission. A real opportunity for an unknown artist to get heard by a home-grown Chicago label.",
+      "submission": {
+        "method": "form",
+        "email": "phunkjunkinfo@gmail.com",
+        "url": "https://phunkjunk.label-engine.com/demos",
+        "formats": [
+          "MP3"
+        ],
+        "requirements": [
+          "Up to 5 tracks via Label Engine form",
+          "Artist name, email, and track titles required"
+        ],
+        "notes": "Label Engine form confirmed live. Email sourced from labelsbase.net and official website phunkjunk.com. Active 2024-2025 releases confirmed on Beatport."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://labelsbase.net/phunkjunk",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://phunkjunk.label-engine.com/demos",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/phunk-junk-records/25736",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Rawhouse Records Chicago",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "house",
+        "deep house",
+        "chicago house",
+        "afro house",
+        "nu-disco"
+      ],
+      "key_people": [
+        "Allen Wright Jr. (DJ Al Groove)"
+      ],
+      "why_it_belongs": "Chicago house label founded 2005 by Allen Wright Jr. Specializes in Chicago House, Deep House, Disco House, Nu Disco, Afro-House. Active through 2025 with confirmed releases: Jeanette Thomas 'Good Vibrations' (March 2025), MISS. TC release (July 2024). A genuine Chicago underground imprint with multiple sub-styles and Traxsource/Beatport presence. A grassroots label that can launch an unknown artist into the Chicago house scene.",
+      "submission": {
+        "method": "dm",
+        "email": null,
+        "url": "https://rawhouserecords.bandcamp.com/",
+        "formats": [],
+        "requirements": [
+          "Contact via Bandcamp 'Contact Rawhouse Records Chicago' email link"
+        ],
+        "notes": "No public demo email found. Best approach is Bandcamp contact form. Active 2025 releases confirmed. Facebook and SoundCloud also active. Traxsource label page: traxsource.com/label/68303/rawhouse-records-chicago."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://essentialhouse.club/2025/03/jeanette-thomas-good-vibrations-on-rawhouse-records-chicago/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://rawhouserecords.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.traxsource.com/label/68303/rawhouse-records-chicago",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Soul Candi Records",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "afro house",
+        "deep house",
+        "tech house",
+        "afro tech"
+      ],
+      "key_people": [],
+      "why_it_belongs": "South Africa's longest-running dedicated house imprint (est. late 1990s), consistently releasing deep house, afro house and afro tech. Active releases confirmed through 2024 and 2025 (multiple Bandcamp releases: 'The Chronic Effect' Nov 2025, 'House Archives Vol.1' Sept 2025). Open public demo submission form on official website with clear requirements.",
+      "submission": {
+        "method": "form",
+        "email": "info@soulcandi.co.za",
+        "url": "https://soulcandi.co.za/submit-a-demo/",
+        "formats": [
+          "MP3 at 320kbps"
+        ],
+        "requirements": [
+          "Original unreleased material only",
+          "No remixes or bootlegs",
+          "MP3 320kbps preferred, max 20MB per file",
+          "Upload via official website form only (no SoundCloud or Dropbox links)",
+          "Filename must include artist name and track title"
+        ],
+        "notes": "No response within 8 weeks means not proceeding. WhatsApp contact: +27 82 048 3725."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://soulcandi.co.za/submit-a-demo/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/5518",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://soulcandi.co.za/all-releases/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Kunye Records",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "afro house",
+        "afro tech"
+      ],
+      "key_people": [
+        "Shimza"
+      ],
+      "why_it_belongs": "Founded 2020 by Shimza (South Africa). Beatport Hype Label of the Month October 2024. Bridges South African emerging producers to global stages. Roster includes Thakzin, Blanka Mazimela, Darque, with remixes by Louie Vega, Mele, Rodriguez Jr. Has official LabelRadar demo portal and a general contact email.",
+      "submission": {
+        "method": "form",
+        "email": "info@kunyerecords.com",
+        "url": "https://www.labelradar.com/labels/kunye/portal",
+        "formats": [],
+        "requirements": [
+          "Afro House / Afro Tech only"
+        ],
+        "notes": "Primary submission channel is LabelRadar portal. General contact: info@kunyerecords.com."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://kunyerecords.co.za/about-us/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatportal.com/articles/676618-hype-label-of-the-month-kunye-records",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.labelradar.com/labels/kunye/portal",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Make The Girls Dance Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "afro house",
+        "tribal house",
+        "house",
+        "latin"
+      ],
+      "key_people": [
+        "HUGEL",
+        "Juany Bravo"
+      ],
+      "why_it_belongs": "Founded 2021 by HUGEL and Juany Bravo. Ranked #2 top-selling Afro House label on Beatport in 2024. Rooted in Tribal and Afro House, Latin grooves, and club culture. Trackstack demo box URL publicly posted on Threads by label manager Juany Bravo. Also has a LabelRadar portal.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://tstack.app/makethegirlsdance",
+        "formats": [],
+        "requirements": [],
+        "notes": "LabelRadar portal also available: https://www.labelradar.com/labels/makethegirlsdancerecords/portal"
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.threads.com/@juanybravo/post/C8bQfZVPUgr",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.labelradar.com/labels/makethegirlsdancerecords/portal",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatportal.com/articles/780016-afro-house-the-top-selling-tracks-artists-and-labels-of-2024",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Dawn Patrol Records",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "afro house",
+        "melodic house",
+        "organic house"
+      ],
+      "key_people": [
+        "Maz (BR)",
+        "Antdot"
+      ],
+      "why_it_belongs": "Founded 2020 by Brazilian duo Maz and Antdot. Top-5 best-selling Afro House label on Beatport in 2023 and 2024. 'Povoada' reached #1 on Beatport Afro House chart. Active release 'Emoriô' in October 2024. Official contact form on website. Label explicitly states preferred genres via Instagram @dawnpatrol.music.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://www.dawnpatrolmusic.com/contact",
+        "formats": [],
+        "requirements": [
+          "Melodic house, organic house, or melodic techno preferred",
+          "Label is NOT looking for pure afro house singles"
+        ],
+        "notes": "Submit via contact form at dawnpatrolmusic.com/contact. See Instagram @dawnpatrol.music for detailed submission guidelines."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.dawnpatrolmusic.com/contact",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://tuneinmag.com/2024/10/05/brazilian-rhythms-and-afro-house-merge-in-maz-antdot-jessica-gaspars-new-track-emorio/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.traxsource.com/label/54577/dawn-patrol-records",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://label-engine.com/news/dawn-patrol-records/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Afrocentric Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "afro house",
+        "deep house"
+      ],
+      "key_people": [
+        "Cory Centric"
+      ],
+      "why_it_belongs": "Founded 2015 by Cory Centric, dedicated exclusively to high-quality Afro House from across the African continent. Active 2024 releases confirmed (RAWNIK 'AMAZWI', Kates Le Cafe). Demo email published directly on the label's official contact page.",
+      "submission": {
+        "method": "email",
+        "email": "cory@afrocentricrecords.com",
+        "url": "https://www.afrocentricrecords.com/contact/",
+        "formats": [
+          "streaming links (MP3)"
+        ],
+        "requirements": [
+          "Send private streaming links (MP3)",
+          "Include contact details in email body",
+          "Keep submission short, best tracks first"
+        ],
+        "notes": "Label is based in Dubai (UAE) but entirely dedicated to African continent artists and sounds."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://afrocentricrecords.com/contact/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://afrocentricrecords.com/about/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/afrocentric-records/67263",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Cafe De Anatolia",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "organic house",
+        "afro house",
+        "ethnic deep house",
+        "world music"
+      ],
+      "key_people": [
+        "Monika Ilieva",
+        "Rialians On Earth (Nikola Iliev)",
+        "Billy Esteban (Zoran Iliev)"
+      ],
+      "why_it_belongs": "Founded 2017, North Macedonia. #1 best-selling label and artist in Organic/Ethnic House on Beatport in 2024. Nominated IMS Ibiza Beatport Hype Label of Year 2024. 10,000+ track catalog with 5,000+ artists across 50+ sub-brands including Afro House. Massive breakout vehicle for unknown artists. LabelRadar portal and email both verified.",
+      "submission": {
+        "method": "form",
+        "email": "demos@cafe-de-anatolia.com",
+        "url": "https://www.labelradar.com/labels/CafeDeAnatolia/portal",
+        "formats": [],
+        "requirements": [
+          "Organic house / ethnic deep house / afro house / world music genres only"
+        ],
+        "notes": "Also contactable via demos.cafedeanatolia@gmail.com (verified via official Facebook post). LabelRadar portal is the primary channel."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.labelradar.com/labels/CafeDeAnatolia/portal",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://cafe-de-anatolia.com/about",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://m.facebook.com/CafeDeAnatolia/photos/a.298848046902916/2270135376440830/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Nulu Music",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "afro house",
+        "afro tech",
+        "deep house"
+      ],
+      "key_people": [
+        "Anane Vega"
+      ],
+      "why_it_belongs": "Founded 2009 in New York by Anane Vega, pioneer of Afro House and Afro Tech. 'You're So Sweet' remix ranked #1 on Traxsource Afro House. Active 2024-2025 releases confirmed (Dec 2024, Nov 2024). Also runs the NULU Movement Radio Show on KayaFM (South Africa). Demo email verified on official contact page.",
+      "submission": {
+        "method": "email",
+        "email": "demo@nulumusic.com",
+        "url": "https://www.nulumusic.com/contact/",
+        "formats": [],
+        "requirements": [
+          "Afro house and afro tech only"
+        ],
+        "notes": "Booking: booking@nulumusic.com. Sub-label Nulu Electronic also active on Beatport."
+      },
+      "sub_labels": [
+        "Nulu Electronic"
+      ],
+      "sub_label_multiplier": 2,
+      "sources": [
+        {
+          "url": "https://www.nulumusic.com/contact/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/nulu-music/12789/releases",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://news.traxsource.com/articles/2580/label-spotlight-022-nulu",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "CamelMusic Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "tech house",
+        "house",
+        "minimal"
+      ],
+      "key_people": [
+        "JayCamel"
+      ],
+      "why_it_belongs": "Founded 2012, Mendoza, Argentina. Independent Argentine underground label dedicated to house, tech house and minimal. Active 2025 release confirmed (Jan 2025 on Beatport, May 2026 on LabelsBase). Tally.so demo submission form personally verified as live and functioning.",
+      "submission": {
+        "method": "form",
+        "email": "camelrecordsgroup@gmail.com",
+        "url": "https://tally.so/r/68rO1e",
+        "formats": [
+          "SoundCloud private links"
+        ],
+        "requirements": [
+          "Tech house and house genres only",
+          "Submit private SoundCloud links",
+          "Include artist name and email address in the form"
+        ],
+        "notes": "Tally.so demo form verified live on 2026-06-01. Also reachable at camelrecordsgroup@gmail.com."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://tally.so/r/68rO1e",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://labelsbase.net/camelmusic-records",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/camelmusic-records/26750",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Kazukuta Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "afro house",
+        "afro tech"
+      ],
+      "key_people": [
+        "DJEFF (Djeff Afrozila)"
+      ],
+      "why_it_belongs": "Founded 2011, Angola — the first electronic music label born in Angola. 266 Afro House tracks on Beatport. Active releases Dec 2024 and Jan 2025 confirmed. DJEFF has released on Spinnin' Deep and Diplo's Higher Ground, giving the label international credibility. Email published on official website kazukuta-records.com.",
+      "submission": {
+        "method": "email",
+        "email": "kazukutarecords@gmail.com",
+        "url": "https://www.kazukuta-records.com/",
+        "formats": [],
+        "requirements": [
+          "Afro house only"
+        ],
+        "notes": "No formal submission form; contact via email. Also reachable via Instagram @kazukutarecords and Facebook @KazukutaRecords."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.kazukuta-records.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/kazukuta-records/70568",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://electronicgroove.com/interview-djeff/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Timeless Moment",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "progressive house",
+        "melodic house",
+        "melodic techno"
+      ],
+      "key_people": [
+        "Morttagua"
+      ],
+      "why_it_belongs": "Founded 2016, Brazil. Premier melodic/progressive house label from Brazil with global recognition. 'Timeless 2025' compilation released in 2025. 881 Progressive House releases on Beatport. Support from Solomun, Black Coffee, Pete Tong (BBC Radio 1), Hernan Cattaneo. Demo email confirmed via LabelsBase and label website.",
+      "submission": {
+        "method": "email",
+        "email": "demos@timelessmoment.com.br",
+        "url": null,
+        "formats": [
+          "SoundCloud private links with download enabled"
+        ],
+        "requirements": [
+          "SoundCloud private links only (with download enabled)",
+          "Progressive house / melodic house / melodic techno only"
+        ],
+        "notes": "License inquiries: kelly@timelessmoment.com.br. Demo submissions: demos@timelessmoment.com.br."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://labelsbase.net/timelessmoment",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/timeless-moment/59941",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/15220",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Area Verde",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "progressive house",
+        "melodic house",
+        "melodic techno"
+      ],
+      "key_people": [],
+      "why_it_belongs": "Founded 2019, Brazil (IAMT Music Group). One of 5 labels in Beatport Hype accelerator program. Active 2024-2025 with releases including 'Best Melodic & Progressive House 2024' compilation on Beatport. 213 Progressive House + 92 Melodic House & Techno releases on Beatport. Runs open producer competitions via LabelRadar. Clear public demo email with requirements.",
+      "submission": {
+        "method": "email",
+        "email": "demo@area-verde.com",
+        "url": "https://www.labelradar.com/opportunities/areaverdeproducercompetition/portal",
+        "formats": [
+          "SoundCloud secret links"
+        ],
+        "requirements": [
+          "SoundCloud secret links only",
+          "All tracks in one secret SoundCloud playlist",
+          "Maximum 5 tracks",
+          "Include text in email body (not just a link)"
+        ],
+        "notes": "Also has periodic Beatport Hype producer competitions via LabelRadar portal."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://labelsbase.net/areaverde",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatportal.com/articles/294210-area-verde-x-beatport-hype-launch-producer-competition",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/area-verde/79254",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Nube Music Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "progressive house",
+        "deep house",
+        "house"
+      ],
+      "key_people": [],
+      "why_it_belongs": "Founded 2016, Argentina. Partners with Proton Label network. Active December 2024 release (pre-order 'Game Over' EP) confirmed on Beatport. Focuses on progressive house, deep house, and deep techno from Argentine and international artists. Demo email listed on LabelsBase.",
+      "submission": {
+        "method": "email",
+        "email": "data.nubemusic@gmail.com",
+        "url": null,
+        "formats": [
+          "SoundCloud private links"
+        ],
+        "requirements": [
+          "SoundCloud private links only",
+          "Progressive house / deep house genres"
+        ],
+        "notes": "General and demo contact: data.nubemusic@gmail.com. Also reachable via Facebook @Nubemusicrecords."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://labelsbase.net/nube-music-records",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/nube-music-records/55979",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.protonradio.com/labels/1157/nube-music-records/releases",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Under Pressure Records South Africa",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "afro house",
+        "afro tech",
+        "deep house"
+      ],
+      "key_people": [
+        "Soul Varti (Thabo Matebesi)"
+      ],
+      "why_it_belongs": "Founded 2012 by Soul Varti, influential Afro House label from South Africa. Active releases confirmed through 2025 (UPR Vaults Locks Unchained Vol. III Oct 2025, 'Christina' Aug 2025). Features South African producers KingTouch, Smallistic, Deep Sen, Hypaphonik, DJ Tears PLK. Contact email cited across multiple licensing and submission reference sources.",
+      "submission": {
+        "method": "email",
+        "email": "soulvarti@gmail.com",
+        "url": null,
+        "formats": [],
+        "requirements": [
+          "Afro house and adjacent deep house only"
+        ],
+        "notes": "Also reachable via Instagram @underpressure_records and Twitter @UPR_SA. Contact: +27 72 644 6316."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.traxsource.com/label/31388/under-pressure-records-south-africa",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/under-pressure-records-south-africa/29547",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://essentialhouse.club/2025/10/va-upr-vaults-locks-unchained-vol-iii-on-under-pressure-records-south-africa/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Midnight Riot Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "nu-disco",
+        "disco",
+        "balearic",
+        "house",
+        "boogie",
+        "afro house"
+      ],
+      "key_people": [
+        "Yam Who? (founder / A&R)"
+      ],
+      "why_it_belongs": "London's premier nu-disco/balearic imprint, run by Yam Who? since 2012. Consistently in Traxsource top-200 and lands numerous compilations per year. Actively released throughout 2024-2025 ('The Finest 2024', 'Set Me Free', 'Balearic Headspace Vol 7'). Known for breaking unknown disco and house producers — ideal stepping stone for the slice.",
+      "submission": {
+        "method": "email",
+        "email": "yamster70@hotmail.com",
+        "url": null,
+        "formats": [
+          "private SoundCloud link"
+        ],
+        "requirements": [
+          "Private SoundCloud links only",
+          "Yam Who personally listens to every demo"
+        ],
+        "notes": "Same address used for A&R, bookings, and general contact. Hotmail address has been publicly listed on labelsbase and confirmed on the label's own site as the single demo channel."
+      },
+      "sub_labels": [
+        "ISM Records"
+      ],
+      "sub_label_multiplier": 2,
+      "sources": [
+        {
+          "url": "https://labelsbase.net/midnight-riot",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.midnightriotrecords.co.uk/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://midnightriotrecords.bandcamp.com/album/various-the-finest-2024",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Sol Selectas",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "organic house",
+        "tribal house",
+        "deep house",
+        "downtempo",
+        "afro"
+      ],
+      "key_people": [
+        "Sabo (founder / A&R)",
+        "Helia Jamali (co-runner)"
+      ],
+      "why_it_belongs": "NYC-founded, LA-based organic-house powerhouse run by Sabo since 2006. Home of the 'Summer Sol' and 'Global Entry' compilation series — key tastemaker releases in the organic/tribal house scene. Active in 2025 ('Pura Sol', 'Summer Sol X'). Sabo explicitly stated he listens personally to every SoundCloud DM submission.",
+      "submission": {
+        "method": "dm",
+        "email": null,
+        "url": "https://soundcloud.com/solselectas",
+        "formats": [
+          "private SoundCloud link"
+        ],
+        "requirements": [
+          "Send private SoundCloud links via SoundCloud DM only",
+          "Send only a few best tracks",
+          "Include bio/concept background",
+          "Tracks should be mastered, even basic home master",
+          "Replies only if interested — be patient"
+        ],
+        "notes": "No public demo email. SoundCloud DM is the sole confirmed submission channel, per Sabo interview in Progressive Astronaut and official contact page."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://progressiveastronaut.com/feature-sabo/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "http://www.solselectas.com/contact",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://solselectas.bandcamp.com/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Maccabi House",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "melodic house",
+        "deep house",
+        "psychedelic house",
+        "tech house"
+      ],
+      "key_people": [
+        "Adam Ten (founder)",
+        "Mita Gami (co-founder)"
+      ],
+      "why_it_belongs": "Tel Aviv imprint run by Adam Ten, one of the most internationally hyped melodic/psychedelic house acts of 2024-2025 (Coachella, Insomniac shows). Roster includes Luke Alessi, Rafael, and others. Active releases throughout 2024-2025 ('Like This' March 2025, 'All Stars 007' March 2025). Open Trackstack portal confirms they accept cold demos. Music played by Black Coffee, Solomun, FISHER.",
+      "submission": {
+        "method": "form",
+        "email": "maccabihouse@gmail.com",
+        "url": "https://tstack.app/maccabihouse",
+        "formats": [],
+        "requirements": [
+          "Primary channel: Trackstack portal at tstack.app/maccabihouse",
+          "Alternative: maccabihouse@gmail.com"
+        ],
+        "notes": "Trackstack portal confirmed via multiple sources. Gmail address referenced alongside Trackstack as secondary contact."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://maccabihouse.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://dancingastronaut.com/2024/04/adam-ten-and-mita-gami-bring-maccabi-house-to-coachella/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://edmidentity.com/2025/03/30/maccabi-house-all-stars-007/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "STEREOHYPE",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "tech house",
+        "house"
+      ],
+      "key_people": [
+        "James Hype (founder)"
+      ],
+      "why_it_belongs": "James Hype's own artist label, founded 2019. One of the most-streamed tech house acts globally. Active releases in 2024-2025 (e.g. 'Behaviour' feat. A.D.O.R. 2025, 'More Of The Same' with Tita Lau 2025). Confirmed open LabelRadar demo portal — very accessible for unknown producers seeking a high-profile tech-house co-sign.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://www.labelradar.com/labels/stereohype/portal",
+        "formats": [],
+        "requirements": [
+          "Submit via LabelRadar portal",
+          "Label also historically accepted direct email demos per Instagram post (June 2024) but email not confirmed — use LabelRadar as primary"
+        ],
+        "notes": "LabelRadar portal is the official confirmed channel. Instagram post C8C1gQ-MGLi teased email demos in June 2024 but exact address unconfirmed publicly. LabelRadar rated high confidence."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.labelradar.com/labels/stereohype/portal",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://stereohype.global/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.instagram.com/stereohypeglobal/p/C8C1gQ-MGLi/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Slow Life",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "deep house",
+        "progressive house",
+        "tech house",
+        "organic house"
+      ],
+      "key_people": [
+        "S. Moreira",
+        "Cecilio",
+        "Laurine",
+        "Santi Uribe / Indi Zone"
+      ],
+      "why_it_belongs": "Berlin-based collective-label active since 2011, consistently releasing quality deep/progressive house on vinyl. Catalog now past SL041 (April 2025). Niche underground reach: distributed via Redeye, Yoyaku, Newtone. Accepts cold demos purely via SoundCloud DM — accessible entry point for unknown artists with a deep/progressive sound.",
+      "submission": {
+        "method": "dm",
+        "email": "info@slowlifemusic.org",
+        "url": "https://soundcloud.com/slow-life",
+        "formats": [
+          "private SoundCloud link"
+        ],
+        "requirements": [
+          "Demos only via SoundCloud DM (stated on their social media)",
+          "info@slowlifemusic.org for general inquiries"
+        ],
+        "notes": "Multiple sources (labelsbase, RA, Bandcamp community) confirm 'demos only via SoundCloud DM'. Official website slowlifemusic.org confirms info email."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://soundcloud.com/slow-life",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.slowlifemusic.org/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/10437",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Phantasy Sound",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "house",
+        "indie dance",
+        "electronica",
+        "disco",
+        "psychedelic"
+      ],
+      "key_people": [
+        "Erol Alkan (founder)"
+      ],
+      "why_it_belongs": "London label run by DJ legend Erol Alkan since 2007. UK's most artistically ambitious house-adjacent imprint; roster includes Roman Flügel, Factory Floor, Tom Rowlands. Releases very active in 2024-2025 (Roman Flügel 'No Solutions EP' Nov 2024, Factory Floor PH153 Jan 2025). Official About Us page links directly to demos@phantasysound.co.uk — genuine cold-demo channel.",
+      "submission": {
+        "method": "email",
+        "email": "demos@phantasysound.co.uk",
+        "url": null,
+        "formats": [],
+        "requirements": [
+          "Email demos to above address",
+          "General/licensing inquiries: phantasyhq@gmail.com"
+        ],
+        "notes": "Email confirmed directly from official About Us page at shop.phantasysound.co.uk/pages/about-us. The page includes a 'click here' link resolving to this address."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://shop.phantasysound.co.uk/pages/about-us",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://909originals.com/2024/04/30/roman-flugel-releases-ep-on-erol-alkans-label-phantasy/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/5277",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Bastard Jazz Recordings",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "disco",
+        "house",
+        "nu-disco",
+        "dub",
+        "afro",
+        "downtempo"
+      ],
+      "key_people": [
+        "Captain Planet (label head / A&R)"
+      ],
+      "why_it_belongs": "Brooklyn-based label since 2001, now one of the most respected independent disco/house imprints in the US. 143+ nu-disco catalog entries on Beatport. Active releases throughout 2025 (Captain Planet & Tony Allen 'Tony's House' Aug 2025, Eliot Lipp EP May 2025, Peter Matson Jan 2025). Artists like Lord Echo, Robohands, Illa J. Confirmed cold-demo-friendly via general contact email. Genre overlap strong for disco/Afro/house slice.",
+      "submission": {
+        "method": "email",
+        "email": "info@bastardjazz.com",
+        "url": null,
+        "formats": [],
+        "requirements": [
+          "General inquiry email also used for demo submissions"
+        ],
+        "notes": "info@bastardjazz.com confirmed on official About page bastardjazz.com/bastard-jazz/. No dedicated demos@ address published; use info@ with clear subject line per industry standard."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://bastardjazz.com/bastard-jazz/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://bastardjazz.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://bastardjazz.com/category/new-releases/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "FHUO Records",
+      "tier": "B",
+      "access_path": "relationship-only",
+      "access_path_verified": "relationship-only",
+      "genre_tags": [
+        "deep house",
+        "house",
+        "electronica",
+        "indie dance"
+      ],
+      "key_people": [
+        "Folamour (founder)"
+      ],
+      "why_it_belongs": "London imprint by Folamour — one of the most distinctive deep house artists of the era. Active 2024-2025 releases including 'Oyabun', 'Chapeau rouge', 'Ordinary Drugs', and the album 'Movement Therapy' (2025). Artists like Kimosabe, Madcat, Parviz on roster. Folamour's taste-making profile means a release here carries significant weight in the European deep house community.",
+      "submission": {
+        "method": "none-public",
+        "email": null,
+        "url": null,
+        "formats": [],
+        "requirements": [
+          "No public demo channel",
+          "Label's own SoundCloud states 'don't write us at: forheavenuseonly@gmail.com' — they do not accept unsolicited demos",
+          "Relationship/referral only"
+        ],
+        "notes": "Included for CRM visibility (warm-intro target). Do NOT cold-email. The address forheavenuseonly@gmail.com is intentionally discouraged. Only approach through artist connections."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://soundcloud.com/forheavenuseonly-records",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://fhuo.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/18612",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Pinchy & Friends",
+      "tier": "B",
+      "access_path": "needs-warm-intro",
+      "access_path_verified": "needs-warm-intro",
+      "genre_tags": [
+        "deep house",
+        "downtempo",
+        "leftfield",
+        "disco",
+        "world music"
+      ],
+      "key_people": [
+        "Pinchy (founder, LA)"
+      ],
+      "why_it_belongs": "LA-based vinyl-focused imprint, catalog PF001–PF021+. Releases eclectic leftfield deep house, Afro-influenced, and disco-house. Artists include Alex Kassian, Exotic Gardens, Dreems. Still actively releasing (PF020 Coyote 'Nyabinghi LP', PF021 'Afternoon Dubs' pre-order 2025). Distributed by Serendeepity and respected in the underground. No cold-demo email confirmed publicly.",
+      "submission": {
+        "method": "unknown",
+        "email": null,
+        "url": null,
+        "formats": [],
+        "requirements": [
+          "No public demo channel confirmed",
+          "Serendeepity distributes label (info@serendeepity.net may be a distribution contact but not a demo channel)",
+          "Bandcamp contact form or warm intro recommended"
+        ],
+        "notes": "Searched pinchyandfriends.com, Bandcamp, RA, Discogs — no dedicated demo email found. Small artisanal roster suggests relationship-first approach."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://pinchyandfriends.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.pinchyandfriends.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/22466",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Let's Play House",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "nu-disco",
+        "house",
+        "deep house",
+        "disco"
+      ],
+      "key_people": [
+        "Jacques Renault (co-founder / A&R)",
+        "Nik Mercer (co-founder)",
+        "James Friedman"
+      ],
+      "why_it_belongs": "Brooklyn party-turned-label founded 2009 by Jacques Renault and Nik Mercer. 30+ nu-disco/disco catalog releases on Beatport through 2024-2025. Artists include Jacques Renault, Sound Support, Saidêra. Active releases 2025 ('Extended Sky Islands', 'Méhari'). Respected NYC underground imprint for disco/house crossover. Contact form accessible via lphnyc.com.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://lphnyc.com/",
+        "formats": [],
+        "requirements": [
+          "Contact via form on lphnyc.com or Bandcamp contact link"
+        ],
+        "notes": "No dedicated demo email found publicly. Label is responsive via their website contact form. Warm approach with context recommended. Bandcamp also has a contact link."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://lphnyc.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.beatport.com/label/lets-play-house/22500",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/6772",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "ATW Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "UK garage",
+        "speed garage",
+        "bass house",
+        "house-adjacent"
+      ],
+      "key_people": [
+        "Interplanetary Criminal (co-founder)",
+        "Main Phase (co-founder)"
+      ],
+      "why_it_belongs": "Manchester/Copenhagen label founded 2020 by Interplanetary Criminal and Main Phase. Core of the UK garage revival; documented documentary subject in early 2025. Active 2024-2025 releases ('Move Your Body' March 2025, 'Rubadub' 2025, 'Back 2 Front' July 2025). For a house producer crossing into bass-house/UKG territory, this is the key artist-owned imprint to target. atwrec@gmail.com confirmed by multiple sources.",
+      "submission": {
+        "method": "email",
+        "email": "atwrec@gmail.com",
+        "url": null,
+        "formats": [],
+        "requirements": [],
+        "notes": "Genre note: primarily UK garage/speed garage — adjacent to house but not pure house. Most relevant for house producers with a 4x4 bass-house or funky UKG crossover. Email atwrec@gmail.com confirmed via multiple industry sources."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://atwrecords.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.skiddle.com/news/all/Interplanetary-Criminal--Main-Phases-record-label-covered-in-new-documentary/61249/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/dj/interplanetarycriminal",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     }
   ]
 }
