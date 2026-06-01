@@ -1,0 +1,64 @@
+@import 'tailwindcss';
+
+/* DemoTrack visual language: late-night studio. Near-black canvas, restrained
+   surfaces, one acid-lime accent that does all the signalling. Mobile-first. */
+@theme {
+  --color-ink: #0b0b0f;
+  --color-surface: #14141b;
+  --color-surface-2: #1d1d27;
+  --color-line: #2a2a37;
+  --color-muted: #8b8b9e;
+  --color-text: #ededf2;
+  --color-accent: #c2ff1f;
+  --color-accent-dim: #9bcc18;
+  --color-danger: #ff5d5d;
+  --color-warn: #ffb020;
+  --color-ok: #3ddc84;
+
+  --font-display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Hanken Grotesk', ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --radius-card: 1rem;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  background: var(--color-ink);
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: var(--color-ink);
+  /* subtle vignette so flat black isn't dead-flat */
+  background-image: radial-gradient(
+    120% 80% at 50% -10%,
+    rgba(194, 255, 31, 0.06),
+    transparent 60%
+  );
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* respect the notch / home indicator on installed PWA */
+.safe-bottom {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 0.5rem);
+}
+.safe-top {
+  padding-top: calc(env(safe-area-inset-top) + 0.5rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
