@@ -10,6 +10,7 @@ dist-ssr/
 .env
 .env.*
 !.env.example
+.firecrawl.env
 
 # editor / os
 .vscode/*
@@ -22,5 +23,6 @@ npm-debug.log*
 # vite pwa generated
 dev-dist/
 
-# firecrawl CLI scrape cache
+# firecrawl CLI scrape cache + transient collection scratch
 .firecrawl/
+data/_agent_*.json
