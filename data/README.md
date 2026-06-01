@@ -11,18 +11,37 @@ seeds the in-app Label Discovery library (Phase 3, spec §11).
 
 ## Status (2026-06-01)
 - **Batches 1–3:** the 17 spec seed labels + 28 hand-researched additions (45).
-- **Batch 4:** a parallel **6-agent sweep** across the house/tech-house universe
-  (tech house UK/EU · mainstream/festival · melodic/progressive/organic · deep/soulful/
-  classic/disco · bass/G-house · afro/Latin), merged and de-duplicated → **+95 labels**.
+- **Batch 4:** a parallel **6-agent sweep** of the house/tech-house universe → +95 (140).
+- **Batch 5:** imported a user-provided master list (175 entries, stamped May 2025),
+  then **re-verified every import label-by-label** with a parallel 5-agent pass against
+  each label's own official source → **+65 verified** (and **22 rejected**).
 
 | Metric | Value |
 |---|---|
-| Labels recorded | **140** |
-| Contactable now (have a real demo channel) | 135 / 140 |
-| High confidence (official page or ≥2 sources) | 78 |
-| Medium confidence (single secondary source — re-verify) | 53 |
-| Low confidence (channel unconfirmed / window-only) | 9 |
-| Tier mix | 11 ELITE · 65 A · 64 B |
+| Labels recorded | **205** |
+| Contactable now (have a real demo channel) | 192 / 205 |
+| High confidence (official page or ≥2 sources) | 104 |
+| Medium confidence (single secondary source — re-verify) | 82 |
+| Low confidence (channel unconfirmed / window-only) | 19 |
+| Tier mix | 11 ELITE · 66 A · 128 B |
+
+### Batch 5 — the master-list import was NOT trusted blindly
+The uploaded file (`labelsdatabasemaster.js`) had a JS syntax error, a header/row
+mismatch (claimed 175, parsed 170), an internal duplicate, and a uniform "May 2025"
+stamp. A spot-check showed its contact details were **wrong/stale ~half the time**
+(e.g. Skint, Running Back, CUFF all had bad addresses). So every candidate was
+re-verified before keeping:
+- **66** were already in our DB (incl. sub-label aliases) → skipped.
+- **8** techno/off-genre and **7** sub-label-of-parent redundancies → dropped pre-merge.
+- **87** new in-scope candidates were merged `pending`, then re-checked individually:
+  **65 kept** (channels corrected where the file was wrong), **22 rejected** —
+  off-genre techno (Truesoul, Intec, Soma, Cocoon Recordings, Minus, Odd Recordings,
+  Senso, Arcane), commercial/other-genre (Kontor, Enhanced, Futuristica, Get The Sound),
+  dormant (Tsuba, Leftroom), or phantom/unverifiable (Muse, Coco, Criterio, Tactile,
+  NOXU Deep, Rejected, Odd Mob, Rebel Rave).
+- Common corrections applied: Skint → `skint.demos@bmg.com`, Running Back →
+  `demos@running-back.com`, Keinemusik → `drop@keinemusik.com`, CUFF → Trackstack,
+  Mobilee → LabelRadar portal, Relief → `bruce@cajual.com`, Nite Grooves → King Street.
 
 **Batch 4 coverage by slice:** tech house EU 17 · mainstream/festival 18 ·
 melodic/progressive 20 · deep/soulful/disco 19 · afro/Latin 13 · bass/G-house 10

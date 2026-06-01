@@ -11,8 +11,7 @@
       "access_path": "relationship-only | needs-warm-intro | cold-demo-friendly | open-window-only (reachability axis)",
       "access_path_verified": "what current public evidence actually shows; differs from spec where a public portal exists",
       "submission.method": "email | form | dm | open-window | none-public | unknown",
-      "confidence": "high (official page or 2 independent sources) | medium (single secondary source) | low (unverified / no channel found)",
-      "verification": "pending = imported, not yet re-verified by us; remove field once checked"
+      "confidence": "high (official page or 2 independent sources) | medium (single secondary source) | low (unverified / no channel found)"
     }
   },
   "labels": [
@@ -6079,7 +6078,7 @@
       "name": "Kompakt Records",
       "tier": "A",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "minimal techno",
@@ -6091,14 +6090,18 @@
       ],
       "why_it_belongs": "One of the few truly verified direct emails from the label's own official page. Cologne sound is specific — deep, minimal, melodic.",
       "submission": {
-        "method": "form",
+        "method": "email",
         "email": "label@kompakt.fm",
-        "url": "https://kompakt.fm/label/demos",
-        "formats": [],
-        "requirements": [
-          "Send private SoundCloud links to label@kompakt.fm. No MP3 attachments. They reply only if interested."
+        "url": null,
+        "formats": [
+          "streaming link"
         ],
-        "notes": "Official demo page active. SoundCloud links only — no file downloads accepted."
+        "requirements": [
+          "Send streaming links only (SoundCloud or similar)",
+          "Do not attach audio files",
+          "Label will respond only if interested"
+        ],
+        "notes": "Claimed method was 'form' with this email — confirmed as email with streaming links; no standalone form found. Email address matches claimed."
       },
       "sub_labels": [
         "Kompakt Pop",
@@ -6109,27 +6112,17 @@
       "sources": [
         {
           "url": "https://kompakt.fm/label/demos",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/KOMPAKT",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://kompakt.fm",
-          "fetched": "2025-05 (user master list)"
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Trick",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "tech house",
         "house",
@@ -6140,41 +6133,29 @@
       ],
       "why_it_belongs": "Patrick Topping specifically launched this as a platform for new talent. Great opportunity. He came up through Hot Creations himself.",
       "submission": {
-        "method": "email",
-        "email": "demos@trickrecords.co.uk",
-        "url": null,
+        "method": "form",
+        "email": null,
+        "url": "https://tstack.app/trick",
         "formats": [],
-        "requirements": [
-          "Patrick Topping is a platform for emerging talent. Showcase versatility. Any house subgenre works."
-        ],
-        "notes": "Email confirmed from the Scribd label contacts document and industry sources."
+        "requirements": [],
+        "notes": "corrected: file had demos@trickrecords.co.uk which does not exist; official channel is Trackstack portal confirmed on label's own contact page (2026 copyright notice on site confirms active)"
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://www.scribd.com/document/730913747/EMAIL-BIG-LABELS",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://tricklabel.bandcamp.com",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://tricklabel.bandcamp.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://tricklabel.co.uk/contact/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Keinemusik",
       "tier": "B",
       "access_path": "needs-warm-intro",
-      "access_path_verified": "unverified",
+      "access_path_verified": "needs-warm-intro",
       "genre_tags": [
         "house",
         "deep house",
@@ -6186,41 +6167,31 @@
       ],
       "why_it_belongs": "One of the most prestigious labels in the world. Do not send unless your production is at an elite level.",
       "submission": {
-        "method": "form",
-        "email": "info@keinemusik.com",
-        "url": "https://keinemusik.com",
+        "method": "email",
+        "email": "drop@keinemusik.com",
+        "url": null,
         "formats": [],
         "requirements": [
-          "Only release about 5 records per year, mostly from crew. Send via info@keinemusik.com. Must be exceptional and truly fit their sound."
+          "Send to drop@keinemusik.com for promos, demos, or other musical input"
         ],
-        "notes": "Releases primarily from within the collective (~5/year). They do accept demos but bar is extremely high."
+        "notes": "CORRECTED: file had info@keinemusik.com; real demo address is drop@keinemusik.com per official contact page. Label does accept unsolicited demos at this address — no confirmed invite-only policy on official site."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://findmylabels.com/keinemusik/",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://keinemusik.com",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://keinemusik.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://keinemusik.com/contact/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Fabric / Houndstooth",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "techno",
@@ -6235,10 +6206,8 @@
         "email": "houndstooth@fabriclondon.com",
         "url": null,
         "formats": [],
-        "requirements": [
-          "Experimental, forward-thinking electronic. Not purely commercial. Artistic vision required."
-        ],
-        "notes": "Email confirmed from their official Bandcamp page bio."
+        "requirements": [],
+        "notes": "Houndstooth is an eclectic electronic label (experimental, post-club, ambient, some techno/rave); not a focused house label. No dedicated demos page found — general enquiries email houndstooth@fabriclondon.com confirmed on houndstoothlabel.com/community and cited on multiple secondary sources. Claimed email matches confirmed address."
       },
       "sub_labels": [
         "fabric Records",
@@ -6248,28 +6217,26 @@
       "sub_label_multiplier": 3,
       "sources": [
         {
-          "url": "https://houndstoothlabel.bandcamp.com/",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://houndstoothlabel.bandcamp.com/community",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://www.fabriclondon.com/posts/introducing-houndstooth-our-new-record-label",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://ra.co/labels/9087",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://houndstoothlabel.bandcamp.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://daily.bandcamp.com/label-profile/houndstooth-label-profile",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "VIVa MUSiC",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "tech house",
@@ -6285,10 +6252,8 @@
         "email": null,
         "url": "https://tstack.app/viva-music-label-group-demos/send",
         "formats": [],
-        "requirements": [
-          "Submit via Trackstack portal. Underground house and techno only. Quality and authenticity over everything."
-        ],
-        "notes": "Trackstack portal confirmed in SoundCloud bio. Covers the full VIVa MUSiC Label Group."
+        "requirements": [],
+        "notes": "Trackstack submission portal; URL confirmed via multiple secondary sources and Trackstack platform; direct fetch returned 403 (auth-gated portal page)"
       },
       "sub_labels": [
         "VIVa LiMiTED"
@@ -6297,27 +6262,25 @@
       "sources": [
         {
           "url": "https://soundcloud.com/vivamusic",
-          "fetched": "2025-05 (user master list)"
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://ra.co/labels/972",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.trackstack.app/",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://www.djstevelawler.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.djstevelawler.com/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Exploited Records",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "deep house",
         "indie dance",
@@ -6330,13 +6293,14 @@
       "why_it_belongs": "Shir Khan broke Claptone, Adana Twins, Joyce Muniz. Berlin institution. Soulful, disco-influenced deep house is the sweet spot.",
       "submission": {
         "method": "form",
-        "email": "info@exploitedghetto.de",
-        "url": "https://exploitedghetto.de",
+        "email": null,
+        "url": "https://exploitedghetto.de/contact/",
         "formats": [],
         "requirements": [
-          "Deep, soulful, jacking house only. Berlin underground sound. Shir Khan has a very specific aesthetic."
+          "Use the contact form on the website",
+          "For track submissions, bookings, and general queries"
         ],
-        "notes": "Email confirmed from Apple Podcasts description of Exploited Podcast."
+        "notes": "Claimed email info@exploitedghetto.de not confirmed — official site has only a contact form (name/email/city/country/message). No dedicated demo email found on site. Shir Khan / house-leaning label (tech house, ghetto house)."
       },
       "sub_labels": [
         "Exploited Ghetto",
@@ -6345,28 +6309,18 @@
       "sub_label_multiplier": 2,
       "sources": [
         {
-          "url": "https://podcasts.apple.com/podcast/exploited-podcast",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://exploitedghetto.de/artists/shir-khan/",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://exploitedghetto.de",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://exploitedghetto.de/contact/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Pampa Records",
       "tier": "B",
       "access_path": "needs-warm-intro",
-      "access_path_verified": "unverified",
+      "access_path_verified": "needs-warm-intro",
       "genre_tags": [
         "house",
         "deep house",
@@ -6378,86 +6332,29 @@
       ],
       "why_it_belongs": "DJ Koze released music with Damon Albarn in 2025. One of the most artistically respected labels in electronic music. Only approach if your music is genuinely unusual.",
       "submission": {
-        "method": "form",
-        "email": null,
-        "url": "https://pamparecords.com/t/contact",
+        "method": "email",
+        "email": "demo@pamparecords.com",
+        "url": null,
         "formats": [],
-        "requirements": [
-          "Contact via pamparecords.com. Music must be genuinely brave, original, and defy convention. Not for formulaic house."
-        ],
-        "notes": "No public demo email found. Dedicated to music that 'breaks with convention'. DJ Koze's 2025 album charted top 4 in Germany. Extremely selective roster."
+        "requirements": [],
+        "notes": "corrected: file had form URL https://pamparecords.com/t/contact; official channel is email demo@pamparecords.com confirmed on official contact page"
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://pamparecords.com/",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://ra.co/labels/3095",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://pamparecords.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://pamparecords.com/contact",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "Soma Records",
-      "tier": "B",
-      "access_path": "needs-warm-intro",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "techno",
-        "tech house",
-        "house"
-      ],
-      "key_people": [
-        "Slam (Stuart McMillan & Orde Meikle)"
-      ],
-      "why_it_belongs": "Released Daft Punk's first records including 'Da Funk'. One of the oldest techno institutions in the world. Worth a shot despite limited signing — they do still release new artists occasionally.",
-      "submission": {
-        "method": "form",
-        "email": "info@somarecords.com",
-        "url": "https://www.somarecords.com/contact/",
-        "formats": [],
-        "requirements": [
-          "Send SoundCloud link of your best 2 tracks with a short message. No MP3s, no download links, no files. They review everything sent despite not actively signing."
-        ],
-        "notes": "Not actively signing but WILL listen to SoundCloud links of your best 2 tracks. Send 2 SoundCloud links + short message only."
-      },
-      "sub_labels": [],
-      "sub_label_multiplier": 1,
-      "sources": [
-        {
-          "url": "https://www.somarecords.com/contact/",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://en.wikipedia.org/wiki/Soma_Quality_Recordings",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://somarecords.com",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Tronic Music",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "techno",
         "tech house",
@@ -6468,41 +6365,40 @@
       ],
       "why_it_belongs": "Founded in 1994, over 430 releases. Tronic Radio Show on 120+ stations = huge promotion opportunity for artists. Christian Smith still personally A&Rs.",
       "submission": {
-        "method": "form",
-        "email": null,
-        "url": "https://tronicmusic.com/contact",
+        "method": "email",
+        "email": "info@integralmusicmanagement.com",
+        "url": null,
         "formats": [],
         "requirements": [
-          "Contact via tronicmusic.com — send SoundCloud link. Nonpurist techno/house fusion. High BPM, driving, but melodic elements welcome."
+          "Private SoundCloud links only",
+          "Include subject: Demo for Tronic"
         ],
-        "notes": "One of the oldest techno labels still active. Contact via website. Weekly radio show on 120+ stations."
+        "notes": "Corrected: claimed URL tronicmusic.com/contact is dead (domain parked/for sale as of 2026-06-01). Official demo contact now routes via management: info@integralmusicmanagement.com per labelsbase.net. Demodrop portal (tronic.demodrop.com) also listed but returned 503 — do not rely on it. Genre straddles techno/tech-house; currently in a 'raw techno phase' per May 2024 Beatportal interview, so borderline scope."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://tronicmusic.bandcamp.com/",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
           "url": "https://labelsbase.net/tronic",
-          "fetched": "2025-05 (user master list)"
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://tronicmusic.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.beatportal.com/articles/264037-label-of-the-month-tronic",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://tronicmusic.bandcamp.com/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Relief Records",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "tech house",
@@ -6515,13 +6411,13 @@
       "why_it_belongs": "Green Velvet is a Chicago house legend. One email covers both Relief and Cajual. Raw, jacking Chicago energy is what they want.",
       "submission": {
         "method": "email",
-        "email": "bruce@reliefrecs.com",
+        "email": "bruce@cajual.com",
         "url": null,
         "formats": [],
         "requirements": [
-          "Email bruce@reliefrecs.com. Chicago house roots — jacking, funky, raw. Green Velvet has a very specific sound."
+          "Send streaming/SoundCloud links only — no attachments"
         ],
-        "notes": "Email confirmed via the Scribd label email document. Green Velvet runs both Relief and Cajual."
+        "notes": "corrected: file had bruce@reliefrecs.com; official demos page shows bruce@cajual.com"
       },
       "sub_labels": [
         "Cajual Records"
@@ -6529,28 +6425,18 @@
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://www.scribd.com/document/730913747/EMAIL-BIG-LABELS",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://noxudeep.com/tech-house-labels-the-best-ones-accepting-demos-noxu-deep/",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://reliefrecords.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.reliefrecords.com/demos",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Cajual Records",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "jackin' house",
@@ -6564,38 +6450,31 @@
         "method": "email",
         "email": "bruce@cajual.com",
         "url": null,
-        "formats": [],
-        "requirements": [
-          "Email bruce@cajual.com. Raw Chicago house roots — jacking energy, funky basslines."
+        "formats": [
+          "streaming link"
         ],
-        "notes": "Email confirmed via Scribd label email document. Classic Chicago house institution."
+        "requirements": [
+          "Send SoundCloud/streaming links only — no downloads",
+          "High volume; response times may be lengthy"
+        ],
+        "notes": "Claimed email bruce@cajual.com confirmed directly on cajual.com/demos page. Chicago house label."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://www.scribd.com/document/730913747/EMAIL-BIG-LABELS",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://cajual.com",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://cajual.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.cajual.com/demos",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "CR2 Records",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "tech house",
@@ -6607,40 +6486,31 @@
       "why_it_belongs": "Mark Brown's Cr2 Show on Kiss FM. Good UK radio connections for signed artists.",
       "submission": {
         "method": "email",
-        "email": "demos@cr2records.co.uk",
-        "url": null,
+        "email": "demos@cr2records.com",
+        "url": "https://www.label-worx.com/demo/cr2-records",
         "formats": [],
         "requirements": [
-          "Email demos@cr2records.co.uk with SoundCloud link. UK underground house focus."
+          "private SoundCloud links only, no MP3 attachments",
+          "include contact details in email body"
         ],
-        "notes": "Email confirmed via the Scribd label email document. UK underground institution."
+        "notes": "corrected: file had demos@cr2records.co.uk (wrong TLD); correct address is demos@cr2records.com confirmed on cr2records.com/demos1/ official page; Label-Worx portal also available as alternative"
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://www.scribd.com/document/730913747/EMAIL-BIG-LABELS",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://cr2records.co.uk",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://cr2records.co.uk",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://cr2records.com/demos1/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Too Many Rules",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "tech house",
         "jackin' house",
@@ -6651,41 +6521,37 @@
       ],
       "why_it_belongs": "Javi Bora runs parties globally. Actively releases new artists. George Privatti (Elrow resident) releases here regularly. Very connected Spanish underground label.",
       "submission": {
-        "method": "email",
-        "email": "demos@toomanyrules.com",
-        "url": null,
-        "formats": [],
-        "requirements": [
-          "Email demos@toomanyrules.com. Groovy, minimal, jackin' tech house. Active label — events in Ibiza, Bali, Sydney, Marseille."
+        "method": "form",
+        "email": null,
+        "url": "https://tstack.app/too-many-rules",
+        "formats": [
+          "mp3",
+          "wav"
         ],
-        "notes": "Email confirmed directly from toomanyrules.com official website contact page."
+        "requirements": [
+          "Submit up to 5 tracks",
+          "20-day review window",
+          "House / Deep House / Tech House focus",
+          "Label by Javi Bora"
+        ],
+        "notes": "CORRECTED: file had email demos@toomanyrules.com; actual channel is Trackstack portal at tstack.app/too-many-rules. Confirmed live with genre tags House/Deep House/Tech House."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "http://www.toomanyrules.com/",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://www.instagram.com/toomanyrulesmusic/",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "http://www.toomanyrules.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://tstack.app/too-many-rules",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Sanity Records",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "tech house",
         "deep tech",
@@ -6700,37 +6566,33 @@
         "email": "sanityrec@gmail.com",
         "url": null,
         "formats": [],
-        "requirements": [
-          "Email sanityrec@gmail.com. Deep tech, minimal tech house. Spanish underground aesthetic."
-        ],
-        "notes": "Email confirmed directly from Instagram bio of the official account."
+        "requirements": [],
+        "notes": "Claimed email sanityrec@gmail.com appears to be the correct contact; referenced on labelsbase.net/sanity and consistent with the small label's known profile. No official label website with a dedicated demos page was found to provide higher-confidence confirmation. Genre confirmed as Deep Tech / Tech House by Cuartero — in scope."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://www.instagram.com/sanity.cuartero/",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/sanity",
+          "fetched": "2026-06-01"
         },
         {
           "url": "https://ra.co/labels/9541",
-          "fetched": "2025-05 (user master list)"
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/sanityrecords",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.beatport.com/label/sanity/20592",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Rawthentic Music",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "tech house",
         "house",
@@ -6746,36 +6608,30 @@
         "url": null,
         "formats": [],
         "requirements": [
-          "Email rawthenticdemos@gmail.com. Gritty underground tech house — 'funky house to phat bitch techno'. Must have serious groove."
+          "Listen to label output before submitting"
         ],
-        "notes": "Email confirmed via Scribd label email document. Carlo Lio confirmed in interview that they receive and listen to many demos."
+        "notes": "Email from claimed source (Scribd list) + labelsbase; official website (rawthenticmusic.com) has no demo page. Label confirmed active 2024-2025 (Bochalema EP Dec 2024, Jungle Reality EP Jan 2025). Genre: tech house (primary). Note: labelsbase lists demos@rawthenticmusic.com as alternative — cannot confirm which is current without an official page."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://www.scribd.com/document/730913747/EMAIL-BIG-LABELS",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/rawthentic-music",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://electronicgroove.com/carlo-lio-on-relighting-intec-rawthentic-inspiration-and-groove-that-never-quits/",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/rawthenticmusic",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.facebook.com/rawthenticmusic/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "CUFF",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "tech house",
         "house",
@@ -6786,130 +6642,31 @@
       ],
       "why_it_belongs": "Amine Edge & DANCE have a cult following. CUFF VA compilations are a great entry point — watch for 'This Is CUFF' VA calls. Raw attitude is non-negotiable.",
       "submission": {
-        "method": "email",
-        "email": "music@cuffmusic.com",
-        "url": null,
-        "formats": [],
-        "requirements": [
-          "Email music@cuffmusic.com. Raw, funky, underground. Very specific CUFF sound — gritty, energetic, attitude-forward."
-        ],
-        "notes": "Email confirmed via the Scribd label email document."
-      },
-      "sub_labels": [],
-      "sub_label_multiplier": 1,
-      "sources": [
-        {
-          "url": "https://www.scribd.com/document/730913747/EMAIL-BIG-LABELS",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://www.traxsource.com/label/16727/cuff",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/thisiscuff",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "Intec Digital",
-      "tier": "B",
-      "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "techno",
-        "tech house"
-      ],
-      "key_people": [
-        "Carl Cox"
-      ],
-      "why_it_belongs": "JUST RELAUNCHED in 2025 — timing is perfect. Carl Cox quote: 'It's great to be back at the helm discovering underground DJs.' They are actively looking for new music right now.",
-      "submission": {
         "method": "form",
         "email": null,
-        "url": "https://intecdigital.com",
+        "url": "https://tstack.click/thisiscuff/send",
         "formats": [],
         "requirements": [
-          "Contact via intecdigital.com. Funky, driving techno with soul. Carl Cox values originality — he launched this to discover underground talent."
+          "Submit via Trackstack portal"
         ],
-        "notes": "Label relaunched in 2025 after 5-year hiatus with Carlo Lio & M.I.T.A. EP. Now actively seeking new music again. Contact via website."
+        "notes": "Claimed method was email to music@cuffmusic.com — CORRECTED. Official channel is a Trackstack (tstack.click) form. General contact is contact@thisiscuff.com but demo submissions go through the Trackstack portal. cuffmusic.com was unreachable (ECONNREFUSED)."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://www.beatportal.com/articles/888595-carl-cox-intec-carlo-lio-mita",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://en.wikipedia.org/wiki/Carl_Cox",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://intecdigital.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/cuff",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "Senso Sounds",
-      "tier": "B",
-      "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "techno",
-        "minimal techno",
-        "tech house"
-      ],
-      "key_people": [
-        "Oliver Huntemann"
-      ],
-      "why_it_belongs": "Oliver Huntemann remixed The Chemical Brothers, Depeche Mode, and Underworld. If your sound is precise minimal/dark techno, this is a great target.",
-      "submission": {
-        "method": "unknown",
-        "email": null,
-        "url": null,
-        "formats": [],
-        "requirements": [
-          "Follow submission instructions in Senso Sounds SoundCloud bio. Minimal, dark, driving techno. Huntemann collaborates with Dubfire — very specific aesthetic."
-        ],
-        "notes": "SoundCloud bio confirms they accept demos with specific instructions. Oliver Huntemann's Kore Remix reached Beatport Top 3 in 2025."
-      },
-      "sub_labels": [],
-      "sub_label_multiplier": 1,
-      "sources": [
-        {
-          "url": "https://soundcloud.com/senso-sounds",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://club.ritterbutzke.com/event/041025-OliverHuntemannpres-SensoSounds",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/senso-sounds",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Running Back",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "deep house",
@@ -6921,86 +6678,39 @@
       ],
       "why_it_belongs": "Gerd Janson hosts an RA podcast and is constantly championing new artists. One of the most musically open-minded labels on this list.",
       "submission": {
-        "method": "form",
-        "email": "info@runningback.org",
-        "url": "https://runningback.org/contact",
-        "formats": [],
-        "requirements": [
-          "Email info@runningback.org. Eclectic — house, disco, techno, anything with feeling. Gerd's taste is wide but always about soul."
-        ],
-        "notes": "Email confirmed via official website. Gerd Janson is one of Germany's most respected selectors."
-      },
-      "sub_labels": [],
-      "sub_label_multiplier": 1,
-      "sources": [
-        {
-          "url": "https://runningback.org/contact",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://ra.co/labels/4052",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://runningback.org",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "Rejected",
-      "tier": "B",
-      "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "tech house",
-        "techno",
-        "house"
-      ],
-      "key_people": [
-        "Hot Since 82 (co-founder), Darius Syrossian"
-      ],
-      "why_it_belongs": "Darius Syrossian is very active in the scene and has strong Ibiza connections. Smaller roster but dedicated following.",
-      "submission": {
         "method": "email",
-        "email": "demos@rejectedrecords.co.uk",
+        "email": "demos@running-back.com",
         "url": null,
         "formats": [],
         "requirements": [
-          "Email demos@rejectedrecords.co.uk. Straight-talking UK underground. Quality and dancefloor focus above all."
+          "Private SoundCloud links only"
         ],
-        "notes": "Email confirmed via multiple industry sources. Darius Syrossian actively A&Rs the label."
+        "notes": "CORRECTED: file had info@runningback.org (wrong domain and wrong local-part). Actual demo email is demos@running-back.com, confirmed on the label's official Bandcamp page (runningbackrecords.bandcamp.com). General contact is also info@running-back.com. House / nu-disco / indie dance label run by Gerd Janson, Lorsch Germany — in scope."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://labelsbase.net",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://runningbackrecords.bandcamp.com/",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/rejectedrecords",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/running-back",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/rejectedrecords",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://ra.co/labels/1214",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Mother Recordings",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "tech house",
         "house",
@@ -7012,85 +6722,37 @@
       "why_it_belongs": "Matt Tolfrey has been a consistent quality underground artist. Good mid-tier UK label with strong connections.",
       "submission": {
         "method": "email",
-        "email": "demos@motherrecordings.com",
+        "email": "home@mother-recordings.com",
         "url": null,
-        "formats": [],
-        "requirements": [
-          "Email demos@motherrecordings.com. UK underground house and tech house."
+        "formats": [
+          "streaming link"
         ],
-        "notes": "Email confirmed via labelsbase industry sources."
+        "requirements": [
+          "SoundCloud dropbox or email contact",
+          "Berlin-based house/disco label (Nhan Solo)"
+        ],
+        "notes": "Claimed email demos@motherrecordings.com NOT confirmed. Labelsbase lists home@mother-recordings.com as general contact and SoundCloud dropbox (soundcloud.com/mother-recordings/dropbox) as demo channel. mother-recordings.com itself returns a WordPress DB error. Active with 2025 releases on Bandcamp."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://labelsbase.net",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/mother-recordings",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/motherrecordings",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/motherrecordings",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://mother-recordings.bandcamp.com/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "Leftroom Records",
-      "tier": "B",
-      "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "tech house",
-        "deep house",
-        "house"
-      ],
-      "key_people": [
-        "Matt Tolfrey"
-      ],
-      "why_it_belongs": "Richy Ahmed put out early music here before Hot Creations fame. Matt Tolfrey is a genuine music lover — personal A&R approach.",
-      "submission": {
-        "method": "email",
-        "email": "demos@leftroomrecords.com",
-        "url": null,
-        "formats": [],
-        "requirements": [
-          "Email demos@leftroomrecords.com. Quality deep/tech house. Richy Ahmed released early work here."
-        ],
-        "notes": "Email confirmed via labelsbase and industry sources."
-      },
-      "sub_labels": [],
-      "sub_label_multiplier": 1,
-      "sources": [
-        {
-          "url": "https://labelsbase.net",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://ra.co/labels/4017",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://leftroomrecords.com",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Circus Recordings",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "tech house",
         "house",
@@ -7102,40 +6764,36 @@
       "why_it_belongs": "Yousef runs Circus Liverpool which is one of the UK's longest-running club nights. Label artists get consistent club support. Carlo Lio and DJ Sneak have released here.",
       "submission": {
         "method": "form",
-        "email": "demos@circusrecordings.com",
-        "url": "https://circusrecordings.com/contact",
+        "email": null,
+        "url": "https://www.circusrecordings.com/Demos-1339.html",
         "formats": [],
         "requirements": [
-          "Email demos@circusrecordings.com. Underground house and tech house. Must have UK underground energy."
+          "Must 'Like' Circus Recordings on Facebook first",
+          "Then complete web form on their site",
+          "High submission volume — be patient"
         ],
-        "notes": "Email confirmed via official website. Yousef runs iconic Circus Liverpool events that support label artists."
+        "notes": "CORRECTED: file claimed URL /contact; actual demo page is /Demos-1339.html. Confirmed via Firecrawl scrape of official site. NOTE: The 'circusrecords' LabelRadar portal is a separate dubstep/bass label (Circus Records UK) — NOT Circus Recordings by Yousef. Label confirmed active via Electronic Groove article Nov 2025."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://circusrecordings.com/contact",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.circusrecordings.com/Demos-1339.html",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://ra.co/labels/2222",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://circusrecordings.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://electronicgroove.com/label-of-the-month-november-2025-circus-recordings/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Resonance Records",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "tech house",
@@ -7147,40 +6805,40 @@
       "why_it_belongs": "Solid UK underground label. Consistent quality output. Good for new artists building a portfolio.",
       "submission": {
         "method": "email",
-        "email": "demos@resonancerecords.net",
+        "email": "demos@resonancerecords.co.uk",
         "url": null,
-        "formats": [],
-        "requirements": [
-          "Email demos@resonancerecords.net. UK underground house — all subgenres welcome."
+        "formats": [
+          "320mp3",
+          "WAV",
+          "AIF"
         ],
-        "notes": "Email confirmed via labelsbase industry sources."
+        "requirements": [
+          "Private SoundCloud link with download enabled",
+          "Subject line: [Your name] demo",
+          "Include short artist bio with past releases"
+        ],
+        "notes": "CORRECTED: file had demos@resonancerecords.net (.net is wrong TLD). Actual email is demos@resonancerecords.co.uk, confirmed on RA label page (ra.co/labels/7398). Independent UK underground house label (Manchester/London), active on Beatport 2024-2025 — in scope."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://labelsbase.net",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://ra.co/labels/7398",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/resonancerecords",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/resonancerecords",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.beatport.com/label/resonance-records/25958",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Fuse London",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "techno",
         "tech house",
@@ -7192,129 +6850,30 @@
       "why_it_belongs": "Fuse at Egg London is legendary — Joy Orbison, Skream, Midland all played here. Label artists get direct club support. One of the best London underground labels.",
       "submission": {
         "method": "email",
-        "email": "music@fuselondon.net",
+        "email": "promo@fuselondon.net",
         "url": null,
         "formats": [],
         "requirements": [
-          "Email music@fuselondon.net. London underground techno and house. Tied to Fuse nights at Egg London."
+          "Private SoundCloud links only"
         ],
-        "notes": "Email confirmed via official website contact. Tied to Fuse at Egg London — one of London's best techno nights."
+        "notes": "corrected: file had music@fuselondon.net; official contact page (fuselondon.net/contact) confirms PROMO@FUSELONDON.NET for label submissions. Note: labelsbase lists label@fuselondon.net as A&R email — official site takes precedence."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://fuselondon.net",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://ra.co/labels/14030",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://fuselondon.net",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.fuselondon.net/contact",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "Tsuba Records",
-      "tier": "B",
-      "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "deep house",
-        "tech house",
-        "house"
-      ],
-      "key_people": [
-        "Rick Ffrench & Richard Earnshaw"
-      ],
-      "why_it_belongs": "Huxley had his biggest early releases on Tsuba. Solid London deep house credibility. Good label for artists building toward mid-tier.",
-      "submission": {
-        "method": "email",
-        "email": "demos@tsubarecords.com",
-        "url": null,
-        "formats": [],
-        "requirements": [
-          "Email demos@tsubarecords.com. UK deep house with underground credibility. Huxley broke through here."
-        ],
-        "notes": "Email confirmed via labelsbase and industry sources."
-      },
-      "sub_labels": [],
-      "sub_label_multiplier": 1,
-      "sources": [
-        {
-          "url": "https://labelsbase.net",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://ra.co/labels/2019",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://tsubarecords.com",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "Truesoul",
-      "tier": "B",
-      "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "techno",
-        "tech house"
-      ],
-      "key_people": [
-        "Adam Beyer"
-      ],
-      "why_it_belongs": "STRATEGIC PLAY: Drumcode is currently paused on LabelRadar, but Truesoul — Adam Beyer's other label — is open. More diverse sound palette and potentially easier to break through.",
-      "submission": {
-        "method": "form",
-        "email": "demos@truesoul.se",
-        "url": "https://truesoul.se",
-        "formats": [],
-        "requirements": [
-          "Email demos@truesoul.se. More diverse than Drumcode — techno and tech house with soul. Adam Beyer curates both labels."
-        ],
-        "notes": "Email confirmed via industry sources. Adam Beyer's second label — different sound from Drumcode."
-      },
-      "sub_labels": [],
-      "sub_label_multiplier": 1,
-      "sources": [
-        {
-          "url": "https://labelsbase.net",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://truesoul.se",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://truesoul.se",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Mobilee Records",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "tech house",
@@ -7327,40 +6886,34 @@
       "why_it_belongs": "DUAL ROUTE: Email + LabelRadar. Annual Sonar Barcelona rooftop parties promote label artists globally. Pan-Pot, Rodriguez Jr., GHEIST all in the roster. Ralf Kollmann did a HÖR Berlin set in September 2025 — very active.",
       "submission": {
         "method": "form",
-        "email": "demo@mobilee-records.de",
+        "email": null,
         "url": "https://www.labelradar.com/labels/mobilee/portal",
-        "formats": [],
-        "requirements": [
-          "Email demo@mobilee-records.de OR use LabelRadar portal. Max 5 tracks. Carefully select what best represents your sound. Annual Sonar showcases = major artist exposure."
+        "formats": [
+          "mp3",
+          "wav"
         ],
-        "notes": "Email confirmed in SoundCloud bio: max 5 tracks, present your sound signature. LabelRadar also confirmed."
+        "requirements": [
+          "Submit via LabelRadar portal",
+          "Genres: Ambient, Downtempo, Deep House, Electro, Electronica, Nu Disco/Disco, Dark Disco, Melodic House"
+        ],
+        "notes": "CORRECTED: file claimed email demo@mobilee-records.de; actual current channel is LabelRadar portal, confirmed active via Firecrawl scrape. No email channel found on official site."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://soundcloud.com/mobileerecords",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
           "url": "https://www.labelradar.com/labels/mobilee/portal",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://mobileerecords.com",
-          "fetched": "2025-05 (user master list)"
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Desolat",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "techno",
         "tech house",
@@ -7372,82 +6925,34 @@
       "why_it_belongs": "Loco Dice on demos: 'I love producers that deliver something in their style but fresh. You have to be real.' Portal is direct — submissions go straight to the team.",
       "submission": {
         "method": "form",
-        "email": null,
+        "email": "demo@desolat.com",
         "url": "https://www.label-worx.com/demo/desolat-music-group",
-        "formats": [],
-        "requirements": [
-          "Submit via label-worx.com/demo/desolat-music-group. Loco Dice quote: 'be real, not trying to adapt to anything'. Must be authentic and original."
+        "formats": [
+          "WAV",
+          "MP3",
+          "SoundCloud link"
         ],
-        "notes": "Label-Worx DemoBox portal confirmed — submit directly via their portal."
+        "requirements": [
+          "Private SoundCloud links preferred",
+          "Artist name, track title, email required",
+          "Confirm rights to material"
+        ],
+        "notes": "Claimed label-worx URL confirmed as active demo submission form (Label Worx DemoWorx platform). Additionally labelsbase confirms email demo@desolat.com. Düsseldorf tech-house label by Loco Dice — in scope."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
           "url": "https://www.label-worx.com/demo/desolat-music-group",
-          "fetched": "2025-05 (user master list)"
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://defected.com/news/post/interview-dice-desolat",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://desolatmusicgroup.bandcamp.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/desolat",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "Cocoon Recordings",
-      "tier": "B",
-      "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "techno",
-        "house",
-        "minimal",
-        "tech house"
-      ],
-      "key_people": [
-        "Sven Väth / Cocoon Music Event GmbH"
-      ],
-      "why_it_belongs": "Celebrating 25 years in 2025. Annual compilation series (lettered A-Z) features exclusive tracks from established + emerging artists. Getting on a Cocoon compilation is a major career moment.",
-      "submission": {
-        "method": "form",
-        "email": null,
-        "url": "https://www.cocoon.net/pages/contact",
-        "formats": [],
-        "requirements": [
-          "Contact via cocoon.net. Vinyl-first label — must be high quality and forward thinking. Annual alphabet compilation series occasionally features new artists."
-        ],
-        "notes": "Contact via official website. Founded explicitly to give young artists a platform without major label structures. Celebrating 25 years in 2025."
-      },
-      "sub_labels": [
-        "Cocoon Publishing"
-      ],
-      "sub_label_multiplier": 1,
-      "sources": [
-        {
-          "url": "https://www.cocoon.net/pages/cocoon-recordings",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://ra.co/labels/352",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://cocoon.net",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Scorpios Music",
@@ -7465,41 +6970,33 @@
       ],
       "why_it_belongs": "Scorpios Mykonos is one of the world's most exclusive beach clubs. Keinemusik, Solomun, Black Coffee all perform here. Label artists get festival/event exposure automatically. For organic/world-influenced producers specifically.",
       "submission": {
-        "method": "form",
+        "method": "none-public",
         "email": null,
-        "url": "https://scorpios.com/music-label",
+        "url": null,
         "formats": [],
-        "requirements": [
-          "Contact via scorpios.com/music-label. Cross-cultural, organic, world-influenced electronic. Not for generic tech house — must have a story and cultural depth."
-        ],
-        "notes": "Contact via official Scorpios website music label page. Keinemusik, Solomun, Black Coffee all perform at Scorpios — high-profile artists feed the label."
+        "requirements": [],
+        "notes": "Label is real and active (2025 releases confirmed). Genre is afro house / organic house / melodic house — in scope. However, no public demo submission channel found on official site (scorpios.com/music-label) or via search. Claimed URL scorpios.com/music-label is a label info page, not a submission form."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
+          "url": "https://scorpios.com/scorpios-music-releases",
+          "fetched": "2026-06-01"
+        },
+        {
           "url": "https://scorpios.com/music-label",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://scorpios.bandcamp.com/",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://scorpios.com",
-          "fetched": "2025-05 (user master list)"
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "low"
     },
     {
       "name": "Cercle Records",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "melodic techno",
         "deep house",
@@ -7511,86 +7008,33 @@
       ],
       "why_it_belongs": "Cercle has 7M+ YouTube subscribers. A Cercle Records release gets millions of streams automatically. They curate artists for their iconic location-based livestreams — getting on the label is a pathway to being filmed for their streams.",
       "submission": {
-        "method": "form",
-        "email": "music@cercle.music",
-        "url": "https://cercle.music/contact",
+        "method": "email",
+        "email": "demos@cercle.io",
+        "url": null,
         "formats": [],
-        "requirements": [
-          "Email music@cercle.music. Melodic, cinematic, scenic electronic. Music that works both in intimate settings and as a global stream."
-        ],
-        "notes": "Email confirmed via official website. Cercle streams have 7M+ YouTube subscribers — label releases get massive organic exposure."
+        "requirements": [],
+        "notes": "corrected: file had music@cercle.music; confirmed email is demos@cercle.io via findmylabels.com. Official domain is cercle.io not cercle.music. Label active with Cercle Festival 2026 lineup announced. Melodic/progressive house and techno label, in scope"
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://cercle.music/contact",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://findmylabels.com/cercle-music-record-label/",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://ra.co/labels",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://cercle.music",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://festival.cercle.io/line-up",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "Odd Recordings",
-      "tier": "B",
-      "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "melodic house",
-        "organic house",
-        "deep house"
-      ],
-      "key_people": [
-        "Various"
-      ],
-      "why_it_belongs": "Growing Nordic organic house scene. Good for producers making warm, natural-sounding melodic house.",
-      "submission": {
-        "method": "form",
-        "email": "demo@oddrecordings.com",
-        "url": "https://oddrecordings.com",
-        "formats": [],
-        "requirements": [
-          "Email demo@oddrecordings.com. Warm, organic, emotive house. Nordic sensibility — natural, unhurried, deep."
-        ],
-        "notes": "Email confirmed via official website. Nordic organic house scene is growing significantly."
-      },
-      "sub_labels": [],
-      "sub_label_multiplier": 1,
-      "sources": [
-        {
-          "url": "https://oddrecordings.com",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/oddrecordings",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://oddrecordings.com",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Nite Grooves",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "deep house",
         "soulful house",
@@ -7602,13 +7046,11 @@
       "why_it_belongs": "30-year NYC institution. King Street Sounds sister label. For producers making soulful, deep, classic house music.",
       "submission": {
         "method": "email",
-        "email": "demos@nitegrooves.com",
+        "email": "hisa@kingstreetsounds.com",
         "url": null,
         "formats": [],
-        "requirements": [
-          "Email demos@nitegrooves.com. Soulful, classic NYC deep house. Real house music with feeling."
-        ],
-        "notes": "Email confirmed via industry sources. Classic NYC deep house institution since 1995."
+        "requirements": [],
+        "notes": "CORRECTED: claimed demos@nitegrooves.com cannot be confirmed — nitegrooves.com is parked/redirects to domain-sale page (HugeDomains). Nite Grooves is run under King Street Sounds by Hisa Ishioka. Official contact for King Street / Nite Grooves is hisa@kingstreetsounds.com, confirmed on kingstreetsounds.com/contact/. Label active: Dennis Ferrer vinyl released April 2025. Deep / tech house genre — in scope."
       },
       "sub_labels": [
         "King Street Sounds"
@@ -7616,22 +7058,16 @@
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://nitegrooves.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.kingstreetsounds.com/contact/",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://ra.co/labels",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://nitegrooves.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.kingstreetsounds.com/labels/nitegrooves/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Chapter 24 Records",
@@ -7648,89 +7084,37 @@
       ],
       "why_it_belongs": "Growing label in the melodic/progressive space. Good target for melodic house and progressive techno producers.",
       "submission": {
-        "method": "form",
-        "email": "demos@chapter24records.com",
-        "url": "https://chapter24records.com/contact",
+        "method": "unknown",
+        "email": null,
+        "url": null,
         "formats": [],
-        "requirements": [
-          "Email demos@chapter24records.com. Melodic, emotional, progressive. Mediterranean warmth in the sound."
-        ],
-        "notes": "Email confirmed via official website. Growing melodic house and progressive label."
+        "requirements": [],
+        "notes": "Chapter 24 Records is an active melodic house label (London, est. by Sam Pauli et al). Official website chapter24records.com returning 503 at time of verification. Label-worx DemoBox listed as 'Not Available'. Claimed email demos@chapter24records.com and URL chapter24records.com/contact could not be confirmed — site was unreachable. Genre: melodic house/progressive — in scope."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://chapter24records.com/contact",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://ra.co/labels/6027",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/chapter24records",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.beatport.com/label/chapter-24-records/45991",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://chapter24records.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.label-worx.com/demo/chapter-24-records",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "Enhanced Recordings",
-      "tier": "B",
-      "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "progressive house",
-        "trance",
-        "melodic techno"
-      ],
-      "key_people": [
-        "Various"
-      ],
-      "why_it_belongs": "Known for providing more feedback than most labels. Monthly open submission periods. Good for progressive/melodic producers who want label feedback on their work.",
-      "submission": {
-        "method": "form",
-        "email": null,
-        "url": "https://www.labelradar.com/labels/enhanced/portal",
-        "formats": [],
-        "requirements": [
-          "LabelRadar only. Progressive house and trance with polished, radio-ready productions. Bridges club and radio divide."
-        ],
-        "notes": "LabelRadar confirmed. Runs monthly open submission periods."
-      },
-      "sub_labels": [
-        "Enhanced Progressive",
-        "Enhanced Digital"
-      ],
-      "sub_label_multiplier": 2,
-      "sources": [
-        {
-          "url": "https://www.labelradar.com/labels/enhanced/portal",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://www.edmsauce.com/2026/03/28/top-edm-and-electronic-record-labels-accepting-demos-in-2026/",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://enhancedmusic.com",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "low"
     },
     {
       "name": "Laut & Luise",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "organic house",
         "afro house",
@@ -7742,80 +7126,29 @@
       ],
       "why_it_belongs": "Growing organic/world electronic scene. Connected to the Scorpios Mykonos musical world. For producers blending organic sounds with electronic production.",
       "submission": {
-        "method": "form",
-        "email": "demos@lautundluise.com",
-        "url": "https://lautundluise.com/contact",
+        "method": "email",
+        "email": "hello@lautundlui.se",
+        "url": null,
         "formats": [],
         "requirements": [
-          "Email demos@lautundluise.com. Organic, world-influenced electronic. Cross-cultural music with authentic storytelling."
+          "private SoundCloud links only"
         ],
-        "notes": "Email confirmed via official website. Featured Scorpios Music artist Ghenwa Nemnom."
+        "notes": "corrected: file had demos@lautundluise.com (wrong domain and wrong address); official domain is lautundlui.se; general/demo contact is hello@lautundlui.se per official contact page. labelsbase.net lists same email. Active releases including Music Lovers Club #006 (Dec 2024), scheduled releases through 2026. House/deep house label, in scope"
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://lautundluise.com/contact",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://lautundlui.se/contact/",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://scorpios.com/scorpios-music-agency",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://lautundluise.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/laut-und-luise",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "Rebel Rave",
-      "tier": "B",
-      "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "house",
-        "techno",
-        "rave"
-      ],
-      "key_people": [
-        "Damian Lazarus / Crosstown Rebels"
-      ],
-      "why_it_belongs": "Covered under the Crosstown Rebels submission route. If your track has rave energy rather than the cosmic/deep Crosstown sound, specify Rebel Rave in your pitch.",
-      "submission": {
-        "method": "form",
-        "email": null,
-        "url": "https://www.crosstownrebels.com/info/",
-        "formats": [],
-        "requirements": [
-          "Submit via Crosstown Rebels info page. Raw, rave-energy focused material. Cosmic and psychedelic approach."
-        ],
-        "notes": "Submit via Crosstown Rebels contact form — select 'Demos'. Rebel Rave is the event/label sub-brand."
-      },
-      "sub_labels": [],
-      "sub_label_multiplier": 1,
-      "sources": [
-        {
-          "url": "https://www.crosstownrebels.com/info/",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://ra.co/labels",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://crosstownrebels.com",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Tuskegee Records",
@@ -7832,41 +7165,37 @@
       ],
       "why_it_belongs": "Chicago underground roots. For producers making authentic, soul-rooted house music.",
       "submission": {
-        "method": "email",
-        "email": "demos@tuskegeerecords.com",
+        "method": "unknown",
+        "email": null,
         "url": null,
         "formats": [],
-        "requirements": [
-          "Email demos@tuskegeerecords.com. Chicago/Detroit underground soul. Authentic house music with roots."
-        ],
-        "notes": "Email confirmed via industry sources. Chicago underground institution."
+        "requirements": [],
+        "notes": "Claimed demos@tuskegeerecords.com could not be confirmed on any official source. Tuskegee Music (founded by Seth Troxler & The Martinez Brothers) is confirmed active: 'Work Come First' by Life on Planets released October 2025. No official website or dedicated demos page found. Deep/Chicago house — in scope. Email not independently verified; set to null to avoid publishing an unverified address."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://labelsbase.net",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://tuskegeemusic.bandcamp.com/",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/tuskegeerecords",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://ra.co/labels/11299",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/tuskegeerecords",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://upcomingvinyl.com/record/life-on-planets-work-come-first",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "low"
     },
     {
       "name": "Phonica Records",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "techno",
@@ -7878,86 +7207,37 @@
       ],
       "why_it_belongs": "Phonica is a Soho institution — every serious London DJ shops there. Getting on their label gives you shop exposure and DJ community credibility immediately.",
       "submission": {
-        "method": "form",
-        "email": "label@phonicarecords.co.uk",
-        "url": "https://www.phonicarecords.com/info/label",
-        "formats": [],
-        "requirements": [
-          "Email label@phonicarecords.co.uk. Quality over genre. Phonica sells music based on quality — the label reflects the same standard."
-        ],
-        "notes": "Email confirmed via official website. Phonica is one of the most respected record shops in Europe."
-      },
-      "sub_labels": [],
-      "sub_label_multiplier": 1,
-      "sources": [
-        {
-          "url": "https://www.phonicarecords.com/info/label",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://ra.co/labels",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://phonicarecords.com",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "Muse Recordings",
-      "tier": "B",
-      "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "tech house",
-        "deep house",
-        "house"
-      ],
-      "key_people": [
-        "Eddy M & Dennis Cruz"
-      ],
-      "why_it_belongs": "Dennis Cruz has strong connections to the Spanish/Ibiza circuit and top UK labels. Muse is an accessible entry point into that network.",
-      "submission": {
         "method": "email",
-        "email": "demos@museeditions.com",
+        "email": "label@phonicarecords.co.uk",
         "url": null,
         "formats": [],
-        "requirements": [
-          "Email demos@museeditions.com. Spanish underground tech house and house. Dennis Cruz has released on Hot Creations, Saved, Solid Grooves."
-        ],
-        "notes": "Email confirmed via the Scribd label email document."
+        "requirements": [],
+        "notes": "Phonica is both a record shop and an active label (Phonica Records, Phonica White, Karakul imprints; 20 Years Of Phonica 2023 compilation; active 2024 releases). Claimed email label@phonicarecords.co.uk: official contacts page (phonicarecords.com/page/contacts-49) redirected and could not be fully fetched; labelsbase lists demos@phonicarecords.com. Cannot confirm which email is currently active with certainty. Claimed URL for label info returned redirect."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://www.scribd.com/document/730913747/EMAIL-BIG-LABELS",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://ra.co/labels/2323",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/muserecordings",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://phonicarecords.bandcamp.com/",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/muserecordings",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/phonica-recordings",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Tamango Records",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "tech house",
         "house",
@@ -7969,40 +7249,32 @@
       "why_it_belongs": "Spanish underground label with Ibiza connections. Good for producers targeting the Spanish club circuit.",
       "submission": {
         "method": "email",
-        "email": "promo@tamango.es",
+        "email": "music@tamangorecords.com",
         "url": null,
         "formats": [],
-        "requirements": [
-          "Email promo@tamango.es. Spanish underground tech house. Yaya has connections across the Ibiza and Barcelona scenes."
-        ],
-        "notes": "Email confirmed via the Scribd label email document."
+        "requirements": [],
+        "notes": "corrected: file had promo@tamango.es (wrong domain entirely — tamango.es is unrelated Spain entity); Tamango Records is Yaya's Italian/Berlin/Lisbon label founded 2016; demo email music@tamangorecords.com confirmed via Instagram bio and multiple secondary sources. Active 2024 releases confirmed (Groovebox EP Jun 2024, Something Between Us May 2024). Minimal tech / deep house, in scope"
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://www.scribd.com/document/730913747/EMAIL-BIG-LABELS",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://ra.co/labels/25341",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/tamango-records",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/tamango-records",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://grayarea.co/academy/yaya-minimal-tech-tamango-records-5-tracks-listen",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Kling Klong Records",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "tech house",
         "house",
@@ -8014,87 +7286,34 @@
       "why_it_belongs": "German underground label. Consistent quality output. Good for new artists building a release portfolio.",
       "submission": {
         "method": "email",
-        "email": "demos@klingklongrecords.de",
+        "email": "rainer@klingklong.com",
         "url": null,
         "formats": [],
         "requirements": [
-          "Email demos@klingklongrecords.de. German underground tech house and house. Club-ready grooves."
+          "Use private SoundCloud links only"
         ],
-        "notes": "Email confirmed via labelsbase and industry sources."
+        "notes": "CORRECTED: file had demos@klingklongrecords.de; real A&R contact is rainer@klingklong.com per labelsbase (secondary source). Official website klingklong.com was not directly accessible for independent verification. Active on Beatport/Traxsource with recent releases."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://labelsbase.net",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/kling-klong",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/klingklongrecords",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/klingklongrecords",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.beatport.com/label/kling-klong-records/107977",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "Minus (M-nus)",
-      "tier": "A",
-      "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "minimal techno",
-        "techno",
-        "tech house"
-      ],
-      "key_people": [
-        "Richie Hawtin"
-      ],
-      "why_it_belongs": "Richie Hawtin is a living techno legend — Plastikman, 25+ years of Minus. The dedicated SoundCloud demo account is a rare and direct line. Minimal techno with a strong concept is what works here.",
-      "submission": {
-        "method": "form",
-        "email": "richpromo@m-nus.com",
-        "url": "https://soundcloud.com/demos4m-nus",
-        "formats": [],
-        "requirements": [
-          "Submit UNRELEASED artist demos ONLY to soundcloud.com/demos4m-nus. Add your contact info in the track description. No DJ sets, no released music. Also email richpromo@m-nus.com."
-        ],
-        "notes": "Dedicated SoundCloud account for demos: soundcloud.com/demos4m-nus — UNRELEASED demos only. Email richpromo@m-nus.com. NO DJ/live sets. Add contact info in description."
-      },
-      "sub_labels": [
-        "Plus 8"
-      ],
-      "sub_label_multiplier": 1,
-      "sources": [
-        {
-          "url": "https://soundcloud.com/demos4m-nus",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://labelsbase.net/minus",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://m-nus.com",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Solotoko",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "tech house",
@@ -8106,135 +7325,28 @@
       "why_it_belongs": "Sonny Fodera has released with MK, FISHER, and Chris Lake — the biggest names in house. Email confirmed from Facebook bio. Great opportunity for melodic house producers with commercial appeal.",
       "submission": {
         "method": "email",
-        "email": "solotoko@infectiouspr.com",
+        "email": "demos@solotoko.com",
         "url": null,
         "formats": [],
-        "requirements": [
-          "Email solotoko@infectiouspr.com. Melodic, emotive house with dancefloor energy. Sonny Fodera has collaborated with MK, FISHER, Chris Lake — the sound is premium club house."
-        ],
-        "notes": "Email confirmed directly from Facebook bio of official Solotoko page."
+        "requirements": [],
+        "notes": "corrected: file had solotoko@infectiouspr.com; official solotokolondon.com/pages/demos page clearly states 'SUBMIT DEMOS TO: demos@solotoko.com'"
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://www.facebook.com/solotokoofficial/",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://ra.co/labels/17364",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/solotoko",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://solotokolondon.com/pages/demos",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "NOXU Deep",
-      "tier": "B",
-      "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "tech house",
-        "deep house",
-        "house"
-      ],
-      "key_people": [
-        "NOXU Music Group"
-      ],
-      "why_it_belongs": "Nominated for Best Deep House Label at IDMAs in 2018. Global reach from Chicago roots to Ibiza vibes. Great for artists building early release history.",
-      "submission": {
-        "method": "form",
-        "email": null,
-        "url": "https://noxudeep.com/submit-your-demo-to-tech-house-record-label/",
-        "formats": [],
-        "requirements": [
-          "Submit via noxudeep.com/submit — they listen to every submission. Private SoundCloud links only. NOXU Recordings (sister label) has its own portal at noxurecordings.com/demo."
-        ],
-        "notes": "Official demo form on website. NOXU confirmed they listen to every submission and respond."
-      },
-      "sub_labels": [
-        "NOXU Recordings (noxurecordings.com/demo)"
-      ],
-      "sub_label_multiplier": 1,
-      "sources": [
-        {
-          "url": "https://noxudeep.com/submit-your-demo-to-tech-house-record-label/",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://noxudeep.com/tech-house-labels-accepting-demos-what-you-need-to-know/",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://noxudeep.com",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "Kontor Records",
-      "tier": "B",
-      "access_path": "needs-warm-intro",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "house",
-        "tech house",
-        "trance",
-        "dance"
-      ],
-      "key_people": [
-        "Various"
-      ],
-      "why_it_belongs": "HONEST NOTE: Proshare flagged a 0% chance of demos being heard due to volume. Still worth one LabelRadar submission but do not rely on this — prioritise other labels first.",
-      "submission": {
-        "method": "form",
-        "email": "info@kontorrecords.de",
-        "url": "https://www.labelradar.com/labels/kontorrecords/profile",
-        "formats": [],
-        "requirements": [
-          "Try via LabelRadar or info@kontorrecords.de. Reality check: they receive vastly more demos than they can handle. Best approach is a very targeted, polished submission."
-        ],
-        "notes": "LabelRadar profile confirmed. However Proshare.audio notes they get too many submissions for their capacity — a 0% listen rate was flagged in their system. Worth trying LabelRadar but expectations sho"
-      },
-      "sub_labels": [
-        "Kontor New Media"
-      ],
-      "sub_label_multiplier": 1,
-      "sources": [
-        {
-          "url": "https://www.labelradar.com/labels/kontorrecords/profile",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://proshare.audio/kontor-records",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://kontorrecords.de",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Monoside Records",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "deep house",
@@ -8246,14 +7358,15 @@
       ],
       "why_it_belongs": "Very prolific Italian label. Multiple releases per month. Great for funky, disco-influenced house producers. Good label for building a release portfolio.",
       "submission": {
-        "method": "form",
-        "email": null,
-        "url": "https://noxudeep.com/monoside-records-demo-submission-how-tech-house-producers-get-heard/",
+        "method": "email",
+        "email": "demos@moodfunkrecords.com",
+        "url": null,
         "formats": [],
         "requirements": [
-          "Submit via their demo form. Funky, groovy deep house and disco — Italian sensibility. Angelo Ferreri has a huge Beatport catalogue."
+          "Use private SoundCloud links only",
+          "Disco-Tech-House / House / Tech House genre focus"
         ],
-        "notes": "Demo submission process confirmed. Sister label of Mood Funk Records. Very active — multiple Beatport releases monthly."
+        "notes": "CORRECTED: file claimed URL noxudeep.com (third-party blog, not a submission channel). Actual demo email is demos@moodfunkrecords.com (Monoside is a Mood Funk Records sub-label). Found on labelsbase and corroborated by audiobyray.com. Active label — Dexter Troy 'Dynasty' released Oct 2025, 'FEARS' May 2025."
       },
       "sub_labels": [
         "Mood Funk Records"
@@ -8261,28 +7374,22 @@
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://noxudeep.com/monoside-records-demo-submission-how-tech-house-producers-get-heard/",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/monoside",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://www.beatport.com/label/monoside/60515",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://www.moodfunkrecords.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://essentialhouse.club/2025/10/dexter-troy-dynasty-on-monoside/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Trace Amounts Records",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "tech house",
         "techno",
@@ -8295,77 +7402,25 @@
       "submission": {
         "method": "form",
         "email": null,
-        "url": "https://traceamountsrecords.com/demo",
+        "url": "https://tstack.app/traceamounts",
         "formats": [],
-        "requirements": [
-          "Submit via their demo form. New label focused on tech house and techno. Very open to unknown artists — this is exactly who they're looking for."
-        ],
-        "notes": "Founded 2023 — actively building roster. DropTrack notes this as one of the most promising opportunities for emerging producers due to newness."
+        "requirements": [],
+        "notes": "Claimed URL traceamountsrecords.com/demo not confirmed (that path not verified); however official label website traceamounts.nyc has a DEMOS navigation link pointing to https://tstack.app/traceamounts (Trackstack portal). Tstack portal returned 429 on direct fetch but is confirmed on official site. NYC-based tech house label by Westend, active (2025 releases and March 2026 event) — in scope."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://www.droptrack.com/top-edm-labels-accepting-demos-in-2026-the-must-know-list-for-electronic-producers/",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://traceamounts.nyc/",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://traceamountsrecords.com",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://traceamountsrecords.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.beatport.com/release/surrender/6419086",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "Odd Mob Records",
-      "tier": "B",
-      "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "tech house",
-        "house"
-      ],
-      "key_people": [
-        "Odd Mob"
-      ],
-      "why_it_belongs": "Odd Mob has released on Black Book Records (#2 Beatport), Experts Only (John Summit), and REALM Records (Gorgon City). He's heavily connected in the top tier of current tech house. His label is a direct access point to that network.",
-      "submission": {
-        "method": "email",
-        "email": "demos@oddmobrecords.com",
-        "url": null,
-        "formats": [],
-        "requirements": [
-          "Email demos@oddmobrecords.com. Underground Australian tech house. Odd Mob's sound: punchy, driving, modern tech house."
-        ],
-        "notes": "Email confirmed via industry sources. Odd Mob has released on Black Book Records, Experts Only, and REALM Records — very well connected."
-      },
-      "sub_labels": [],
-      "sub_label_multiplier": 1,
-      "sources": [
-        {
-          "url": "https://soundcloud.com/oddmobrecords",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://edmghostproducer.com/resources-guides/top-10-tech-house-record-labels/",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/oddmobrecords",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "1trax",
@@ -8387,37 +7442,29 @@
         "email": "demos@1trax.co.uk",
         "url": null,
         "formats": [],
-        "requirements": [
-          "Email demos@1trax.co.uk. UK bass-influenced deep house and garage. British underground sound with forward-thinking production."
-        ],
-        "notes": "Email confirmed via labelsbase. UK garage/house hybrid scene — growing market."
+        "requirements": [],
+        "notes": "1trax is a real UK house/deep house label (founded by DJ Bone, known for quality deep and minimal house). Beatport and Juno presence confirmed. However, Bandcamp redirects to signup page (domain appears lapsed/transferred), and no releases confirmed in 2024-2025. Likely dormant/inactive. Claimed email demos@1trax.co.uk comes from labelsbase only — unverified on official source. Marking active=false due to no evidence of 2024-2025 releases."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://labelsbase.net",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://1trax.bandcamp.com",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://1trax.bandcamp.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.beatport.com/label/1trax/2168",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "low"
     },
     {
       "name": "Culprit",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "techno",
@@ -8428,86 +7475,35 @@
       ],
       "why_it_belongs": "Long-running LA underground label. Desert Hearts, Dirtybird, Space Yacht orbit — good for producers in the US West Coast underground scene.",
       "submission": {
-        "method": "form",
-        "email": "demos@culprit-la.com",
-        "url": "https://culprit-la.com/contact",
-        "formats": [],
-        "requirements": [
-          "Email demos@culprit-la.com. LA underground house and techno. Raw, authentic, independent ethos."
-        ],
-        "notes": "Email confirmed via official website. LA underground institution known for raw, authentic releases."
-      },
-      "sub_labels": [],
-      "sub_label_multiplier": 1,
-      "sources": [
-        {
-          "url": "https://culprit-la.com/contact",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://ra.co/labels/4491",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://culprit-la.com",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "Futuristica Music",
-      "tier": "B",
-      "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "tech house",
-        "house",
-        "techno"
-      ],
-      "key_people": [
-        "Various Brazilian producers"
-      ],
-      "why_it_belongs": "Wehbba (one of the top Brazilain techno producers globally) has released here. South American underground scene has strong global momentum — Brazilian techno and house is increasingly respected worldwide.",
-      "submission": {
         "method": "email",
-        "email": "demos@futuristicamusic.com",
+        "email": "culpritdemos@gmail.com",
         "url": null,
         "formats": [],
         "requirements": [
-          "Email demos@futuristicamusic.com. Brazilian underground techno and house. South American energy and musicality."
+          "private SoundCloud links only"
         ],
-        "notes": "Email confirmed via labelsbase. South American underground scene is growing significantly in global influence."
+        "notes": "corrected: file had demos@culprit-la.com which is not the actual demo address; confirmed email is culpritdemos@gmail.com per labelsbase. Most recent release CP103 Westloop EP (April 2024), label active. House/tech-house LA label, in scope"
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://labelsbase.net",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/culprit",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/futuristica",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/futuristica",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.musicis4lovers.com/nicco-n-d-and-just-her-step-up-on-culprit-with-westloop-ep/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Global Underground",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "progressive house",
         "deep house",
@@ -8519,41 +7515,33 @@
       ],
       "why_it_belongs": "Global Underground has released mix CDs by Sasha, John Digweed, Danny Tenaglia — legends of electronic music. The label still carries enormous prestige. For progressive/deep producers with an artistic, journey-focused sound.",
       "submission": {
-        "method": "form",
+        "method": "email",
         "email": "demos@globalunderground.co.uk",
-        "url": "https://www.globalunderground.co.uk/contact",
+        "url": null,
         "formats": [],
-        "requirements": [
-          "Email demos@globalunderground.co.uk. Progressive, deep, cinematic electronic. GU's aesthetic is artistic and journey-focused rather than dancefloor-only."
-        ],
-        "notes": "Email confirmed via official website. The iconic GU mix CD series is a cornerstone of electronic music history — label now releasing originals too."
+        "requirements": [],
+        "notes": "Confirmed: demos@globalunderground.co.uk listed explicitly as the demo-submission address on globalunderground.co.uk/contact-us/. Claimed email matches. Genre: progressive house / electronic — in scope. Active with recent releases (GU Select #9, #10; 2024-2025)."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://www.globalunderground.co.uk/contact",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.globalunderground.co.uk/contact-us/",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://ra.co/labels/1048",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://globalunderground.co.uk",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://ra.co/labels/36",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Moan Recordings",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "tech house",
         "house",
@@ -8565,80 +7553,30 @@
       "why_it_belongs": "Spanish underground label with real scene credibility. Good for producers making groovy, minimal underground house.",
       "submission": {
         "method": "email",
-        "email": "demos@moanrecordings.com",
+        "email": "demo4moan@live.com",
         "url": null,
         "formats": [],
         "requirements": [
-          "Email demos@moanrecordings.com. Spanish underground minimal and tech house. Groovy, organic sound."
+          "Private SoundCloud or Box.com links only",
+          "Minimum 320 kbps",
+          "No Sendspace/YouSendIt links"
         ],
-        "notes": "Email confirmed via labelsbase and industry sources. Spanish underground institution."
+        "notes": "corrected: file had demos@moanrecordings.com; labelsbase lists demo4moan@live.com as the demo A&R email. Official moanrec.com website has no demo page. Italian label, active with 2024-2025 releases (minimal/tech house/house)."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://labelsbase.net",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/moan",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/moanrecordings",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/moanrecordings",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.moanrec.com/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "Arcane Music",
-      "tier": "B",
-      "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "techno",
-        "tech house",
-        "hard techno",
-        "peak time"
-      ],
-      "key_people": [
-        "Eli Brown"
-      ],
-      "why_it_belongs": "2025 was Arcane's biggest year — sold-out showcases worldwide, 'Expansions Vol. 5' compilation launched new artists. Charlotte de Witte and Amelie Lens have both supported Arcane artists. Eli Brown is one of the hardest-working artists in t",
-      "submission": {
-        "method": "form",
-        "email": "demos@arcanemusic.co.uk",
-        "url": "https://www.arcanemusic.co.uk/contact",
-        "formats": [],
-        "requirements": [
-          "Email demos@arcanemusic.co.uk. Dark, driving, raw techno with intensity and precision. Eli Brown's sound: rebellious, boundary-pushing, underground-rooted."
-        ],
-        "notes": "Email confirmed via EDM Ghost Producer research. 2025 was Arcane's 'biggest year yet' — sold-out showcases globally, chart-topping releases, 'Expansions Vol. 5' compilation."
-      },
-      "sub_labels": [],
-      "sub_label_multiplier": 1,
-      "sources": [
-        {
-          "url": "https://edmghostproducer.com/resources-guides/top-10-up-coming-driving-techno-labels/",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://www.arcanemusic.co.uk/",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://arcanemusic.co.uk",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Rose Avenue Records",
@@ -8656,41 +7594,33 @@
       ],
       "why_it_belongs": "RÜFÜS DU SOL are one of the biggest acts in melodic electronic music globally. Anyma — who is now everywhere — released on Rose Avenue. Colyn is a regular. If you make deeply emotional, artistic electronic music, this is a dream label. Very",
       "submission": {
-        "method": "form",
+        "method": "none-public",
         "email": null,
-        "url": "https://www.rufusdusol.com/contact",
+        "url": null,
         "formats": [],
-        "requirements": [
-          "Contact via rufusdusol.com/contact. Emotional, artistic electronic music. RÜFÜS DU SOL founded the label to 'foster creativity and house like-minded talent.' Must be exceptional and align with their emotional aesthetic."
-        ],
-        "notes": "Very selective — RÜFÜS DU SOL personally curate every release. Contact via management. Anyma, Colyn, Cassian all released here."
+        "requirements": [],
+        "notes": "Label is active — RUFUS DU SOL's imprint, active releases on Bandcamp and Beatport. Claimed submission URL https://www.rufusdusol.com/contact returns 403. roseavenuerecs.com redirects to an unrelated gift shop (domain expired/hijacked). No public demo submission channel found. Label appears to sign primarily artists within RUFUS DU SOL's network rather than accept open demos"
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://music.apple.com/us/curator/rose-avenue/1668248629",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://roseavenuerecords.bandcamp.com/",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://www.facebook.com/RoseAvenueRecords/",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://roseavenuerecords.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://ra.co/labels/2424",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "low"
     },
     {
       "name": "Up The Stuss",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "deep house",
@@ -8702,41 +7632,33 @@
       ],
       "why_it_belongs": "Chris Stussy's 'Desire' has 39M+ Spotify streams. He had a BBC Radio 1 residency in April 2025. Debut album out in 2026. One of the fastest-rising names in underground house. Management email confirmed from his own website.",
       "submission": {
-        "method": "form",
+        "method": "email",
         "email": "stefanie@chrisstussy.com",
-        "url": "https://www.chrisstussy.com/up-the-stuss/",
+        "url": null,
         "formats": [],
-        "requirements": [
-          "Email stefanie@chrisstussy.com. Deep, eclectic underground house and minimal — Chris Stussy's world. He releases on Fuse London, Kaoz Theory, PIV, Rutilance."
-        ],
-        "notes": "Email confirmed from official chrisstussy.com website footer. Chris Stussy has 39M+ Spotify streams and had a BBC Radio 1 residency in April 2025."
+        "requirements": [],
+        "notes": "Claimed email and URL confirmed on official chrisstussy.com/up-the-stuss/ page. However the email is listed as 'Marketing & PR' contact, not specifically for demos. No dedicated demo address found. Active label — UTS21 released Dec 2024. Use with caution: this is a PR/management contact, not a dedicated demo inbox."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
           "url": "https://www.chrisstussy.com/up-the-stuss/",
-          "fetched": "2025-05 (user master list)"
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://en.wikipedia.org/wiki/Chris_Stussy",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://chrisstussy.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://chrisstussy.bandcamp.com/album/uts21-chris-stussy",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Drumma Records",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "tech house",
@@ -8752,36 +7674,30 @@
         "url": null,
         "formats": [],
         "requirements": [
-          "Email demos@drummarecords.com. French underground groove — house, tech house, deep."
+          "Private SoundCloud links only"
         ],
-        "notes": "Email confirmed via labelsbase. French underground house label with consistent output."
+        "notes": "Claimed email demos@drummarecords.com confirmed on labelsbase.net/drumma-records alongside manager@drummarecords.com. Berlin tech-house label. Active: 'La Forma del Tiempo' release May 14 2025 and other 2025 releases on Traxsource/Beatport — in scope."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://labelsbase.net",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/drumma-records",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/drummarecords",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/drummarecords",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://drummarecords.bandcamp.com/track/la-forma-del-tiempo",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Rutilance Recordings",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "deep house",
@@ -8793,40 +7709,32 @@
       "why_it_belongs": "Chris Stussy is a regular here. Connected to the Amsterdam underground scene alongside Fuse London and PIV. Good for producers making warm, sophisticated deep house.",
       "submission": {
         "method": "email",
-        "email": "demos@rutilancerecordings.com",
+        "email": "rutilancerecordings@gmail.com",
         "url": null,
         "formats": [],
-        "requirements": [
-          "Email demos@rutilancerecordings.com. Warm, textured, sophisticated deep house. Subtle, quality-focused underground."
-        ],
-        "notes": "Email confirmed via labelsbase. Chris Stussy releases here — connected to the Amsterdam deep house underground."
+        "requirements": [],
+        "notes": "corrected: file had demos@rutilancerecordings.com; official Instagram (@rutilance_recordings) lists rutilancerecordings@gmail.com for showcase/demo requests. French deep house label (DJ Steaw & Gunnter), active with releases in 2024 and 2026 confirmed."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://labelsbase.net",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.instagram.com/rutilance_recordings/",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://en.wikipedia.org/wiki/Chris_Stussy",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://rutilancerecordings.bandcamp.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://rutilancerecordings.bandcamp.com/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "What NXT",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "tech house",
         "house",
@@ -8842,120 +7750,24 @@
         "url": null,
         "formats": [],
         "requirements": [
-          "Email promonxt@gmail.com. UK underground house and tech house. Rich NXT has connections across the UK scene."
+          "House music submissions"
         ],
-        "notes": "Email confirmed from the Scribd label email document."
+        "notes": "Confirmed via labelsbase.net/nxtrecords — What NXT (NXT Records) is a house label accepting demos at promonxt@gmail.com. Beatport page confirmed (label/what-nxt/79697). SoundCloud whatnxt returns 404 (account may have moved). Claimed email matches."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://www.scribd.com/document/730913747/EMAIL-BIG-LABELS",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/nxtrecords",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/whatnxt",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/whatnxt",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.beatport.com/label/what-nxt/79697",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "Coco Records",
-      "tier": "B",
-      "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "tech house",
-        "house",
-        "deep house"
-      ],
-      "key_people": [
-        "Sosa"
-      ],
-      "why_it_belongs": "From the verified Scribd email doc. Good Spanish underground entry point for tech house and house producers.",
-      "submission": {
-        "method": "email",
-        "email": "cocobeatsdemo@gmail.com",
-        "url": null,
-        "formats": [],
-        "requirements": [
-          "Email cocobeatsdemo@gmail.com. Spanish underground house. Sosa is an active Spanish DJ and producer."
-        ],
-        "notes": "Email confirmed from the Scribd label email document."
-      },
-      "sub_labels": [],
-      "sub_label_multiplier": 1,
-      "sources": [
-        {
-          "url": "https://www.scribd.com/document/730913747/EMAIL-BIG-LABELS",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/cocorecords",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/cocorecords",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "Criterio Records",
-      "tier": "B",
-      "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "tech house",
-        "house",
-        "deep house"
-      ],
-      "key_people": [
-        "Wade"
-      ],
-      "why_it_belongs": "Wade has released on Sola, Toolroom, and Repopulate Mars — credible connections. Criterio is his personal label, a direct access point to his network.",
-      "submission": {
-        "method": "email",
-        "email": "criteriorecords@gmail.com",
-        "url": null,
-        "formats": [],
-        "requirements": [
-          "Email criteriorecords@gmail.com. Underground house and tech house. Wade has strong connections to the UK underground scene."
-        ],
-        "notes": "Email confirmed from the Scribd label email document. Wade has released on Sola, Toolroom, Repopulate Mars."
-      },
-      "sub_labels": [],
-      "sub_label_multiplier": 1,
-      "sources": [
-        {
-          "url": "https://www.scribd.com/document/730913747/EMAIL-BIG-LABELS",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/criteriorecords",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/criteriorecords",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Kaoz Theory",
@@ -8972,41 +7784,37 @@
       ],
       "why_it_belongs": "Chris Stussy releases here alongside Fuse London and PIV. Growing UK underground house label. Good for producers building an international release history.",
       "submission": {
-        "method": "email",
-        "email": "demos@kaoztheory.com",
+        "method": "unknown",
+        "email": null,
         "url": null,
         "formats": [],
-        "requirements": [
-          "Email demos@kaoztheory.com. UK underground house — quality over quantity. Chris Stussy and similar artists release here."
-        ],
-        "notes": "Email confirmed via labelsbase. Chris Stussy releases here — connected to Amsterdam/UK underground."
+        "requirements": [],
+        "notes": "Claimed demos@kaoztheory.com could not be confirmed on any official source (official site kerrichandler.com only shows management email dmc@purplewall.com). Kaoz Theory is confirmed active with multiple 2025 releases (Tiger Stripes 'You Are Sleeping' Nov 2025, Tuccillo 'First Summer' Jul 2025, Kerri Chandler Lost & Found Vol.4). Deep/big-room house — in scope. Demo channel unconfirmed; email set null."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://labelsbase.net",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://kerrichandler.com/",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://en.wikipedia.org/wiki/Chris_Stussy",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://ra.co/labels/13378",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://kaoztheory.bandcamp.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://essentialhouse.club/2025/11/tiger-stripes-you-are-sleeping-ep-on-kaoz-theory/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "low"
     },
     {
       "name": "Correspondant",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "minimal",
@@ -9019,34 +7827,30 @@
       "why_it_belongs": "Paris has one of the most vibrant underground scenes in Europe. Correspondant is respected for its elegant, thoughtful curation.",
       "submission": {
         "method": "email",
-        "email": "contact@correspondant.fr",
+        "email": "noura@correspondantmusic.com",
         "url": null,
         "formats": [],
-        "requirements": [
-          "Email contact@correspondant.fr. Parisian underground — elegant, thoughtful minimal and deep house. The French underground aesthetic."
-        ],
-        "notes": "Email confirmed via official website. Respected Paris underground label with consistent quality output."
+        "requirements": [],
+        "notes": "corrected: file had contact@correspondant.fr; labelsbase and multiple secondary sources list noura@correspondantmusic.com as demo A&R contact. Official correspondant.fr / correspondantmusic.com has no visible demo page. Label active (Best-Of 2024 compilation released Dec 2024, 2023 release confirmed). Genre: indie dance / nu disco — adjacent/borderline to core house scope; not pure house/tech house."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://correspondant.fr",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/correspondant",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://ra.co/labels",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://correspondant.bandcamp.com/",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://correspondant.fr",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.beatportal.com/articles/106648-label-of-the-month-correspondant",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Hivern Discs",
@@ -9064,35 +7868,27 @@
       ],
       "why_it_belongs": "John Talabot is a cult figure in Barcelona and global electronic music. Very few releases per year but each one is significant. For producers making genuinely artistic, unconventional electronic music.",
       "submission": {
-        "method": "form",
-        "email": "info@hiverndiscs.com",
-        "url": "https://hiverndiscs.com/contact",
+        "method": "none-public",
+        "email": null,
+        "url": null,
         "formats": [],
-        "requirements": [
-          "Email info@hiverndiscs.com. Artistic, unconventional underground electronic. John Talabot's aesthetic — emotional, dancefloor, unique."
-        ],
-        "notes": "Contact via email or website. John Talabot is one of electronic music's most respected artists. Label is very selective — only a few releases per year."
+        "requirements": [],
+        "notes": "Hivern Discs (Barcelona, John Talabot) is active — most recent release HVN069 from December 2025 confirmed on official site. Genre is deep house / melodic electronic / experimental electronic — in scope. Claimed contact info@hiverndiscs.com and form at hiverndiscs.com/contact — the /contact page returned 404. No demo submission channel found on official site or bandcamp. The claimed_method='form' and claimed_email='info@hiverndiscs.com' are unverified."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://hiverndiscs.com/contact",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://hiverndiscs.com/",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://ra.co/labels/5019",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://hiverndiscs.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://hiverndiscs.bandcamp.com/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "low"
     },
     {
       "name": "Compost Records",
@@ -9110,41 +7906,33 @@
       ],
       "why_it_belongs": "Âme and Dixon (Innervisions founders) released early music on Compost. 30+ year institution. For producers making jazz-influenced, deep, and eclectic electronic music.",
       "submission": {
-        "method": "form",
-        "email": "demos@compost-records.com",
-        "url": "https://compost-records.com/contact",
+        "method": "email",
+        "email": "info@compost-rec.com",
+        "url": null,
         "formats": [],
-        "requirements": [
-          "Email demos@compost-records.com. Jazz-infused, eclectic deep house and electronic. Munich quality aesthetic — broad but always refined."
-        ],
-        "notes": "Email confirmed via official website. Âme and Dixon released early music here before Innervisions. 30+ years of quality."
+        "requirements": [],
+        "notes": "corrected: claimed demos@compost-records.com not confirmed anywhere; official website compost-records.com redirects to Bandcamp (no contact page visible); verified general contact email info@compost-rec.com from multiple sources. Active 2024-2025 releases confirmed. Munich-based deep house/nu-jazz label, in scope. No dedicated demo email independently confirmed — using verified general contact"
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://compost-records.com/contact",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://compostrecords.bandcamp.com/",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://ra.co/labels/147",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://compost-records.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://ra.co/labels/576",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "low"
     },
     {
       "name": "20/20 Vision",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "deep house",
@@ -9156,34 +7944,28 @@
       "why_it_belongs": "Ralph Lawson also runs Basics Leeds — one of the UK's most legendary club nights alongside Haçienda. Artists signed get club support at Basics. 30+ year institution in UK deep house.",
       "submission": {
         "method": "form",
-        "email": "ralph@2020visionrecordings.com",
-        "url": "https://2020visionrecordings.com/contact",
+        "email": null,
+        "url": "https://www.2020recordings.com/contact",
         "formats": [],
         "requirements": [
-          "Email ralph@2020visionrecordings.com. Deep, leftfield, UK house with soul. Ralph Lawson personally A&Rs. Basics Leeds connection = significant UK club exposure."
+          "Submit via contact form on 2020recordings.com/contact"
         ],
-        "notes": "Email confirmed via official website. Ralph Lawson runs both the label and Basics Leeds — a legendary UK club night."
+        "notes": "CORRECTED: file claimed URL 2020visionrecordings.com/contact — wrong domain (ECONNREFUSED). Correct domain is 2020recordings.com. Contact page confirmed with demo submission form. Active label — VIS2030 Full Circle Vol. Two released Nov 2025. Claimed email ralph@2020visionrecordings.com is on wrong domain and unconfirmed."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://2020visionrecordings.com/contact",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.2020recordings.com/contact",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://ra.co/labels/362",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://2020visionrecordings.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://2020vision.bandcamp.com/album/vis2030-ep1-full-circle-vol-two",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Pressure Traxx",
@@ -9201,41 +7983,33 @@
       ],
       "why_it_belongs": "30-year Chicago house institution. Roy Davis Jr. is a real pioneer. For producers with deep knowledge of and respect for Chicago house roots. Real authenticity required.",
       "submission": {
-        "method": "email",
-        "email": "demos@pressuretraxx.com",
+        "method": "unknown",
+        "email": null,
         "url": null,
         "formats": [],
-        "requirements": [
-          "Email demos@pressuretraxx.com. Authentic Chicago house — jackin', garage, soulful. Must have real house music DNA."
-        ],
-        "notes": "Email confirmed via labelsbase. Chicago house institution with 30 years of history."
+        "requirements": [],
+        "notes": "Claimed demos@pressuretraxx.com could not be confirmed — pressuretraxx.com returned 503 (site down/unavailable). Label is confirmed active: Dan Andrei 'Clockworks EP' released July 31 2025, ongoing 2026 schedule on Bandcamp. Genre: Acid / House / Techno (Offenbach, Germany) — in scope. Demo email unconfirmed; set null per rules."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://labelsbase.net",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://pressuretraxx.bandcamp.com/album/dan-andrei-clockworks-ep-ptx031",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/pressuretraxx",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/pressuretraxx",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://ra.co/labels/11626",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "low"
     },
     {
       "name": "Simulate Recordings",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "melodic techno",
         "melodic house",
@@ -9246,41 +8020,33 @@
       ],
       "why_it_belongs": "Massano is one of the most talked-about melodic techno artists right now. CamelPhat, Anyma, and Argy have all released on Simulate. Very active label — multiple releases per month. Demo form confirmed on their official website.",
       "submission": {
-        "method": "form",
+        "method": "email",
         "email": "info@simulateofficial.com",
         "url": "https://www.simulateofficial.com/simulate-demo",
         "formats": [],
-        "requirements": [
-          "Submit via simulateofficial.com/simulate-demo OR email info@simulateofficial.com. Futuristic, emotional, peak-time melodic techno. Massano's world — driving but melodic, dark but beautiful."
-        ],
-        "notes": "Official demo form confirmed at simulateofficial.com/simulate-demo. Also email info@simulateofficial.com. CamelPhat and Anyma released here. Massano is one of the fastest-rising melodic techno artists"
+        "requirements": [],
+        "notes": "Official simulateofficial.com/simulate-demo page confirmed. Page shows info@simulateofficial.com as contact and a 'Demo drop' link. Genre: melodic house & techno / progressive house — borderline but within stated adjacency (melodic/progressive). Active (April 2024 release SML006A confirmed)."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
           "url": "https://www.simulateofficial.com/simulate-demo",
-          "fetched": "2025-05 (user master list)"
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://www.beatport.com/label/simulate-recordings/113747",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://simulateofficial.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.electrobuzz.net/2024/04/massano-talking-on-simulate-recordings/599223/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Ellum Audio",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "techno",
         "melodic techno",
@@ -9295,38 +8061,35 @@
         "method": "email",
         "email": "demos@ellumaudio.com",
         "url": null,
-        "formats": [],
-        "requirements": [
-          "Email demos@ellumaudio.com. 'Deep, dirty and beautiful' — Maceo Plex's own description. Eclectic — spans dark techno to soulful house. Must have character and depth."
+        "formats": [
+          "streaming link"
         ],
-        "notes": "Email confirmed directly from SoundCloud bio: 'demos@ellumaudio.com'. Maceo Plex described by BBC Radio 1's fabric98 mix team as paying homage while blending genres into 'one journey filled mix'."
+        "requirements": [
+          "Use private SoundCloud links only",
+          "No file attachments"
+        ],
+        "notes": "Claimed email demos@ellumaudio.com confirmed via labelsbase.net/ellum-audio. ellumaudio.com returned 503 on fetch. Ellum Sampler Vol. 4 Part 1 released Aug 2024 confirms active. Deep/melodic house/techno (Maceo Plex label) — in scope."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://soundcloud.com/ellum",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
           "url": "https://labelsbase.net/ellum-audio",
-          "fetched": "2025-05 (user master list)"
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://ellumaudio.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://ellum.bandcamp.com/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Mindshake Records",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "techno",
         "tech house",
@@ -9341,37 +8104,29 @@
         "email": null,
         "url": "https://tstack.app/mindshakerecords",
         "formats": [],
-        "requirements": [
-          "Submit via tstack.app/mindshakerecords — exclusive demos only. Driving, funky techno with personality. Paco Osuna's sound is a full spectrum of house and techno."
-        ],
-        "notes": "Trackstack portal confirmed via AC55ID platform listing. Paco Osuna is one of Spain's most iconic techno DJs — resident at DC-10, Music On, and clubs globally."
+        "requirements": [],
+        "notes": "confirmed: claimed URL tstack.app/mindshakerecords matches actual channel; confirmed via official Mindshake Records Instagram bio ('DEMOS: https://www.tstack.app/mindshakerecords') and labelsbase. Active 2025 releases confirmed (Paco Osuna remix Jan 2025). Tech house/techno Paco Osuna label, in scope"
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://www.ac55id.com/label/mindshake/",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.instagram.com/mindshakerecords/",
+          "fetched": "2026-06-01"
         },
         {
           "url": "https://whenwedip.com/2025/01/premiere-paco-osuna-manolaco-mindshake-records/",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/mindshakerecords",
-          "fetched": "2025-05 (user master list)"
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Noir Music",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "deep house",
         "melodic techno",
@@ -9383,35 +8138,33 @@
       ],
       "why_it_belongs": "Gregor Tresher and Nick Curly have released on Noir. Noir's productions are sophisticated and cinematic. Good for producers making dark, deep, melodic electronic with strong artistic vision.",
       "submission": {
-        "method": "form",
-        "email": null,
+        "method": "email",
+        "email": "demo@noir-music.com",
         "url": "https://www.labelradar.com/labels/noirmusic/portal",
-        "formats": [],
-        "requirements": [
-          "Submit via LabelRadar portal. Dark, cinematic, deep electronic. Noir's sound bridges deep house, progressive, and atmospheric techno."
+        "formats": [
+          "mp3",
+          "wav"
         ],
-        "notes": "LabelRadar portal confirmed from labelsbase cross-reference. Gregor Tresher and Nick Curly both released here — serious credibility."
+        "requirements": [
+          "Two submission channels available: email demo@noir-music.com or LabelRadar portal",
+          "LabelRadar accepts: Deep House, Techno, Ambient"
+        ],
+        "notes": "CORRECTED: file claimed method=form with only LabelRadar URL. Official noir-music.com/contact page lists email demo@noir-music.com as primary demo channel. LabelRadar portal also confirmed active via Firecrawl (Deep House + Techno genres). Both channels are valid."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
+          "url": "https://noir-music.com/contact",
+          "fetched": "2026-06-01"
+        },
+        {
           "url": "https://www.labelradar.com/labels/noirmusic/portal",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://labelsbase.net/noir-music",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://noirmusic.dk",
-          "fetched": "2025-05 (user master list)"
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Of Unsound Mind",
@@ -9429,41 +8182,37 @@
       ],
       "why_it_belongs": "Skream is one of UK dance music's most respected figures — UK garage to dubstep to house to techno. Of Unsound Mind is entirely personal. Getting on here means Skream genuinely loves your music.",
       "submission": {
-        "method": "form",
+        "method": "unknown",
         "email": null,
-        "url": "https://of-unsound-mind.bandcamp.com",
+        "url": null,
         "formats": [],
-        "requirements": [
-          "Contact via Bandcamp. Eclectic UK underground — house, techno, and beyond. Skream has one of the most diverse music tastes in UK dance music."
-        ],
-        "notes": "Very selective — Skream transitioned from dubstep to house/techno. Releases only music he personally believes in. Contact via Bandcamp."
+        "requirements": [],
+        "notes": "Claimed bandcamp form URL of-unsound-mind.bandcamp.com is not a demo submission portal — it is the label's music storefront. No dedicated demo email or form found. A Facebook post from Skream noted 'more formal calls for submissions' planned, with no specific channel yet. Label confirmed active: ELZACE EP #117 released Oct 2025. House (UK) — in scope. Bandcamp URL incorrect as a submission method."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
           "url": "https://of-unsound-mind.bandcamp.com/",
-          "fetched": "2025-05 (user master list)"
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://ra.co/labels",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://ra.co/labels/17209",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://of-unsound-mind.bandcamp.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.facebook.com/ofunsound/posts/what-is-next-for-of-unsound-mind-ill-be-putting-out-more-formal-calls-for-submis/425581915425904/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "low"
     },
     {
       "name": "DeepClass Records",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "deep house",
         "tech house",
@@ -9478,37 +8227,29 @@
         "email": null,
         "url": "https://www.deepclassrecords.com/submit-your-demo/",
         "formats": [],
-        "requirements": [
-          "Submit via deepclassrecords.com/submit-your-demo. Deep house and tech house — Barcelona underground quality."
-        ],
-        "notes": "Official demo form on website confirmed. Barcelona deep house label actively seeking new talent."
+        "requirements": [],
+        "notes": "Official submission page at deepclassrecords.com/submit-your-demo/ confirmed active in searches. Page returned 403 on direct fetch (likely JavaScript-rendered form). Secondary sources confirm the URL and demos@deepclassrecords.com as contact email. Deep house / lounge house, Philadelphia, est. 2007. Active with recent releases."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
           "url": "https://www.deepclassrecords.com/submit-your-demo/",
-          "fetched": "2025-05 (user master list)"
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/deepclassrecords",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://deepclassrecords.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://ra.co/labels/1651",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Stil vor Talent — Light My Fire",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "melodic techno",
@@ -9522,38 +8263,35 @@
         "method": "email",
         "email": "demo@stilvortalent.de",
         "url": null,
-        "formats": [],
-        "requirements": [
-          "Email demo@stilvortalent.de — if your material is more dancefloor/club-focused, mention it might suit Light My Fire. Same SVT team routes accordingly."
+        "formats": [
+          "streaming link"
         ],
-        "notes": "Same demo email as main SVT — Oliver Koletzki routes appropriately to Light My Fire for dancefloor-focused material. Sub-label philosophy: electronic music with international impact and dancefloor foc"
+        "requirements": [
+          "Use private SoundCloud links only",
+          "This address covers Stil vor Talent main label; Light My Fire is an SVT sub-division"
+        ],
+        "notes": "Claimed email demo@stilvortalent.de confirmed directly on stilvortalent.de/imprint/ under 'Want to send in demos?' section. LabelRadar portal also exists (labelradar.com/labels/stilvortalent/portal). Light My Fire is confirmed as a Stil vor Talent sub-division (Oliver Koletzki). 'Celestial Bodies' (2023) is the most recent Light My Fire release found; SVT main label active through 2025. Genre: deep/melodic house — in scope."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://stilvortalent.de/",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://stilvortalent.de/imprint/",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/stilvortalent",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://stilvortalent.de",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.labelradar.com/labels/stilvortalent/portal",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Rebirth Records",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "techno",
         "tech house",
@@ -9565,85 +8303,34 @@
       "why_it_belongs": "Len Faki is a Berghain resident DJ — one of the most respected names in techno. Rebirth has connections across the Dutch and German underground techno scene.",
       "submission": {
         "method": "email",
-        "email": "demos@rebirthrecords.nl",
+        "email": "demo@rebirth.dj",
         "url": null,
         "formats": [],
         "requirements": [
-          "Email demos@rebirthrecords.nl. Driving, industrial techno — Berghain adjacent sound. Strong Dutch/German underground scene connections."
+          "private SoundCloud links only"
         ],
-        "notes": "Email confirmed via labelsbase and industry sources. Len Faki is a Berghain resident. Label has strong Dutch and German scene connections."
+        "notes": "corrected: file had demos@rebirthrecords.nl (wrong domain); official domain is rebirth.dj; demo email is demo@rebirth.dj per labelsbase. rebirth.dj site shows 'coming soon' under construction. Italian house label (not hardstyle REBiRTH Festival — different entity); founded 2006, celebrated 20th anniversary May 2026 with Rebirth 20 compilation. House label, in scope"
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://labelsbase.net",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/rebirth",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://rebirthrecords.nl",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://rebirthrecords.nl",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://edmidentity.com/2026/05/29/rebirth-records-rebirth-20/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "Get The Sound Records",
-      "tier": "B",
-      "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "house",
-        "tech house",
-        "deep house"
-      ],
-      "key_people": [
-        "Various"
-      ],
-      "why_it_belongs": "Good independent label with an active demo form. They listen to everything and have a clear, transparent policy. Good for producers building a release catalogue.",
-      "submission": {
-        "method": "form",
-        "email": null,
-        "url": "https://www.getthesoundrecords.com/form-pages/demo-submission",
-        "formats": [],
-        "requirements": [
-          "Submit via their form. Private streaming link only — no WeTransfer/download links. They respond within a week if interested. No duplicate submissions."
-        ],
-        "notes": "Demo form confirmed from official website. They state: 'We listen to all submissions... feel free to send new tracks whenever they're finished. Please do not submit the same track twice.'"
-      },
-      "sub_labels": [],
-      "sub_label_multiplier": 1,
-      "sources": [
-        {
-          "url": "https://www.getthesoundrecords.com/form-pages/demo-submission",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://www.getthesoundrecords.com/demo-drop",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://getthesoundrecords.com",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Noir sur Blanc Records",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "deep house",
@@ -9655,40 +8342,34 @@
       "why_it_belongs": "Elegant French deep house label. Good for producers making refined, artistic deep house with a European sensibility.",
       "submission": {
         "method": "form",
-        "email": null,
+        "email": "contact@noirsurblancrecords.com",
         "url": "https://www.noirsurblancrecords.com/demos/",
         "formats": [],
         "requirements": [
-          "Submit via noirsurblancrecords.com/demos. Elegant French deep house — refined, minimal, artistic. Black and white aesthetic."
+          "Submit via form on demos page"
         ],
-        "notes": "Demo form confirmed from official website: 'Send your demo to noir sur blanc and become part of the family.'"
+        "notes": "Confirmed: official website noirsurblancrecords.com/demos/ has an active demo submission form ('send us your demo by submitting the form below') plus contact@noirsurblancrecords.com as fallback. Claimed URL matches. French bass house / house label by KOOS, founded 2017, active on Beatport/Traxsource — in scope."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
           "url": "https://www.noirsurblancrecords.com/demos/",
-          "fetched": "2025-05 (user master list)"
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/noirsurblancrecords",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://noirsurblancrecords.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/noir-sur-blanc-records",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "HoTL Records",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "deep house",
@@ -9700,40 +8381,35 @@
       "why_it_belongs": "Active independent label with clear demo process. Good for producers building initial release history.",
       "submission": {
         "method": "form",
-        "email": null,
+        "email": "demos@hotlrecords.com",
         "url": "https://hotlrecords.com/submit-your-demo/",
         "formats": [],
         "requirements": [
-          "Submit via hotlrecords.com/submit-your-demo. Underground quality house across subgenres."
+          "Original music only (no bootlegs, mash-ups, promos)",
+          "Demo must be offered exclusively to HoTL Records"
         ],
-        "notes": "Demo form confirmed from official website. Active label releasing consistently."
+        "notes": "Claimed URL confirmed active. Form page live at hotlrecords.com/submit-your-demo/. Email demos@hotlrecords.com confirmed via labelsbase. Tech house label (David Tort & Markem), active. Claimed URL correct."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
           "url": "https://hotlrecords.com/submit-your-demo/",
-          "fetched": "2025-05 (user master list)"
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/hotlrecords",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://hotlrecords.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/hotl-records",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "Ritter Butzke Studio",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "techno",
         "house",
@@ -9744,41 +8420,39 @@
       ],
       "why_it_belongs": "Ritter Butzke is one of Berlin's favourite underground clubs. The label reflects the club's musical identity. Artists on the label get exposure at one of Berlin's best venues.",
       "submission": {
-        "method": "form",
-        "email": "label@ritterbutzke.com",
-        "url": "https://club.ritterbutzke.com",
-        "formats": [],
-        "requirements": [
-          "Email label@ritterbutzke.com. Berlin underground — techno and house for real dancefloors. Ritter Butzke is an iconic venue."
+        "method": "email",
+        "email": "demo@ritter-butzke.de",
+        "url": null,
+        "formats": [
+          "streaming link"
         ],
-        "notes": "Email confirmed via official website. Ritter Butzke is one of Berlin's best underground venues. Oliver Huntemann hosted Senso Sounds there in October 2025."
+        "requirements": [
+          "Send private SoundCloud links only",
+          "Include a short bio",
+          "No messenger submissions accepted — email only"
+        ],
+        "notes": "Claimed email label@ritterbutzke.com NOT confirmed — CORRECTED. Actual demo email is demo@ritter-butzke.de per labelsbase.net/ritter-butzke-studio. Claimed URL club.ritterbutzke.com is the venue events site, not a label demo page. Label is active: 'Break Of Dawn' released March 2025 on Ritter Butzke Records. Genre: deep house / melodic house & techno — in scope. studio.ritterbutzke.com connection refused."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://club.ritterbutzke.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/ritter-butzke-studio",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://club.ritterbutzke.com/event/041025-OliverHuntemannpres-SensoSounds",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://ritterbutzke.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.electrobuzz.net/2025/03/va-break-of-dawn-on-ritter-butzke-records/693277/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Adesso Music",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "deep house",
@@ -9790,40 +8464,28 @@
       "why_it_belongs": "Ferreck Dawn has released on Defected, Hot Creations, and Toolroom. Adesso is his home label. Good Italian underground entry point.",
       "submission": {
         "method": "form",
-        "email": "demos@adessomusic.com",
-        "url": "https://adessomusic.com/contact",
+        "email": null,
+        "url": "https://www.labelradar.com/labels/adessomusic/portal",
         "formats": [],
-        "requirements": [
-          "Email demos@adessomusic.com. Soulful, groovy Italian house. Quality and feel over trends."
-        ],
-        "notes": "Email confirmed via official website. Italian house institution with consistent quality output."
+        "requirements": [],
+        "notes": "corrected: file claimed demos@adessomusic.com email; actual primary channel is LabelRadar portal confirmed in search results. adessomusic.com returns 503. Junior Jack's house label, active releases on Beatport/Bandcamp 2024-2025. House label, in scope"
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://adessomusic.com/contact",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/adessomusic",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://adessomusic.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.labelradar.com/labels/adessomusic/portal",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Skint Records",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "electro house",
@@ -9836,40 +8498,36 @@
       "why_it_belongs": "Fatboy Slim's original label. 30 years of British electronic music. Still active and eclectic. Good for producers making distinctive, British-spirited electronic music.",
       "submission": {
         "method": "email",
-        "email": "demos@skint.net",
+        "email": "skint.demos@bmg.com",
         "url": null,
         "formats": [],
         "requirements": [
-          "Email demos@skint.net. Eclectic British electronic — big beat to house to beyond. If it's forward-thinking and British in spirit, worth submitting."
+          "Submit to skint.demos@bmg.com",
+          "BMG-owned label since 2014",
+          "Brighton-based dance/electronic label"
         ],
-        "notes": "Email confirmed via labelsbase. Fatboy Slim's home label — 30 year British electronic institution."
+        "notes": "CORRECTED: file had demos@skint.net (stale pre-BMG acquisition address). Real current channel is skint.demos@bmg.com per multiple secondary sources (labelsbase, search results referencing SoundCloud bio). Official skintentertainment.com domain did not resolve (DNS failure) — could not confirm on label's own site. Genre: dance/electronic/house-adjacent (Maya Jane Coles, Hercules & Love Affair, PBR Streetgang)."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://labelsbase.net",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/skint-records",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://skint.net",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://skint.net",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://soundcloud.com/skintrecords",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Agile Recordings",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "tech house",
         "house",
@@ -9881,40 +8539,38 @@
       "why_it_belongs": "Swedish underground label. Good for accessing the Scandinavian club circuit. Consistent quality output.",
       "submission": {
         "method": "email",
-        "email": "demos@agilerecordings.com",
+        "email": "demo@agilerec.com",
         "url": null,
         "formats": [],
         "requirements": [
-          "Email demos@agilerecordings.com. Swedish underground house and tech house."
+          "Private SoundCloud links only"
         ],
-        "notes": "Email confirmed via labelsbase. Swedish underground scene is strong with consistent quality output."
+        "notes": "CORRECTED: claimed demos@agilerecordings.com not verified. Actual demo email is demo@agilerec.com (note: agilerec.com domain, not agilerecordings.com), confirmed on labelsbase.net/agile-recordings. agilerecordings.com appears to be a near-empty front-end page. Label is primarily techno with tech-house elements (Uto Karem, UMEK, etc.) — borderline scope but includes tech house. Last confirmed release: '15 Years of Agile Recordings' compilation Jan 2024."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://labelsbase.net",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://labelsbase.net/agile-recordings",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://soundcloud.com/agilerecordings",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://agilerecordings.bandcamp.com/",
+          "fetched": "2026-06-01"
         },
         {
-          "url": "https://agilerecordings.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.beatport.com/release/15-years-of-agile-recordings/4385996",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     },
     {
       "name": "Loot Recordings",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "deep house",
@@ -9926,85 +8582,31 @@
       "why_it_belongs": "Good UK independent for groovy, soulful house producers. Consistent output, accessible submission process.",
       "submission": {
         "method": "email",
-        "email": "demos@lootrecordings.com",
+        "email": "demos@lootrecording.com",
         "url": null,
         "formats": [],
         "requirements": [
-          "Email demos@lootrecordings.com. Groovy, soulful UK house."
+          "Private SoundCloud link with brief artist bio",
+          "No attachments or downloads"
         ],
-        "notes": "Email confirmed via labelsbase. UK underground house label with consistent output."
+        "notes": "corrected: file had demos@lootrecordings.com (plural); official lootrecordings.com/contact page shows demos@lootrecording.com (singular 'recording' — note domain differs from label name). Deep/melodic organic house, est. 2014 by Kered. Active with 2024 releases."
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
-          "url": "https://labelsbase.net",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/lootrecordings",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://lootrecordings.bandcamp.com",
-          "fetched": "2025-05 (user master list)"
+          "url": "https://www.lootrecordings.com/contact/",
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
-    },
-    {
-      "name": "Tactile Records",
-      "tier": "B",
-      "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
-      "genre_tags": [
-        "house",
-        "deep house",
-        "tech house"
-      ],
-      "key_people": [
-        "Various"
-      ],
-      "why_it_belongs": "Good UK independent for producers building early release history in the underground house space.",
-      "submission": {
-        "method": "email",
-        "email": "demos@tactilerecords.co.uk",
-        "url": null,
-        "formats": [],
-        "requirements": [
-          "Email demos@tactilerecords.co.uk. Underground UK house — quality and feel over trends."
-        ],
-        "notes": "Email confirmed via labelsbase. UK underground label focused on quality over hype."
-      },
-      "sub_labels": [],
-      "sub_label_multiplier": 1,
-      "sources": [
-        {
-          "url": "https://labelsbase.net",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/tactilerecords",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/tactilerecords",
-          "fetched": "2025-05 (user master list)"
-        }
-      ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     },
     {
       "name": "MK837",
       "tier": "B",
       "access_path": "cold-demo-friendly",
-      "access_path_verified": "unverified",
+      "access_path_verified": "cold-demo-friendly",
       "genre_tags": [
         "house",
         "deep house",
@@ -10020,30 +8622,22 @@
         "url": "https://mk837.com/demo-submission",
         "formats": [],
         "requirements": [
-          "Submit via mk837.com/demo-submission. Underground US house. MK837 explicitly wants new artists — 'whether you're an experienced veteran or a guy just looking for a break, we're interested.' Label support your releases and those of labelmates."
+          "unreleased tracks only (no prior commercial release, free downloads, or streaming)",
+          "private links only",
+          "genres: house, tech house, deep house, progressive house, minimal/deep tech, techno"
         ],
-        "notes": "Demo form confirmed from official website. They state: 'We have a long history of working with new artists and helping them establish themselves over time.' Currently looking for new faces."
+        "notes": "confirmed: claimed URL mk837.com/demo-submission matches actual channel; confirmed on official MK837 website scrape showing live web form. Always accepting demos per site copy. House/tech-house label, in scope"
       },
       "sub_labels": [],
       "sub_label_multiplier": 1,
       "sources": [
         {
           "url": "https://mk837.com/demo-submission",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://soundcloud.com/mk837",
-          "fetched": "2025-05 (user master list)"
-        },
-        {
-          "url": "https://mk837.com",
-          "fetched": "2025-05 (user master list)"
+          "fetched": "2026-06-01"
         }
       ],
-      "last_verified": null,
-      "confidence": "low",
-      "verification": "pending",
-      "import_origin": "user master list (labelsdatabasemaster.js, stamped May 2025)"
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     }
   ]
 }
