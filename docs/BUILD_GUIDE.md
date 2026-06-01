@@ -24,7 +24,7 @@ House & Tech House · Independent Artist Toolkit · Tunis, Tunisia · 2026
 | 4 | **Notifications/digest is now a first-class, early feature.** Scheduled email (or push) of "follow-ups due / demos opened." | The follow-up queue only changes behavior if it reaches you when the app is closed. Load-bearing for the weekly habit. |
 | 5 | **Relationship stage on contacts** (`cold → engaged → responded → relationship`) + warm-up task type. | Signings increasingly come from warmed relationships, not pure cold sends. |
 | 6 | **Structured per-label submission requirements** → enforced as a pre-send checklist. | The #1 cause of instant rejection is mechanical (wrong format, released track, album not single). Pure friction-killer. |
-| 7 | **Scoring formula reworked for cold-start** (priors + Bayesian shrinkage + `access_path` gate). | v2's weights leave 70% of the score undefined for never-contacted labels and over-rank relationship-only labels. |
+| 7 | **Removed the weighted contact-scoring formula entirely.** Replaced with a simple **"times contacted" count** per label (derived from submission history), sorted untried-first. | The cold-start problem was inherent to *having* a score — with little data a weighted number is false precision you'd never trust. A count needs no data, can't be undefined, and is honest. `access_path` already answers "who's worth cold-sending." |
 | 8 | **AI prompts get hard guardrails** (anti-fabrication, length caps, conditional hooks, JSON output). | Generic/hallucinated AI emails get rejected instantly. |
 | 9 | **Mobile-first + installable PWA** stated as a requirement, not an afterthought. | The weekly habit happens on a phone. |
 | 10 | **Funnel/conversion view** (sent → opened → replied → considering → signed) as a Dashboard centerpiece + CSV export. | The most motivating and informative metric; also sets realistic expectations for cold reply rates. |
@@ -70,7 +70,7 @@ product.**
 ## 3. Structure — 4 layers
 
 - **🎵 Music Layer** — Track Vault (catalogue + status + holds), Feedback Log (memory of every reaction).
-- **📨 Outreach Layer (the heart)** — Contacts CRM, Send Demo, AI Email, Link Tracking, Follow-up, Contact Scoring, A&R Intel, Label Discovery.
+- **📨 Outreach Layer (the heart)** — Contacts CRM, Send Demo, AI Email, Link Tracking, Follow-up, A&R Intel, Label Discovery. (No scoring engine — labels carry a simple "times contacted" count instead.)
 - **👤 You Layer** — Artist Press Kit (EPK), Work Sessions, Goals.
 - **📊 Dashboard + Notifications** — the home screen and the digest that reaches you when the app is closed.
 
@@ -102,11 +102,15 @@ and feedback, and at most one active exclusive hold. `press_kit` is 1:1 with you
 `labels` is the read-only library seeding Discovery; pursued labels become
 `contacts` rows.
 
+**No scoring table.** "Times contacted" is a **derived count** of `submissions`
+per contact, not a stored or computed score — there is nothing to recalculate or
+keep in sync.
+
 ### Controlled genre vocabulary (shared by tracks + labels)
-Genre-fit scoring is 30% of the contact score and **only works if both sides use
-the same tags.** Maintain one enum, e.g.: `tech-house`, `house`, `melodic-house`,
-`minimal-deep-tech`, `afro-house`, `peak-time-techno`, `progressive-house`,
-`bass-house`, `organic-house`. No free text.
+Genre filtering in Discovery (and the AI email's "why it fits" reasoning) **only
+works if both sides use the same tags.** Maintain one enum, e.g.: `tech-house`,
+`house`, `melodic-house`, `minimal-deep-tech`, `afro-house`, `peak-time-techno`,
+`progressive-house`, `bass-house`, `organic-house`. No free text.
 
 ---
 
@@ -157,24 +161,22 @@ Before any send, Send Demo renders the target's `submission_requirements` as a
 checklist (file format, unreleased-only, single-not-album, no-stream-links, etc.)
 and **warns if the track is on exclusive hold elsewhere.**
 
-### Contact scoring (reworked for cold-start)
-Single 0–100 score; higher = more worth your time **right now**.
+### Prioritization — no scoring engine, just two honest signals
+There is **no weighted contact score.** A computed 0–100 score has a cold-start
+problem (almost no data early) and is false precision you'd never trust. Instead,
+prioritization comes from two signals that need **zero history**:
 
-```
-score = access_gate × ( 0.35·response_rate*  +  0.30·genre_fit
-                       + 0.20·response_speed  +  0.15·history )
+- **`access_path`** — who's even worth a cold send. Discovery shows
+  `cold-demo-friendly` first; `relationship-only` elites go to a separate
+  **"long game"** list, not the weekly cold-send queue.
+- **Times contacted** — a simple count per label, derived from `submissions`
+  (`count(submissions WHERE contact_id = …)`). `0` = your next target; a high
+  count with no reply = change the track or move on.
 
-response_rate*  = Bayesian blend of the label-DB prior and your own sends:
-                  (prior·k + your_replies) / (k + your_sends),  k ≈ 3
-genre_fit       = 0.6·tag_overlap + 0.3·bpm_range_match + 0.1·key/energy_match
-access_gate     = 1.0 cold-demo-friendly · 0.8 open-window-only
-                  · 0.5 needs-warm-intro · 0.3 relationship-only
-```
-- New labels score on **reputation prior**, then your real data takes over.
-- Stale data (no re-verify in ~6 months) lowers **confidence**, shown as a badge —
-  it doesn't silently corrupt the number.
-- `relationship-only` elites are routed to a separate **"long game"** list, not
-  your weekly cold-send queue.
+**Default Discovery sort:** cold-demo-friendly + untried (0 contacts) first, then
+by tier. Stale labels (no re-verify in ~6 months) get a freshness badge. That's
+the whole prioritizer — nothing to compute, nothing to debug, nothing that breaks
+on day one.
 
 ### Follow-up timing
 - **7 days silence** → gentle first-nudge queued.
@@ -264,7 +266,7 @@ sub-labels; 1 Repopulate Mars ≈ 3), add new qualified contacts.
 
 ### Intelligence — make every send smarter
 7. **Feedback Log** — responses + silence against submissions · types · link back to track/contact. _Done: every reply (and non-reply) captured._
-8. **Contact Scoring & A&R Intel** — cold-start formula + access_gate + score bands · intel records. _Done: contacts ranked, research attached._
+8. **A&R Intel & prioritization** — A&R intel records per contact · show "times contacted" on every label · Discovery sorts untried + cold-demo-friendly first. **(No weighted score.)** _Done: each label shows your history at a glance and untried targets surface first._
 9. **Dashboard + Funnel** — aggregate signals · sent→opened→replied→considering→signed funnel · response-rate by genre/tier · streak · CSV export. _Done: home screen answers "what now?"_
 
 ### Advanced (v3) — the unfair advantages
