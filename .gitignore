@@ -1,3 +1,4 @@
 .firecrawl.env
 .firecrawl/
+data/_agent_*.json
 node_modules/
