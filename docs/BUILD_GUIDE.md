@@ -18,14 +18,14 @@ House & Tech House · Independent Artist Toolkit · Tunis, Tunisia · 2026
 
 | # | Change | Why |
 |---|--------|-----|
-| 1 | **Don't relay cold email through an app domain.** Send via the user's own Gmail (OAuth) or a `mailto:`/compose deep link. | A server relay on `demotrack.app` lands demos in spam and burns domain reputation. A&Rs trust mail from your real address. |
+| 1 | **Email is preset-driven, not AI-written end-to-end, and never relayed by the app.** You keep your own template presets; the app auto-fills merge fields and AI suggests only the one personalized `{hook}` sentence; the filled email opens in *your* Gmail / `mailto:` to send from your real inbox. | A server relay on `demotrack.app` lands demos in spam and burns domain reputation. Presets keep your voice + speed; AI on just the hook avoids the "generic AI email" smell while still removing the blank-page excuse. |
 | 2 | **New `access_path` field on labels/contacts** (`cold-demo-friendly` / `open-window-only` / `needs-warm-intro` / `relationship-only`). | Several seed "elite" labels don't sign unknowns from cold demos. Tier ≠ accessibility. Prevents bouncing off walls. |
 | 3 | **Exclusivity / hold tracking on tracks.** Send Demo warns before re-sending a held track. | Labels expect exclusive demos; shopping a held/signed track is a real faux-pas. v2's status field didn't capture this. |
 | 4 | **Notifications/digest is now a first-class, early feature.** Scheduled email (or push) of "follow-ups due / demos opened." | The follow-up queue only changes behavior if it reaches you when the app is closed. Load-bearing for the weekly habit. |
 | 5 | **Relationship stage on contacts** (`cold → engaged → responded → relationship`) + warm-up task type. | Signings increasingly come from warmed relationships, not pure cold sends. |
 | 6 | **Structured per-label submission requirements** → enforced as a pre-send checklist. | The #1 cause of instant rejection is mechanical (wrong format, released track, album not single). Pure friction-killer. |
 | 7 | **Removed the weighted contact-scoring formula entirely.** Replaced with a simple **"times contacted" count** per label (derived from submission history), sorted untried-first. | The cold-start problem was inherent to *having* a score — with little data a weighted number is false precision you'd never trust. A count needs no data, can't be undefined, and is honest. `access_path` already answers "who's worth cold-sending." |
-| 8 | **AI prompts get hard guardrails** (anti-fabrication, length caps, conditional hooks, JSON output). | Generic/hallucinated AI emails get rejected instantly. |
+| 8 | **AI prompts get hard guardrails** (anti-fabrication, length caps, hook required + no-duplicate warning). | Generic/hallucinated AI emails get rejected instantly; a duplicate hook is a mass-blast tell. |
 | 9 | **Mobile-first + installable PWA** stated as a requirement, not an afterthought. | The weekly habit happens on a phone. |
 | 10 | **Funnel/conversion view** (sent → opened → replied → considering → signed) as a Dashboard centerpiece + CSV export. | The most motivating and informative metric; also sets realistic expectations for cold reply rates. |
 | 11 | **Leaner MVP ordering.** Ship the loop (Tracks → Contacts → Send → AI Email → Follow-up + digest) before the v3 polish. | The friction thesis says get the loop running fast; advanced toys come after the habit forms. |
@@ -58,7 +58,7 @@ scene respect · accessible to unknown artists. Applied to every seeded label.
 
 ```
 1 DISCOVER → 2 PREPARE → 3 GENERATE → 4 SEND → 5 TRACK → 6 FOLLOW-UP → 7 LEARN
-   find labels  track+kit   AI email   <3 min   opens     right time     log + patterns
+   find labels  track+kit   preset+hook <3 min   opens     right time     log + patterns
                                                                    ↘ back to 1 with next track
 ```
 
@@ -87,7 +87,7 @@ private to your account. (Single-user today; RLS keeps it safe and future-proof.
 | `tracks` | Catalogue + status (`idea → demo-ready → submitted → signed`). | + `exclusive_hold_contact_id`, + `hold_until`, + readiness checklist fields |
 | `submissions` | Every demo sent (track ↔ contact); follow-up dates & tracking. | + `method` (email/form/dm), + `tracking_enabled` |
 | `feedback` | Every response, tied to track + contact. | + treat **silence** as an explicit logged signal |
-| `templates` | Reusable email & follow-up templates. | — |
+| `templates` | Your preset email & follow-up skeletons with `{merge_fields}` + one `{hook}` slot. | now first-class (preset-driven sends) |
 | `ar_intel` | Research notes, one record per contact. | — |
 | `work_sessions` | Studio time logs (time, work, demos, mood). | — |
 | `goals` | Targets + live progress. | — |
@@ -118,19 +118,46 @@ works if both sides use the same tags.** Maintain one enum, e.g.: `tech-house`,
 
 Claude is used in exactly three high-leverage, skippable-task places.
 
-### 5.1 Demo email writing
-- **Inputs (~13):** artist name, track name, genre tags, BPM, key, label name,
-  why-it-fits, recent releases (only if known), private listen link, press-kit
-  link, tone, A&R hook (only if `ar_intel` exists), prior history with contact.
-- **Output:** strict JSON `{ "subject": ..., "body": ... }` + regex fallback parser.
-- **Hard guardrails baked into the system prompt:**
-  - One track only. Body ≤ ~120 words. No "Dear Sir/Madam," no life story, no
-    walls of text. Lead with the track, not the bio.
-  - **Never fabricate** releases, stats, plays, or an A&R angle. Reference a
-    recent release / personal hook **only if** intel is provided; otherwise omit.
-  - Respect the label's stated submission rules (e.g. "private SoundCloud only").
-- **Tone presets → concrete instructions:** _Professional_ (concise, respectful),
-  _Personal_ (one genuine line on why this label), _Direct_ (peak-time, no fluff).
+### 5.1 Email presets + AI hook suggestion
+The email is **not** AI-written end-to-end. You keep a small library of your own
+**preset templates** (a skeleton with merge fields); the app auto-fills everything
+mechanical, and AI suggests only the **one personalized sentence** (`{hook}`) that
+actually earns a reply. This is faster than full generation *and* more personal
+than a tweaked block of copy-paste.
+
+**How a preset works** — a skeleton with merge fields the app fills from the
+track + contact + your profile, plus exactly one slot you personalize:
+```
+Subject: {genre} demo — "{track_title}" for {label}
+
+Hi {first_name},
+
+I'm {artist_name}, a house & tech house producer from Tunis. {hook}
+
+"{track_title}" — {bpm} BPM, {key}. Private listen: {listen_link}
+More on me: {press_kit_link}
+
+Would love your thoughts. Thanks for listening.
+{artist_name}
+```
+Everything in `{...}` auto-fills **except `{hook}`**. A send is: pick track → pick
+label → confirm/tweak the hook → send. Suggested starter presets: *cold email*,
+*DM* (shorter), *warm follow-up*, *form-portal note*.
+
+**The AI's only job** is to draft the `{hook}` — one honest sentence tailored to
+this label, e.g. _"Your recent Cloonee EP on Hellbent is exactly the lane this
+track sits in."_ You always review/edit before it goes.
+- **Inputs to the hook prompt:** label name, genre tags, the track's vibe, and
+  the `ar_intel` record **if one exists**.
+- **Output:** 1–2 plain-text sentence options (no JSON needed — it's one field).
+- **Hard guardrails:** ≤ ~30 words; **never fabricate** a release, stat, or
+  personal angle — if no `ar_intel` exists, return a generic-but-honest line (or
+  nothing) rather than inventing one. The hook field is **required** and the app
+  **warns if it's empty or identical to a recent send** (anti-mass-blast).
+
+**Sending:** the filled template opens in your own Gmail / a `mailto:` compose
+window with subject + body prefilled — you send from your real inbox. No in-app
+relay, no deliverability risk, no send engine to build.
 
 ### 5.2 Artist bio generation
 3 tones (Professional / Story / Punchy) from profile **facts only** — no invented
@@ -152,7 +179,7 @@ Reads across the whole feedback log and surfaces patterns. Guardrails:
 ### Three submission methods (color-coded in Send Demo)
 | Method | Badge | Flow |
 |--------|-------|------|
-| Email | 🟢 Green | AI draft → **opens your real inbox / Gmail compose (or sends via your connected Gmail)** → confirm logged. *(Changed from in-app relay.)* |
+| Email | 🟢 Green | Pick preset → app auto-fills merge fields → AI suggests the `{hook}`, you confirm/tweak → **opens your Gmail / `mailto:` prefilled** → you send → confirm logged. *(No in-app relay.)* |
 | Form | 🟡 Amber | App opens the portal/platform (LabelRadar, Demodrop, Typeform…) in a new tab → you submit → confirm. |
 | DM | 🔵 Blue | App opens the profile → you send → confirm. |
 
@@ -260,8 +287,8 @@ sub-labels; 1 Repopulate Mars ≈ 3), add new qualified contacts.
 1. **Foundation** — Supabase project · 12-table schema · email auth · RLS · React+Vite+Tailwind PWA shell + routing. _Done: you can log in, data secured._
 2. **Track Vault** — add/edit/list tracks · status · listen link · notes · readiness checklist · hold field. _Done: tracks stored with status._
 3. **Contacts CRM** — 7 categories · method + links · `relationship_stage` · `access_path` · seed 17 labels · history view. _Done: label list lives in-app._
-4. **Send Demo** — pick track+contact · 3 methods (email via your inbox / form / DM) · pre-send checklist + hold warning · record to history. **← first usable milestone.**
-5. **AI Email Generation** — wire Claude · ~13-input form · tone presets · guardrails · JSON output + fallback parser. _Done: tailored draft in seconds._
+4. **Send Demo** — pick track+contact · choose a preset · auto-fill merge fields · 3 methods (email opens your inbox prefilled / form / DM) · pre-send checklist + hold warning · record to history. **← first usable milestone.**
+5. **Email presets + AI hook** — preset CRUD with `{merge_fields}` · auto-fill from track/contact/profile · wire Claude to suggest the `{hook}` (guardrails: ≤30 words, no fabrication, required, no-duplicate warning) · `mailto:`/Gmail prefill. _Done: a tailored, personal demo email in ~1 minute, sent from your own inbox._
 6. **Follow-up + Notifications digest** — template engine · 7/14-day rules · overdue queue · **scheduled email/push digest.** _Done: the app tells you who to follow up — and reminds you when it's closed._
 
 ### Intelligence — make every send smarter
