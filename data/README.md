@@ -18,12 +18,21 @@ seeds the in-app Label Discovery library (Phase 3, spec §11).
 
 | Metric | Value |
 |---|---|
-| Labels recorded | **205** |
-| Contactable now (have a real demo channel) | 192 / 205 |
-| High confidence (official page or ≥2 sources) | 104 |
-| Medium confidence (single secondary source — re-verify) | 82 |
+| Labels recorded | **211** |
+| Contactable now (have a real demo channel) | 198 / 211 |
+| High confidence (official page or ≥2 sources) | 107 |
+| Medium confidence (single secondary source — re-verify) | 85 |
 | Low confidence (channel unconfirmed / window-only) | 19 |
-| Tier mix | 11 ELITE · 66 A · 128 B |
+| Tier mix | 11 ELITE · 67 A · 133 B |
+
+### Batch 6 — major-label coverage check
+Ran a gap analysis against a checklist of canonical house/tech-house labels. Coverage
+was already strong; filled the remaining true gaps with verified additions:
+**Strictly Rhythm** (`strictlyrec.com/demos/`), **Kittball Records**, **Lone Romantic**
+(Maceo Plex), **STMPD RCRDS** (already present), **Do Not Sleep**, **Ovum Recordings**
+(Josh Wink), **8Bit Records**. Deliberately *not* added: Cocoon / Soma / Intec / Truesoul
+(techno, out of scope); **Edible** and **Sosumi** (real labels, but no current demo
+channel could be verified — left as open gaps to revisit).
 
 ### Batch 5 — the master-list import was NOT trusted blindly
 The uploaded file (`labelsdatabasemaster.js`) had a JS syntax error, a header/row

@@ -8638,6 +8638,216 @@
       ],
       "last_verified": "2026-06-01",
       "confidence": "high"
+    },
+    {
+      "name": "Strictly Rhythm",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "house"
+      ],
+      "key_people": [],
+      "why_it_belongs": "Legendary NYC house institution since 1989 — and it runs a live demo form, so it's reachable.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "http://strictlyrec.com/demos/",
+        "formats": [
+          "private SoundCloud link"
+        ],
+        "requirements": [
+          "Submit via the on-site demos form (artist name, email, private SoundCloud link)"
+        ],
+        "notes": ""
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "http://strictlyrec.com/demos/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Kittball Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "tech house",
+        "house"
+      ],
+      "key_people": [
+        "Tube & Berger"
+      ],
+      "why_it_belongs": "Tube & Berger's German tech house label — consistent Beatport presence and demo-friendly.",
+      "submission": {
+        "method": "form",
+        "email": "demos@kittball.com",
+        "url": "https://www.labelradar.com/labels/KittballRecords/portal",
+        "formats": [],
+        "requirements": [
+          "Submit via the LabelRadar portal, the on-site demo form, or the demo email"
+        ],
+        "notes": "General: info@kittball.com (not demos)."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.labelradar.com/labels/KittballRecords/portal",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.kittball.com/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Lone Romantic",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "melodic house",
+        "organic house"
+      ],
+      "key_people": [
+        "Maceo Plex"
+      ],
+      "why_it_belongs": "Maceo Plex's melodic/organic label — 'beautifully organized noise', strong scene pull.",
+      "submission": {
+        "method": "email",
+        "email": "demos@loneromantic.com",
+        "url": null,
+        "formats": [],
+        "requirements": [],
+        "notes": "Demo address published on the label's official SoundCloud."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://soundcloud.com/loneromantic",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://ra.co/labels/14861",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Do Not Sleep",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "tech house",
+        "house"
+      ],
+      "key_people": [
+        "Darius Syrossian"
+      ],
+      "why_it_belongs": "Darius Syrossian's tech house brand (label + Ibiza party) — credible underground platform.",
+      "submission": {
+        "method": "email",
+        "email": "info@donotsleepibiza.com",
+        "url": null,
+        "formats": [],
+        "requirements": [],
+        "notes": "Demo A&R email per directory; confirm against an official channel before bulk use."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://labelsbase.net/do-not-sleep",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Ovum Recordings",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "house",
+        "tech house",
+        "techno"
+      ],
+      "key_people": [
+        "Josh Wink"
+      ],
+      "why_it_belongs": "Josh Wink's seminal Philadelphia label (since 1994) — deep house/techno heritage and respect.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://ovumrecordings.com/",
+        "formats": [],
+        "requirements": [
+          "Submit via the official site's 'Submit a Demo'",
+          "Postal A&R also accepted: Ovum Recordings, 611 S. 4th St, Philadelphia, PA 19147, Attn: A&R"
+        ],
+        "notes": ""
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://ovumrecordings.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.joshwink.com/ovum-recordings",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "8Bit Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "tech house",
+        "deep house",
+        "house"
+      ],
+      "key_people": [],
+      "why_it_belongs": "German house/tech house label with steady output and an open demo door.",
+      "submission": {
+        "method": "email",
+        "email": "info@8bit-records.de",
+        "url": null,
+        "formats": [],
+        "requirements": [],
+        "notes": "Demo A&R email per directory; info@ doubles as the demo address — confirm before bulk use."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://labelsbase.net/8bit",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
     }
   ]
 }
