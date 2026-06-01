@@ -8848,6 +8848,291 @@
       ],
       "last_verified": "2026-06-01",
       "confidence": "medium"
+    },
+    {
+      "name": "Suol",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "deep house",
+        "house"
+      ],
+      "key_people": [
+        "Full Crate"
+      ],
+      "why_it_belongs": "Respected Berlin deep/soulful house label with a strong, distinctive catalogue.",
+      "submission": {
+        "method": "email",
+        "email": "label@suol.com",
+        "url": null,
+        "formats": [],
+        "requirements": [],
+        "notes": "General: info@suol.com (not demos)."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://suol.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://labelsbase.net/suol",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Katermukke",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "melodic house",
+        "organic house",
+        "tech house"
+      ],
+      "key_people": [],
+      "why_it_belongs": "Berlin melodic/organic house label with broad reach and a steady release schedule.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://www.labelradar.com/labels/katermukke/portal",
+        "formats": [],
+        "requirements": [
+          "Submit via the LabelRadar portal"
+        ],
+        "notes": ""
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.labelradar.com/labels/katermukke/portal",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://www.katermukke.com/",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "3000 Grad Records",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "organic house",
+        "melodic house"
+      ],
+      "key_people": [],
+      "why_it_belongs": "North-German organic/melodic house label and crew — a recognised home for the outdoor/organic sound.",
+      "submission": {
+        "method": "email",
+        "email": "demo@3000grad-records.com",
+        "url": "https://www.3000grad.com/music/",
+        "formats": [],
+        "requirements": [
+          "3 tracks minimum, with downloads enabled"
+        ],
+        "notes": ""
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://www.3000grad.com/music/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://labelsbase.net/3000-grad-records",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
+    },
+    {
+      "name": "Time Is Now",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "unverified",
+      "genre_tags": [
+        "uk garage",
+        "bass house",
+        "house"
+      ],
+      "key_people": [
+        "My Nu Leng"
+      ],
+      "why_it_belongs": "Leading UKG / garage-house label (Shall Not Fade family) — a key route in the UK garage revival.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": null,
+        "formats": [],
+        "requirements": [
+          "Submit via the label's online form (linked from socials)"
+        ],
+        "notes": "NEEDS the exact current submission link captured; UKG/garage-house leaning."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://ra.co/labels/2659",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "low"
+    },
+    {
+      "name": "Natura Viva",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "house",
+        "tech house"
+      ],
+      "key_people": [],
+      "why_it_belongs": "Italian house/tech house label (since 2010) that openly welcomes demos.",
+      "submission": {
+        "method": "email",
+        "email": "info.naturaviva@gmail.com",
+        "url": null,
+        "formats": [],
+        "requirements": [],
+        "notes": "Label states 'DEMOS are WELCOME' on its official channels."
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://soundcloud.com/naturaviva",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://labelsbase.net/natura-viva",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Lapsus Music",
+      "tier": "B",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "tech house",
+        "house"
+      ],
+      "key_people": [
+        "Albert Salinas"
+      ],
+      "why_it_belongs": "Barcelona tech/house label with consistent output and a clear submission route.",
+      "submission": {
+        "method": "form",
+        "email": null,
+        "url": "https://www.lapsusmusic.com",
+        "formats": [],
+        "requirements": [
+          "Submit via the 'Submit Music' form on the official site"
+        ],
+        "notes": ""
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://lapsus.bandcamp.com/",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://labelsbase.net/lapsus-music",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Só Track Boa",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "tech house",
+        "house"
+      ],
+      "key_people": [
+        "Vintage Culture"
+      ],
+      "why_it_belongs": "Major Brazilian tech house brand (Vintage Culture's circle) — huge reach in the LATAM scene.",
+      "submission": {
+        "method": "email",
+        "email": "demos@sotrackboa.com",
+        "url": null,
+        "formats": [],
+        "requirements": [],
+        "notes": ""
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://soundcloud.com/Sotrackboa",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "Warung Recordings",
+      "tier": "A",
+      "access_path": "cold-demo-friendly",
+      "access_path_verified": "cold-demo-friendly",
+      "genre_tags": [
+        "melodic house",
+        "tech house",
+        "organic house"
+      ],
+      "key_people": [],
+      "why_it_belongs": "Warung Beach Club's label (Brazil, since 2012) — a globally respected melodic/organic platform.",
+      "submission": {
+        "method": "form",
+        "email": "demos@warungrec.com",
+        "url": "https://tstack.app/warung-rec",
+        "formats": [],
+        "requirements": [
+          "Submit via the Trackstack portal (or the demo email)"
+        ],
+        "notes": ""
+      },
+      "sub_labels": [],
+      "sub_label_multiplier": 1,
+      "sources": [
+        {
+          "url": "https://tstack.app/warung-rec",
+          "fetched": "2026-06-01"
+        },
+        {
+          "url": "https://soundcloud.com/warungrecordings",
+          "fetched": "2026-06-01"
+        }
+      ],
+      "last_verified": "2026-06-01",
+      "confidence": "high"
     }
   ]
 }

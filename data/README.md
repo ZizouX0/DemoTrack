@@ -18,12 +18,23 @@ seeds the in-app Label Discovery library (Phase 3, spec §11).
 
 | Metric | Value |
 |---|---|
-| Labels recorded | **211** |
-| Contactable now (have a real demo channel) | 198 / 211 |
-| High confidence (official page or ≥2 sources) | 107 |
-| Medium confidence (single secondary source — re-verify) | 85 |
-| Low confidence (channel unconfirmed / window-only) | 19 |
-| Tier mix | 11 ELITE · 67 A · 133 B |
+| Labels recorded | **219** |
+| Contactable now (have a real demo channel) | 206 / 219 |
+| High confidence (official page or ≥2 sources) | 110 |
+| Medium confidence (single secondary source — re-verify) | 89 |
+| Low confidence (channel unconfirmed / window-only) | 20 |
+| Tier mix | 11 ELITE · 69 A · 139 B |
+
+### Batch 7 — "no good label left behind" sweep
+Targeted the regions/niches still thin (Spain/Italy, Germany/Benelux/Nordics, UK/IE,
+North America, LATAM/Africa, sub-niches + artist labels). Added 8 verified:
+**Suol, Katermukke, 3000 Grad Records, Natura Viva, Lapsus Music, Só Track Boa,
+Warung Recordings, Time Is Now**. Confirmed-but-excluded: **Steel City Dance Discs**
+("⚠ NO DEMOS" stated on its own channels). Still no verifiable demo channel (left as
+open leads): Edible, Sosumi, G-Town, UTTU, Poker Flat, Sol Selectas, Public Possession,
+Apparel Music, Lump Records — real labels, but no current public demo route found.
+(A broader 6-agent pass was cut short by a model rate-limit; can be resumed to extend
+coverage further.)
 
 ### Batch 6 — major-label coverage check
 Ran a gap analysis against a checklist of canonical house/tech-house labels. Coverage
