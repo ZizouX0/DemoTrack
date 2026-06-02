@@ -5,6 +5,651 @@ import Modal from '../components/Modal'
 import Field, { inputCls, selectCls } from '../components/Field'
 import Badge from '../components/Badge'
 
+/* ── Press Kit helpers ──────────────────────────────────────── */
+/** Convert artist name to URL-safe slug */
+function slugify(str) {
+  return str
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '')
+    .replace(/-{2,}/g, '-')
+    .replace(/^-|-$/g, '')
+}
+
+/** Build the public press-kit URL from a slug */
+function buildPressKitUrl(slug) {
+  const base = import.meta.env.VITE_PRESS_BASE_URL
+  if (base) return `${base}/${slug}`
+  return `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/press-kit?slug=${slug}`
+}
+
+const TONE_OPTIONS = [
+  { value: 'professional', label: 'Professional' },
+  { value: 'story', label: 'Story' },
+  { value: 'punchy', label: 'Punchy' },
+]
+
+/* ── Press Kit section ──────────────────────────────────────── */
+function PressKitSection({ userId }) {
+  /* ── data state ── */
+  const [kit, setKit] = useState(null)        // null = not yet loaded
+  const [loading, setLoading] = useState(true)
+  const [loadError, setLoadError] = useState(null)
+
+  /* ── form state ── */
+  const [artistName, setArtistName]   = useState('')
+  const [slug, setSlug]               = useState('')
+  const [slugEdited, setSlugEdited]   = useState(false) // user manually changed slug
+  const [bio, setBio]                 = useState('')
+  const [bioTone, setBioTone]         = useState('professional')
+  const [links, setLinks]             = useState([])       // [{label,url}]
+  const [releases, setReleases]       = useState([])       // [{title,url}]
+  const [stats, setStats]             = useState([])       // [{label,value}] (local array form)
+  const [photoUrl, setPhotoUrl]       = useState('')
+  const [autoAttach, setAutoAttach]   = useState(true)
+
+  /* ── ui state ── */
+  const [saving, setSaving]           = useState(false)
+  const [saveError, setSaveError]     = useState(null)
+  const [saveOk, setSaveOk]           = useState(false)
+  const [genLoading, setGenLoading]   = useState(false)
+  const [genError, setGenError]       = useState(null)
+
+  /* ── populate form from loaded kit ── */
+  function populateForm(row) {
+    setArtistName(row.artist_name ?? '')
+    setSlug(row.slug ?? '')
+    setSlugEdited(Boolean(row.slug))
+    setBio(row.bio ?? '')
+    setBioTone(row.bio_tone ?? 'professional')
+    setLinks(Array.isArray(row.links) ? row.links : [])
+    setReleases(Array.isArray(row.releases) ? row.releases : [])
+    // stats is stored as {label: value} object — convert to array for editing
+    const statsObj = row.stats && typeof row.stats === 'object' ? row.stats : {}
+    setStats(Object.entries(statsObj).map(([label, value]) => ({ label, value: String(value) })))
+    setPhotoUrl(row.photo_url ?? '')
+    setAutoAttach(row.auto_attach ?? true)
+  }
+
+  /* ── load ── */
+  const load = useCallback(async () => {
+    setLoading(true)
+    setLoadError(null)
+    const { data, error: err } = await supabase
+      .from('press_kit')
+      .select('*')
+      .eq('user_id', userId)
+      .maybeSingle()
+    if (err) {
+      setLoadError(err.message)
+    } else {
+      setKit(data ?? null)
+      if (data) populateForm(data)
+    }
+    setLoading(false)
+  }, [userId])
+
+  useEffect(() => { load() }, [load])
+
+  /* ── auto-slug from artist name ── */
+  useEffect(() => {
+    if (!slugEdited && artistName) {
+      setSlug(slugify(artistName))
+    }
+  }, [artistName, slugEdited])
+
+  /* ── AI bio generation ── */
+  async function handleGenerateBio() {
+    setGenLoading(true)
+    setGenError(null)
+    try {
+      const statsObj = Object.fromEntries(stats.map((s) => [s.label, s.value]))
+      const { data, error: fnErr } = await supabase.functions.invoke('generate-bio', {
+        body: {
+          artist_name: artistName,
+          tone: bioTone,
+          facts: {
+            location: 'Tunis, Tunisia',
+            releases,
+            stats: statsObj,
+            links,
+            notes: '',
+          },
+        },
+      })
+      if (fnErr) throw new Error(fnErr.message ?? 'Edge function error')
+      if (data?.error) throw new Error(data.error)
+      const generated = (data?.bio ?? '').trim()
+      if (!generated) throw new Error('No bio returned — try again or write manually.')
+      setBio(generated)
+    } catch (err) {
+      setGenError(err.message)
+    }
+    setGenLoading(false)
+  }
+
+  /* ── save (upsert) ── */
+  async function handleSave(e) {
+    e.preventDefault()
+    setSaving(true)
+    setSaveError(null)
+    setSaveOk(false)
+
+    // Convert stats array back to object; detect if stats changed
+    const statsObj = Object.fromEntries(
+      stats.filter((s) => s.label.trim()).map((s) => [s.label.trim(), s.value])
+    )
+    const prevStatsObj = kit?.stats && typeof kit.stats === 'object' ? kit.stats : {}
+    const statsChanged = JSON.stringify(statsObj) !== JSON.stringify(prevStatsObj)
+    const statsUpdatedAt = statsChanged ? new Date().toISOString().slice(0, 10) : (kit?.stats_updated_at ?? null)
+
+    const row = {
+      user_id: userId,
+      slug: slug.trim() || null,
+      artist_name: artistName.trim() || null,
+      bio: bio.trim() || null,
+      bio_tone: bioTone,
+      links: links.filter((l) => l.url.trim()),
+      releases: releases.filter((r) => r.url.trim()),
+      stats: statsObj,
+      stats_updated_at: statsUpdatedAt,
+      photo_url: photoUrl.trim() || null,
+      auto_attach: autoAttach,
+      updated_at: new Date().toISOString(),
+    }
+
+    const { data: saved, error: err } = await supabase
+      .from('press_kit')
+      .upsert(row, { onConflict: 'user_id' })
+      .select()
+      .single()
+
+    if (err) {
+      // Unique constraint on slug
+      if (err.code === '23505' || err.message?.toLowerCase().includes('slug')) {
+        setSaveError('That handle is already taken — try another slug.')
+      } else {
+        setSaveError(err.message)
+      }
+    } else {
+      setKit(saved)
+      populateForm(saved)
+      setSaveOk(true)
+      setTimeout(() => setSaveOk(false), 3000)
+    }
+    setSaving(false)
+  }
+
+  /* ── links repeater helpers ── */
+  function addLink() { setLinks((l) => [...l, { label: '', url: '' }]) }
+  function updateLink(i, field, value) {
+    setLinks((l) => l.map((item, idx) => idx === i ? { ...item, [field]: value } : item))
+  }
+  function removeLink(i) { setLinks((l) => l.filter((_, idx) => idx !== i)) }
+
+  /* ── releases repeater helpers ── */
+  function addRelease() { setReleases((r) => [...r, { title: '', url: '' }]) }
+  function updateRelease(i, field, value) {
+    setReleases((r) => r.map((item, idx) => idx === i ? { ...item, [field]: value } : item))
+  }
+  function removeRelease(i) { setReleases((r) => r.filter((_, idx) => idx !== i)) }
+
+  /* ── stats repeater helpers ── */
+  function addStat() { setStats((s) => [...s, { label: '', value: '' }]) }
+  function updateStat(i, field, value) {
+    setStats((s) => s.map((item, idx) => idx === i ? { ...item, [field]: value } : item))
+  }
+  function removeStat(i) { setStats((s) => s.filter((_, idx) => idx !== i)) }
+
+  /* ── render ── */
+  if (loading) {
+    return (
+      <section aria-labelledby="press-kit-heading" className="space-y-3">
+        <p id="press-kit-heading" className="text-xs font-medium uppercase tracking-wider text-accent">
+          Press Kit
+        </p>
+        <div className="space-y-2">
+          {[1, 2, 3].map((n) => (
+            <div key={n} className="h-12 animate-pulse rounded-card border border-line bg-surface" />
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  if (loadError) {
+    return (
+      <section aria-labelledby="press-kit-heading" className="space-y-3">
+        <p id="press-kit-heading" className="text-xs font-medium uppercase tracking-wider text-accent">
+          Press Kit
+        </p>
+        <div className="rounded-card border border-danger/30 bg-danger/10 p-4 text-sm text-danger">
+          Failed to load press kit: {loadError}
+          <button type="button" onClick={load} className="mt-2 block text-xs underline">
+            Retry
+          </button>
+        </div>
+      </section>
+    )
+  }
+
+  const savedSlug = kit?.slug
+  const publicUrl = savedSlug ? buildPressKitUrl(savedSlug) : null
+
+  return (
+    <section aria-labelledby="press-kit-heading" className="space-y-4">
+      {/* Section header */}
+      <div className="flex items-center justify-between">
+        <p id="press-kit-heading" className="text-xs font-medium uppercase tracking-wider text-accent">
+          Press Kit
+        </p>
+        {publicUrl && (
+          <a
+            href={publicUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-xs text-accent hover:underline"
+            aria-label="View public press kit page"
+          >
+            <IconExternalLink className="size-3.5" />
+            View public page
+          </a>
+        )}
+      </div>
+
+      {/* First-time callout */}
+      {!kit && (
+        <div className="rounded-card border border-dashed border-line bg-surface/40 p-4 text-center space-y-1">
+          <p className="font-display font-bold text-text text-sm">Set up your press kit</p>
+          <p className="text-xs text-muted">
+            Fill in your artist info below — it powers the{' '}
+            <code className="rounded bg-surface-2 px-1 py-0.5 font-mono text-[0.65rem] text-text">
+              {'{press_kit_link}'}
+            </code>{' '}
+            merge field and your public press page.
+          </p>
+        </div>
+      )}
+
+      <form onSubmit={handleSave} className="space-y-5" noValidate>
+        {/* ── Identity ── */}
+        <div className="rounded-card border border-line bg-surface p-4 space-y-4">
+          <p className="text-[0.65rem] font-semibold uppercase tracking-widest text-muted/70">
+            Identity
+          </p>
+
+          <Field id="pk-artist-name" label="Artist name">
+            <input
+              id="pk-artist-name"
+              type="text"
+              className={inputCls}
+              value={artistName}
+              onChange={(e) => setArtistName(e.target.value)}
+              placeholder="e.g. Aziz Dardouri"
+            />
+          </Field>
+
+          <Field
+            id="pk-slug"
+            label="URL handle"
+            hint="Your public press kit lives at this address."
+          >
+            <input
+              id="pk-slug"
+              type="text"
+              className={inputCls}
+              value={slug}
+              onChange={(e) => { setSlug(e.target.value); setSlugEdited(true) }}
+              placeholder="e.g. aziz-dardouri"
+              spellCheck={false}
+              autoCorrect="off"
+              autoCapitalize="none"
+            />
+          </Field>
+
+          {/* URL preview */}
+          {slug && (
+            <div className="flex items-center gap-2 rounded-lg border border-line bg-surface-2 px-3 py-2">
+              <span className="text-xs text-muted shrink-0">Public URL:</span>
+              <span className="truncate font-mono text-[0.7rem] text-accent/80">
+                press.demotrack.app/{slug}
+              </span>
+            </div>
+          )}
+
+          <Field id="pk-photo-url" label="Photo URL" hint="Paste a direct image link — no upload needed.">
+            <input
+              id="pk-photo-url"
+              type="url"
+              className={inputCls}
+              value={photoUrl}
+              onChange={(e) => setPhotoUrl(e.target.value)}
+              placeholder="https://…"
+            />
+          </Field>
+        </div>
+
+        {/* ── Bio ── */}
+        <div className="rounded-card border border-line bg-surface p-4 space-y-4">
+          <p className="text-[0.65rem] font-semibold uppercase tracking-widest text-muted/70">
+            Bio
+          </p>
+
+          {/* Tone selector */}
+          <Field id="pk-bio-tone" label="Tone">
+            <div role="group" aria-label="Bio tone" className="flex gap-2 pt-0.5">
+              {TONE_OPTIONS.map((t) => (
+                <button
+                  key={t.value}
+                  type="button"
+                  aria-pressed={bioTone === t.value}
+                  onClick={() => setBioTone(t.value)}
+                  className={[
+                    'flex-1 rounded-lg border py-2 text-center text-xs font-semibold transition-colors',
+                    bioTone === t.value
+                      ? 'border-accent bg-accent/10 text-accent'
+                      : 'border-line bg-surface-2 text-muted hover:border-accent/40 hover:text-text',
+                  ].join(' ')}
+                >
+                  {t.label}
+                </button>
+              ))}
+            </div>
+          </Field>
+
+          {/* Generate button + textarea */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between gap-2">
+              <label
+                htmlFor="pk-bio"
+                className="block text-xs font-medium uppercase tracking-wider text-muted"
+              >
+                Bio text
+              </label>
+              <button
+                type="button"
+                disabled={genLoading}
+                onClick={handleGenerateBio}
+                className="flex shrink-0 items-center gap-1.5 rounded-lg border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent transition-colors hover:bg-accent/20 disabled:opacity-50"
+              >
+                {genLoading ? (
+                  <>
+                    <IconSpinner className="size-3.5 animate-spin" />
+                    Generating…
+                  </>
+                ) : (
+                  <>
+                    <IconSparkle className="size-3.5" />
+                    Generate with AI
+                  </>
+                )}
+              </button>
+            </div>
+
+            <textarea
+              id="pk-bio"
+              rows={6}
+              className={inputCls}
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
+              placeholder="Your artist bio — generate with AI or write your own…"
+            />
+          </div>
+
+          {genError && (
+            <div className="flex items-start gap-2 rounded-lg border border-warn/30 bg-warn/10 px-3 py-2 text-xs text-warn">
+              <IconWarn className="mt-0.5 size-3.5 shrink-0" />
+              <span>AI unavailable: {genError} — write your bio manually above.</span>
+            </div>
+          )}
+        </div>
+
+        {/* ── Links ── */}
+        <div className="rounded-card border border-line bg-surface p-4 space-y-3">
+          <div className="flex items-center justify-between">
+            <p className="text-[0.65rem] font-semibold uppercase tracking-widest text-muted/70">
+              Links
+            </p>
+            <button
+              type="button"
+              onClick={addLink}
+              className="flex items-center gap-1 rounded-lg border border-line px-2.5 py-1 text-xs text-muted transition-colors hover:border-accent/40 hover:text-accent"
+            >
+              <IconPlus className="size-3.5" />
+              Add link
+            </button>
+          </div>
+
+          {links.length === 0 && (
+            <p className="text-xs text-muted/60">No links yet — add Soundcloud, Instagram, etc.</p>
+          )}
+
+          {links.map((link, i) => (
+            <div key={i} className="flex items-start gap-2">
+              <div className="flex-1 grid grid-cols-2 gap-2">
+                <input
+                  type="text"
+                  aria-label={`Link ${i + 1} label`}
+                  className={inputCls}
+                  value={link.label}
+                  onChange={(e) => updateLink(i, 'label', e.target.value)}
+                  placeholder="Label"
+                />
+                <input
+                  type="url"
+                  aria-label={`Link ${i + 1} URL`}
+                  className={inputCls}
+                  value={link.url}
+                  onChange={(e) => updateLink(i, 'url', e.target.value)}
+                  placeholder="https://…"
+                />
+              </div>
+              <button
+                type="button"
+                onClick={() => removeLink(i)}
+                aria-label={`Remove link ${i + 1}`}
+                className="mt-1 grid size-8 shrink-0 place-items-center rounded-lg text-muted transition-colors hover:bg-surface-2 hover:text-danger"
+              >
+                <IconTrash className="size-4" />
+              </button>
+            </div>
+          ))}
+        </div>
+
+        {/* ── Releases ── */}
+        <div className="rounded-card border border-line bg-surface p-4 space-y-3">
+          <div className="flex items-center justify-between">
+            <p className="text-[0.65rem] font-semibold uppercase tracking-widest text-muted/70">
+              Releases
+            </p>
+            <button
+              type="button"
+              onClick={addRelease}
+              className="flex items-center gap-1 rounded-lg border border-line px-2.5 py-1 text-xs text-muted transition-colors hover:border-accent/40 hover:text-accent"
+            >
+              <IconPlus className="size-3.5" />
+              Add release
+            </button>
+          </div>
+
+          {releases.length === 0 && (
+            <p className="text-xs text-muted/60">No releases yet — add tracks, EPs, or albums.</p>
+          )}
+
+          {releases.map((rel, i) => (
+            <div key={i} className="flex items-start gap-2">
+              <div className="flex-1 grid grid-cols-2 gap-2">
+                <input
+                  type="text"
+                  aria-label={`Release ${i + 1} title`}
+                  className={inputCls}
+                  value={rel.title}
+                  onChange={(e) => updateRelease(i, 'title', e.target.value)}
+                  placeholder="Title"
+                />
+                <input
+                  type="url"
+                  aria-label={`Release ${i + 1} URL`}
+                  className={inputCls}
+                  value={rel.url}
+                  onChange={(e) => updateRelease(i, 'url', e.target.value)}
+                  placeholder="https://…"
+                />
+              </div>
+              <button
+                type="button"
+                onClick={() => removeRelease(i)}
+                aria-label={`Remove release ${i + 1}`}
+                className="mt-1 grid size-8 shrink-0 place-items-center rounded-lg text-muted transition-colors hover:bg-surface-2 hover:text-danger"
+              >
+                <IconTrash className="size-4" />
+              </button>
+            </div>
+          ))}
+        </div>
+
+        {/* ── Stats ── */}
+        <div className="rounded-card border border-line bg-surface p-4 space-y-3">
+          <div className="flex items-center justify-between">
+            <p className="text-[0.65rem] font-semibold uppercase tracking-widest text-muted/70">
+              Stats
+            </p>
+            <button
+              type="button"
+              onClick={addStat}
+              className="flex items-center gap-1 rounded-lg border border-line px-2.5 py-1 text-xs text-muted transition-colors hover:border-accent/40 hover:text-accent"
+            >
+              <IconPlus className="size-3.5" />
+              Add stat
+            </button>
+          </div>
+
+          {stats.length === 0 && (
+            <p className="text-xs text-muted/60">
+              No stats yet — e.g. "Monthly listeners" / "12,400".
+            </p>
+          )}
+
+          {stats.map((stat, i) => (
+            <div key={i} className="flex items-start gap-2">
+              <div className="flex-1 grid grid-cols-2 gap-2">
+                <input
+                  type="text"
+                  aria-label={`Stat ${i + 1} label`}
+                  className={inputCls}
+                  value={stat.label}
+                  onChange={(e) => updateStat(i, 'label', e.target.value)}
+                  placeholder="Monthly listeners"
+                />
+                <input
+                  type="text"
+                  aria-label={`Stat ${i + 1} value`}
+                  className={inputCls}
+                  value={stat.value}
+                  onChange={(e) => updateStat(i, 'value', e.target.value)}
+                  placeholder="12,400"
+                />
+              </div>
+              <button
+                type="button"
+                onClick={() => removeStat(i)}
+                aria-label={`Remove stat ${i + 1}`}
+                className="mt-1 grid size-8 shrink-0 place-items-center rounded-lg text-muted transition-colors hover:bg-surface-2 hover:text-danger"
+              >
+                <IconTrash className="size-4" />
+              </button>
+            </div>
+          ))}
+
+          {/* stats_updated_at display */}
+          {kit?.stats_updated_at && (
+            <p className="text-[0.65rem] text-muted/60">
+              Stats last updated:{' '}
+              {new Date(kit.stats_updated_at + 'T12:00:00').toLocaleDateString(undefined, {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric',
+              })}
+            </p>
+          )}
+        </div>
+
+        {/* ── Settings ── */}
+        <div className="rounded-card border border-line bg-surface p-4 space-y-3">
+          <p className="text-[0.65rem] font-semibold uppercase tracking-widest text-muted/70">
+            Settings
+          </p>
+
+          <label className="flex cursor-pointer items-start gap-3">
+            <div className="relative mt-0.5 shrink-0">
+              <input
+                id="pk-auto-attach"
+                type="checkbox"
+                checked={autoAttach}
+                onChange={(e) => setAutoAttach(e.target.checked)}
+                className="peer sr-only"
+              />
+              {/* custom toggle track */}
+              <div
+                aria-hidden="true"
+                className={[
+                  'h-5 w-9 rounded-full border transition-colors',
+                  autoAttach
+                    ? 'border-accent bg-accent/80'
+                    : 'border-line bg-surface-2',
+                ].join(' ')}
+              />
+              {/* thumb */}
+              <div
+                aria-hidden="true"
+                className={[
+                  'absolute top-0.5 size-4 rounded-full bg-text shadow transition-transform',
+                  autoAttach ? 'translate-x-4' : 'translate-x-0.5',
+                ].join(' ')}
+              />
+            </div>
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-text leading-tight">
+                Attach my press-kit link to every demo by default
+              </p>
+              <p className="mt-0.5 text-xs text-muted">
+                Automatically fills{' '}
+                <code className="rounded bg-surface-2 px-1 font-mono text-[0.65rem]">
+                  {'{press_kit_link}'}
+                </code>{' '}
+                in email presets.
+              </p>
+            </div>
+          </label>
+        </div>
+
+        {/* ── Save errors / success ── */}
+        {saveError && (
+          <p className="rounded-lg border border-danger/30 bg-danger/10 px-3 py-2 text-xs text-danger">
+            {saveError}
+          </p>
+        )}
+
+        {saveOk && (
+          <div className="flex items-center gap-2 rounded-lg border border-ok/30 bg-ok/10 px-3 py-2 text-xs text-ok">
+            <IconCheck className="size-3.5 shrink-0" />
+            Press kit saved.
+          </div>
+        )}
+
+        {/* ── Save button ── */}
+        <button
+          type="submit"
+          disabled={saving}
+          className="w-full rounded-lg bg-accent py-2.5 text-sm font-semibold text-ink transition-opacity hover:opacity-90 disabled:opacity-50"
+        >
+          {saving ? 'Saving…' : kit ? 'Save press kit' : 'Create press kit'}
+        </button>
+      </form>
+    </section>
+  )
+}
+
 /* ── constants ─────────────────────────────────────────────── */
 const KIND_OPTIONS = ['cold_email', 'dm', 'follow_up', 'form_note']
 const KIND_LABELS = {
@@ -1252,7 +1897,7 @@ export default function You() {
   return (
     <section className="space-y-8">
       <header>
-        <p className="text-xs font-medium uppercase tracking-wider text-accent">Phase 12</p>
+        <p className="text-xs font-medium uppercase tracking-wider text-accent">Phase 13</p>
         <h1 className="mt-0.5 text-2xl font-extrabold">You</h1>
         <p className="mt-0.5 text-sm text-muted">Sessions, goals, presets, and your artist profile.</p>
       </header>
@@ -1346,6 +1991,9 @@ export default function You() {
         )}
       </div>
 
+      {/* ── Press Kit ── */}
+      <PressKitSection userId={user.id} />
+
       {/* Template modal */}
       <Modal
         open={modalOpen}
@@ -1418,6 +2066,32 @@ function IconPlay(props) {
   return (
     <svg {...svgBase(props)}>
       <polygon points="5 3 19 12 5 21 5 3" />
+    </svg>
+  )
+}
+function IconExternalLink(props) {
+  return (
+    <svg {...svgBase(props)}>
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+      <polyline points="15 3 21 3 21 9" />
+      <line x1="10" y1="14" x2="21" y2="3" />
+    </svg>
+  )
+}
+function IconWarn(props) {
+  return (
+    <svg {...svgBase(props)}>
+      <path d="m10.29 3.86-8.34 14.45A1 1 0 0 0 2.82 20h18.36a1 1 0 0 0 .87-1.5L13.71 3.86a1 1 0 0 0-1.74 0z" />
+      <line x1="12" y1="9" x2="12" y2="13" />
+      <line x1="12" y1="17" x2="12.01" y2="17" />
+    </svg>
+  )
+}
+function IconSpinner(props) {
+  return (
+    <svg {...svgBase({ strokeWidth: 2, ...props })}>
+      <circle cx="12" cy="12" r="9" strokeOpacity="0.25" />
+      <path d="M12 3a9 9 0 0 1 9 9" strokeLinecap="round" />
     </svg>
   )
 }
