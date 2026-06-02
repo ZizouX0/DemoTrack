@@ -80,10 +80,10 @@ function computeByTier(submissions) {
 function computeStreak(sessions) {
   if (!sessions || sessions.length === 0) return 0
 
-  // Collect distinct calendar days (YYYY-MM-DD) from occurred_on or created_at
+  // Collect distinct calendar days (YYYY-MM-DD) from session_date
   const days = new Set()
   for (const s of sessions) {
-    const raw = s.occurred_on || s.created_at
+    const raw = s.session_date
     if (!raw) continue
     days.add(raw.slice(0, 10))
   }
@@ -225,7 +225,8 @@ function AnalyticsBlock() {
       try {
         const { data: wsData } = await supabase
           .from('work_sessions')
-          .select('created_at, occurred_on')
+          .select('session_date')
+          .eq('user_id', user.id)
         if (active) setStreak(computeStreak(wsData ?? []))
       } catch {
         if (active) setStreak(0)
