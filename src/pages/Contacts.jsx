@@ -39,6 +39,15 @@ const EMPTY_FORM = {
   label_id: null,
 }
 
+const EMPTY_INTEL = {
+  runs_label: '',
+  signs: '',
+  recent_releases: '',
+  submission_prefs: '',
+  personal_angle: '',
+  notes: '',
+}
+
 /* ── helpers ────────────────────────────────────────────────── */
 function formToRow(form, userId) {
   return {
@@ -96,6 +105,239 @@ function submissionStatusVariant(status) {
       signed: 'ok',
       passed: 'danger',
     }[status] ?? 'muted'
+  )
+}
+
+/* ── Prioritization sort ────────────────────────────────────── */
+/**
+ * Sort order:
+ * 1. Untried (times_contacted === 0) AND cold_demo_friendly
+ * 2. Remaining cold_demo_friendly
+ * 3. open_window_only
+ * 4. needs_warm_intro
+ * 5. relationship_only
+ * Within each group: times_contacted asc, then name asc
+ */
+const ACCESS_RANK = {
+  cold_demo_friendly: 0,
+  open_window_only: 1,
+  needs_warm_intro: 2,
+  relationship_only: 3,
+}
+
+function sortContacts(contacts, sendCounts) {
+  function getCount(c) {
+    return sendCounts[c.id]?.times_contacted ?? 0
+  }
+  function getGroup(c) {
+    const count = getCount(c)
+    const accessRank = ACCESS_RANK[c.access_path] ?? 4
+    // Group 0: untried cold_demo_friendly
+    if (count === 0 && c.access_path === 'cold_demo_friendly') return 0
+    // Group 1: tried cold_demo_friendly
+    if (c.access_path === 'cold_demo_friendly') return 1
+    // Groups 2–5 by access rank
+    return accessRank + 2
+  }
+  return [...contacts].sort((a, b) => {
+    const ga = getGroup(a)
+    const gb = getGroup(b)
+    if (ga !== gb) return ga - gb
+    const ca = getCount(a)
+    const cb = getCount(b)
+    if (ca !== cb) return ca - cb
+    return (a.name ?? '').localeCompare(b.name ?? '')
+  })
+}
+
+/* ── A&R Intel form ─────────────────────────────────────────── */
+function ARIntelSection({ contact, user }) {
+  const [intel, setIntel] = useState(EMPTY_INTEL)
+  const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [saved, setSaved] = useState(false)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    let cancelled = false
+    async function load() {
+      setLoading(true)
+      const { data, error: err } = await supabase
+        .from('ar_intel')
+        .select('*')
+        .eq('user_id', user.id)
+        .eq('contact_id', contact.id)
+        .maybeSingle()
+      if (cancelled) return
+      if (err) {
+        setError(err.message)
+      } else if (data) {
+        setIntel({
+          runs_label: data.runs_label ?? '',
+          signs: data.signs ?? '',
+          recent_releases: data.recent_releases ?? '',
+          submission_prefs: data.submission_prefs ?? '',
+          personal_angle: data.personal_angle ?? '',
+          notes: data.notes ?? '',
+        })
+      }
+      setLoading(false)
+    }
+    load()
+    return () => { cancelled = true }
+  }, [contact.id, user.id])
+
+  function set(field, value) {
+    setIntel((prev) => ({ ...prev, [field]: value }))
+    setSaved(false)
+  }
+
+  async function handleSave(e) {
+    e.preventDefault()
+    setSaving(true)
+    setError(null)
+    setSaved(false)
+
+    const { error: upsertErr } = await supabase
+      .from('ar_intel')
+      .upsert(
+        {
+          user_id: user.id,
+          contact_id: contact.id,
+          runs_label: intel.runs_label.trim() || null,
+          signs: intel.signs.trim() || null,
+          recent_releases: intel.recent_releases.trim() || null,
+          submission_prefs: intel.submission_prefs.trim() || null,
+          personal_angle: intel.personal_angle.trim() || null,
+          notes: intel.notes.trim() || null,
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: 'user_id,contact_id' }
+      )
+
+    if (upsertErr) {
+      setError(upsertErr.message)
+    } else {
+      setSaved(true)
+      setTimeout(() => setSaved(false), 3000)
+    }
+    setSaving(false)
+  }
+
+  if (loading) {
+    return (
+      <div className="space-y-2" aria-busy="true" aria-label="Loading A&R intel">
+        {[1, 2, 3].map((n) => (
+          <div key={n} className="h-10 animate-pulse rounded-lg border border-line bg-surface" />
+        ))}
+      </div>
+    )
+  }
+
+  return (
+    <section aria-labelledby="ar-intel-heading">
+      <div className="mb-3 flex items-center justify-between gap-2">
+        <h3
+          id="ar-intel-heading"
+          className="text-xs font-medium uppercase tracking-wider text-muted"
+        >
+          A&amp;R Intel
+        </h3>
+        {saved && (
+          <span className="flex items-center gap-1 text-[0.65rem] font-semibold text-ok">
+            <IconCheck className="size-3" />
+            Saved
+          </span>
+        )}
+      </div>
+
+      <form onSubmit={handleSave} className="space-y-3">
+        <Field id={`intel-runs-${contact.id}`} label="Who runs it">
+          <input
+            id={`intel-runs-${contact.id}`}
+            type="text"
+            className={inputCls}
+            value={intel.runs_label}
+            onChange={(e) => set('runs_label', e.target.value)}
+            placeholder="e.g. Adam Beyer, Seth Troxler…"
+          />
+        </Field>
+
+        <Field id={`intel-signs-${contact.id}`} label="What they sign">
+          <input
+            id={`intel-signs-${contact.id}`}
+            type="text"
+            className={inputCls}
+            value={intel.signs}
+            onChange={(e) => set('signs', e.target.value)}
+            placeholder="e.g. driving techno, dark minimal, 125–135 BPM…"
+          />
+        </Field>
+
+        <Field id={`intel-recent-${contact.id}`} label="Recent releases">
+          <input
+            id={`intel-recent-${contact.id}`}
+            type="text"
+            className={inputCls}
+            value={intel.recent_releases}
+            onChange={(e) => set('recent_releases', e.target.value)}
+            placeholder="e.g. SOMA-452, Kode9 remix EP…"
+          />
+        </Field>
+
+        <Field id={`intel-prefs-${contact.id}`} label="Submission preferences">
+          <input
+            id={`intel-prefs-${contact.id}`}
+            type="text"
+            className={inputCls}
+            value={intel.submission_prefs}
+            onChange={(e) => set('submission_prefs', e.target.value)}
+            placeholder="e.g. demos@label.com, no SoundCloud links…"
+          />
+        </Field>
+
+        <Field id={`intel-angle-${contact.id}`} label="Personal angle">
+          <input
+            id={`intel-angle-${contact.id}`}
+            type="text"
+            className={inputCls}
+            value={intel.personal_angle}
+            onChange={(e) => set('personal_angle', e.target.value)}
+            placeholder="e.g. met at ADE, mutual with DJ X…"
+          />
+        </Field>
+
+        <Field id={`intel-notes-${contact.id}`} label="Notes">
+          <textarea
+            id={`intel-notes-${contact.id}`}
+            rows={3}
+            className={inputCls}
+            value={intel.notes}
+            onChange={(e) => set('notes', e.target.value)}
+            placeholder="Anything else worth knowing…"
+          />
+        </Field>
+
+        {error && (
+          <p className="rounded-lg border border-danger/30 bg-danger/10 px-3 py-2 text-xs text-danger">
+            {error}
+          </p>
+        )}
+
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-[0.65rem] text-muted/70 italic">
+            This intel feeds the AI email hook.
+          </p>
+          <button
+            type="submit"
+            disabled={saving}
+            className="shrink-0 rounded-lg bg-accent px-4 py-2 text-xs font-semibold text-ink transition-opacity hover:opacity-90 disabled:opacity-50"
+          >
+            {saving ? 'Saving…' : 'Save intel'}
+          </button>
+        </div>
+      </form>
+    </section>
   )
 }
 
@@ -523,6 +765,11 @@ function ContactHistoryModal({ contact, user, onClose, onEdit, onDelete }) {
 
         {!loading && !error && (
           <>
+            {/* A&R Intel section */}
+            <div className="rounded-lg border border-line bg-surface-2 px-4 py-4">
+              <ARIntelSection contact={contact} user={user} />
+            </div>
+
             {/* Submission history */}
             <section>
               <h3 className="mb-2 text-xs font-medium uppercase tracking-wider text-muted">
@@ -607,7 +854,7 @@ function ContactHistoryModal({ contact, user, onClose, onEdit, onDelete }) {
 }
 
 /* ── Contact card ───────────────────────────────────────────── */
-function ContactCard({ contact, onEdit, onDelete, onViewHistory }) {
+function ContactCard({ contact, onEdit, onDelete, onViewHistory, sendCount }) {
   const contactLink =
     contact.submission_method === 'email'
       ? contact.email
@@ -622,6 +869,11 @@ function ContactCard({ contact, onEdit, onDelete, onViewHistory }) {
 
   const lastContacted = contact.last_contacted_at
     ? new Date(contact.last_contacted_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+    : null
+
+  const timesContacted = sendCount?.times_contacted ?? 0
+  const lastSentAt = sendCount?.last_sent_at
+    ? new Date(sendCount.last_sent_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
     : null
 
   return (
@@ -646,6 +898,12 @@ function ContactCard({ contact, onEdit, onDelete, onViewHistory }) {
               <Badge variant="muted">
                 {methodIcon(contact.submission_method)} {contact.submission_method}
               </Badge>
+            )}
+            {/* Contacted count badge */}
+            {timesContacted === 0 ? (
+              <Badge variant="accent">untried</Badge>
+            ) : (
+              <Badge variant="muted">contacted &times;{timesContacted}</Badge>
             )}
           </div>
         </div>
@@ -695,9 +953,12 @@ function ContactCard({ contact, onEdit, onDelete, onViewHistory }) {
         </a>
       )}
 
-      {lastContacted && (
+      {/* Last sent from send counts (more accurate than last_contacted_at) */}
+      {lastSentAt ? (
+        <p className="text-xs text-muted">Last sent: {lastSentAt}</p>
+      ) : lastContacted ? (
         <p className="text-xs text-muted">Last contacted: {lastContacted}</p>
-      )}
+      ) : null}
 
       {contact.notes && (
         <p className="line-clamp-2 text-xs text-muted">{contact.notes}</p>
@@ -877,12 +1138,52 @@ function LabelDiscovery({ existingLabelIds, onAdd, onClose }) {
   )
 }
 
+/* ── Filter chips ───────────────────────────────────────────── */
+function FilterChips({ label, options, value, onChange }) {
+  return (
+    <div className="flex flex-wrap gap-1.5" role="group" aria-label={label}>
+      <button
+        type="button"
+        onClick={() => onChange('')}
+        className={[
+          'rounded-full border px-2.5 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wider transition-colors',
+          value === ''
+            ? 'border-accent/50 bg-accent/15 text-accent'
+            : 'border-line bg-surface-2 text-muted hover:border-line/60 hover:text-text',
+        ].join(' ')}
+      >
+        All
+      </button>
+      {options.map(([val, lbl]) => (
+        <button
+          key={val}
+          type="button"
+          onClick={() => onChange(value === val ? '' : val)}
+          className={[
+            'rounded-full border px-2.5 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wider transition-colors',
+            value === val
+              ? 'border-accent/50 bg-accent/15 text-accent'
+              : 'border-line bg-surface-2 text-muted hover:border-line/60 hover:text-text',
+          ].join(' ')}
+        >
+          {lbl}
+        </button>
+      ))}
+    </div>
+  )
+}
+
 /* ── Main page ──────────────────────────────────────────────── */
 export default function Contacts() {
   const { user } = useAuth()
   const [contacts, setContacts] = useState([])
+  const [sendCounts, setSendCounts] = useState({}) // keyed by contact_id
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+
+  // Filter state
+  const [categoryFilter, setCategoryFilter] = useState('')
+  const [accessFilter, setAccessFilter] = useState('')
 
   // Manual add/edit modal
   const [modalOpen, setModalOpen] = useState(false)
@@ -900,13 +1201,33 @@ export default function Contacts() {
   const load = useCallback(async () => {
     setLoading(true)
     setError(null)
-    const { data, error: err } = await supabase
-      .from('contacts')
-      .select('*')
-      .eq('user_id', user.id)
-      .order('created_at', { ascending: false })
-    if (err) setError(err.message)
-    else setContacts(data ?? [])
+    const [contactsRes, countsRes] = await Promise.all([
+      supabase
+        .from('contacts')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false }),
+      supabase
+        .from('contact_send_counts')
+        .select('contact_id, times_contacted, last_sent_at')
+        .eq('user_id', user.id),
+    ])
+
+    if (contactsRes.error) {
+      setError(contactsRes.error.message)
+    } else {
+      setContacts(contactsRes.data ?? [])
+    }
+
+    // Build a lookup map; counts query failure is non-fatal
+    if (!countsRes.error && countsRes.data) {
+      const map = {}
+      for (const row of countsRes.data) {
+        map[row.contact_id] = { times_contacted: row.times_contacted, last_sent_at: row.last_sent_at }
+      }
+      setSendCounts(map)
+    }
+
     setLoading(false)
   }, [user.id])
 
@@ -1001,6 +1322,15 @@ export default function Contacts() {
     }
   }
 
+  /* derived: filtered + sorted contacts */
+  const filteredContacts = contacts.filter((c) => {
+    const matchCat = !categoryFilter || c.category === categoryFilter
+    const matchAccess = !accessFilter || c.access_path === accessFilter
+    return matchCat && matchAccess
+  })
+
+  const sortedContacts = sortContacts(filteredContacts, sendCounts)
+
   /* render */
   return (
     <section className="space-y-5">
@@ -1034,6 +1364,24 @@ export default function Contacts() {
           </button>
         </div>
       </header>
+
+      {/* Filter controls */}
+      {!loading && contacts.length > 0 && (
+        <div className="space-y-2">
+          <FilterChips
+            label="Filter by category"
+            value={categoryFilter}
+            onChange={setCategoryFilter}
+            options={CATEGORY_OPTIONS.map((c) => [c, CATEGORY_LABELS[c]])}
+          />
+          <FilterChips
+            label="Filter by access path"
+            value={accessFilter}
+            onChange={setAccessFilter}
+            options={ACCESS_OPTIONS.map((a) => [a, ACCESS_LABELS[a]])}
+          />
+        </div>
+      )}
 
       {loading && (
         <div className="space-y-3">
@@ -1077,18 +1425,32 @@ export default function Contacts() {
         </div>
       )}
 
-      {!loading && contacts.length > 0 && (
-        <div className="space-y-3">
-          {contacts.map((c) => (
-            <ContactCard
-              key={c.id}
-              contact={c}
-              onEdit={openEdit}
-              onDelete={handleDelete}
-              onViewHistory={setHistoryContact}
-            />
-          ))}
-        </div>
+      {!loading && !error && contacts.length > 0 && (
+        <>
+          {/* Sort caption */}
+          <p className="text-[0.65rem] text-muted/70 italic">
+            Untried, cold-demo-friendly first — then by access path, times contacted ascending.
+          </p>
+
+          {sortedContacts.length === 0 ? (
+            <p className="rounded-card border border-dashed border-line bg-surface/40 px-4 py-6 text-center text-sm text-muted">
+              No contacts match the current filters.
+            </p>
+          ) : (
+            <div className="space-y-3">
+              {sortedContacts.map((c) => (
+                <ContactCard
+                  key={c.id}
+                  contact={c}
+                  sendCount={sendCounts[c.id]}
+                  onEdit={openEdit}
+                  onDelete={handleDelete}
+                  onViewHistory={setHistoryContact}
+                />
+              ))}
+            </div>
+          )}
+        </>
       )}
 
       {/* Manual add/edit modal */}
