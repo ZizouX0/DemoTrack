@@ -686,16 +686,32 @@ function EmailReviewPanel({
   )
 }
 
-/* ── Step 3 — form / DM path (unchanged from Phase 4) ──────── */
+/* ── Tracking-link URL builder ──────────────────────────────── */
+function buildTrackedUrl(hash) {
+  const base = import.meta.env.VITE_TRACK_BASE_URL
+  if (base) return `${base}/${hash}`
+  return `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/track-redirect?h=${hash}`
+}
+
+/* ── Step 3 — form / DM path ────────────────────────────────── */
 function NonEmailReviewPanel({
   track,
   contact,
+  user,
   onConfirm,
   confirming,
   error,
   onBack,
+  onTrackingHashChange,
 }) {
   const method = contact.submission_method
+
+  /* ── tracking link state ── */
+  const [trackingHash, setTrackingHash] = useState(null)
+  const [trackedUrl, setTrackedUrl] = useState(null)
+  const [trackingLoading, setTrackingLoading] = useState(false)
+  const [trackingError, setTrackingError] = useState(null)
+  const [copied, setCopied] = useState(false)
 
   const hasExclusiveHold =
     track.exclusive_hold_contact_id &&
@@ -712,6 +728,45 @@ function NonEmailReviewPanel({
   }
 
   const requirements = contact.notes || null
+
+  /* create tracked link */
+  async function handleCreateTrackingLink() {
+    setTrackingLoading(true)
+    setTrackingError(null)
+    const hash = crypto.randomUUID().replace(/-/g, '').slice(0, 12)
+    const { error: insertErr } = await supabase
+      .from('tracked_links')
+      .insert({
+        user_id: user.id,
+        submission_id: null,
+        hash,
+        target_url: track.listen_link,
+      })
+    if (insertErr) {
+      setTrackingError(
+        'Could not create tracking link — proceed with your raw link above.'
+      )
+      setTrackingLoading(false)
+      return
+    }
+    const url = buildTrackedUrl(hash)
+    setTrackingHash(hash)
+    setTrackedUrl(url)
+    onTrackingHashChange(hash)
+    setTrackingLoading(false)
+  }
+
+  /* copy tracked URL */
+  async function handleCopy() {
+    if (!trackedUrl) return
+    try {
+      await navigator.clipboard.writeText(trackedUrl)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      // fallback: select the input text
+    }
+  }
 
   return (
     <div className="space-y-4">
@@ -782,6 +837,96 @@ function NonEmailReviewPanel({
         )}
       </div>
 
+      {/* Track this link affordance — only when listen_link exists */}
+      {track.listen_link && (
+        <div className="rounded-card border border-line bg-surface p-4 space-y-3">
+          <div className="flex items-center justify-between gap-2">
+            <div>
+              <p className="text-xs font-medium uppercase tracking-wider text-accent">
+                Track this link
+                <Badge variant="muted" className="ml-2">Optional</Badge>
+              </p>
+              <p className="mt-0.5 text-[0.65rem] text-muted">
+                Get notified when they open it.
+              </p>
+            </div>
+            {!trackingHash && (
+              <button
+                type="button"
+                disabled={trackingLoading}
+                onClick={handleCreateTrackingLink}
+                className="flex shrink-0 items-center gap-1.5 rounded-lg border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent transition-colors hover:bg-accent/20 disabled:opacity-50"
+              >
+                {trackingLoading ? (
+                  <>
+                    <IconSpinner className="size-3.5 animate-spin" />
+                    Creating…
+                  </>
+                ) : (
+                  <>
+                    <IconLink className="size-3.5" />
+                    Create tracking link
+                  </>
+                )}
+              </button>
+            )}
+          </div>
+
+          {trackingError && (
+            <div className="flex items-start gap-2 rounded-lg border border-warn/30 bg-warn/10 px-3 py-2 text-xs text-warn">
+              <IconWarn className="mt-0.5 size-3.5 shrink-0" />
+              <span>{trackingError}</span>
+            </div>
+          )}
+
+          {trackedUrl && (
+            <div className="space-y-2">
+              <Field
+                id="tracked-url"
+                label="Your tracking link"
+                hint="Paste THIS link into the portal/DM instead of your raw link — you'll see when they open it. (Form/DM only — never use for email.)"
+              >
+                <div className="flex gap-2">
+                  <input
+                    id="tracked-url"
+                    type="url"
+                    readOnly
+                    value={trackedUrl}
+                    className={`${inputCls} flex-1 select-all font-mono text-[0.7rem] text-accent/90`}
+                    onFocus={(e) => e.target.select()}
+                    aria-label="Tracked link URL"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleCopy}
+                    className="flex shrink-0 items-center gap-1.5 rounded-lg border border-line bg-surface-2 px-3 py-2 text-xs font-semibold text-text transition-colors hover:border-accent/40 hover:text-accent"
+                    aria-label="Copy tracking link"
+                  >
+                    {copied ? (
+                      <>
+                        <IconCheck className="size-3.5 text-ok" />
+                        <span className="text-ok">Copied</span>
+                      </>
+                    ) : (
+                      <>
+                        <IconCopy className="size-3.5" />
+                        Copy
+                      </>
+                    )}
+                  </button>
+                </div>
+              </Field>
+              <div className="flex items-center gap-1.5">
+                <Badge variant="ok">Active</Badge>
+                <span className="text-[0.65rem] text-muted">
+                  Opens will be linked to this submission on confirm.
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Send action */}
       {actionHref ? (
         <button
@@ -834,6 +979,8 @@ function ReviewAndSend(props) {
   }
   return <NonEmailReviewPanel {...props} />
 }
+// NonEmailReviewPanel receives: track, contact, user, onConfirm, confirming,
+// error, onBack, onTrackingHashChange — all forwarded via spread from SendDemo.
 
 /* ── Shared check item ──────────────────────────────────────── */
 function CheckItem({ done, children }) {
@@ -938,6 +1085,8 @@ export default function SendDemo() {
   const [confirming, setConfirming] = useState(false)
   const [confirmError, setConfirmError] = useState(null)
   const [submission, setSubmission] = useState(null)
+  // Phase 11: tracking hash created during the review step (non-email only)
+  const [pendingTrackingHash, setPendingTrackingHash] = useState(null)
 
   const load = useCallback(async () => {
     setLoadingData(true)
@@ -1034,6 +1183,16 @@ export default function SendDemo() {
         .eq('user_id', user.id)
     }
 
+    // Phase 11: link the tracked_links row to this submission so opens
+    // attribute to it and can advance it to 'opened'.
+    if (pendingTrackingHash) {
+      await supabase
+        .from('tracked_links')
+        .update({ submission_id: submissionData.id })
+        .eq('hash', pendingTrackingHash)
+        .eq('user_id', user.id)
+    }
+
     setSubmission(submissionData)
     setConfirming(false)
     setStep(4)
@@ -1045,6 +1204,7 @@ export default function SendDemo() {
     setSelectedContact(null)
     setSubmission(null)
     setConfirmError(null)
+    setPendingTrackingHash(null)
     load()
   }
 
@@ -1118,10 +1278,12 @@ export default function SendDemo() {
               pressKit={pressKit}
               artistName={artistName}
               userId={user.id}
+              user={user}
               onConfirm={handleConfirm}
               confirming={confirming}
               error={confirmError}
               onBack={() => setStep(2)}
+              onTrackingHashChange={setPendingTrackingHash}
             />
           )}
 
@@ -1202,6 +1364,22 @@ function IconWarn(props) {
       <path d="m10.29 3.86-8.34 14.45A1 1 0 0 0 2.82 20h18.36a1 1 0 0 0 .87-1.5L13.71 3.86a1 1 0 0 0-1.74 0z" />
       <line x1="12" y1="9" x2="12" y2="13" />
       <line x1="12" y1="17" x2="12.01" y2="17" />
+    </svg>
+  )
+}
+function IconLink(props) {
+  return (
+    <svg {...svgBase(props)}>
+      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+    </svg>
+  )
+}
+function IconCopy(props) {
+  return (
+    <svg {...svgBase(props)}>
+      <rect x="9" y="9" width="13" height="13" rx="2" />
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
     </svg>
   )
 }
