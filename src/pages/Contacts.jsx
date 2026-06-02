@@ -3,7 +3,8 @@ import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
 import Modal from '../components/Modal'
 import Field, { inputCls, selectCls } from '../components/Field'
-import Badge, { stageVariant, tierVariant } from '../components/Badge'
+import Badge, { stageVariant } from '../components/Badge'
+import LabelDiscovery from '../components/LabelDiscovery'
 
 /* ── constants ─────────────────────────────────────────────── */
 const CATEGORY_OPTIONS = ['label', 'dj', 'ar', 'curator', 'blog', 'promoter', 'radio']
@@ -967,176 +968,9 @@ function ContactCard({ contact, onEdit, onDelete, onViewHistory, sendCount }) {
   )
 }
 
-/* ── Label discovery picker ─────────────────────────────────── */
-function LabelDiscovery({ existingLabelIds, onAdd, onClose }) {
-  const [labels, setLabels] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [search, setSearch] = useState('')
-  const [tierFilter, setTierFilter] = useState('')
-  const [accessFilter, setAccessFilter] = useState('')
-  const [selected, setSelected] = useState(null)
-  const [adding, setAdding] = useState(false)
-
-  useEffect(() => {
-    async function fetchLabels() {
-      setLoading(true)
-      const { data, error: err } = await supabase
-        .from('labels')
-        .select('id, name, tier, access_path, submission_method, contact_link, genre_tags, submission_requirements, why')
-        .order('name', { ascending: true })
-      if (err) setError(err.message)
-      else setLabels(data ?? [])
-      setLoading(false)
-    }
-    fetchLabels()
-  }, [])
-
-  const filtered = labels.filter((l) => {
-    const matchSearch = !search || l.name.toLowerCase().includes(search.toLowerCase()) ||
-      (l.genre_tags ?? []).some((g) => g.toLowerCase().includes(search.toLowerCase()))
-    const matchTier = !tierFilter || l.tier === tierFilter
-    const matchAccess = !accessFilter || l.access_path === accessFilter
-    const alreadyAdded = existingLabelIds.has(l.id)
-    return matchSearch && matchTier && matchAccess && !alreadyAdded
-  })
-
-  async function handleAdd() {
-    if (!selected) return
-    setAdding(true)
-    await onAdd(selected)
-    setAdding(false)
-  }
-
-  return (
-    <div className="space-y-4">
-      {/* Search + filters */}
-      <div className="space-y-2">
-        <div className="relative">
-          <IconSearch className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted pointer-events-none" />
-          <input
-            type="search"
-            aria-label="Search labels"
-            placeholder="Search by name or genre…"
-            className={`${inputCls} pl-9`}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-        <div className="grid grid-cols-2 gap-2">
-          <select
-            aria-label="Filter by tier"
-            className={selectCls}
-            value={tierFilter}
-            onChange={(e) => setTierFilter(e.target.value)}
-          >
-            <option value="">All tiers</option>
-            <option value="elite">Elite</option>
-            <option value="a">A-tier</option>
-            <option value="b">B-tier</option>
-          </select>
-          <select
-            aria-label="Filter by access"
-            className={selectCls}
-            value={accessFilter}
-            onChange={(e) => setAccessFilter(e.target.value)}
-          >
-            <option value="">All access</option>
-            {ACCESS_OPTIONS.map((a) => (
-              <option key={a} value={a}>{ACCESS_LABELS[a]}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      {/* List */}
-      {loading && (
-        <div className="space-y-2">
-          {[1, 2, 3].map((n) => (
-            <div key={n} className="h-14 animate-pulse rounded-lg border border-line bg-surface" />
-          ))}
-        </div>
-      )}
-
-      {error && (
-        <p className="text-sm text-danger">Failed to load labels: {error}</p>
-      )}
-
-      {!loading && !error && filtered.length === 0 && (
-        <p className="py-4 text-center text-sm text-muted">
-          {labels.length === 0 ? 'No labels available.' : 'No results — try a different search or filter.'}
-        </p>
-      )}
-
-      {!loading && !error && filtered.length > 0 && (
-        <div className="max-h-60 space-y-1.5 overflow-y-auto pr-1">
-          {filtered.map((label) => (
-            <button
-              key={label.id}
-              type="button"
-              onClick={() => setSelected(selected?.id === label.id ? null : label)}
-              className={[
-                'w-full rounded-lg border p-3 text-left transition-colors',
-                selected?.id === label.id
-                  ? 'border-accent/50 bg-accent/10'
-                  : 'border-line bg-surface-2 hover:border-line/80 hover:bg-surface',
-              ].join(' ')}
-            >
-              <div className="flex items-center justify-between gap-2">
-                <span className="truncate font-medium text-sm">{label.name}</span>
-                <div className="flex shrink-0 gap-1">
-                  {label.tier && <Badge variant={tierVariant(label.tier)}>{label.tier}</Badge>}
-                  {label.submission_method && (
-                    <Badge variant="muted">{label.submission_method}</Badge>
-                  )}
-                </div>
-              </div>
-              {label.genre_tags?.length > 0 && (
-                <p className="mt-0.5 truncate text-[0.65rem] text-muted">
-                  {label.genre_tags.join(', ')}
-                </p>
-              )}
-            </button>
-          ))}
-        </div>
-      )}
-
-      {/* Preview of selected */}
-      {selected && (
-        <div className="rounded-lg border border-accent/30 bg-accent/5 p-3 space-y-2">
-          <p className="text-xs font-medium uppercase tracking-wider text-accent">{selected.name}</p>
-          {selected.why && (
-            <p className="text-xs text-muted">{selected.why}</p>
-          )}
-          {selected.submission_requirements && (
-            <div className="rounded bg-surface-2 px-2 py-1.5">
-              <p className="text-[0.65rem] font-medium uppercase tracking-wider text-muted mb-0.5">Requirements</p>
-              <p className="text-xs text-text">{selected.submission_requirements}</p>
-            </div>
-          )}
-        </div>
-      )}
-
-      <div className="flex gap-3 pt-1">
-        <button
-          type="button"
-          onClick={onClose}
-          className="flex-1 rounded-lg border border-line py-2.5 text-sm text-muted transition-colors hover:border-text hover:text-text"
-        >
-          Cancel
-        </button>
-        <button
-          type="button"
-          disabled={!selected || adding}
-          onClick={handleAdd}
-          className="flex-1 rounded-lg bg-accent py-2.5 text-sm font-semibold text-ink transition-opacity hover:opacity-90 disabled:opacity-40"
-        >
-          {adding ? 'Adding…' : 'Add to contacts'}
-        </button>
-      </div>
-    </div>
-  )
-}
+/* ── Label discovery picker (Phase 3 modal — superseded by Discover tab) ── */
+// The full-page Discover tab uses the LabelDiscovery component imported above.
+// This inline picker is kept only for backward compatibility with the modal button.
 
 /* ── Filter chips ───────────────────────────────────────────── */
 function FilterChips({ label, options, value, onChange }) {
@@ -1176,6 +1010,10 @@ function FilterChips({ label, options, value, onChange }) {
 /* ── Main page ──────────────────────────────────────────────── */
 export default function Contacts() {
   const { user } = useAuth()
+
+  // Tab: 'crm' | 'discover'
+  const [activeTab, setActiveTab] = useState('crm')
+
   const [contacts, setContacts] = useState([])
   const [sendCounts, setSendCounts] = useState({}) // keyed by contact_id
   const [loading, setLoading] = useState(true)
@@ -1190,9 +1028,6 @@ export default function Contacts() {
   const [editing, setEditing] = useState(null)
   const [saving, setSaving] = useState(false)
   const [saveError, setSaveError] = useState(null)
-
-  // Label discovery modal
-  const [discoverOpen, setDiscoverOpen] = useState(false)
 
   // Contact history modal
   const [historyContact, setHistoryContact] = useState(null)
@@ -1232,9 +1067,6 @@ export default function Contacts() {
   }, [user.id])
 
   useEffect(() => { load() }, [load])
-
-  /* existing label IDs to prevent duplicates */
-  const existingLabelIds = new Set(contacts.map((c) => c.label_id).filter(Boolean))
 
   /* open modals */
   function openNew() {
@@ -1298,30 +1130,6 @@ export default function Contacts() {
     else setContacts((prev) => prev.filter((c) => c.id !== id))
   }
 
-  /* add from label discovery */
-  async function handleAddFromLabel(label) {
-    const row = {
-      user_id: user.id,
-      name: label.name,
-      category: 'label',
-      submission_method: label.submission_method ?? null,
-      email: label.submission_method === 'email' ? (label.contact_link ?? null) : null,
-      portal_url: label.submission_method === 'form' ? (label.contact_link ?? null) : null,
-      dm_link: label.submission_method === 'dm' ? (label.contact_link ?? null) : null,
-      access_path: label.access_path ?? null,
-      relationship_stage: 'cold',
-      label_id: label.id,
-      notes: label.submission_requirements ?? null,
-    }
-    const { error: err } = await supabase.from('contacts').insert(row)
-    if (err) {
-      setError(err.message)
-    } else {
-      setDiscoverOpen(false)
-      load()
-    }
-  }
-
   /* derived: filtered + sorted contacts */
   const filteredContacts = contacts.filter((c) => {
     const matchCat = !categoryFilter || c.category === categoryFilter
@@ -1336,24 +1144,17 @@ export default function Contacts() {
     <section className="space-y-5">
       <header className="flex items-start justify-between">
         <div>
-          <p className="text-xs font-medium uppercase tracking-wider text-accent">Phase 3</p>
+          <p className="text-xs font-medium uppercase tracking-wider text-accent">Phase 10</p>
           <h1 className="mt-0.5 text-2xl font-extrabold">Labels &amp; Contacts</h1>
           <p className="mt-0.5 text-sm text-muted">
-            {contacts.length > 0
-              ? `${contacts.length} contact${contacts.length !== 1 ? 's' : ''}`
-              : 'Your outreach CRM.'}
+            {activeTab === 'crm'
+              ? contacts.length > 0
+                ? `${contacts.length} contact${contacts.length !== 1 ? 's' : ''}`
+                : 'Your outreach CRM.'
+              : 'Browse 288 labels — add to your CRM instantly.'}
           </p>
         </div>
-        <div className="flex gap-2">
-          <button
-            type="button"
-            onClick={() => setDiscoverOpen(true)}
-            aria-label="Add from label discovery"
-            className="flex items-center gap-1.5 rounded-lg border border-line px-3 py-2 text-sm text-muted transition-colors hover:border-accent/50 hover:text-accent"
-          >
-            <IconSearch className="size-4" />
-            Discover
-          </button>
+        {activeTab === 'crm' && (
           <button
             type="button"
             onClick={openNew}
@@ -1362,95 +1163,141 @@ export default function Contacts() {
             <IconPlus className="size-4" />
             Add
           </button>
-        </div>
+        )}
       </header>
 
-      {/* Filter controls */}
-      {!loading && contacts.length > 0 && (
-        <div className="space-y-2">
-          <FilterChips
-            label="Filter by category"
-            value={categoryFilter}
-            onChange={setCategoryFilter}
-            options={CATEGORY_OPTIONS.map((c) => [c, CATEGORY_LABELS[c]])}
-          />
-          <FilterChips
-            label="Filter by access path"
-            value={accessFilter}
-            onChange={setAccessFilter}
-            options={ACCESS_OPTIONS.map((a) => [a, ACCESS_LABELS[a]])}
-          />
-        </div>
-      )}
+      {/* Segmented toggle: My CRM | Discover */}
+      <div
+        role="tablist"
+        aria-label="Labels view"
+        className="flex rounded-xl border border-line bg-surface-2 p-1 gap-1"
+      >
+        <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === 'crm'}
+          onClick={() => setActiveTab('crm')}
+          className={[
+            'flex-1 rounded-lg py-2 text-sm font-semibold transition-colors',
+            activeTab === 'crm'
+              ? 'bg-surface text-text shadow-sm'
+              : 'text-muted hover:text-text',
+          ].join(' ')}
+        >
+          My CRM
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === 'discover'}
+          onClick={() => setActiveTab('discover')}
+          className={[
+            'flex-1 rounded-lg py-2 text-sm font-semibold transition-colors',
+            activeTab === 'discover'
+              ? 'bg-surface text-text shadow-sm'
+              : 'text-muted hover:text-text',
+          ].join(' ')}
+        >
+          Discover
+        </button>
+      </div>
 
-      {loading && (
-        <div className="space-y-3">
-          {[1, 2, 3].map((n) => (
-            <div key={n} className="h-28 animate-pulse rounded-card border border-line bg-surface" />
-          ))}
-        </div>
-      )}
-
-      {!loading && error && (
-        <div className="rounded-card border border-danger/30 bg-danger/10 p-4 text-sm text-danger">
-          Failed to load contacts: {error}
-          <button type="button" onClick={load} className="mt-2 block text-xs underline">
-            Retry
-          </button>
-        </div>
-      )}
-
-      {!loading && !error && contacts.length === 0 && (
-        <div className="rounded-card border border-dashed border-line bg-surface/40 p-8 text-center">
-          <p className="font-display text-lg font-bold">No contacts yet</p>
-          <p className="mt-1 text-sm text-muted">
-            Add a label manually or discover from 288 seeded labels.
-          </p>
-          <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:justify-center">
-            <button
-              type="button"
-              onClick={() => setDiscoverOpen(true)}
-              className="rounded-lg border border-line px-5 py-2 text-sm text-muted transition-colors hover:border-accent/50 hover:text-accent"
-            >
-              Browse Labels
-            </button>
-            <button
-              type="button"
-              onClick={openNew}
-              className="rounded-lg bg-accent px-5 py-2 text-sm font-semibold text-ink transition-opacity hover:opacity-90"
-            >
-              Add manually
-            </button>
-          </div>
-        </div>
-      )}
-
-      {!loading && !error && contacts.length > 0 && (
+      {/* ── My CRM tab ── */}
+      {activeTab === 'crm' && (
         <>
-          {/* Sort caption */}
-          <p className="text-[0.65rem] text-muted/70 italic">
-            Untried, cold-demo-friendly first — then by access path, times contacted ascending.
-          </p>
+          {/* Filter controls */}
+          {!loading && contacts.length > 0 && (
+            <div className="space-y-2">
+              <FilterChips
+                label="Filter by category"
+                value={categoryFilter}
+                onChange={setCategoryFilter}
+                options={CATEGORY_OPTIONS.map((c) => [c, CATEGORY_LABELS[c]])}
+              />
+              <FilterChips
+                label="Filter by access path"
+                value={accessFilter}
+                onChange={setAccessFilter}
+                options={ACCESS_OPTIONS.map((a) => [a, ACCESS_LABELS[a]])}
+              />
+            </div>
+          )}
 
-          {sortedContacts.length === 0 ? (
-            <p className="rounded-card border border-dashed border-line bg-surface/40 px-4 py-6 text-center text-sm text-muted">
-              No contacts match the current filters.
-            </p>
-          ) : (
+          {loading && (
             <div className="space-y-3">
-              {sortedContacts.map((c) => (
-                <ContactCard
-                  key={c.id}
-                  contact={c}
-                  sendCount={sendCounts[c.id]}
-                  onEdit={openEdit}
-                  onDelete={handleDelete}
-                  onViewHistory={setHistoryContact}
-                />
+              {[1, 2, 3].map((n) => (
+                <div key={n} className="h-28 animate-pulse rounded-card border border-line bg-surface" />
               ))}
             </div>
           )}
+
+          {!loading && error && (
+            <div className="rounded-card border border-danger/30 bg-danger/10 p-4 text-sm text-danger">
+              Failed to load contacts: {error}
+              <button type="button" onClick={load} className="mt-2 block text-xs underline">
+                Retry
+              </button>
+            </div>
+          )}
+
+          {!loading && !error && contacts.length === 0 && (
+            <div className="rounded-card border border-dashed border-line bg-surface/40 p-8 text-center">
+              <p className="font-display text-lg font-bold">No contacts yet</p>
+              <p className="mt-1 text-sm text-muted">
+                Add a label manually or discover from 288 seeded labels.
+              </p>
+              <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:justify-center">
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('discover')}
+                  className="rounded-lg border border-line px-5 py-2 text-sm text-muted transition-colors hover:border-accent/50 hover:text-accent"
+                >
+                  Browse Labels
+                </button>
+                <button
+                  type="button"
+                  onClick={openNew}
+                  className="rounded-lg bg-accent px-5 py-2 text-sm font-semibold text-ink transition-opacity hover:opacity-90"
+                >
+                  Add manually
+                </button>
+              </div>
+            </div>
+          )}
+
+          {!loading && !error && contacts.length > 0 && (
+            <>
+              {/* Sort caption */}
+              <p className="text-[0.65rem] text-muted/70 italic">
+                Untried, cold-demo-friendly first — then by access path, times contacted ascending.
+              </p>
+
+              {sortedContacts.length === 0 ? (
+                <p className="rounded-card border border-dashed border-line bg-surface/40 px-4 py-6 text-center text-sm text-muted">
+                  No contacts match the current filters.
+                </p>
+              ) : (
+                <div className="space-y-3">
+                  {sortedContacts.map((c) => (
+                    <ContactCard
+                      key={c.id}
+                      contact={c}
+                      sendCount={sendCounts[c.id]}
+                      onEdit={openEdit}
+                      onDelete={handleDelete}
+                      onViewHistory={setHistoryContact}
+                    />
+                  ))}
+                </div>
+              )}
+            </>
+          )}
         </>
+      )}
+
+      {/* ── Discover tab ── */}
+      {activeTab === 'discover' && (
+        <LabelDiscovery />
       )}
 
       {/* Manual add/edit modal */}
@@ -1465,20 +1312,6 @@ export default function Contacts() {
           onCancel={closeModal}
           saving={saving}
           error={saveError}
-        />
-      </Modal>
-
-      {/* Label discovery modal */}
-      <Modal
-        open={discoverOpen}
-        onClose={() => setDiscoverOpen(false)}
-        title="Discover Labels"
-        wide
-      >
-        <LabelDiscovery
-          existingLabelIds={existingLabelIds}
-          onAdd={handleAddFromLabel}
-          onClose={() => setDiscoverOpen(false)}
         />
       </Modal>
 
