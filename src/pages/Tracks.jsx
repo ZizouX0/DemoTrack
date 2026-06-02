@@ -10,6 +10,14 @@ const STATUS_OPTIONS = ['idea', 'demo_ready', 'submitted', 'signed']
 const STATUS_LABELS = { idea: 'Idea', demo_ready: 'Demo Ready', submitted: 'Submitted', signed: 'Signed' }
 const LINK_TYPES = ['soundcloud', 'dropbox', 'gdrive', 'other']
 
+const RESPONSE_TYPE_OPTIONS = ['yes', 'no', 'not_for_us', 'constructive']
+const RESPONSE_TYPE_LABELS = {
+  yes: 'Yes — interested',
+  no: 'No thanks',
+  not_for_us: 'Not for us',
+  constructive: 'Constructive feedback',
+}
+
 const EMPTY_FORM = {
   title: '',
   genre_tags: '',
@@ -45,6 +53,42 @@ function formToRow(form, userId) {
     link_type: form.listen_link.trim() ? form.link_type : null,
     notes: form.notes.trim() || null,
   }
+}
+
+function fmtDate(iso) {
+  if (!iso) return '—'
+  return new Date(iso).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  })
+}
+
+/* ── Response-type badge ────────────────────────────────────── */
+function responseTypeVariant(type) {
+  return (
+    { yes: 'ok', no: 'danger', not_for_us: 'muted', constructive: 'accent', no_response: 'muted' }[type] ?? 'muted'
+  )
+}
+
+function responseTypeLabel(type) {
+  return (
+    { yes: 'Yes', no: 'No', not_for_us: 'Not for us', constructive: 'Constructive', no_response: 'No response' }[type] ?? type
+  )
+}
+
+/* ── Submission status badge variant ───────────────────────── */
+function submissionStatusVariant(status) {
+  return (
+    {
+      sent: 'muted',
+      opened: 'info',
+      replied: 'accent',
+      considering: 'warn',
+      signed: 'ok',
+      passed: 'danger',
+    }[status] ?? 'muted'
+  )
 }
 
 /* ── Track form modal ───────────────────────────────────────── */
@@ -190,15 +234,344 @@ function TrackForm({ initial, onSave, onCancel, saving, error }) {
   )
 }
 
+/* ── Log Response Modal ─────────────────────────────────────── */
+function LogResponseModal({ submissions, onClose, onSuccess, user }) {
+  const [submissionId, setSubmissionId] = useState(submissions[0]?.id ?? '')
+  const [responseType, setResponseType] = useState('yes')
+  const [body, setBody] = useState('')
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState(null)
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    if (!submissionId) return
+    setSubmitting(true)
+    setError(null)
+
+    const chosen = submissions.find((s) => s.id === submissionId)
+    if (!chosen) {
+      setError('Submission not found.')
+      setSubmitting(false)
+      return
+    }
+
+    const { error: fbErr } = await supabase.from('feedback').insert({
+      user_id: user.id,
+      track_id: chosen.track_id,
+      contact_id: chosen.contact_id,
+      submission_id: chosen.id,
+      response_type: responseType,
+      body: body.trim() || null,
+    })
+
+    if (fbErr) {
+      setError(fbErr.message)
+      setSubmitting(false)
+      return
+    }
+
+    // Advance status to 'replied' only if currently 'sent' or 'opened'
+    if (chosen.status === 'sent' || chosen.status === 'opened') {
+      const { error: subErr } = await supabase
+        .from('submissions')
+        .update({ status: 'replied', updated_at: new Date().toISOString() })
+        .eq('id', chosen.id)
+        .eq('user_id', user.id)
+      if (subErr) {
+        setError(subErr.message)
+        setSubmitting(false)
+        return
+      }
+    }
+
+    setSubmitting(false)
+    onSuccess()
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <Field id="log-submission" label="Submission" required>
+        <select
+          id="log-submission"
+          className={selectCls}
+          value={submissionId}
+          onChange={(e) => setSubmissionId(e.target.value)}
+          required
+        >
+          {submissions.map((s) => (
+            <option key={s.id} value={s.id}>
+              {s.contacts?.name ?? 'Unknown'} · {s.method} · {fmtDate(s.sent_at)}
+            </option>
+          ))}
+        </select>
+      </Field>
+
+      <Field id="log-response-type" label="Response type" required>
+        <select
+          id="log-response-type"
+          className={selectCls}
+          value={responseType}
+          onChange={(e) => setResponseType(e.target.value)}
+          required
+        >
+          {RESPONSE_TYPE_OPTIONS.map((v) => (
+            <option key={v} value={v}>{RESPONSE_TYPE_LABELS[v]}</option>
+          ))}
+        </select>
+      </Field>
+
+      <Field id="log-body" label="Notes / paste their reply" hint="Optional">
+        <textarea
+          id="log-body"
+          rows={3}
+          className={inputCls}
+          value={body}
+          onChange={(e) => setBody(e.target.value)}
+          placeholder="Paste what they wrote or add context…"
+        />
+      </Field>
+
+      {error && (
+        <p className="rounded-lg border border-danger/30 bg-danger/10 px-3 py-2 text-xs text-danger">
+          {error}
+        </p>
+      )}
+
+      <div className="flex gap-3 pt-1">
+        <button
+          type="button"
+          onClick={onClose}
+          className="flex-1 rounded-lg border border-line py-2.5 text-sm text-muted transition-colors hover:border-text hover:text-text"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          disabled={submitting || !submissionId}
+          className="flex-1 rounded-lg bg-accent py-2.5 text-sm font-semibold text-ink transition-opacity hover:opacity-90 disabled:opacity-50"
+        >
+          {submitting ? 'Saving…' : 'Log response'}
+        </button>
+      </div>
+    </form>
+  )
+}
+
+/* ── Track detail / history modal ───────────────────────────── */
+function TrackDetailModal({ track, user, onClose, onEdit }) {
+  const [submissions, setSubmissions] = useState([])
+  const [feedback, setFeedback] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [logOpen, setLogOpen] = useState(false)
+
+  const load = useCallback(async () => {
+    setLoading(true)
+    setError(null)
+
+    const [subRes, fbRes] = await Promise.all([
+      supabase
+        .from('submissions')
+        .select('*, contacts(name)')
+        .eq('track_id', track.id)
+        .eq('user_id', user.id)
+        .order('sent_at', { ascending: false }),
+      supabase
+        .from('feedback')
+        .select('*, tracks(title), contacts(name)')
+        .eq('track_id', track.id)
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false }),
+    ])
+
+    if (subRes.error) setError(subRes.error.message)
+    else if (fbRes.error) setError(fbRes.error.message)
+    else {
+      setSubmissions(subRes.data ?? [])
+      setFeedback(fbRes.data ?? [])
+    }
+    setLoading(false)
+  }, [track.id, user.id])
+
+  useEffect(() => { load() }, [load])
+
+  function handleLogSuccess() {
+    setLogOpen(false)
+    load()
+  }
+
+  if (logOpen) {
+    return (
+      <Modal open onClose={() => setLogOpen(false)} title="Log response">
+        {submissions.length === 0 ? (
+          <div className="space-y-4">
+            <p className="text-sm text-muted">No submissions exist for this track yet.</p>
+            <button
+              type="button"
+              onClick={() => setLogOpen(false)}
+              className="w-full rounded-lg border border-line py-2.5 text-sm text-muted transition-colors hover:border-text hover:text-text"
+            >
+              Close
+            </button>
+          </div>
+        ) : (
+          <LogResponseModal
+            submissions={submissions}
+            user={user}
+            onClose={() => setLogOpen(false)}
+            onSuccess={handleLogSuccess}
+          />
+        )}
+      </Modal>
+    )
+  }
+
+  return (
+    <Modal open onClose={onClose} title={track.title} wide>
+      <div className="space-y-5">
+        {/* Track meta row */}
+        <div className="flex flex-wrap gap-1.5">
+          <Badge variant={trackStatusVariant(track.status)}>
+            {STATUS_LABELS[track.status] ?? track.status}
+          </Badge>
+          {track.bpm && <Badge variant="info">{track.bpm} BPM</Badge>}
+          {track.musical_key && <Badge variant="info">{track.musical_key}</Badge>}
+        </div>
+
+        {/* Actions */}
+        <div className="flex gap-2">
+          <button
+            type="button"
+            onClick={() => onEdit(track)}
+            className="flex items-center gap-1.5 rounded-lg border border-line px-3 py-2 text-xs font-semibold text-muted transition-colors hover:border-text hover:text-text"
+          >
+            <IconEdit className="size-3.5" />
+            Edit track
+          </button>
+          <button
+            type="button"
+            onClick={() => setLogOpen(true)}
+            className="flex items-center gap-1.5 rounded-lg border border-accent/40 bg-accent/10 px-3 py-2 text-xs font-semibold text-accent transition-colors hover:bg-accent/20"
+          >
+            <IconPlus className="size-3.5" />
+            Log response
+          </button>
+        </div>
+
+        {loading && (
+          <div className="space-y-2" aria-busy="true" aria-label="Loading history">
+            {[1, 2, 3].map((n) => (
+              <div key={n} className="h-14 animate-pulse rounded-lg border border-line bg-surface" />
+            ))}
+          </div>
+        )}
+
+        {!loading && error && (
+          <p className="rounded-lg border border-danger/30 bg-danger/10 px-3 py-2 text-xs text-danger">
+            Failed to load history: {error}
+          </p>
+        )}
+
+        {!loading && !error && (
+          <>
+            {/* Submission history */}
+            <section>
+              <h3 className="mb-2 text-xs font-medium uppercase tracking-wider text-muted">
+                Sends ({submissions.length})
+              </h3>
+              {submissions.length === 0 ? (
+                <p className="rounded-lg border border-dashed border-line bg-surface/40 px-4 py-5 text-center text-sm text-muted">
+                  No sends yet for this track.
+                </p>
+              ) : (
+                <ul className="space-y-2" role="list">
+                  {submissions.map((s) => (
+                    <li
+                      key={s.id}
+                      className="flex items-center justify-between gap-3 rounded-lg border border-line bg-surface-2 px-3 py-2.5"
+                    >
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-sm font-medium text-text">
+                          {s.contacts?.name ?? '—'}
+                        </p>
+                        <p className="text-xs text-muted">
+                          {s.method} · {fmtDate(s.sent_at)}
+                        </p>
+                      </div>
+                      <Badge variant={submissionStatusVariant(s.status)}>
+                        {s.status}
+                      </Badge>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+
+            {/* Feedback timeline */}
+            <section>
+              <h3 className="mb-2 text-xs font-medium uppercase tracking-wider text-muted">
+                Responses ({feedback.length})
+              </h3>
+              {feedback.length === 0 ? (
+                <p className="rounded-lg border border-dashed border-line bg-surface/40 px-4 py-5 text-center text-sm text-muted">
+                  No responses logged yet.
+                </p>
+              ) : (
+                <ul className="space-y-2" role="list">
+                  {feedback.map((fb) => (
+                    <li
+                      key={fb.id}
+                      className="rounded-lg border border-line bg-surface-2 px-3 py-3 space-y-1.5"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2">
+                          <Badge variant={responseTypeVariant(fb.response_type)}>
+                            {fb.response_type === 'no_response' ? (
+                              <span className="italic">{responseTypeLabel(fb.response_type)}</span>
+                            ) : (
+                              responseTypeLabel(fb.response_type)
+                            )}
+                          </Badge>
+                          <span className="text-xs text-muted">
+                            {fb.contacts?.name ?? '—'}
+                          </span>
+                        </div>
+                        <span className="shrink-0 text-[0.65rem] text-muted/70">
+                          {fmtDate(fb.created_at)}
+                        </span>
+                      </div>
+                      {fb.body && (
+                        <p className="text-xs text-text/80 leading-relaxed">{fb.body}</p>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          </>
+        )}
+      </div>
+    </Modal>
+  )
+}
+
 /* ── Track card ─────────────────────────────────────────────── */
-function TrackCard({ track, onEdit, onDelete }) {
+function TrackCard({ track, onEdit, onDelete, onViewHistory }) {
   const [confirming, setConfirming] = useState(false)
 
   return (
     <article className="rounded-card border border-line bg-surface p-4 space-y-3">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
-          <h3 className="truncate font-display font-bold leading-tight">{track.title}</h3>
+          <button
+            type="button"
+            onClick={() => onViewHistory(track)}
+            className="text-left group"
+          >
+            <h3 className="truncate font-display font-bold leading-tight group-hover:text-accent transition-colors">
+              {track.title}
+            </h3>
+          </button>
           <div className="mt-1.5 flex flex-wrap gap-1.5">
             <Badge variant={trackStatusVariant(track.status)}>
               {STATUS_LABELS[track.status] ?? track.status}
@@ -212,6 +585,14 @@ function TrackCard({ track, onEdit, onDelete }) {
           </div>
         </div>
         <div className="flex shrink-0 gap-1">
+          <button
+            type="button"
+            onClick={() => onViewHistory(track)}
+            aria-label={`View history for ${track.title}`}
+            className="grid size-8 place-items-center rounded-lg text-muted transition-colors hover:bg-surface-2 hover:text-accent"
+          >
+            <IconHistory className="size-4" />
+          </button>
           <button
             type="button"
             onClick={() => onEdit(track)}
@@ -281,11 +662,14 @@ export default function Tracks() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  // Modal state
+  // Edit modal state
   const [modalOpen, setModalOpen] = useState(false)
-  const [editing, setEditing] = useState(null) // null = new, track obj = edit
+  const [editing, setEditing] = useState(null)
   const [saving, setSaving] = useState(false)
   const [saveError, setSaveError] = useState(null)
+
+  // Detail / history modal
+  const [detailTrack, setDetailTrack] = useState(null)
 
   /* fetch */
   const load = useCallback(async () => {
@@ -303,7 +687,7 @@ export default function Tracks() {
 
   useEffect(() => { load() }, [load])
 
-  /* open modal */
+  /* open modals */
   function openNew() {
     setEditing(null)
     setSaveError(null)
@@ -321,6 +705,8 @@ export default function Tracks() {
       notes: track.notes ?? '',
     })
     setSaveError(null)
+    // Close detail modal if open, open edit modal
+    setDetailTrack(null)
     setModalOpen(true)
   }
   function closeModal() {
@@ -336,7 +722,6 @@ export default function Tracks() {
 
     let err
     if (editing?.id) {
-      // update
       const { error: e } = await supabase
         .from('tracks')
         .update({ ...row, updated_at: new Date().toISOString() })
@@ -344,7 +729,6 @@ export default function Tracks() {
         .eq('user_id', user.id)
       err = e
     } else {
-      // insert
       const { error: e } = await supabase.from('tracks').insert(row)
       err = e
     }
@@ -438,11 +822,13 @@ export default function Tracks() {
               track={t}
               onEdit={openEdit}
               onDelete={handleDelete}
+              onViewHistory={setDetailTrack}
             />
           ))}
         </div>
       )}
 
+      {/* Edit modal */}
       <Modal
         open={modalOpen}
         onClose={closeModal}
@@ -456,6 +842,16 @@ export default function Tracks() {
           error={saveError}
         />
       </Modal>
+
+      {/* Track detail / history modal */}
+      {detailTrack && (
+        <TrackDetailModal
+          track={detailTrack}
+          user={user}
+          onClose={() => setDetailTrack(null)}
+          onEdit={openEdit}
+        />
+      )}
     </section>
   )
 }
@@ -498,6 +894,15 @@ function IconLink(props) {
     <svg {...svgBase(props)}>
       <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
       <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+    </svg>
+  )
+}
+function IconHistory(props) {
+  return (
+    <svg {...svgBase(props)}>
+      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+      <path d="M3 3v5h5" />
+      <path d="M12 7v5l4 2" />
     </svg>
   )
 }
