@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
 import Modal from '../components/Modal'
@@ -668,6 +669,9 @@ export default function Tracks() {
   const [saving, setSaving] = useState(false)
   const [saveError, setSaveError] = useState(null)
 
+  // Show a "send demo" nudge after creating a new track
+  const [justCreatedTitle, setJustCreatedTitle] = useState(null)
+
   // Detail / history modal
   const [detailTrack, setDetailTrack] = useState(null)
 
@@ -721,7 +725,8 @@ export default function Tracks() {
     const row = formToRow(form, user.id)
 
     let err
-    if (editing?.id) {
+    const isNew = !editing?.id
+    if (!isNew) {
       const { error: e } = await supabase
         .from('tracks')
         .update({ ...row, updated_at: new Date().toISOString() })
@@ -736,6 +741,9 @@ export default function Tracks() {
     if (err) {
       setSaveError(err.message)
     } else {
+      if (isNew) {
+        setJustCreatedTitle(form.title.trim())
+      }
       closeModal()
       load()
     }
@@ -811,6 +819,31 @@ export default function Tracks() {
           >
             Add first track
           </button>
+        </div>
+      )}
+
+      {/* Post-create nudge */}
+      {justCreatedTitle && (
+        <div className="flex items-center justify-between gap-3 rounded-lg border border-accent/30 bg-accent/8 px-4 py-3">
+          <p className="text-sm text-text">
+            <span className="font-medium">{justCreatedTitle}</span> added.
+          </p>
+          <div className="flex items-center gap-3 shrink-0">
+            <Link
+              to="/send"
+              className="text-sm font-semibold text-accent hover:underline"
+            >
+              Send a demo with this &rarr;
+            </Link>
+            <button
+              type="button"
+              onClick={() => setJustCreatedTitle(null)}
+              className="text-muted hover:text-text transition-colors"
+              aria-label="Dismiss"
+            >
+              <IconX className="size-4" />
+            </button>
+          </div>
         </div>
       )}
 
@@ -905,4 +938,7 @@ function IconHistory(props) {
       <path d="M12 7v5l4 2" />
     </svg>
   )
+}
+function IconX(props) {
+  return <svg {...svgBase(props)}><path d="M18 6 6 18M6 6l12 12" /></svg>
 }

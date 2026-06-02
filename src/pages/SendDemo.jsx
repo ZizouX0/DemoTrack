@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
-import Badge, { trackStatusVariant, stageVariant } from '../components/Badge'
-import Field, { inputCls } from '../components/Field'
+import { norm } from '../lib/labelNorm'
+import Badge, { trackStatusVariant, tierVariant } from '../components/Badge'
+import Field, { inputCls, selectCls } from '../components/Field'
 
 /* ── constants ─────────────────────────────────────────────── */
 const STATUS_LABELS = {
@@ -34,6 +35,21 @@ const KIND_VARIANT = {
   form_note: 'muted',
 }
 
+const ACCESS_LABELS = {
+  cold_demo_friendly: 'Cold OK',
+  open_window_only: 'Open Window',
+  needs_warm_intro: 'Warm Intro',
+  relationship_only: 'Relationship',
+}
+
+const TIER_RANK = { elite: 0, a: 1, b: 2 }
+const ACCESS_RANK = {
+  cold_demo_friendly: 0,
+  open_window_only: 1,
+  needs_warm_intro: 2,
+  relationship_only: 3,
+}
+
 const RECENT_HOOKS_KEY = 'demotrack:recent_hooks'
 const MAX_RECENT_HOOKS = 5
 
@@ -55,11 +71,6 @@ function pushRecentHook(hook) {
 }
 
 /* ── merge-field fill ───────────────────────────────────────── */
-/**
- * Replace all supported placeholders in `text`.
- * Any placeholder whose value is absent is either removed or its whole line
- * is dropped — so the caller never sees a raw {tag} in output.
- */
 function fillMergeFields(text, { track, contact, pressKit, artistName, hook }) {
   if (!text) return ''
 
@@ -82,7 +93,6 @@ function fillMergeFields(text, { track, contact, pressKit, artistName, hook }) {
     .replace(/\{artist_name\}/g, resolvedArtist)
     .replace(/\{hook\}/g, hook ?? '')
 
-  // BPM: remove gracefully if absent
   if (bpm) {
     result = result.replace(/\{bpm\}/g, bpm)
   } else {
@@ -91,14 +101,12 @@ function fillMergeFields(text, { track, contact, pressKit, artistName, hook }) {
       .replace(/\{bpm\}/g, '')
   }
 
-  // Key: remove gracefully if absent
   if (key) {
     result = result.replace(/\{key\}/g, key)
   } else {
     result = result.replace(/[,·]\s*\{key\}/g, '').replace(/\{key\}/g, '')
   }
 
-  // Listen link: remove whole line if absent
   if (listenLink) {
     result = result.replace(/\{listen_link\}/g, listenLink)
   } else {
@@ -108,7 +116,6 @@ function fillMergeFields(text, { track, contact, pressKit, artistName, hook }) {
       .join('\n')
   }
 
-  // Press kit link: remove whole line if absent (no press_kit row or no slug)
   if (pressKitLink) {
     result = result.replace(/\{press_kit_link\}/g, pressKitLink)
   } else {
@@ -118,16 +125,11 @@ function fillMergeFields(text, { track, contact, pressKit, artistName, hook }) {
       .join('\n')
   }
 
-  // Collapse runs of more than two blank lines
   result = result.replace(/\n{3,}/g, '\n\n').trim()
 
   return result
 }
 
-/**
- * If the template body starts with "Subject: …\n", strip it so it isn't
- * double-rendered in the body preview / mail body.
- */
 function stripSubjectLine(body) {
   return body.replace(/^Subject:.*\n?/i, '').trim()
 }
@@ -155,9 +157,28 @@ function addDays(days) {
   return d.toISOString()
 }
 
+/* ── Sort targets: cold_demo_friendly first, then tier, then name ── */
+function sortTargets(targets) {
+  return [...targets].sort((a, b) => {
+    // CRM contacts come first (they have an id)
+    const aInCRM = a.id ? 0 : 1
+    const bInCRM = b.id ? 0 : 1
+    if (aInCRM !== bInCRM) return aInCRM - bInCRM
+
+    const ar = ACCESS_RANK[a.access_path ?? a._access_path] ?? 9
+    const br = ACCESS_RANK[b.access_path ?? b._access_path] ?? 9
+    if (ar !== br) return ar - br
+
+    const tr = (TIER_RANK[a._tier] ?? 9) - (TIER_RANK[b._tier] ?? 9)
+    if (tr !== 0) return tr
+
+    return (a.name ?? '').localeCompare(b.name ?? '')
+  })
+}
+
 /* ── Step indicator ─────────────────────────────────────────── */
 function StepBar({ step }) {
-  const steps = ['Track', 'Contact', 'Review', 'Done']
+  const steps = ['Track', 'Target', 'Review', 'Done']
   return (
     <div className="flex items-center gap-1" role="list" aria-label="Steps">
       {steps.map((label, i) => {
@@ -253,53 +274,250 @@ function PickTrack({ tracks, selected, onSelect }) {
   )
 }
 
-/* ── Step 2: pick a contact ─────────────────────────────────── */
-function PickContact({ contacts, selected, onSelect }) {
+/* ── Step 2: pick a target (contacts + all labels) ──────────── */
+function PickTarget({ targets, labelsLoading, selected, onSelect }) {
+  const [search, setSearch] = useState('')
+  const [tierFilter, setTierFilter] = useState('')
+  const [accessFilter, setAccessFilter] = useState('')
+  const [methodFilter, setMethodFilter] = useState('')
+  const [genreFilter, setGenreFilter] = useState('')
+  const searchRef = useRef(null)
+
+  // Derive distinct genre tags across all targets that have them
+  const genreOptions = useMemo(() => {
+    const tags = new Set()
+    for (const t of targets) {
+      for (const g of t._genres ?? []) {
+        tags.add(g)
+      }
+    }
+    return [...tags].sort((a, b) => norm(a).localeCompare(norm(b)))
+  }, [targets])
+
+  const filtered = useMemo(() => {
+    const q = norm(search)
+
+    return targets.filter((t) => {
+      if (q) {
+        const matchName = norm(t.name).includes(q)
+        const matchGenre = (t._genres ?? []).some((g) => norm(g).includes(q))
+        if (!matchName && !matchGenre) return false
+      }
+      if (tierFilter && t._tier !== tierFilter) return false
+      if (accessFilter && (t.access_path ?? t._access_path) !== accessFilter) return false
+      if (methodFilter && t.submission_method !== methodFilter) return false
+      if (genreFilter && !(t._genres ?? []).includes(genreFilter)) return false
+      return true
+    })
+  }, [targets, search, tierFilter, accessFilter, methodFilter, genreFilter])
+
+  const hasActiveFilters = search || tierFilter || accessFilter || methodFilter || genreFilter
+
+  function clearFilters() {
+    setSearch('')
+    setTierFilter('')
+    setAccessFilter('')
+    setMethodFilter('')
+    setGenreFilter('')
+    searchRef.current?.focus()
+  }
+
   return (
     <div className="space-y-3">
-      <p className="text-xs font-medium uppercase tracking-wider text-muted">Choose a contact</p>
-      {contacts.length === 0 ? (
-        <div className="rounded-card border border-dashed border-line bg-surface/40 p-6 text-center">
-          <p className="text-sm text-muted">No contacts yet.</p>
-          <Link
-            to="/contacts"
-            className="mt-2 inline-block text-sm text-accent hover:underline"
+      <p className="text-xs font-medium uppercase tracking-wider text-muted">Pick a target</p>
+
+      {/* Search */}
+      <div className="relative">
+        <IconSearch className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted pointer-events-none" aria-hidden="true" />
+        <input
+          ref={searchRef}
+          type="search"
+          aria-label="Search by name or genre"
+          placeholder="Search by name or genre…"
+          className={`${inputCls} pl-9`}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
+
+      {/* Filters */}
+      <div className="grid grid-cols-2 gap-2">
+        {/* Tier */}
+        <div>
+          <label htmlFor="target-tier" className="sr-only">Filter by tier</label>
+          <select
+            id="target-tier"
+            className={selectCls}
+            value={tierFilter}
+            onChange={(e) => setTierFilter(e.target.value)}
           >
-            Add a contact &rarr;
-          </Link>
+            <option value="">All tiers</option>
+            <option value="elite">Elite</option>
+            <option value="a">A-tier</option>
+            <option value="b">B-tier</option>
+          </select>
         </div>
-      ) : (
-        <div className="space-y-2">
-          {contacts.map((contact) => (
-            <button
-              key={contact.id}
-              type="button"
-              onClick={() => onSelect(contact)}
-              className={[
-                'w-full rounded-lg border p-3 text-left transition-colors',
-                selected?.id === contact.id
-                  ? 'border-accent/50 bg-accent/10'
-                  : 'border-line bg-surface hover:border-line/80 hover:bg-surface-2',
-              ].join(' ')}
-            >
-              <div className="flex items-center justify-between gap-2">
-                <span className="truncate font-display font-bold text-sm">{contact.name}</span>
-                <div className="flex gap-1">
-                  <Badge variant="info">
-                    {CATEGORY_LABELS[contact.category] ?? contact.category}
-                  </Badge>
-                  <Badge variant={stageVariant(contact.relationship_stage)}>
-                    {contact.relationship_stage}
-                  </Badge>
-                </div>
-              </div>
-              {contact.submission_method && (
-                <p className="mt-0.5 text-[0.65rem] text-muted capitalize">
-                  via {contact.submission_method}
-                </p>
-              )}
-            </button>
+
+        {/* Access */}
+        <div>
+          <label htmlFor="target-access" className="sr-only">Filter by access</label>
+          <select
+            id="target-access"
+            className={selectCls}
+            value={accessFilter}
+            onChange={(e) => setAccessFilter(e.target.value)}
+          >
+            <option value="">All access</option>
+            <option value="cold_demo_friendly">Cold Demo OK</option>
+            <option value="open_window_only">Open Window</option>
+            <option value="needs_warm_intro">Warm Intro</option>
+            <option value="relationship_only">Relationship</option>
+          </select>
+        </div>
+
+        {/* Method */}
+        <div>
+          <label htmlFor="target-method" className="sr-only">Filter by method</label>
+          <select
+            id="target-method"
+            className={selectCls}
+            value={methodFilter}
+            onChange={(e) => setMethodFilter(e.target.value)}
+          >
+            <option value="">All methods</option>
+            <option value="email">Email</option>
+            <option value="form">Form</option>
+            <option value="dm">DM</option>
+          </select>
+        </div>
+
+        {/* Genre */}
+        <div>
+          <label htmlFor="target-genre" className="sr-only">Filter by genre</label>
+          <select
+            id="target-genre"
+            className={selectCls}
+            value={genreFilter}
+            onChange={(e) => setGenreFilter(e.target.value)}
+          >
+            <option value="">All genres</option>
+            {genreOptions.map((g) => (
+              <option key={g} value={g}>
+                {norm(g).replace(/\b\w/g, (c) => c.toUpperCase())}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      {/* Count + clear */}
+      <div className="flex items-center justify-between min-h-[1.25rem]">
+        {!labelsLoading && (
+          <p className="text-[0.65rem] text-muted">
+            {filtered.length === targets.length
+              ? `${targets.length} targets`
+              : `${filtered.length} of ${targets.length}`}
+          </p>
+        )}
+        {hasActiveFilters && (
+          <button
+            type="button"
+            onClick={clearFilters}
+            className="ml-auto text-[0.65rem] font-semibold uppercase tracking-wider text-muted/70 hover:text-muted transition-colors"
+          >
+            Clear filters
+          </button>
+        )}
+      </div>
+
+      {labelsLoading && (
+        <div className="space-y-2" aria-busy="true" aria-label="Loading targets">
+          {[1, 2, 3, 4].map((n) => (
+            <div key={n} className="h-16 animate-pulse rounded-lg border border-line bg-surface" />
           ))}
+        </div>
+      )}
+
+      {!labelsLoading && filtered.length === 0 && (
+        <div className="rounded-card border border-dashed border-line bg-surface/40 p-6 text-center">
+          <p className="text-sm text-muted">
+            {targets.length === 0
+              ? 'No labels loaded yet.'
+              : 'No results — try adjusting filters.'}
+          </p>
+          {hasActiveFilters && (
+            <button
+              type="button"
+              onClick={clearFilters}
+              className="mt-2 text-sm text-accent hover:underline"
+            >
+              Clear filters
+            </button>
+          )}
+        </div>
+      )}
+
+      {!labelsLoading && filtered.length > 0 && (
+        <div className="space-y-1.5 max-h-[60vh] overflow-y-auto pr-0.5" role="listbox" aria-label="Pick a target">
+          {filtered.map((target) => {
+            const isSelected = selected
+              ? target.id
+                ? selected.id === target.id
+                : selected.label_id === target.label_id
+              : false
+            const isInCRM = Boolean(target.id)
+            const tier = target._tier
+            const access = target.access_path ?? target._access_path
+            const method = target.submission_method
+
+            return (
+              <button
+                key={target.id ?? `label-${target.label_id}`}
+                type="button"
+                role="option"
+                aria-selected={isSelected}
+                onClick={() => onSelect(target)}
+                className={[
+                  'w-full rounded-lg border p-3 text-left transition-colors',
+                  isSelected
+                    ? 'border-accent/50 bg-accent/10'
+                    : 'border-line bg-surface hover:border-line/60 hover:bg-surface-2',
+                ].join(' ')}
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <span className="truncate font-display font-bold text-sm leading-snug">{target.name}</span>
+                  {isInCRM && (
+                    <Badge variant="ok">In CRM</Badge>
+                  )}
+                </div>
+                <div className="mt-1.5 flex flex-wrap gap-1">
+                  {tier && (
+                    <Badge variant={tierVariant(tier)}>
+                      {tier === 'elite' ? 'Elite' : tier === 'a' ? 'A-tier' : 'B-tier'}
+                    </Badge>
+                  )}
+                  {access && (
+                    <Badge variant="muted">
+                      {ACCESS_LABELS[access] ?? access}
+                    </Badge>
+                  )}
+                  {method && (
+                    <Badge variant="muted">
+                      {method}
+                    </Badge>
+                  )}
+                  {!isInCRM && target._genres?.slice(0, 2).map((g) => (
+                    <span
+                      key={g}
+                      className="rounded border border-line/60 bg-surface-2 px-1.5 py-0.5 text-[0.6rem] font-medium text-muted/80 uppercase tracking-wider"
+                    >
+                      {g}
+                    </span>
+                  ))}
+                </div>
+              </button>
+            )
+          })}
         </div>
       )}
     </div>
@@ -318,19 +536,16 @@ function EmailReviewPanel({
   error,
   onBack,
 }) {
-  /* ── template state ── */
   const [templates, setTemplates] = useState([])
   const [loadingTemplates, setLoadingTemplates] = useState(true)
   const [selectedTemplateId, setSelectedTemplateId] = useState(null)
 
-  /* ── hook state ── */
   const [hook, setHook] = useState('')
   const [hookLoading, setHookLoading] = useState(false)
   const [hookError, setHookError] = useState(null)
   const [hookWarn, setHookWarn] = useState(null)
   const hookTextareaRef = useRef(null)
 
-  /* load templates */
   useEffect(() => {
     let cancelled = false
     async function load() {
@@ -343,7 +558,6 @@ function EmailReviewPanel({
       if (cancelled) return
       const rows = data ?? []
       setTemplates(rows)
-      // Auto-select: prefer cold_email, else first
       const auto = rows.find((t) => t.kind === 'cold_email') ?? rows[0]
       if (auto) setSelectedTemplateId(auto.id)
       setLoadingTemplates(false)
@@ -352,7 +566,6 @@ function EmailReviewPanel({
     return () => { cancelled = true }
   }, [userId])
 
-  /* hook duplicate guard */
   useEffect(() => {
     if (!hook.trim()) { setHookWarn(null); return }
     const recents = getRecentHooks()
@@ -363,7 +576,6 @@ function EmailReviewPanel({
     }
   }, [hook])
 
-  /* derived filled content */
   const selectedTemplate =
     templates.find((t) => t.id === selectedTemplateId) ?? null
 
@@ -385,14 +597,12 @@ function EmailReviewPanel({
   const hookIsEmpty = !hook.trim()
   const hasNoTemplates = !loadingTemplates && templates.length === 0
 
-  /* AI hook */
   async function handleSuggestHook() {
     setHookLoading(true)
     setHookError(null)
     try {
       const recentHooks = getRecentHooks()
 
-      // Fetch A&R intel and label.why in parallel, gracefully
       const [intelRes, labelRes] = await Promise.all([
         supabase
           .from('ar_intel')
@@ -409,7 +619,6 @@ function EmailReviewPanel({
           : Promise.resolve({ data: null, error: null }),
       ])
 
-      // Compose ar_intel string from non-empty fields
       let arIntelString = ''
       if (intelRes.data) {
         const d = intelRes.data
@@ -423,7 +632,8 @@ function EmailReviewPanel({
         arIntelString = parts.join('. ')
       }
 
-      const labelWhy = labelRes.data?.why ?? ''
+      // For label-targets that don't have a contact id yet, _why is on the target
+      const labelWhy = labelRes.data?.why ?? contact._why ?? ''
 
       const { data, error: fnErr } = await supabase.functions.invoke('suggest-hook', {
         body: {
@@ -455,7 +665,6 @@ function EmailReviewPanel({
     setHookLoading(false)
   }
 
-  /* confirm: persist hook then call parent */
   function handleConfirmWithHook() {
     if (hookIsEmpty) return
     pushRecentHook(hook.trim())
@@ -706,7 +915,6 @@ function NonEmailReviewPanel({
 }) {
   const method = contact.submission_method
 
-  /* ── tracking link state ── */
   const [trackingHash, setTrackingHash] = useState(null)
   const [trackedUrl, setTrackedUrl] = useState(null)
   const [trackingLoading, setTrackingLoading] = useState(false)
@@ -729,7 +937,6 @@ function NonEmailReviewPanel({
 
   const requirements = contact.notes || null
 
-  /* create tracked link */
   async function handleCreateTrackingLink() {
     setTrackingLoading(true)
     setTrackingError(null)
@@ -756,7 +963,6 @@ function NonEmailReviewPanel({
     setTrackingLoading(false)
   }
 
-  /* copy tracked URL */
   async function handleCopy() {
     if (!trackedUrl) return
     try {
@@ -837,7 +1043,7 @@ function NonEmailReviewPanel({
         )}
       </div>
 
-      {/* Track this link affordance — only when listen_link exists */}
+      {/* Track this link affordance */}
       {track.listen_link && (
         <div className="rounded-card border border-line bg-surface p-4 space-y-3">
           <div className="flex items-center justify-between gap-2">
@@ -979,8 +1185,6 @@ function ReviewAndSend(props) {
   }
   return <NonEmailReviewPanel {...props} />
 }
-// NonEmailReviewPanel receives: track, contact, user, onConfirm, confirming,
-// error, onBack, onTrackingHashChange — all forwarded via spread from SendDemo.
 
 /* ── Shared check item ──────────────────────────────────────── */
 function CheckItem({ done, children }) {
@@ -1075,8 +1279,10 @@ export default function SendDemo() {
   const { user } = useAuth()
   const [tracks, setTracks] = useState([])
   const [contacts, setContacts] = useState([])
-  const [pressKit, setPressKit] = useState(null) // absent if user hasn't filled press_kit
+  const [labels, setLabels] = useState([])
+  const [pressKit, setPressKit] = useState(null)
   const [loadingData, setLoadingData] = useState(true)
+  const [labelsLoading, setLabelsLoading] = useState(true)
   const [loadError, setLoadError] = useState(null)
 
   const [step, setStep] = useState(1)
@@ -1085,7 +1291,6 @@ export default function SendDemo() {
   const [confirming, setConfirming] = useState(false)
   const [confirmError, setConfirmError] = useState(null)
   const [submission, setSubmission] = useState(null)
-  // Phase 11: tracking hash created during the review step (non-email only)
   const [pendingTrackingHash, setPendingTrackingHash] = useState(null)
 
   const load = useCallback(async () => {
@@ -1102,7 +1307,6 @@ export default function SendDemo() {
         .select('*')
         .eq('user_id', user.id)
         .order('name', { ascending: true }),
-      // press_kit is optional — use maybeSingle so a missing row isn't an error
       supabase
         .from('press_kit')
         .select('artist_name, slug, photo_url')
@@ -1115,27 +1319,106 @@ export default function SendDemo() {
       setTracks(tracksRes.data ?? [])
       setContacts(contactsRes.data ?? [])
     }
-    // press_kit absence (null data, no error) is handled gracefully
     if (!pressKitRes.error) {
       setPressKit(pressKitRes.data ?? null)
     }
     setLoadingData(false)
   }, [user.id])
 
+  // Load labels independently so the picker shows immediately even if labels are slow
+  useEffect(() => {
+    let cancelled = false
+    setLabelsLoading(true)
+    supabase
+      .from('labels')
+      .select('id, name, tier, access_path, submission_method, contact_link, genre_tags, submission_requirements, why')
+      .then(({ data, error }) => {
+        if (cancelled) return
+        if (!error) setLabels(data ?? [])
+        setLabelsLoading(false)
+      })
+    return () => { cancelled = true }
+  }, [])
+
   useEffect(() => { load() }, [load])
 
-  // Derive a display name for the artist
+  // Derive artist name
   const artistName =
     pressKit?.artist_name ||
     (user?.email ? user.email.split('@')[0] : 'Unknown Artist')
+
+  // Build unified target list: CRM contacts first, then labels not yet in CRM
+  const targets = useMemo(() => {
+    // Set of label_ids already in CRM
+    const crmLabelIds = new Set(
+      contacts.filter((c) => c.label_id).map((c) => c.label_id)
+    )
+
+    // Enrich existing contacts with _tier / _genres / _access_path for filtering
+    const crmTargets = contacts.map((c) => ({
+      ...c,
+      _tier: c._tier ?? null,
+      _genres: c.genre_tags ?? [],
+      _access_path: c.access_path ?? null,
+      _why: c._why ?? '',
+    }))
+
+    // Labels not yet in CRM
+    const labelTargets = labels
+      .filter((l) => !crmLabelIds.has(l.id))
+      .map((label) => ({
+        id: null,
+        label_id: label.id,
+        name: label.name,
+        category: 'label',
+        submission_method: label.submission_method ?? null,
+        email: label.submission_method === 'email' ? (label.contact_link ?? null) : null,
+        portal_url: label.submission_method === 'form' ? (label.contact_link ?? null) : null,
+        dm_link: label.submission_method === 'dm' ? (label.contact_link ?? null) : null,
+        access_path: label.access_path ?? null,
+        notes: label.submission_requirements ?? null,
+        _why: label.why ?? '',
+        _tier: label.tier,
+        _genres: label.genre_tags ?? [],
+        _access_path: label.access_path ?? null,
+      }))
+
+    return sortTargets([...crmTargets, ...labelTargets])
+  }, [contacts, labels])
+
+  /* ── resolveContactId: get or create the CRM contact before submitting ── */
+  async function resolveContactId(target) {
+    if (target.id) return target.id
+
+    const { data, error } = await supabase
+      .from('contacts')
+      .insert({
+        user_id: user.id,
+        name: target.name,
+        category: 'label',
+        submission_method: target.submission_method,
+        email: target.email,
+        portal_url: target.portal_url,
+        dm_link: target.dm_link,
+        access_path: target.access_path,
+        relationship_stage: 'cold',
+        label_id: target.label_id,
+        notes: target.notes,
+      })
+      .select('id')
+      .single()
+
+    if (error) throw error
+    return data.id
+  }
 
   function handleSelectTrack(track) {
     setSelectedTrack(track)
     setStep(2)
   }
 
-  function handleSelectContact(contact) {
-    setSelectedContact(contact)
+  function handleSelectTarget(target) {
+    setSelectedContact(target)
     setStep(3)
   }
 
@@ -1144,58 +1427,64 @@ export default function SendDemo() {
     setConfirming(true)
     setConfirmError(null)
 
-    const now = new Date().toISOString()
-    const followUpAt = addDays(7)
-    const overdueAt = addDays(14)
+    try {
+      const contactId = await resolveContactId(selectedContact)
 
-    const { data: submissionData, error: subErr } = await supabase
-      .from('submissions')
-      .insert({
-        user_id: user.id,
-        track_id: selectedTrack.id,
-        contact_id: selectedContact.id,
-        method: selectedContact.submission_method,
-        status: 'sent',
-        sent_at: now,
-        follow_up_due_at: followUpAt,
-        overdue_at: overdueAt,
-      })
-      .select()
-      .single()
+      const now = new Date().toISOString()
+      const followUpAt = addDays(7)
+      const overdueAt = addDays(14)
 
-    if (subErr) {
-      setConfirmError(subErr.message)
+      const { data: submissionData, error: subErr } = await supabase
+        .from('submissions')
+        .insert({
+          user_id: user.id,
+          track_id: selectedTrack.id,
+          contact_id: contactId,
+          method: selectedContact.submission_method,
+          status: 'sent',
+          sent_at: now,
+          follow_up_due_at: followUpAt,
+          overdue_at: overdueAt,
+        })
+        .select()
+        .single()
+
+      if (subErr) throw subErr
+
+      await supabase
+        .from('contacts')
+        .update({ last_contacted_at: now, updated_at: now })
+        .eq('id', contactId)
+        .eq('user_id', user.id)
+
+      if (selectedTrack.status === 'demo_ready') {
+        await supabase
+          .from('tracks')
+          .update({ status: 'submitted', updated_at: now })
+          .eq('id', selectedTrack.id)
+          .eq('user_id', user.id)
+      }
+
+      if (pendingTrackingHash) {
+        await supabase
+          .from('tracked_links')
+          .update({ submission_id: submissionData.id })
+          .eq('hash', pendingTrackingHash)
+          .eq('user_id', user.id)
+      }
+
+      // If we auto-created a contact, update the selectedContact so it has an id
+      if (!selectedContact.id) {
+        setSelectedContact((prev) => ({ ...prev, id: contactId }))
+      }
+
+      setSubmission(submissionData)
       setConfirming(false)
-      return
+      setStep(4)
+    } catch (err) {
+      setConfirmError(err.message ?? 'Something went wrong — please try again.')
+      setConfirming(false)
     }
-
-    await supabase
-      .from('contacts')
-      .update({ last_contacted_at: now, updated_at: now })
-      .eq('id', selectedContact.id)
-      .eq('user_id', user.id)
-
-    if (selectedTrack.status === 'demo_ready') {
-      await supabase
-        .from('tracks')
-        .update({ status: 'submitted', updated_at: now })
-        .eq('id', selectedTrack.id)
-        .eq('user_id', user.id)
-    }
-
-    // Phase 11: link the tracked_links row to this submission so opens
-    // attribute to it and can advance it to 'opened'.
-    if (pendingTrackingHash) {
-      await supabase
-        .from('tracked_links')
-        .update({ submission_id: submissionData.id })
-        .eq('hash', pendingTrackingHash)
-        .eq('user_id', user.id)
-    }
-
-    setSubmission(submissionData)
-    setConfirming(false)
-    setStep(4)
   }
 
   function handleReset() {
@@ -1214,7 +1503,7 @@ export default function SendDemo() {
         <p className="text-xs font-medium uppercase tracking-wider text-accent">Phase 5</p>
         <h1 className="mt-0.5 text-2xl font-extrabold">Send Demo</h1>
         <p className="mt-0.5 text-sm text-muted">
-          Pick a track, pick a contact, send — every send logged.
+          Pick a track, pick any label or contact, send — every send logged automatically.
         </p>
       </header>
 
@@ -1263,10 +1552,11 @@ export default function SendDemo() {
                   Change
                 </button>
               </div>
-              <PickContact
-                contacts={contacts}
+              <PickTarget
+                targets={targets}
+                labelsLoading={labelsLoading}
                 selected={selectedContact}
-                onSelect={handleSelectContact}
+                onSelect={handleSelectTarget}
               />
             </div>
           )}
@@ -1380,6 +1670,14 @@ function IconCopy(props) {
     <svg {...svgBase(props)}>
       <rect x="9" y="9" width="13" height="13" rx="2" />
       <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+    </svg>
+  )
+}
+function IconSearch(props) {
+  return (
+    <svg {...svgBase(props)}>
+      <circle cx="11" cy="11" r="7" />
+      <path d="m21 21-4.35-4.35" />
     </svg>
   )
 }

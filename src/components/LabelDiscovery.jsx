@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
+import { norm } from '../lib/labelNorm'
 import Badge, { tierVariant } from './Badge'
 import { inputCls, selectCls } from './Field'
 
@@ -303,6 +304,7 @@ export default function LabelDiscovery() {
   const [accessFilter, setAccessFilter] = useState('')
   const [methodFilter, setMethodFilter] = useState('')
   const [freshnessFilter, setFreshnessFilter] = useState('') // '' | 'fresh' | 'stale'
+  const [genreFilter, setGenreFilter] = useState('')
 
   const searchRef = useRef(null)
 
@@ -402,14 +404,23 @@ export default function LabelDiscovery() {
     })
   }
 
+  /* ── Distinct genre tags for filter select ──────────────────── */
+  const genreOptions = useMemo(() => {
+    const tags = new Set()
+    for (const l of labels) {
+      for (const g of l.genre_tags ?? []) tags.add(g)
+    }
+    return [...tags].sort((a, b) => norm(a).localeCompare(norm(b)))
+  }, [labels])
+
   /* ── Filter + sort ───────────────────────────────────────────── */
   const filtered = useMemo(() => {
-    const q = search.trim().toLowerCase()
+    const q = norm(search)
 
     const result = labels.filter((l) => {
       if (q) {
-        const matchName = l.name.toLowerCase().includes(q)
-        const matchGenre = (l.genre_tags ?? []).some((g) => g.toLowerCase().includes(q))
+        const matchName = norm(l.name).includes(q)
+        const matchGenre = (l.genre_tags ?? []).some((g) => norm(g).includes(q))
         if (!matchName && !matchGenre) return false
       }
       if (tierFilter && l.tier !== tierFilter) return false
@@ -417,13 +428,14 @@ export default function LabelDiscovery() {
       if (methodFilter && l.submission_method !== methodFilter) return false
       if (freshnessFilter === 'fresh' && !isFresh(l.last_verified)) return false
       if (freshnessFilter === 'stale' && isFresh(l.last_verified)) return false
+      if (genreFilter && !(l.genre_tags ?? []).includes(genreFilter)) return false
       return true
     })
 
     return sortLabels(result)
-  }, [labels, search, tierFilter, accessFilter, methodFilter, freshnessFilter])
+  }, [labels, search, tierFilter, accessFilter, methodFilter, freshnessFilter, genreFilter])
 
-  const hasActiveFilters = search || tierFilter || accessFilter || methodFilter || freshnessFilter
+  const hasActiveFilters = search || tierFilter || accessFilter || methodFilter || freshnessFilter || genreFilter
 
   function clearAllFilters() {
     setSearch('')
@@ -431,6 +443,7 @@ export default function LabelDiscovery() {
     setAccessFilter('')
     setMethodFilter('')
     setFreshnessFilter('')
+    setGenreFilter('')
     searchRef.current?.focus()
   }
 
@@ -475,21 +488,42 @@ export default function LabelDiscovery() {
           onChange={setMethodFilter}
         />
 
-        {/* Freshness filter — select, not chips, to save space */}
-        <div className="flex items-center gap-2">
-          <label htmlFor="freshness-filter" className="shrink-0 text-[0.65rem] font-semibold uppercase tracking-wider text-muted">
-            Freshness
-          </label>
-          <select
-            id="freshness-filter"
-            className={`${selectCls} max-w-[14rem]`}
-            value={freshnessFilter}
-            onChange={(e) => setFreshnessFilter(e.target.value)}
-          >
-            <option value="">All</option>
-            <option value="fresh">Verified in last 6 months</option>
-            <option value="stale">Stale / unverified</option>
-          </select>
+        {/* Freshness + Genre filters — selects, not chips, to save space */}
+        <div className="flex flex-wrap gap-2">
+          <div className="flex items-center gap-2">
+            <label htmlFor="freshness-filter" className="shrink-0 text-[0.65rem] font-semibold uppercase tracking-wider text-muted">
+              Freshness
+            </label>
+            <select
+              id="freshness-filter"
+              className={`${selectCls} max-w-[14rem]`}
+              value={freshnessFilter}
+              onChange={(e) => setFreshnessFilter(e.target.value)}
+            >
+              <option value="">All</option>
+              <option value="fresh">Verified in last 6 months</option>
+              <option value="stale">Stale / unverified</option>
+            </select>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <label htmlFor="genre-filter" className="shrink-0 text-[0.65rem] font-semibold uppercase tracking-wider text-muted">
+              Genre
+            </label>
+            <select
+              id="genre-filter"
+              className={`${selectCls} max-w-[14rem]`}
+              value={genreFilter}
+              onChange={(e) => setGenreFilter(e.target.value)}
+            >
+              <option value="">All genres</option>
+              {genreOptions.map((g) => (
+                <option key={g} value={g}>
+                  {norm(g).replace(/\b\w/g, (c) => c.toUpperCase())}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
