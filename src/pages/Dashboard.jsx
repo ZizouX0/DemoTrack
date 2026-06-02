@@ -9,6 +9,421 @@ import Modal from '../components/Modal'
 // The dashboard is the connective tissue. Phase 6 adds the Follow-up queue.
 const LOOP = ['Discover', 'Prepare', 'Generate', 'Send', 'Track', 'Follow-up', 'Learn']
 
+/* ── Analytics helpers ──────────────────────────────────────── */
+
+/** Status rank — passed is excluded from funnel progression */
+const STATUS_RANK = { sent: 0, opened: 1, replied: 2, considering: 3, signed: 4 }
+
+/**
+ * Compute funnel counts from submissions array.
+ * Each stage = submissions whose rank >= that stage (excluding passed above sent).
+ */
+function computeFunnel(submissions) {
+  const total = submissions.length
+  const nonPassed = submissions.filter((s) => s.status !== 'passed')
+  const passedCount = submissions.filter((s) => s.status === 'passed').length
+
+  const rank = (s) => STATUS_RANK[s.status] ?? 0
+
+  return {
+    sent: total,
+    opened: nonPassed.filter((s) => rank(s) >= 1).length,
+    replied: nonPassed.filter((s) => rank(s) >= 2).length,
+    considering: nonPassed.filter((s) => rank(s) >= 3).length,
+    signed: nonPassed.filter((s) => rank(s) >= 4).length,
+    passed: passedCount,
+  }
+}
+
+/**
+ * Response rate by genre (explode genre_tags arrays).
+ * responded = status in (replied, considering, signed)
+ */
+function computeByGenre(submissions) {
+  const RESPONDED = new Set(['replied', 'considering', 'signed'])
+  const map = {} // genre -> { sent, responded }
+  for (const sub of submissions) {
+    const tags = sub.tracks?.genre_tags ?? []
+    const responded = RESPONDED.has(sub.status)
+    for (const tag of tags) {
+      if (!tag) continue
+      if (!map[tag]) map[tag] = { genre: tag, sent: 0, responded: 0 }
+      map[tag].sent += 1
+      if (responded) map[tag].responded += 1
+    }
+  }
+  return Object.values(map)
+    .sort((a, b) => b.sent - a.sent)
+    .slice(0, 6)
+}
+
+/**
+ * Response rate by label tier.
+ * null tier grouped as 'unlabeled'.
+ */
+function computeByTier(submissions) {
+  const RESPONDED = new Set(['replied', 'considering', 'signed'])
+  const map = {} // tier -> { sent, responded }
+  for (const sub of submissions) {
+    const tier = sub.contacts?.labels?.tier ?? 'unlabeled'
+    const responded = RESPONDED.has(sub.status)
+    if (!map[tier]) map[tier] = { tier, sent: 0, responded: 0 }
+    map[tier].sent += 1
+    if (responded) map[tier].responded += 1
+  }
+  // Order: elite, a, b, unlabeled
+  const order = ['elite', 'a', 'b', 'unlabeled']
+  return order.filter((t) => map[t]).map((t) => map[t])
+}
+
+/** Compute current consecutive-day streak from an array of date strings */
+function computeStreak(sessions) {
+  if (!sessions || sessions.length === 0) return 0
+
+  // Collect distinct calendar days (YYYY-MM-DD) from occurred_on or created_at
+  const days = new Set()
+  for (const s of sessions) {
+    const raw = s.occurred_on || s.created_at
+    if (!raw) continue
+    days.add(raw.slice(0, 10))
+  }
+  if (days.size === 0) return 0
+
+  const sorted = Array.from(days).sort().reverse() // most recent first
+
+  const todayStr = new Date().toISOString().slice(0, 10)
+  const yesterdayStr = new Date(Date.now() - 864e5).toISOString().slice(0, 10)
+
+  // Streak must start from today or yesterday
+  if (sorted[0] !== todayStr && sorted[0] !== yesterdayStr) return 0
+
+  let streak = 1
+  for (let i = 1; i < sorted.length; i++) {
+    const prev = new Date(sorted[i - 1])
+    const curr = new Date(sorted[i])
+    const diffDays = Math.round((prev - curr) / 864e5)
+    if (diffDays === 1) {
+      streak++
+    } else {
+      break
+    }
+  }
+  return streak
+}
+
+/** Escape a single CSV field */
+function csvField(val) {
+  if (val == null) return ''
+  const str = String(val)
+  if (str.includes(',') || str.includes('"') || str.includes('\n')) {
+    return '"' + str.replace(/"/g, '""') + '"'
+  }
+  return str
+}
+
+/** Trigger a client-side CSV download */
+function downloadCsv(rows, filename) {
+  const header = ['sent_at', 'status', 'track_title', 'contact_name', 'method']
+  const lines = [header.join(',')]
+  for (const r of rows) {
+    lines.push(
+      [r.sent_at, r.status, r.track_title, r.contact_name, r.method]
+        .map(csvField)
+        .join(',')
+    )
+  }
+  const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8;' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = filename
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
+/* ── Analytics sub-components ──────────────────────────────── */
+
+function FunnelBar({ label, count, total, note }) {
+  const pct = total > 0 ? Math.round((count / total) * 100) : 0
+  const width = total > 0 ? `${Math.max((count / total) * 100, count > 0 ? 2 : 0)}%` : '0%'
+
+  return (
+    <div className="space-y-1">
+      <div className="flex items-center justify-between gap-2 text-xs">
+        <span className="text-muted">{label}</span>
+        <span className="font-medium tabular-nums text-text">
+          {count}
+          <span className="ml-1.5 text-muted/70">
+            {total > 0 ? `${pct}%` : '—'}
+          </span>
+        </span>
+      </div>
+      <div className="h-1.5 w-full overflow-hidden rounded-full bg-surface-2">
+        <div
+          className="h-full rounded-full bg-accent transition-all duration-500"
+          style={{ width }}
+          role="img"
+          aria-label={`${label}: ${count} (${pct}%)`}
+        />
+      </div>
+      {note && <p className="text-[0.6rem] text-muted/50 italic">{note}</p>}
+    </div>
+  )
+}
+
+function RateRow({ label, sent, responded }) {
+  const pct = sent > 0 ? Math.round((responded / sent) * 100) : null
+  return (
+    <div className="flex items-center justify-between gap-2 py-1.5 text-xs border-b border-line/40 last:border-0">
+      <span className="truncate text-muted max-w-[45%]">{label}</span>
+      <span className="tabular-nums text-muted/70 shrink-0">
+        {responded}/{sent}
+      </span>
+      <span
+        className={[
+          'tabular-nums font-semibold shrink-0 w-10 text-right',
+          pct === null ? 'text-muted/50' : pct >= 15 ? 'text-ok' : pct >= 5 ? 'text-warn' : 'text-muted',
+        ].join(' ')}
+      >
+        {pct === null ? '—' : `${pct}%`}
+      </span>
+    </div>
+  )
+}
+
+const TIER_LABEL = { elite: 'Elite', a: 'A-list', b: 'B-list', unlabeled: 'Other' }
+
+/* ── Analytics block ────────────────────────────────────────── */
+function AnalyticsBlock() {
+  const { user } = useAuth()
+  const [submissions, setSubmissions] = useState(null) // null = loading
+  const [streak, setStreak] = useState(null)           // null = loading
+  const [error, setError] = useState(null)
+  const [exporting, setExporting] = useState(false)
+
+  useEffect(() => {
+    let active = true
+
+    async function load() {
+      // Submissions with genre tags + label tier + track title + contact name
+      const { data, error: subErr } = await supabase
+        .from('submissions')
+        .select(
+          'id, status, sent_at, method, tracks(genre_tags, title), contacts(name, label_id, labels(tier))'
+        )
+        .eq('user_id', user.id)
+
+      if (!active) return
+      if (subErr) {
+        setError(subErr.message)
+        setSubmissions([])
+      } else {
+        setSubmissions(data ?? [])
+      }
+
+      // Work sessions — non-fatal
+      try {
+        const { data: wsData } = await supabase
+          .from('work_sessions')
+          .select('created_at, occurred_on')
+        if (active) setStreak(computeStreak(wsData ?? []))
+      } catch {
+        if (active) setStreak(0)
+      }
+    }
+
+    load()
+    return () => { active = false }
+  }, [user.id])
+
+  async function handleExport() {
+    setExporting(true)
+    try {
+      // Use already-loaded submissions, map to CSV rows
+      const rows = (submissions ?? []).map((s) => ({
+        sent_at: s.sent_at ?? '',
+        status: s.status ?? '',
+        track_title: s.tracks?.title ?? '',
+        contact_name: s.contacts?.name ?? '',
+        method: s.method ?? '',
+      }))
+      const today = new Date().toISOString().slice(0, 10)
+      downloadCsv(rows, `demotrack-submissions-${today}.csv`)
+    } finally {
+      setExporting(false)
+    }
+  }
+
+  // Loading skeleton
+  if (submissions === null) {
+    return (
+      <div
+        className="space-y-3 animate-pulse"
+        aria-busy="true"
+        aria-label="Loading analytics"
+      >
+        <div className="h-4 w-32 rounded-full bg-surface-2" />
+        <div className="h-24 rounded-card border border-line bg-surface" />
+        <div className="h-20 rounded-card border border-line bg-surface" />
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="rounded-card border border-danger/30 bg-danger/10 p-4 text-sm text-danger">
+        Analytics unavailable: {error}
+      </div>
+    )
+  }
+
+  const funnel = computeFunnel(submissions)
+  const byGenre = computeByGenre(submissions)
+  const byTier = computeByTier(submissions)
+  const totalSent = funnel.sent
+  const totalResponded = funnel.replied + funnel.considering + funnel.signed
+  const overallRate = totalSent > 0 ? Math.round((totalResponded / totalSent) * 100) : null
+
+  return (
+    <div className="space-y-4">
+      {/* ── 1. Conversion funnel ── */}
+      <div className="rounded-card border border-line bg-surface p-4 space-y-4">
+        <div className="flex items-center justify-between gap-2">
+          <p className="text-xs font-medium uppercase tracking-wider text-accent">Your funnel</p>
+          {totalSent > 0 && (
+            <span className="text-[0.65rem] text-muted/70 tabular-nums">
+              {totalSent} total sent
+            </span>
+          )}
+        </div>
+
+        {totalSent === 0 ? (
+          <p className="py-2 text-center text-xs text-muted/60">
+            No submissions yet —{' '}
+            <Link to="/send" className="text-accent hover:underline">
+              send a demo
+            </Link>
+          </p>
+        ) : (
+          <div className="space-y-3">
+            <FunnelBar label="Sent" count={funnel.sent} total={totalSent} />
+            <FunnelBar
+              label="Opened"
+              count={funnel.opened}
+              total={totalSent}
+              note="Populates once link tracking is active (Phase 11)"
+            />
+            <FunnelBar label="Replied" count={funnel.replied} total={totalSent} />
+            <FunnelBar label="Considering" count={funnel.considering} total={totalSent} />
+            <FunnelBar label="Signed" count={funnel.signed} total={totalSent} />
+            {funnel.passed > 0 && (
+              <div className="flex items-center justify-between pt-1 text-xs border-t border-line/40">
+                <span className="text-muted/60">Passed (no)</span>
+                <span className="tabular-nums text-muted/60">{funnel.passed}</span>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* ── 2. Response rates ── */}
+      {totalSent > 0 && (
+        <div className="rounded-card border border-line bg-surface p-4 space-y-3">
+          <p className="text-xs font-medium uppercase tracking-wider text-accent">
+            Response rates
+          </p>
+          <p className="text-[0.65rem] text-muted/60 leading-relaxed">
+            Cold-demo rates of 5–15% are normal — low numbers reflect the industry, not your demos.
+          </p>
+
+          {/* Overall */}
+          <div className="flex items-center justify-between py-1.5 text-xs border-b border-line/40">
+            <span className="font-medium text-text">Overall</span>
+            <span className="tabular-nums text-muted/70">{totalResponded}/{totalSent}</span>
+            <span
+              className={[
+                'tabular-nums font-semibold w-10 text-right',
+                overallRate === null
+                  ? 'text-muted/50'
+                  : overallRate >= 15
+                  ? 'text-ok'
+                  : overallRate >= 5
+                  ? 'text-warn'
+                  : 'text-muted',
+              ].join(' ')}
+            >
+              {overallRate === null ? '—' : `${overallRate}%`}
+            </span>
+          </div>
+
+          {/* By genre */}
+          {byGenre.length > 0 && (
+            <div className="space-y-0.5">
+              <p className="text-[0.6rem] font-semibold uppercase tracking-widest text-muted/50 pb-1">
+                By genre
+              </p>
+              {byGenre.map((g) => (
+                <RateRow
+                  key={g.genre}
+                  label={g.genre}
+                  sent={g.sent}
+                  responded={g.responded}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* By tier */}
+          {byTier.length > 0 && (
+            <div className="space-y-0.5">
+              <p className="text-[0.6rem] font-semibold uppercase tracking-widest text-muted/50 pb-1">
+                By label tier
+              </p>
+              {byTier.map((t) => (
+                <RateRow
+                  key={t.tier}
+                  label={TIER_LABEL[t.tier] ?? t.tier}
+                  sent={t.sent}
+                  responded={t.responded}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ── 3. Streak + Export row ── */}
+      <div className="flex items-center justify-between gap-3">
+        {/* Streak */}
+        <div className="flex items-center gap-2 text-sm">
+          {streak === null || streak === 0 ? (
+            <span className="text-xs text-muted/60">No sessions logged yet</span>
+          ) : (
+            <>
+              <span aria-hidden="true" className="text-base leading-none">🔥</span>
+              <span className="font-display font-bold text-text">
+                {streak}-day streak
+              </span>
+            </>
+          )}
+        </div>
+
+        {/* CSV export */}
+        <button
+          type="button"
+          onClick={handleExport}
+          disabled={exporting || totalSent === 0}
+          className="flex items-center gap-1.5 rounded-lg border border-line bg-surface px-3 py-2 text-xs font-semibold text-muted transition-colors hover:border-accent/40 hover:text-accent disabled:cursor-not-allowed disabled:opacity-40"
+          aria-label="Export submissions as CSV"
+        >
+          <IconDownload className="size-3.5" />
+          {exporting ? 'Exporting…' : 'Export CSV'}
+        </button>
+      </div>
+    </div>
+  )
+}
+
 /* ── helpers ────────────────────────────────────────────────── */
 function daysSince(isoString) {
   if (!isoString) return null
@@ -458,6 +873,12 @@ export default function Dashboard() {
         </div>
         <FollowUpQueue />
       </div>
+
+      {/* Phase 9: Analytics — funnel + response rates + streak + export */}
+      <div className="space-y-3">
+        <h2 className="font-display text-lg font-bold">Analytics</h2>
+        <AnalyticsBlock />
+      </div>
     </section>
   )
 }
@@ -499,6 +920,16 @@ function IconExternalLink(props) {
       <path d="M15 3h6v6" />
       <path d="M10 14 21 3" />
       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    </svg>
+  )
+}
+
+function IconDownload(props) {
+  return (
+    <svg {...svgBase(props)}>
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="7 10 12 15 17 10" />
+      <line x1="12" y1="15" x2="12" y2="3" />
     </svg>
   )
 }
