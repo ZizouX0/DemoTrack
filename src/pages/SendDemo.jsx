@@ -391,6 +391,40 @@ function EmailReviewPanel({
     setHookError(null)
     try {
       const recentHooks = getRecentHooks()
+
+      // Fetch A&R intel and label.why in parallel, gracefully
+      const [intelRes, labelRes] = await Promise.all([
+        supabase
+          .from('ar_intel')
+          .select('runs_label, signs, recent_releases, submission_prefs, personal_angle, notes')
+          .eq('user_id', userId)
+          .eq('contact_id', contact.id)
+          .maybeSingle(),
+        contact.label_id
+          ? supabase
+              .from('labels')
+              .select('why')
+              .eq('id', contact.label_id)
+              .maybeSingle()
+          : Promise.resolve({ data: null, error: null }),
+      ])
+
+      // Compose ar_intel string from non-empty fields
+      let arIntelString = ''
+      if (intelRes.data) {
+        const d = intelRes.data
+        const parts = []
+        if (d.runs_label) parts.push(`Runs: ${d.runs_label}`)
+        if (d.signs) parts.push(`Signs: ${d.signs}`)
+        if (d.recent_releases) parts.push(`Recent: ${d.recent_releases}`)
+        if (d.submission_prefs) parts.push(`Prefs: ${d.submission_prefs}`)
+        if (d.personal_angle) parts.push(`Angle: ${d.personal_angle}`)
+        if (d.notes) parts.push(`Notes: ${d.notes}`)
+        arIntelString = parts.join('. ')
+      }
+
+      const labelWhy = labelRes.data?.why ?? ''
+
       const { data, error: fnErr } = await supabase.functions.invoke('suggest-hook', {
         body: {
           track: {
@@ -401,10 +435,10 @@ function EmailReviewPanel({
           },
           label: {
             name: contact.name,
-            why: '',
+            why: labelWhy,
             requirements: contact.notes ?? '',
           },
-          ar_intel: '',
+          ar_intel: arIntelString,
           artist_name: artistName,
           recent_hooks: recentHooks,
         },
