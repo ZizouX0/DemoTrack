@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
 import { norm } from '../lib/labelNorm'
+import { freshnessStatus, FRESHNESS_META, needsRecheck } from '../lib/freshness'
 import Badge, { trackStatusVariant, tierVariant } from '../components/Badge'
 import Field, { inputCls, selectCls } from '../components/Field'
 
@@ -469,6 +470,8 @@ function PickTarget({ targets, labelsLoading, selected, onSelect }) {
             const tier = target._tier
             const access = target.access_path ?? target._access_path
             const method = target.submission_method
+            const freshStatus = freshnessStatus(target)
+            const showFreshWarn = needsRecheck(freshStatus)
 
             return (
               <button
@@ -504,6 +507,11 @@ function PickTarget({ targets, labelsLoading, selected, onSelect }) {
                   {method && (
                     <Badge variant="muted">
                       {method}
+                    </Badge>
+                  )}
+                  {showFreshWarn && (
+                    <Badge variant={FRESHNESS_META[freshStatus].variant}>
+                      {FRESHNESS_META[freshStatus].label}
                     </Badge>
                   )}
                   {!isInCRM && target._genres?.slice(0, 2).map((g) => (
@@ -1177,13 +1185,39 @@ function NonEmailReviewPanel({
   )
 }
 
+/* ── Freshness caution — shown before either review panel ───────── */
+function FreshnessCaution({ contact }) {
+  const status = freshnessStatus(contact)
+  if (!needsRecheck(status)) return null
+
+  const msg =
+    status === 'broken'
+      ? 'You reported this route as broken/changed. Double-check the submission link still works before sending.'
+      : status === 'unverified'
+        ? "This label's submission route has never been verified. Confirm the link is current before you rely on it."
+        : "This label's submission route hasn't been verified in over a year. Routes change often — confirm it still works."
+
+  return (
+    <div className="flex items-start gap-2 rounded-lg border border-warn/40 bg-warn/10 p-3 text-xs text-warn">
+      <IconWarn className="mt-0.5 size-3.5 shrink-0" />
+      <span>{msg}</span>
+    </div>
+  )
+}
+
 /* ── Step 3 router ──────────────────────────────────────────── */
 function ReviewAndSend(props) {
   const { contact } = props
-  if (contact.submission_method === 'email') {
-    return <EmailReviewPanel {...props} />
-  }
-  return <NonEmailReviewPanel {...props} />
+  return (
+    <div className="space-y-4">
+      <FreshnessCaution contact={contact} />
+      {contact.submission_method === 'email' ? (
+        <EmailReviewPanel {...props} />
+      ) : (
+        <NonEmailReviewPanel {...props} />
+      )}
+    </div>
+  )
 }
 
 /* ── Shared check item ──────────────────────────────────────── */
@@ -1330,8 +1364,8 @@ export default function SendDemo() {
     let cancelled = false
     setLabelsLoading(true)
     supabase
-      .from('labels')
-      .select('id, name, tier, access_path, submission_method, contact_link, genre_tags, submission_requirements, why')
+      .from('label_freshness')
+      .select('id, name, tier, access_path, submission_method, contact_link, genre_tags, submission_requirements, why, last_verified, effective_verified, my_verified_at, flagged_broken, link_status')
       .then(({ data, error }) => {
         if (cancelled) return
         if (!error) setLabels(data ?? [])
@@ -1354,6 +1388,20 @@ export default function SendDemo() {
       contacts.filter((c) => c.label_id).map((c) => c.label_id)
     )
 
+    // Freshness signal keyed by label_id, so CRM contacts sourced from a label
+    // carry the same warning as labels not yet added.
+    const freshByLabel = new Map(labels.map((l) => [l.id, l]))
+    const pickFresh = (l) =>
+      l
+        ? {
+            last_verified: l.last_verified,
+            effective_verified: l.effective_verified,
+            my_verified_at: l.my_verified_at,
+            flagged_broken: l.flagged_broken,
+            link_status: l.link_status,
+          }
+        : {}
+
     // Enrich existing contacts with _tier / _genres / _access_path for filtering
     const crmTargets = contacts.map((c) => ({
       ...c,
@@ -1361,6 +1409,7 @@ export default function SendDemo() {
       _genres: c.genre_tags ?? [],
       _access_path: c.access_path ?? null,
       _why: c._why ?? '',
+      ...pickFresh(c.label_id ? freshByLabel.get(c.label_id) : null),
     }))
 
     // Labels not yet in CRM
@@ -1381,6 +1430,11 @@ export default function SendDemo() {
         _tier: label.tier,
         _genres: label.genre_tags ?? [],
         _access_path: label.access_path ?? null,
+        last_verified: label.last_verified,
+        effective_verified: label.effective_verified,
+        my_verified_at: label.my_verified_at,
+        flagged_broken: label.flagged_broken,
+        link_status: label.link_status,
       }))
 
     return sortTargets([...crmTargets, ...labelTargets])
