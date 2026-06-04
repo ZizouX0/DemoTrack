@@ -1776,6 +1776,100 @@ function GoalsSection({ userId }) {
 }
 
 /* ── Main You page ──────────────────────────────────────────── */
+/* ── Account: change password ───────────────────────────────── */
+function AccountSection() {
+  const { updatePassword } = useAuth()
+  const [open, setOpen] = useState(false)
+  const [pw, setPw] = useState('')
+  const [pw2, setPw2] = useState('')
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState(null)
+  const [ok, setOk] = useState(false)
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    setError(null)
+    if (pw.length < 8) { setError('Use at least 8 characters.'); return }
+    if (pw !== pw2) { setError('Passwords do not match.'); return }
+    setBusy(true)
+    const { error: err } = await updatePassword(pw)
+    setBusy(false)
+    if (err) { setError(err.message); return }
+    setOk(true)
+    setPw(''); setPw2('')
+    setTimeout(() => { setOk(false); setOpen(false) }, 1500)
+  }
+
+  return (
+    <div className="rounded-card border border-line bg-surface p-4">
+      <div className="flex items-center justify-between gap-2">
+        <div>
+          <p className="text-xs font-medium uppercase tracking-wider text-accent">Password</p>
+          <p className="mt-0.5 text-xs text-muted">Change the password you sign in with.</p>
+        </div>
+        {!open && (
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="rounded-lg border border-line bg-surface-2 px-3 py-1.5 text-xs font-semibold text-text transition-colors hover:border-accent/40 hover:text-accent"
+          >
+            Change password
+          </button>
+        )}
+      </div>
+
+      {open && (
+        <form onSubmit={handleSubmit} className="mt-3 space-y-3">
+          <Field id="new-pw" label="New password" hint="At least 8 characters.">
+            <input
+              id="new-pw"
+              type="password"
+              autoComplete="new-password"
+              value={pw}
+              onChange={(e) => setPw(e.target.value)}
+              className={inputCls}
+              placeholder="••••••••"
+            />
+          </Field>
+          <Field id="new-pw2" label="Confirm new password">
+            <input
+              id="new-pw2"
+              type="password"
+              autoComplete="new-password"
+              value={pw2}
+              onChange={(e) => setPw2(e.target.value)}
+              className={inputCls}
+              placeholder="••••••••"
+            />
+          </Field>
+          {error && (
+            <p className="rounded-lg border border-danger/30 bg-danger/10 px-3 py-2 text-xs text-danger">{error}</p>
+          )}
+          {ok && (
+            <p className="rounded-lg border border-ok/30 bg-ok/10 px-3 py-2 text-xs text-ok">Password updated.</p>
+          )}
+          <div className="flex gap-3">
+            <button
+              type="button"
+              onClick={() => { setOpen(false); setError(null); setPw(''); setPw2('') }}
+              className="rounded-lg border border-line px-4 py-2 text-sm text-muted transition-colors hover:border-text hover:text-text"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={busy}
+              className="flex-1 rounded-lg bg-accent py-2 text-sm font-semibold text-ink transition-opacity hover:opacity-90 disabled:opacity-50"
+            >
+              {busy ? 'Saving…' : 'Update password'}
+            </button>
+          </div>
+        </form>
+      )}
+    </div>
+  )
+}
+
 export default function You() {
   const { user } = useAuth()
 
@@ -1907,6 +2001,9 @@ export default function You() {
         <p className="text-xs uppercase tracking-wider text-muted">Signed in as</p>
         <p className="mt-0.5 text-text">{user?.email}</p>
       </div>
+
+      {/* ── Account / password ── */}
+      <AccountSection />
 
       {/* ── Work Sessions ── */}
       <WorkSessionsSection userId={user.id} />

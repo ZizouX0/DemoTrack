@@ -1,57 +1,62 @@
-import { createContext, useCallback, useContext, useMemo, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { supabase } from '../lib/supabase'
 
 const AuthContext = createContext(null)
 
-// Single-user, no-login mode. The app no longer authenticates against Supabase;
-// it pins to one fixed owner (the original account) so all existing data stays
-// owned and the per-user views keep matching. The email is stored locally and
-// used only for display / as the artist-name fallback.
-//
-// SECURITY: paired with RLS being disabled in the database, anyone with the URL
-// can read/write this data. Acceptable only for a private, unlisted deployment.
-export const OWNER_ID = '5463fb44-8fb7-4f0c-872b-7787640cd676'
-const PROFILE_KEY = 'demotrack:profile'
-
-function readEmail() {
-  try {
-    return JSON.parse(localStorage.getItem(PROFILE_KEY) || 'null')?.email ?? null
-  } catch {
-    return null
-  }
-}
-
 export function AuthProvider({ children }) {
-  const [email, setEmail] = useState(readEmail)
+  const [session, setSession] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-  // "Sign in" just remembers the email — no link, no password, instant.
-  const signInWithEmail = useCallback((value) => {
-    const clean = (value ?? '').trim()
-    if (!clean) return Promise.resolve({ error: { message: 'Enter your email.' } })
-    localStorage.setItem(PROFILE_KEY, JSON.stringify({ email: clean }))
-    setEmail(clean)
-    return Promise.resolve({ error: null })
+  useEffect(() => {
+    let active = true
+
+    supabase.auth.getSession().then(({ data }) => {
+      if (!active) return
+      setSession(data.session)
+      setLoading(false)
+    })
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, newSession) => {
+      setSession(newSession)
+    })
+
+    return () => {
+      active = false
+      subscription.unsubscribe()
+    }
   }, [])
 
-  const signOut = useCallback(() => {
-    localStorage.removeItem(PROFILE_KEY)
-    setEmail(null)
-    return Promise.resolve()
-  }, [])
-
-  const user = useMemo(
-    () => (email ? { id: OWNER_ID, email } : null),
-    [email]
+  // Email + password sign-in. No email link — the session is created instantly
+  // and persisted, so you stay signed in on this device.
+  const signInWithPassword = useCallback(
+    (email, password) =>
+      supabase.auth.signInWithPassword({
+        email: (email ?? '').trim(),
+        password: password ?? '',
+      }),
+    []
   )
+
+  // Update the signed-in user's password.
+  const updatePassword = useCallback(
+    (password) => supabase.auth.updateUser({ password }),
+    []
+  )
+
+  const signOut = useCallback(() => supabase.auth.signOut(), [])
 
   const value = useMemo(
     () => ({
-      session: user ? { user } : null,
-      user,
-      loading: false,
-      signInWithEmail,
+      session,
+      user: session?.user ?? null,
+      loading,
+      signInWithPassword,
+      updatePassword,
       signOut,
     }),
-    [user, signInWithEmail, signOut]
+    [session, loading, signInWithPassword, updatePassword, signOut]
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

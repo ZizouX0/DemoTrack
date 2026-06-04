@@ -12,11 +12,11 @@ if (!url || !anonKey) {
 }
 
 export const supabase = createClient(url ?? '', anonKey ?? '', {
-  // Single-user, no-login mode: the app does not use Supabase auth, so we don't
-  // persist sessions or parse auth tokens from the URL.
+  // Email + password auth: persist the session so you stay signed in on this
+  // device. No magic links, so we don't parse auth tokens from the URL.
   auth: {
-    persistSession: false,
-    autoRefreshToken: false,
+    persistSession: true,
+    autoRefreshToken: true,
     detectSessionInUrl: false,
   },
 })

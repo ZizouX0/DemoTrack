@@ -5,26 +5,27 @@ import { isSupabaseConfigured } from '../lib/supabase'
 import { Wordmark } from '../components/Splash'
 
 export default function Login() {
-  const { user, signInWithEmail } = useAuth()
+  const { user, signInWithPassword } = useAuth()
   const location = useLocation()
   const [email, setEmail] = useState('')
-  const [status, setStatus] = useState('idle') // idle | saving | error
+  const [password, setPassword] = useState('')
+  const [status, setStatus] = useState('idle') // idle | signing | error
   const [error, setError] = useState('')
 
-  // Already in — go where the guard sent us from, else home.
+  // Already signed in — go where the guard sent us from, else home.
   if (user) return <Navigate to={location.state?.from?.pathname || '/'} replace />
 
   async function handleSubmit(e) {
     e.preventDefault()
-    if (!email) return
-    setStatus('saving')
+    if (!email || !password) return
+    setStatus('signing')
     setError('')
-    const { error } = await signInWithEmail(email.trim())
+    const { error } = await signInWithPassword(email, password)
     if (error) {
       setError(error.message)
       setStatus('error')
     }
-    // On success the `user` becomes set and we redirect via <Navigate> above.
+    // On success the session updates and we redirect via <Navigate> above.
   }
 
   return (
@@ -60,18 +61,33 @@ export default function Login() {
             placeholder="you@studio.com"
             className="w-full rounded-lg border border-line bg-surface-2 px-3 py-2.5 text-text outline-none placeholder:text-muted/60 focus:border-accent"
           />
+
+          <label htmlFor="password" className="mb-1.5 mt-4 block text-sm font-medium">
+            Password
+          </label>
+          <input
+            id="password"
+            type="password"
+            required
+            autoComplete="current-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="••••••••"
+            className="w-full rounded-lg border border-line bg-surface-2 px-3 py-2.5 text-text outline-none placeholder:text-muted/60 focus:border-accent"
+          />
+
           {status === 'error' && (
             <p className="mt-2 text-xs text-danger">{error}</p>
           )}
           <button
             type="submit"
-            disabled={status === 'saving'}
+            disabled={status === 'signing'}
             className="mt-4 w-full rounded-lg bg-accent py-2.5 font-semibold text-ink transition-opacity hover:opacity-90 disabled:opacity-50"
           >
-            {status === 'saving' ? 'Continuing…' : 'Continue'}
+            {status === 'signing' ? 'Signing in…' : 'Sign in'}
           </button>
           <p className="mt-3 text-center text-xs text-muted">
-            No password, no email link — your email is just saved on this device.
+            Private to you. Stays signed in on this device.
           </p>
         </form>
       </div>
