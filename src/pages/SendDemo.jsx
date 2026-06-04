@@ -275,8 +275,13 @@ function PickTrack({ tracks, selected, onSelect }) {
   )
 }
 
+/* ── Stable key for a target (CRM contact id, or label id) ──── */
+function targetKey(t) {
+  return t?.id ?? `label-${t?.label_id}`
+}
+
 /* ── Step 2: pick a target (contacts + all labels) ──────────── */
-function PickTarget({ targets, labelsLoading, selected, onSelect }) {
+function PickTarget({ targets, labelsLoading, selected, onSelect, multi = false, selectedKeys, onToggle, onProceed }) {
   const [search, setSearch] = useState('')
   const [tierFilter, setTierFilter] = useState('')
   const [accessFilter, setAccessFilter] = useState('')
@@ -461,11 +466,13 @@ function PickTarget({ targets, labelsLoading, selected, onSelect }) {
       {!labelsLoading && filtered.length > 0 && (
         <div className="space-y-1.5 max-h-[60vh] overflow-y-auto pr-0.5" role="listbox" aria-label="Pick a target">
           {filtered.map((target) => {
-            const isSelected = selected
-              ? target.id
-                ? selected.id === target.id
-                : selected.label_id === target.label_id
-              : false
+            const isSelected = multi
+              ? Boolean(selectedKeys?.has(targetKey(target)))
+              : selected
+                ? target.id
+                  ? selected.id === target.id
+                  : selected.label_id === target.label_id
+                : false
             const isInCRM = Boolean(target.id)
             const tier = target._tier
             const access = target.access_path ?? target._access_path
@@ -481,7 +488,7 @@ function PickTarget({ targets, labelsLoading, selected, onSelect }) {
                 type="button"
                 role="option"
                 aria-selected={isSelected}
-                onClick={() => onSelect(target)}
+                onClick={() => (multi ? onToggle(target) : onSelect(target))}
                 className={[
                   'w-full rounded-lg border p-3 text-left transition-colors',
                   isSelected
@@ -490,7 +497,20 @@ function PickTarget({ targets, labelsLoading, selected, onSelect }) {
                 ].join(' ')}
               >
                 <div className="flex items-start justify-between gap-2">
-                  <span className="truncate font-display font-bold text-sm leading-snug">{target.name}</span>
+                  <span className="flex min-w-0 items-center gap-2">
+                    {multi && (
+                      <span
+                        aria-hidden="true"
+                        className={[
+                          'flex size-4 shrink-0 items-center justify-center rounded border',
+                          isSelected ? 'border-accent bg-accent text-ink' : 'border-line bg-surface-2',
+                        ].join(' ')}
+                      >
+                        {isSelected && <IconCheck className="size-3" />}
+                      </span>
+                    )}
+                    <span className="truncate font-display font-bold text-sm leading-snug">{target.name}</span>
+                  </span>
                   {isInCRM && (
                     <Badge variant="ok">In CRM</Badge>
                   )}
@@ -528,6 +548,21 @@ function PickTarget({ targets, labelsLoading, selected, onSelect }) {
               </button>
             )
           })}
+        </div>
+      )}
+
+      {multi && (
+        <div className="sticky bottom-0 -mx-0.5 bg-gradient-to-t from-bg via-bg/95 to-transparent pt-3">
+          <button
+            type="button"
+            disabled={!selectedKeys || selectedKeys.size === 0}
+            onClick={onProceed}
+            className="w-full rounded-lg bg-accent py-2.5 text-sm font-semibold text-ink transition-opacity hover:opacity-90 disabled:opacity-40"
+          >
+            {selectedKeys && selectedKeys.size > 0
+              ? `Review ${selectedKeys.size} ${selectedKeys.size === 1 ? 'target' : 'targets'} →`
+              : 'Select targets to send'}
+          </button>
         </div>
       )}
     </div>
@@ -1312,6 +1347,92 @@ function SuccessState({ track, contact, submission, onReset }) {
   )
 }
 
+/* ── Batch: progress header ─────────────────────────────────── */
+function BatchProgress({ index, total, target, onSkip, busy }) {
+  return (
+    <div className="space-y-2 rounded-card border border-accent/30 bg-accent/5 p-3">
+      <div className="flex items-center justify-between gap-2">
+        <p className="text-xs font-semibold uppercase tracking-wider text-accent">
+          Batch send · {index + 1} of {total}
+        </p>
+        <button
+          type="button"
+          onClick={onSkip}
+          disabled={busy}
+          className="text-[0.65rem] font-semibold uppercase tracking-wider text-muted/70 hover:text-muted disabled:opacity-40"
+        >
+          Skip this one →
+        </button>
+      </div>
+      <div className="h-1.5 w-full overflow-hidden rounded-full bg-surface-2">
+        <div
+          className="h-full rounded-full bg-accent transition-all duration-300"
+          style={{ width: `${Math.round((index / total) * 100)}%` }}
+        />
+      </div>
+      <p className="truncate text-xs text-muted">
+        Now sending to <span className="font-medium text-text">{target?.name}</span>
+      </p>
+    </div>
+  )
+}
+
+/* ── Batch: final summary ───────────────────────────────────── */
+function BatchSummary({ track, results, onReset }) {
+  const sent = results.filter((r) => r.status === 'sent').length
+  const skipped = results.filter((r) => r.status === 'skipped').length
+
+  return (
+    <div className="space-y-4">
+      <div className="text-center">
+        <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-ok/15">
+          <IconCheck className="size-8 text-ok" />
+        </div>
+        <h2 className="mt-3 font-display text-xl font-extrabold">Batch complete</h2>
+        <p className="mt-1 text-sm text-muted">
+          <span className="text-text font-medium">{sent}</span> sent
+          {skipped > 0 && <> · <span className="text-text font-medium">{skipped}</span> skipped</>} ·{' '}
+          <span className="text-text font-medium">{track.title}</span>
+        </p>
+      </div>
+
+      <div className="rounded-card border border-line bg-surface divide-y divide-line/50">
+        {results.map((r, i) => (
+          <div key={i} className="flex items-center justify-between gap-2 px-4 py-2.5 text-sm">
+            <span className="truncate text-text">{r.name}</span>
+            <span className="flex items-center gap-2 shrink-0">
+              <span className="text-[0.65rem] uppercase tracking-wider text-muted">{r.method}</span>
+              {r.status === 'sent' ? (
+                <Badge variant="ok">Sent</Badge>
+              ) : r.status === 'skipped' ? (
+                <Badge variant="muted">Skipped</Badge>
+              ) : (
+                <Badge variant="danger">Failed</Badge>
+              )}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex flex-col gap-2 pt-1">
+        <button
+          type="button"
+          onClick={onReset}
+          className="w-full rounded-lg bg-accent py-2.5 text-sm font-semibold text-ink transition-opacity hover:opacity-90"
+        >
+          New send
+        </button>
+        <Link
+          to="/"
+          className="block w-full rounded-lg border border-line py-2.5 text-center text-sm text-muted transition-colors hover:border-text hover:text-text"
+        >
+          Back to home
+        </Link>
+      </div>
+    </div>
+  )
+}
+
 /* ── Main page ──────────────────────────────────────────────── */
 export default function SendDemo() {
   const { user } = useAuth()
@@ -1324,12 +1445,18 @@ export default function SendDemo() {
   const [loadError, setLoadError] = useState(null)
 
   const [step, setStep] = useState(1)
+  const [mode, setMode] = useState('single') // 'single' | 'batch'
   const [selectedTrack, setSelectedTrack] = useState(null)
   const [selectedContact, setSelectedContact] = useState(null)
   const [confirming, setConfirming] = useState(false)
   const [confirmError, setConfirmError] = useState(null)
   const [submission, setSubmission] = useState(null)
   const [pendingTrackingHash, setPendingTrackingHash] = useState(null)
+
+  // Batch queue state
+  const [batchSelected, setBatchSelected] = useState([]) // array of target objects
+  const [batchIndex, setBatchIndex] = useState(0)
+  const [batchResults, setBatchResults] = useState([])
 
   const load = useCallback(async () => {
     setLoadingData(true)
@@ -1480,62 +1607,62 @@ export default function SendDemo() {
     setStep(3)
   }
 
+  /* ── recordSend: the shared logging path for one target ──────── */
+  async function recordSend(target, trackingHash) {
+    const contactId = await resolveContactId(target)
+
+    const now = new Date().toISOString()
+    const { data: submissionData, error: subErr } = await supabase
+      .from('submissions')
+      .insert({
+        user_id: user.id,
+        track_id: selectedTrack.id,
+        contact_id: contactId,
+        method: target.submission_method,
+        status: 'sent',
+        sent_at: now,
+        follow_up_due_at: addDays(7),
+        overdue_at: addDays(14),
+      })
+      .select()
+      .single()
+
+    if (subErr) throw subErr
+
+    await supabase
+      .from('contacts')
+      .update({ last_contacted_at: now, updated_at: now })
+      .eq('id', contactId)
+      .eq('user_id', user.id)
+
+    if (selectedTrack.status === 'demo_ready') {
+      await supabase
+        .from('tracks')
+        .update({ status: 'submitted', updated_at: now })
+        .eq('id', selectedTrack.id)
+        .eq('user_id', user.id)
+    }
+
+    if (trackingHash) {
+      await supabase
+        .from('tracked_links')
+        .update({ submission_id: submissionData.id })
+        .eq('hash', trackingHash)
+        .eq('user_id', user.id)
+    }
+
+    return { submissionData, contactId }
+  }
+
   async function handleConfirm() {
     if (!selectedTrack || !selectedContact) return
     setConfirming(true)
     setConfirmError(null)
-
     try {
-      const contactId = await resolveContactId(selectedContact)
-
-      const now = new Date().toISOString()
-      const followUpAt = addDays(7)
-      const overdueAt = addDays(14)
-
-      const { data: submissionData, error: subErr } = await supabase
-        .from('submissions')
-        .insert({
-          user_id: user.id,
-          track_id: selectedTrack.id,
-          contact_id: contactId,
-          method: selectedContact.submission_method,
-          status: 'sent',
-          sent_at: now,
-          follow_up_due_at: followUpAt,
-          overdue_at: overdueAt,
-        })
-        .select()
-        .single()
-
-      if (subErr) throw subErr
-
-      await supabase
-        .from('contacts')
-        .update({ last_contacted_at: now, updated_at: now })
-        .eq('id', contactId)
-        .eq('user_id', user.id)
-
-      if (selectedTrack.status === 'demo_ready') {
-        await supabase
-          .from('tracks')
-          .update({ status: 'submitted', updated_at: now })
-          .eq('id', selectedTrack.id)
-          .eq('user_id', user.id)
-      }
-
-      if (pendingTrackingHash) {
-        await supabase
-          .from('tracked_links')
-          .update({ submission_id: submissionData.id })
-          .eq('hash', pendingTrackingHash)
-          .eq('user_id', user.id)
-      }
-
-      // If we auto-created a contact, update the selectedContact so it has an id
+      const { submissionData, contactId } = await recordSend(selectedContact, pendingTrackingHash)
       if (!selectedContact.id) {
         setSelectedContact((prev) => ({ ...prev, id: contactId }))
       }
-
       setSubmission(submissionData)
       setConfirming(false)
       setStep(4)
@@ -1545,6 +1672,62 @@ export default function SendDemo() {
     }
   }
 
+  /* ── Batch handlers ──────────────────────────────────────────── */
+  function toggleBatchTarget(target) {
+    const key = targetKey(target)
+    setBatchSelected((prev) =>
+      prev.some((t) => targetKey(t) === key)
+        ? prev.filter((t) => targetKey(t) !== key)
+        : [...prev, target]
+    )
+  }
+
+  function startBatch() {
+    if (batchSelected.length === 0) return
+    setBatchIndex(0)
+    setBatchResults([])
+    setPendingTrackingHash(null)
+    setConfirmError(null)
+    setStep(3)
+  }
+
+  function advanceBatch(result) {
+    setBatchResults((prev) => [...prev, result])
+    setPendingTrackingHash(null)
+    setConfirmError(null)
+    if (batchIndex + 1 < batchSelected.length) {
+      setBatchIndex((i) => i + 1)
+    } else {
+      setStep(4)
+    }
+  }
+
+  async function handleBatchConfirm() {
+    const target = batchSelected[batchIndex]
+    if (!selectedTrack || !target) return
+    setConfirming(true)
+    setConfirmError(null)
+    try {
+      await recordSend(target, pendingTrackingHash)
+      setConfirming(false)
+      advanceBatch({ name: target.name, method: target.submission_method, status: 'sent' })
+    } catch (err) {
+      setConfirmError(err.message ?? 'Something went wrong — please try again.')
+      setConfirming(false)
+    }
+  }
+
+  function handleBatchSkip() {
+    const target = batchSelected[batchIndex]
+    if (!target) return
+    advanceBatch({ name: target.name, method: target.submission_method, status: 'skipped' })
+  }
+
+  const batchSelectedKeys = useMemo(
+    () => new Set(batchSelected.map(targetKey)),
+    [batchSelected]
+  )
+
   function handleReset() {
     setStep(1)
     setSelectedTrack(null)
@@ -1552,6 +1735,9 @@ export default function SendDemo() {
     setSubmission(null)
     setConfirmError(null)
     setPendingTrackingHash(null)
+    setBatchSelected([])
+    setBatchIndex(0)
+    setBatchResults([])
     load()
   }
 
@@ -1610,16 +1796,47 @@ export default function SendDemo() {
                   Change
                 </button>
               </div>
+
+              {/* Mode toggle: one-at-a-time vs batch */}
+              <div className="flex gap-1 rounded-lg border border-line bg-surface-2 p-1">
+                {[
+                  ['single', 'One at a time'],
+                  ['batch', 'Batch'],
+                ].map(([val, lbl]) => (
+                  <button
+                    key={val}
+                    type="button"
+                    onClick={() => setMode(val)}
+                    className={[
+                      'flex-1 rounded-md py-1.5 text-xs font-semibold transition-colors',
+                      mode === val ? 'bg-accent text-ink' : 'text-muted hover:text-text',
+                    ].join(' ')}
+                  >
+                    {lbl}
+                  </button>
+                ))}
+              </div>
+              {mode === 'batch' && (
+                <p className="px-0.5 text-[0.65rem] text-muted">
+                  Select several labels — you’ll write a tailored hook and send to each, one after another.
+                </p>
+              )}
+
               <PickTarget
                 targets={targets}
                 labelsLoading={labelsLoading}
                 selected={selectedContact}
                 onSelect={handleSelectTarget}
+                multi={mode === 'batch'}
+                selectedKeys={batchSelectedKeys}
+                onToggle={toggleBatchTarget}
+                onProceed={startBatch}
               />
             </div>
           )}
 
-          {step === 3 && selectedTrack && selectedContact && (
+          {/* Step 3 — single */}
+          {step === 3 && mode === 'single' && selectedTrack && selectedContact && (
             <ReviewAndSend
               track={selectedTrack}
               contact={selectedContact}
@@ -1635,11 +1852,48 @@ export default function SendDemo() {
             />
           )}
 
-          {step === 4 && selectedTrack && selectedContact && (
+          {/* Step 3 — batch queue */}
+          {step === 3 && mode === 'batch' && selectedTrack && batchSelected[batchIndex] && (
+            <div className="space-y-4">
+              <BatchProgress
+                index={batchIndex}
+                total={batchSelected.length}
+                target={batchSelected[batchIndex]}
+                onSkip={handleBatchSkip}
+                busy={confirming}
+              />
+              <ReviewAndSend
+                key={targetKey(batchSelected[batchIndex])}
+                track={selectedTrack}
+                contact={batchSelected[batchIndex]}
+                pressKit={pressKit}
+                artistName={artistName}
+                userId={user.id}
+                user={user}
+                onConfirm={handleBatchConfirm}
+                confirming={confirming}
+                error={confirmError}
+                onBack={() => setStep(2)}
+                onTrackingHashChange={setPendingTrackingHash}
+              />
+            </div>
+          )}
+
+          {/* Step 4 — single success */}
+          {step === 4 && mode === 'single' && selectedTrack && selectedContact && (
             <SuccessState
               track={selectedTrack}
               contact={selectedContact}
               submission={submission}
+              onReset={handleReset}
+            />
+          )}
+
+          {/* Step 4 — batch summary */}
+          {step === 4 && mode === 'batch' && selectedTrack && (
+            <BatchSummary
+              track={selectedTrack}
+              results={batchResults}
               onReset={handleReset}
             />
           )}
