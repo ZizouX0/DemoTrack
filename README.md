@@ -25,7 +25,7 @@ Everything serves one repeating cycle, run for every track you want to place:
 | **Track Vault** | Your catalogue: status (idea → demo-ready → submitted → signed), listen link, BPM/key, notes, per-track send & feedback history. |
 | **Contacts CRM** | Every label/contact in one place: method + links, relationship stage, access path, A&R intel, full history. |
 | **Label Discovery** | Browse/filter a **curated 288-label master** (tier, access path, method, genre, freshness); one-tap "Add to CRM" with "in CRM / submitted" indicators. |
-| **Send Demo** | The friction-killer: pick track → pick contact → preset auto-fill → **AI hook** → pre-send checklist + exclusive-hold warning → mailto/Gmail or portal/DM → recorded in one tap. |
+| **Send Demo** | The friction-killer: pick track → pick contact → preset auto-fill → **AI hook** → pre-send checklist + exclusive-hold warning → mailto/Gmail or portal/DM → recorded in one tap. **Batch mode**: multi-select labels and send a tailored demo to each in one guided queue. |
 | **Email Presets + AI Hook** | Your own templates with merge fields; Claude writes only the one personalized sentence that earns a reply (≤30 words, facts-only). |
 | **Follow-ups + Digest** | 7-day nudge / 14-day overdue queue, one-tap "Got a reply / Still silent", auto-logged silence, scheduled email digest. |
 | **Feedback Log** | Every response tied to a track and contact; silence is data. |
