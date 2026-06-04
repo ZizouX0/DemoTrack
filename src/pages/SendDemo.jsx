@@ -470,8 +470,10 @@ function PickTarget({ targets, labelsLoading, selected, onSelect }) {
             const tier = target._tier
             const access = target.access_path ?? target._access_path
             const method = target.submission_method
+            // Freshness only applies to curated-master labels (have label_id),
+            // not your own manually-added contacts.
             const freshStatus = freshnessStatus(target)
-            const showFreshWarn = needsRecheck(freshStatus)
+            const showFreshWarn = Boolean(target.label_id) && needsRecheck(freshStatus)
 
             return (
               <button
@@ -1187,6 +1189,8 @@ function NonEmailReviewPanel({
 
 /* ── Freshness caution — shown before either review panel ───────── */
 function FreshnessCaution({ contact }) {
+  // Only curated-master labels carry a verification signal.
+  if (!contact.label_id) return null
   const status = freshnessStatus(contact)
   if (!needsRecheck(status)) return null
 
