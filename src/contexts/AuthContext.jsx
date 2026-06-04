@@ -1,55 +1,57 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { supabase } from '../lib/supabase'
+import { createContext, useCallback, useContext, useMemo, useState } from 'react'
 
 const AuthContext = createContext(null)
 
+// Single-user, no-login mode. The app no longer authenticates against Supabase;
+// it pins to one fixed owner (the original account) so all existing data stays
+// owned and the per-user views keep matching. The email is stored locally and
+// used only for display / as the artist-name fallback.
+//
+// SECURITY: paired with RLS being disabled in the database, anyone with the URL
+// can read/write this data. Acceptable only for a private, unlisted deployment.
+export const OWNER_ID = '5463fb44-8fb7-4f0c-872b-7787640cd676'
+const PROFILE_KEY = 'demotrack:profile'
+
+function readEmail() {
+  try {
+    return JSON.parse(localStorage.getItem(PROFILE_KEY) || 'null')?.email ?? null
+  } catch {
+    return null
+  }
+}
+
 export function AuthProvider({ children }) {
-  const [session, setSession] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [email, setEmail] = useState(readEmail)
 
-  useEffect(() => {
-    let active = true
-
-    supabase.auth.getSession().then(({ data }) => {
-      if (!active) return
-      setSession(data.session)
-      setLoading(false)
-    })
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, newSession) => {
-      setSession(newSession)
-    })
-
-    return () => {
-      active = false
-      subscription.unsubscribe()
-    }
+  // "Sign in" just remembers the email — no link, no password, instant.
+  const signInWithEmail = useCallback((value) => {
+    const clean = (value ?? '').trim()
+    if (!clean) return Promise.resolve({ error: { message: 'Enter your email.' } })
+    localStorage.setItem(PROFILE_KEY, JSON.stringify({ email: clean }))
+    setEmail(clean)
+    return Promise.resolve({ error: null })
   }, [])
 
-  // Stable function identities so consumers don't re-render on every auth event.
-  const signInWithEmail = useCallback(
-    (email) =>
-      supabase.auth.signInWithOtp({
-        email,
-        options: {
-          emailRedirectTo: import.meta.env.VITE_SITE_URL || window.location.origin,
-        },
-      }),
-    []
+  const signOut = useCallback(() => {
+    localStorage.removeItem(PROFILE_KEY)
+    setEmail(null)
+    return Promise.resolve()
+  }, [])
+
+  const user = useMemo(
+    () => (email ? { id: OWNER_ID, email } : null),
+    [email]
   )
-  const signOut = useCallback(() => supabase.auth.signOut(), [])
 
   const value = useMemo(
     () => ({
-      session,
-      user: session?.user ?? null,
-      loading,
+      session: user ? { user } : null,
+      user,
+      loading: false,
       signInWithEmail,
       signOut,
     }),
-    [session, loading, signInWithEmail, signOut]
+    [user, signInWithEmail, signOut]
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
