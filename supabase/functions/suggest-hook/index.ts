@@ -1,19 +1,21 @@
 // DemoTrack — AI email hook (Spec §5, feature 1).
-// Writes ONLY the single personalized sentence ("the hook") that slots into the
-// user's email preset. Runs server-side so ANTHROPIC_API_KEY never reaches the
-// browser. Guardrails: <=30 words, one sentence, facts-only (no fabrication).
+// Writes ONLY the single personalized sentence ("the hook") for a demo email.
+// Runs server-side so API keys never reach the browser. JWT-verified by default.
+//
+// Provider: FREE by default via Groq (no credit card) if GROQ_API_KEY is set;
+// falls back to Anthropic (claude-opus-4-8) if only ANTHROPIC_API_KEY is set.
 //
 // Deploy:  supabase functions deploy suggest-hook
-// Secret:  supabase secrets set ANTHROPIC_API_KEY=sk-ant-...
-// Auth:    JWT-verified by default (only signed-in users can call it).
-
-import Anthropic from 'npm:@anthropic-ai/sdk@0.69.0'
+// Secret:  supabase secrets set GROQ_API_KEY=gsk_...      (free — console.groq.com)
+//   or:    supabase secrets set ANTHROPIC_API_KEY=sk-ant-...
 
 const cors = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
 }
+const j = (b: unknown, status = 200) =>
+  new Response(JSON.stringify(b), { status, headers: { ...cors, 'Content-Type': 'application/json' } })
 
 const SYSTEM = `You write ONE sentence: the single personalized line ("the hook") a house / tech-house producer drops into a cold demo email to a record label, saying why THIS track fits THIS label.
 
@@ -22,32 +24,56 @@ Hard rules:
 - Use ONLY the facts provided about the track and the label. NEVER invent a release, chart stat, signing, artist name, event, or any "angle" that isn't in the input.
 - If you don't have a specific angle, write an honest, non-generic line grounded in the track's genre/energy and the label's stated focus — do not fabricate to sound impressive.
 - No hype clichés ("huge fan", "check it out", "I think you'll love"). Be specific and confident, not fawning.
-Respond strictly as JSON matching the schema: {"hook": "<sentence>"}.`
+Respond strictly as JSON: {"hook": "<sentence>"}.`
+
+// ---- Provider call: returns the raw model text (expected to be JSON) ----
+async function complete(system: string, userMsg: string): Promise<string> {
+  const groqKey = Deno.env.get('GROQ_API_KEY')
+  if (groqKey) {
+    const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${groqKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: Deno.env.get('GROQ_MODEL') || 'llama-3.3-70b-versatile',
+        messages: [{ role: 'system', content: system }, { role: 'user', content: userMsg }],
+        response_format: { type: 'json_object' },
+        temperature: 0.7,
+        max_tokens: 300,
+      }),
+    })
+    if (!r.ok) throw new Error(`Groq error ${r.status}: ${(await r.text()).slice(0, 300)}`)
+    const data = await r.json()
+    return data.choices?.[0]?.message?.content ?? ''
+  }
+
+  const anthropicKey = Deno.env.get('ANTHROPIC_API_KEY')
+  if (anthropicKey) {
+    const { default: Anthropic } = await import('npm:@anthropic-ai/sdk@0.69.0')
+    const client = new Anthropic({ apiKey: anthropicKey })
+    const resp = await client.messages.create({
+      model: 'claude-opus-4-8',
+      max_tokens: 256,
+      thinking: { type: 'disabled' },
+      output_config: {
+        effort: 'low',
+        format: { type: 'json_schema', schema: { type: 'object', properties: { hook: { type: 'string' } }, required: ['hook'], additionalProperties: false } },
+      },
+      system,
+      messages: [{ role: 'user', content: userMsg }],
+    })
+    const tb = resp.content.find((b: { type: string }) => b.type === 'text') as { text?: string } | undefined
+    return tb?.text ?? ''
+  }
+
+  throw new Error('No AI key set. Add a FREE Groq key: supabase secrets set GROQ_API_KEY=gsk_... (from console.groq.com), or ANTHROPIC_API_KEY.')
+}
 
 Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors })
-  if (req.method !== 'POST') {
-    return new Response(JSON.stringify({ error: 'Use POST' }), {
-      status: 405, headers: { ...cors, 'Content-Type': 'application/json' },
-    })
-  }
-
-  const apiKey = Deno.env.get('ANTHROPIC_API_KEY')
-  if (!apiKey) {
-    return new Response(
-      JSON.stringify({ error: 'ANTHROPIC_API_KEY not set. Run: supabase secrets set ANTHROPIC_API_KEY=sk-ant-...' }),
-      { status: 500, headers: { ...cors, 'Content-Type': 'application/json' } },
-    )
-  }
+  if (req.method !== 'POST') return j({ error: 'Use POST' }, 405)
 
   let body: Record<string, unknown>
-  try {
-    body = await req.json()
-  } catch {
-    return new Response(JSON.stringify({ error: 'Invalid JSON body' }), {
-      status: 400, headers: { ...cors, 'Content-Type': 'application/json' },
-    })
-  }
+  try { body = await req.json() } catch { return j({ error: 'Invalid JSON body' }, 400) }
 
   const track = (body.track ?? {}) as Record<string, unknown>
   const label = (body.label ?? {}) as Record<string, unknown>
@@ -55,7 +81,6 @@ Deno.serve(async (req: Request) => {
   const artistName = typeof body.artist_name === 'string' ? body.artist_name : 'an independent producer'
   const recentHooks = Array.isArray(body.recent_hooks) ? (body.recent_hooks as string[]) : []
 
-  // Compact, fact-only context. Anything absent is simply omitted (never guessed).
   const facts = [
     `Artist: ${artistName} (house & tech house, Tunis).`,
     track.title ? `Track: "${track.title}".` : '',
@@ -66,47 +91,16 @@ Deno.serve(async (req: Request) => {
     label.why ? `Why the label matters: ${label.why}` : '',
     label.requirements ? `Label submission notes: ${label.requirements}` : '',
     arIntel ? `A&R intel / personal angle: ${arIntel}` : '',
-    recentHooks.length ? `AVOID repeating these recently-used hooks (write something different): ${recentHooks.map((h) => `"${h}"`).join('; ')}` : '',
+    recentHooks.length ? `AVOID repeating these recently-used hooks: ${recentHooks.map((h) => `"${h}"`).join('; ')}` : '',
   ].filter(Boolean).join('\n')
 
   try {
-    const client = new Anthropic({ apiKey })
-    const resp = await client.messages.create({
-      model: 'claude-opus-4-8',
-      max_tokens: 256,
-      thinking: { type: 'disabled' },
-      output_config: {
-        effort: 'low',
-        format: {
-          type: 'json_schema',
-          schema: {
-            type: 'object',
-            properties: { hook: { type: 'string' } },
-            required: ['hook'],
-            additionalProperties: false,
-          },
-        },
-      },
-      system: SYSTEM,
-      messages: [{ role: 'user', content: `Write the hook from these facts:\n\n${facts}` }],
-    })
-
-    const textBlock = resp.content.find((b) => b.type === 'text') as { text?: string } | undefined
+    const raw = await complete(SYSTEM, `Write the hook from these facts:\n\n${facts}`)
     let hook = ''
-    try {
-      hook = (JSON.parse(textBlock?.text ?? '{}').hook ?? '').trim()
-    } catch {
-      hook = (textBlock?.text ?? '').trim()
-    }
+    try { hook = (JSON.parse(raw).hook ?? '').trim() } catch { hook = (raw || '').trim().replace(/^["']|["']$/g, '') }
     if (!hook) throw new Error('Empty hook returned')
-
-    return new Response(JSON.stringify({ hook }), {
-      headers: { ...cors, 'Content-Type': 'application/json' },
-    })
+    return j({ hook })
   } catch (err) {
-    const msg = err instanceof Anthropic.APIError ? `Claude error ${err.status}: ${err.message}` : (err as Error).message
-    return new Response(JSON.stringify({ error: msg }), {
-      status: 502, headers: { ...cors, 'Content-Type': 'application/json' },
-    })
+    return j({ error: (err as Error).message }, 502)
   }
 })
