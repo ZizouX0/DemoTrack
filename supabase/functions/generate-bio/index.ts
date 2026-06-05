@@ -1,18 +1,20 @@
-// DemoTrack — Phase 13: AI bio generation (Spec §5, feature 2).
-// Writes the press-kit bio in one of 3 selectable tones, FROM the artist's
-// profile facts only — never invents numbers or accolades. Server-side so the
-// Anthropic key stays out of the browser. JWT-verified by default.
+// DemoTrack — AI bio generation (Spec §5, feature 2).
+// Writes the press-kit bio in one of 3 tones, FROM the artist's facts only —
+// never invents numbers or accolades. Server-side; JWT-verified by default.
+//
+// Provider: FREE by default via Groq (no credit card) if GROQ_API_KEY is set;
+// falls back to Anthropic (claude-opus-4-8) if only ANTHROPIC_API_KEY is set.
 //
 // Deploy:  supabase functions deploy generate-bio
-// Secret:  supabase secrets set ANTHROPIC_API_KEY=sk-ant-...
-
-import Anthropic from 'npm:@anthropic-ai/sdk@0.69.0'
+// Secret:  supabase secrets set GROQ_API_KEY=gsk_...   (free — console.groq.com)
 
 const cors = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
 }
+const j = (b: unknown, status = 200) =>
+  new Response(JSON.stringify(b), { status, headers: { ...cors, 'Content-Type': 'application/json' } })
 
 const TONES: Record<string, string> = {
   professional: 'Professional and concise — third person, press-ready, the kind of bio a label or promoter would paste verbatim.',
@@ -27,21 +29,55 @@ Hard rules:
 - Use ONLY the facts provided. NEVER invent numbers, streams, chart positions, label signings, accolades, press quotes, or collaborations that aren't in the input. If a fact isn't given, don't imply it.
 - Don't pad with clichés ("up-and-coming", "passion for music", "based in the studio"). Be specific to the facts.
 - Write in the requested tone.
-Respond strictly as JSON matching the schema: {"bio": "<text>"}.`
+Respond strictly as JSON: {"bio": "<text>"}.`
+
+async function complete(system: string, userMsg: string): Promise<string> {
+  const groqKey = Deno.env.get('GROQ_API_KEY')
+  if (groqKey) {
+    const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${groqKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: Deno.env.get('GROQ_MODEL') || 'llama-3.3-70b-versatile',
+        messages: [{ role: 'system', content: system }, { role: 'user', content: userMsg }],
+        response_format: { type: 'json_object' },
+        temperature: 0.8,
+        max_tokens: 500,
+      }),
+    })
+    if (!r.ok) throw new Error(`Groq error ${r.status}: ${(await r.text()).slice(0, 300)}`)
+    const data = await r.json()
+    return data.choices?.[0]?.message?.content ?? ''
+  }
+
+  const anthropicKey = Deno.env.get('ANTHROPIC_API_KEY')
+  if (anthropicKey) {
+    const { default: Anthropic } = await import('npm:@anthropic-ai/sdk@0.69.0')
+    const client = new Anthropic({ apiKey: anthropicKey })
+    const resp = await client.messages.create({
+      model: 'claude-opus-4-8',
+      max_tokens: 600,
+      thinking: { type: 'disabled' },
+      output_config: {
+        effort: 'low',
+        format: { type: 'json_schema', schema: { type: 'object', properties: { bio: { type: 'string' } }, required: ['bio'], additionalProperties: false } },
+      },
+      system,
+      messages: [{ role: 'user', content: userMsg }],
+    })
+    const tb = resp.content.find((b: { type: string }) => b.type === 'text') as { text?: string } | undefined
+    return tb?.text ?? ''
+  }
+
+  throw new Error('No AI key set. Add a FREE Groq key: supabase secrets set GROQ_API_KEY=gsk_... (from console.groq.com), or ANTHROPIC_API_KEY.')
+}
 
 Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors })
-  if (req.method !== 'POST') {
-    return new Response(JSON.stringify({ error: 'Use POST' }), { status: 405, headers: { ...cors, 'Content-Type': 'application/json' } })
-  }
-  const apiKey = Deno.env.get('ANTHROPIC_API_KEY')
-  if (!apiKey) {
-    return new Response(JSON.stringify({ error: 'ANTHROPIC_API_KEY not set. Run: supabase secrets set ANTHROPIC_API_KEY=sk-ant-...' }),
-      { status: 500, headers: { ...cors, 'Content-Type': 'application/json' } })
-  }
+  if (req.method !== 'POST') return j({ error: 'Use POST' }, 405)
 
   let body: Record<string, unknown>
-  try { body = await req.json() } catch { return new Response(JSON.stringify({ error: 'Invalid JSON body' }), { status: 400, headers: { ...cors, 'Content-Type': 'application/json' } }) }
+  try { body = await req.json() } catch { return j({ error: 'Invalid JSON body' }, 400) }
 
   const toneKey = String(body.tone ?? 'professional').toLowerCase()
   const toneInstr = TONES[toneKey] ?? TONES.professional
@@ -59,25 +95,12 @@ Deno.serve(async (req: Request) => {
   ].filter(Boolean).join('\n')
 
   try {
-    const client = new Anthropic({ apiKey })
-    const resp = await client.messages.create({
-      model: 'claude-opus-4-8',
-      max_tokens: 600,
-      thinking: { type: 'disabled' },
-      output_config: {
-        effort: 'low',
-        format: { type: 'json_schema', schema: { type: 'object', properties: { bio: { type: 'string' } }, required: ['bio'], additionalProperties: false } },
-      },
-      system: SYSTEM,
-      messages: [{ role: 'user', content: `Tone: ${toneInstr}\n\nFacts:\n${factLines}` }],
-    })
-    const textBlock = resp.content.find((b) => b.type === 'text') as { text?: string } | undefined
+    const raw = await complete(SYSTEM, `Tone: ${toneInstr}\n\nFacts:\n${factLines}`)
     let bio = ''
-    try { bio = (JSON.parse(textBlock?.text ?? '{}').bio ?? '').trim() } catch { bio = (textBlock?.text ?? '').trim() }
+    try { bio = (JSON.parse(raw).bio ?? '').trim() } catch { bio = (raw || '').trim() }
     if (!bio) throw new Error('Empty bio returned')
-    return new Response(JSON.stringify({ bio, tone: toneKey }), { headers: { ...cors, 'Content-Type': 'application/json' } })
+    return j({ bio, tone: toneKey })
   } catch (err) {
-    const msg = err instanceof Anthropic.APIError ? `Claude error ${err.status}: ${err.message}` : (err as Error).message
-    return new Response(JSON.stringify({ error: msg }), { status: 502, headers: { ...cors, 'Content-Type': 'application/json' } })
+    return j({ error: (err as Error).message }, 502)
   }
 })
