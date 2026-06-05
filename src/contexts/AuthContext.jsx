@@ -28,17 +28,23 @@ export function AuthProvider({ children }) {
     }
   }, [])
 
-  // Stable function identities so consumers don't re-render on every auth event.
-  const signInWithEmail = useCallback(
-    (email) =>
-      supabase.auth.signInWithOtp({
-        email,
-        options: {
-          emailRedirectTo: import.meta.env.VITE_SITE_URL || window.location.origin,
-        },
+  // Email + password sign-in. No email link — the session is created instantly
+  // and persisted, so you stay signed in on this device.
+  const signInWithPassword = useCallback(
+    (email, password) =>
+      supabase.auth.signInWithPassword({
+        email: (email ?? '').trim(),
+        password: password ?? '',
       }),
     []
   )
+
+  // Update the signed-in user's password.
+  const updatePassword = useCallback(
+    (password) => supabase.auth.updateUser({ password }),
+    []
+  )
+
   const signOut = useCallback(() => supabase.auth.signOut(), [])
 
   const value = useMemo(
@@ -46,10 +52,11 @@ export function AuthProvider({ children }) {
       session,
       user: session?.user ?? null,
       loading,
-      signInWithEmail,
+      signInWithPassword,
+      updatePassword,
       signOut,
     }),
-    [session, loading, signInWithEmail, signOut]
+    [session, loading, signInWithPassword, updatePassword, signOut]
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

@@ -12,10 +12,12 @@ if (!url || !anonKey) {
 }
 
 export const supabase = createClient(url ?? '', anonKey ?? '', {
+  // Email + password auth: persist the session so you stay signed in on this
+  // device. No magic links, so we don't parse auth tokens from the URL.
   auth: {
     persistSession: true,
     autoRefreshToken: true,
-    detectSessionInUrl: true,
+    detectSessionInUrl: false,
   },
 })
 

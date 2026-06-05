@@ -2,6 +2,13 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
 import { norm } from '../lib/labelNorm'
+import {
+  freshnessStatus,
+  FRESHNESS_META,
+  effectiveVerified,
+  fmtVerified,
+  needsRecheck,
+} from '../lib/freshness'
 import Badge, { tierVariant } from './Badge'
 import { inputCls, selectCls } from './Field'
 
@@ -40,30 +47,20 @@ const ACCESS_RANK = {
   relationship_only: 3,
 }
 
-// Today is 2026-06-01 per spec; use real Date so it stays correct after
-const TODAY = new Date()
-const SIX_MONTHS_AGO = new Date(TODAY)
-SIX_MONTHS_AGO.setMonth(SIX_MONTHS_AGO.getMonth() - 6)
-
-function isFresh(lastVerified) {
-  if (!lastVerified) return false
-  return new Date(lastVerified) >= SIX_MONTHS_AGO
-}
+const FRESHNESS_OPTIONS = [
+  ['recheck', 'Needs re-check'],
+  ['fresh', 'Fresh'],
+  ['aging', 'Aging'],
+  ['stale', 'Stale'],
+  ['broken', 'Route reported'],
+  ['unverified', 'Unverified'],
+]
 
 function methodIcon(method) {
   if (method === 'email') return '✉'
   if (method === 'form') return '⊞'
   if (method === 'dm') return '◎'
   return '—'
-}
-
-function fmtDate(iso) {
-  if (!iso) return null
-  return new Date(iso).toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  })
 }
 
 /* ── Sort labels: cold_demo_friendly first, then by tier, then name ── */
@@ -114,23 +111,91 @@ function FilterChips({ groupLabel, options, value, onChange }) {
 }
 
 /* ── FreshnessBadge ─────────────────────────────────────────────── */
-function FreshnessBadge({ lastVerified }) {
-  if (isFresh(lastVerified)) {
-    return (
-      <Badge variant="ok">
-        verified {fmtDate(lastVerified)}
-      </Badge>
-    )
-  }
+function FreshnessBadge({ label }) {
+  const status = freshnessStatus(label)
+  const meta = FRESHNESS_META[status]
+  const eff = label.effective_verified ??
+    effectiveVerified(label.last_verified, label.my_verified_at)
+  const when = fmtVerified(eff)
+
+  let suffix = ''
+  if (status === 'fresh' || status === 'aging') suffix = when ? ` · ${when}` : ''
+  else if (status === 'stale') suffix = when ? ` · ${when}` : ''
+  else if (status === 'broken') suffix = ' · re-check route'
+
   return (
-    <Badge variant="warn">
-      {lastVerified ? `stale — ${fmtDate(lastVerified)}` : 'stale — re-verify'}
+    <Badge variant={meta.variant}>
+      {meta.label}{suffix}
     </Badge>
   )
 }
 
+/* ── ReportControls — one-tap write-back to label_reports ───────── */
+const REPORT_REASONS = [
+  ['broken_link', 'Broken link'],
+  ['route_changed', 'Route changed'],
+  ['closed', 'Closed to demos'],
+]
+
+function ReportControls({ label, busy, onReport }) {
+  const [picking, setPicking] = useState(false)
+  const flagged = label.flagged_broken
+
+  return (
+    <div className="flex flex-wrap items-center gap-1.5">
+      <button
+        type="button"
+        disabled={busy}
+        onClick={() => onReport(label, 'verified_ok')}
+        className="inline-flex items-center gap-1 rounded-md border border-ok/30 bg-ok/10 px-2 py-1 text-[0.65rem] font-semibold uppercase tracking-wider text-ok transition-colors hover:bg-ok/20 disabled:opacity-40"
+      >
+        <IconCheck className="size-3" />
+        Still works
+      </button>
+
+      {picking ? (
+        <>
+          {REPORT_REASONS.map(([kind, lbl]) => (
+            <button
+              key={kind}
+              type="button"
+              disabled={busy}
+              onClick={() => { onReport(label, kind); setPicking(false) }}
+              className="rounded-md border border-danger/30 bg-danger/10 px-2 py-1 text-[0.65rem] font-semibold uppercase tracking-wider text-danger transition-colors hover:bg-danger/20 disabled:opacity-40"
+            >
+              {lbl}
+            </button>
+          ))}
+          <button
+            type="button"
+            onClick={() => setPicking(false)}
+            className="text-[0.65rem] font-semibold uppercase tracking-wider text-muted/70 hover:text-muted"
+          >
+            Cancel
+          </button>
+        </>
+      ) : (
+        <button
+          type="button"
+          disabled={busy}
+          onClick={() => setPicking(true)}
+          className={[
+            'inline-flex items-center gap-1 rounded-md border px-2 py-1 text-[0.65rem] font-semibold uppercase tracking-wider transition-colors disabled:opacity-40',
+            flagged
+              ? 'border-danger/40 bg-danger/15 text-danger'
+              : 'border-line bg-surface-2 text-muted hover:border-danger/40 hover:text-danger',
+          ].join(' ')}
+        >
+          <IconFlag className="size-3" />
+          {flagged ? 'Reported' : 'Report issue'}
+        </button>
+      )}
+    </div>
+  )
+}
+
 /* ── LabelCard ──────────────────────────────────────────────────── */
-function LabelCard({ label, inCRM, submitted, onAdd, adding }) {
+function LabelCard({ label, inCRM, submitted, onAdd, adding, onReport, reporting }) {
   const [reqOpen, setReqOpen] = useState(false)
   const reqId = `req-${label.id}`
 
@@ -247,9 +312,10 @@ function LabelCard({ label, inCRM, submitted, onAdd, adding }) {
         <p className="text-xs text-muted leading-relaxed">{label.why}</p>
       )}
 
-      {/* Freshness badge */}
-      <div>
-        <FreshnessBadge lastVerified={label.last_verified} />
+      {/* Freshness signal + one-tap write-back */}
+      <div className="space-y-2 border-t border-line/40 pt-3">
+        <FreshnessBadge label={label} />
+        <ReportControls label={label} busy={reporting} onReport={onReport} />
       </div>
 
       {/* Submission requirements — collapsible */}
@@ -297,6 +363,8 @@ export default function LabelDiscovery() {
 
   // Per-card adding state: Set of label IDs currently being inserted
   const [addingIds, setAddingIds] = useState(new Set())
+  // Per-card reporting state: Set of label IDs with an in-flight report
+  const [reportingIds, setReportingIds] = useState(new Set())
 
   // Filters
   const [search, setSearch] = useState('')
@@ -315,9 +383,9 @@ export default function LabelDiscovery() {
       setLabelsLoading(true)
       setLabelsError(null)
       const { data, error: err } = await supabase
-        .from('labels')
+        .from('label_freshness')
         .select(
-          'id, name, tier, access_path, submission_method, contact_link, genre_tags, submission_requirements, sources, why, last_verified'
+          'id, name, tier, access_path, submission_method, contact_link, genre_tags, submission_requirements, sources, why, last_verified, link_status, link_checked_at, my_verified_at, effective_verified, flagged_broken'
         )
         .order('name', { ascending: true })
       if (cancelled) return
@@ -404,6 +472,43 @@ export default function LabelDiscovery() {
     })
   }
 
+  /* ── Report write-back: insert into label_reports, patch locally ── */
+  async function handleReport(label, kind) {
+    if (reportingIds.has(label.id)) return
+    setReportingIds((prev) => new Set(prev).add(label.id))
+
+    const { error: err } = await supabase.from('label_reports').insert({
+      user_id: user.id,
+      label_id: label.id,
+      kind,
+    })
+
+    if (!err) {
+      // Optimistically reflect the new freshness signal without a refetch.
+      const now = new Date().toISOString()
+      setLabels((prev) =>
+        prev.map((l) =>
+          l.id !== label.id
+            ? l
+            : kind === 'verified_ok'
+              ? {
+                  ...l,
+                  my_verified_at: now,
+                  effective_verified: now,
+                  flagged_broken: false,
+                }
+              : { ...l, flagged_broken: true }
+        )
+      )
+    }
+
+    setReportingIds((prev) => {
+      const next = new Set(prev)
+      next.delete(label.id)
+      return next
+    })
+  }
+
   /* ── Distinct genre tags for filter select ──────────────────── */
   const genreOptions = useMemo(() => {
     const tags = new Set()
@@ -426,8 +531,14 @@ export default function LabelDiscovery() {
       if (tierFilter && l.tier !== tierFilter) return false
       if (accessFilter && l.access_path !== accessFilter) return false
       if (methodFilter && l.submission_method !== methodFilter) return false
-      if (freshnessFilter === 'fresh' && !isFresh(l.last_verified)) return false
-      if (freshnessFilter === 'stale' && isFresh(l.last_verified)) return false
+      if (freshnessFilter) {
+        const status = freshnessStatus(l)
+        if (freshnessFilter === 'recheck') {
+          if (!needsRecheck(status)) return false
+        } else if (status !== freshnessFilter) {
+          return false
+        }
+      }
       if (genreFilter && !(l.genre_tags ?? []).includes(genreFilter)) return false
       return true
     })
@@ -436,6 +547,12 @@ export default function LabelDiscovery() {
   }, [labels, search, tierFilter, accessFilter, methodFilter, freshnessFilter, genreFilter])
 
   const hasActiveFilters = search || tierFilter || accessFilter || methodFilter || freshnessFilter || genreFilter
+
+  /* ── Re-check queue: labels that are stale, broken, or unverified ── */
+  const recheckCount = useMemo(
+    () => labels.reduce((n, l) => n + (needsRecheck(freshnessStatus(l)) ? 1 : 0), 0),
+    [labels]
+  )
 
   function clearAllFilters() {
     setSearch('')
@@ -452,6 +569,25 @@ export default function LabelDiscovery() {
 
   return (
     <div className="space-y-5">
+      {/* Re-check queue banner — turns freshness into an actionable worklist */}
+      {!isLoading && !labelsError && recheckCount > 0 && freshnessFilter !== 'recheck' && (
+        <button
+          type="button"
+          onClick={() => setFreshnessFilter('recheck')}
+          className="flex w-full items-center gap-2.5 rounded-card border border-warn/30 bg-warn/10 px-4 py-3 text-left transition-colors hover:bg-warn/15"
+        >
+          <IconAlert className="size-4 shrink-0 text-warn" />
+          <span className="flex-1 text-sm text-text">
+            <span className="font-semibold">{recheckCount}</span>{' '}
+            {recheckCount === 1 ? 'label needs' : 'labels need'} a re-check
+            <span className="text-muted"> — stale, unverified, or reported broken</span>
+          </span>
+          <span className="shrink-0 text-[0.65rem] font-semibold uppercase tracking-wider text-warn">
+            Show →
+          </span>
+        </button>
+      )}
+
       {/* Search bar */}
       <div className="relative">
         <IconSearch className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted pointer-events-none" />
@@ -501,8 +637,9 @@ export default function LabelDiscovery() {
               onChange={(e) => setFreshnessFilter(e.target.value)}
             >
               <option value="">All</option>
-              <option value="fresh">Verified in last 6 months</option>
-              <option value="stale">Stale / unverified</option>
+              {FRESHNESS_OPTIONS.map(([val, lbl]) => (
+                <option key={val} value={val}>{lbl}</option>
+              ))}
             </select>
           </div>
 
@@ -602,6 +739,8 @@ export default function LabelDiscovery() {
                 submitted={submitted}
                 onAdd={handleAdd}
                 adding={addingIds.has(label.id)}
+                onReport={handleReport}
+                reporting={reportingIds.has(label.id)}
               />
             )
           })}
@@ -655,6 +794,25 @@ function IconChevron(props) {
   return (
     <svg {...svgBase(props)}>
       <path d="m6 9 6 6 6-6" />
+    </svg>
+  )
+}
+
+function IconFlag(props) {
+  return (
+    <svg {...svgBase(props)}>
+      <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+      <line x1="4" y1="22" x2="4" y2="15" />
+    </svg>
+  )
+}
+
+function IconAlert(props) {
+  return (
+    <svg {...svgBase(props)}>
+      <path d="m10.29 3.86-8.34 14.45A1 1 0 0 0 2.82 20h18.36a1 1 0 0 0 .87-1.5L13.71 3.86a1 1 0 0 0-1.74 0z" />
+      <line x1="12" y1="9" x2="12" y2="13" />
+      <line x1="12" y1="17" x2="12.01" y2="17" />
     </svg>
   )
 }

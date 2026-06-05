@@ -25,12 +25,13 @@ Everything serves one repeating cycle, run for every track you want to place:
 | **Track Vault** | Your catalogue: status (idea → demo-ready → submitted → signed), listen link, BPM/key, notes, per-track send & feedback history. |
 | **Contacts CRM** | Every label/contact in one place: method + links, relationship stage, access path, A&R intel, full history. |
 | **Label Discovery** | Browse/filter a **curated 288-label master** (tier, access path, method, genre, freshness); one-tap "Add to CRM" with "in CRM / submitted" indicators. |
-| **Send Demo** | The friction-killer: pick track → pick contact → preset auto-fill → **AI hook** → pre-send checklist + exclusive-hold warning → mailto/Gmail or portal/DM → recorded in one tap. |
+| **Send Demo** | The friction-killer: pick track → pick contact → preset auto-fill → **AI hook** → pre-send checklist + exclusive-hold warning → mailto/Gmail or portal/DM → recorded in one tap. **Batch mode**: multi-select labels and send a tailored demo to each in one guided queue. |
 | **Email Presets + AI Hook** | Your own templates with merge fields; Claude writes only the one personalized sentence that earns a reply (≤30 words, facts-only). |
 | **Follow-ups + Digest** | 7-day nudge / 14-day overdue queue, one-tap "Got a reply / Still silent", auto-logged silence, scheduled email digest. |
 | **Feedback Log** | Every response tied to a track and contact; silence is data. |
 | **A&R Intel & Prioritization** | Research notes per contact (feeds the AI hook); "untried + cold-demo-friendly first" sort with "times contacted". |
 | **Dashboard + Funnel** | Conversion funnel (sent→opened→replied→considering→signed), response rate by genre/tier, work-session streak, CSV export. |
+| **Data Freshness** | Verification age is a live signal, not a static stamp: tiered badges (fresh / aging / stale / broken) in Discovery **and** at send time, one-tap "still works / report broken" write-back, a "needs re-check" queue, and a weekly cron link-checker that flags dead Form/DM routes. |
 | **Demo Link Tracking** *(optional)* | Wrap Form/DM links to see when a label opens your demo. |
 | **Work Sessions & Goals** | One-tap studio logging (hours + mood); goals with progress derived from real activity. |
 | **Artist Press Kit** | Public EPK at `press.<domain>/{slug}` (served through a narrow, whitelisted endpoint) + **AI bio** in 3 tones. |
@@ -69,12 +70,15 @@ supabase/
   promo_contacts.sql    74 non-label promo contacts (table + seed)
   followups.sql         follow-up queue view, auto-no-response, pg_cron tick
   link_tracking.sql     tracked_links + open-logging RPC (optional)
+  freshness.sql         label_reports (user write-back) + label_freshness /
+                        label_recheck_queue views + link-check columns
   functions/
     suggest-hook/       AI email hook (Claude)
     generate-bio/       AI press-kit bio, 3 tones (Claude)
     daily-digest/       scheduled follow-up email digest
     track-redirect/     public demo-link redirect + open tracking (optional)
     press-kit/          public EPK page (whitelisted slug endpoint)
+    check-links/        weekly cron link-checker → writes link_status to labels
 data/
   labels.json / .csv          the 288-label research dataset (source of truth)
   promo_contacts.json / .csv  the 74 promo contacts
@@ -103,7 +107,7 @@ The app runs without the Edge Functions deployed — the AI hook/bio simply fall
 
 **1. Database** (run with the service role, in order):
 ```
-schema.sql  →  seed_labels.sql  ·  promo_contacts.sql  ·  followups.sql  ·  link_tracking.sql
+schema.sql  →  seed_labels.sql  ·  promo_contacts.sql  ·  followups.sql  ·  link_tracking.sql  ·  freshness.sql
 ```
 `pg_cron` is enabled on Supabase, so the daily follow-up tick schedules itself.
 
@@ -114,6 +118,9 @@ supabase functions deploy generate-bio
 supabase functions deploy daily-digest   --no-verify-jwt
 supabase functions deploy track-redirect --no-verify-jwt   # optional
 supabase functions deploy press-kit      --no-verify-jwt
+supabase functions deploy check-links    --no-verify-jwt   # weekly link-checker
+# optional: gate the link-checker so only your cron can run it
+supabase secrets set CRON_SECRET=$(openssl rand -hex 16)
 supabase secrets set ANTHROPIC_API_KEY=sk-ant-...
 # optional (email digest):
 supabase secrets set RESEND_API_KEY=re_... DIGEST_FROM="DemoTrack <digest@yourdomain>"
