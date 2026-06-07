@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
@@ -5,6 +6,15 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // DemoTrack is a mobile-first, installable PWA — the habit happens on a phone.
 export default defineConfig({
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './src/test/setup.js',
+    css: false,
+    // Only our app's tests — never the bundled skills under .agents/.
+    include: ['src/**/*.{test,spec}.{js,jsx}'],
+    exclude: ['node_modules', 'dist', '.agents', '.claude'],
+  },
   plugins: [
     react(),
     tailwindcss(),
