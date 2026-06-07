@@ -49,7 +49,7 @@ All AI runs **server-side** in Supabase Edge Functions (`claude-opus-4-8`) so th
 
 - **React 19 + Vite** — mobile-first, installable PWA
 - **Tailwind CSS 4** — late-night-studio theme (near-black canvas, one acid-lime accent)
-- **Supabase** — PostgreSQL + magic-link auth + Row-Level Security (12 tables) + Edge Functions (Deno) + `pg_cron`
+- **Supabase** — PostgreSQL + email/password auth + Row-Level Security (15 tables) + Edge Functions (Deno) + `pg_cron`
 - **Anthropic API (Claude)** — the 3 AI features
 - **`mailto:` / Gmail compose deep links** — demos open prefilled in your own inbox; no relay, no deliverability risk
 - **Vercel** — hosting for the app and public press-kit pages
@@ -65,7 +65,7 @@ src/
   contexts/         AuthContext
   lib/              supabase client
 supabase/
-  schema.sql            12 tables, enums, RLS (owner-only), views
+  schema.sql            core tables, enums, RLS (owner-only), views
   seed_labels.sql       288 verified labels (idempotent upsert)
   promo_contacts.sql    74 non-label promo contacts (table + seed)
   followups.sql         follow-up queue view, auto-no-response, pg_cron tick

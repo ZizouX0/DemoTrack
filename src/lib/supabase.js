@@ -11,14 +11,22 @@ if (!url || !anonKey) {
   )
 }
 
-export const supabase = createClient(url ?? '', anonKey ?? '', {
-  // Email + password auth: persist the session so you stay signed in on this
-  // device. No magic links, so we don't parse auth tokens from the URL.
-  auth: {
-    persistSession: true,
-    autoRefreshToken: true,
-    detectSessionInUrl: false,
-  },
-})
-
 export const isSupabaseConfigured = Boolean(url && anonKey)
+
+// Use a syntactically valid placeholder when unconfigured: createClient throws
+// ("supabaseUrl is required") on an empty string, which would crash the whole
+// app at import before the UI can show a helpful message. The placeholder lets
+// the module load; `isSupabaseConfigured` gates any real auth/data calls.
+export const supabase = createClient(
+  url || 'https://placeholder.supabase.co',
+  anonKey || 'placeholder-anon-key',
+  {
+    // Email + password auth: persist the session so you stay signed in on this
+    // device. No magic links, so we don't parse auth tokens from the URL.
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: false,
+    },
+  }
+)
