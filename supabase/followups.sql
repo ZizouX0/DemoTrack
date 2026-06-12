@@ -169,16 +169,53 @@ $$;
 
 -- ---------------------------------------------------------------------------
 -- Email digest: the daily-digest Edge Function composes & sends the digest.
--- On Supabase, trigger it from the same daily tick via pg_net (uncomment and
--- fill your project ref + a service-role/anon JWT stored in Vault). Left
--- commented because it is project-specific.
---
+-- APPLIED TO PRODUCTION (migrations: schedule_digest_and_check_links_crons,
+-- cron_secret_verification_helpers): a random secret is stored in Vault as
+-- 'demotrack_cron_secret' and the cron below posts it as the bearer; the
+-- function verifies it via the service-role-only verify_cron_secret RPC, so
+-- no function env secret is required. Mail config (Resend) can live in Vault
+-- too: 'resend_api_key' / 'digest_from'.
+
+-- Service-role-only helpers the cron-triggered functions use to authenticate
+-- against Vault (and read mail config) without function env secrets.
+create or replace function public.verify_cron_secret(p_secret text)
+returns boolean
+language sql
+security definer
+set search_path = ''
+as $$
+  select p_secret is not null
+     and length(p_secret) > 0
+     and exists (
+       select 1 from vault.decrypted_secrets
+       where name = 'demotrack_cron_secret'
+         and decrypted_secret = p_secret
+     );
+$$;
+
+create or replace function public.get_vault_secret(p_name text)
+returns text
+language sql
+security definer
+set search_path = ''
+as $$
+  select decrypted_secret from vault.decrypted_secrets where name = p_name;
+$$;
+
+revoke execute on function public.verify_cron_secret(text) from public, anon, authenticated;
+revoke execute on function public.get_vault_secret(text) from public, anon, authenticated;
+grant execute on function public.verify_cron_secret(text) to service_role;
+grant execute on function public.get_vault_secret(text) to service_role;
+
+-- The production cron (project-specific, shown for reference):
 -- select cron.schedule(
 --   'demotrack_daily_digest', '5 8 * * *',
 --   $$ select net.http_post(
---        url     := 'https://<PROJECT_REF>.functions.supabase.co/daily-digest',
+--        url     := 'https://<PROJECT_REF>.supabase.co/functions/v1/daily-digest',
 --        headers := jsonb_build_object('Content-Type','application/json',
---                     'Authorization','Bearer ' || current_setting('app.service_role_key', true))
+--                     'Authorization','Bearer ' || (select decrypted_secret
+--                        from vault.decrypted_secrets where name = 'demotrack_cron_secret')),
+--        body    := '{}'::jsonb
 --      ); $$
 -- );
 -- ---------------------------------------------------------------------------

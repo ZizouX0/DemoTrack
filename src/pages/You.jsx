@@ -4,6 +4,7 @@ import { supabase } from '../lib/supabase'
 import Modal from '../components/Modal'
 import Field, { inputCls, selectCls } from '../components/Field'
 import Badge from '../components/Badge'
+import { buildPressKitUrl } from '../lib/pressKit'
 
 /* ── Press Kit helpers ──────────────────────────────────────── */
 /** Convert artist name to URL-safe slug */
@@ -14,13 +15,6 @@ function slugify(str) {
     .replace(/[^a-z0-9-]/g, '')
     .replace(/-{2,}/g, '-')
     .replace(/^-|-$/g, '')
-}
-
-/** Build the public press-kit URL from a slug */
-function buildPressKitUrl(slug) {
-  const base = import.meta.env.VITE_PRESS_BASE_URL
-  if (base) return `${base}/${slug}`
-  return `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/press-kit?slug=${slug}`
 }
 
 const TONE_OPTIONS = [

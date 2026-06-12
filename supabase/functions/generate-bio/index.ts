@@ -57,11 +57,6 @@ async function complete(system: string, userMsg: string): Promise<string> {
     const resp = await client.messages.create({
       model: 'claude-opus-4-8',
       max_tokens: 600,
-      thinking: { type: 'disabled' },
-      output_config: {
-        effort: 'low',
-        format: { type: 'json_schema', schema: { type: 'object', properties: { bio: { type: 'string' } }, required: ['bio'], additionalProperties: false } },
-      },
       system,
       messages: [{ role: 'user', content: userMsg }],
     })
@@ -96,8 +91,10 @@ Deno.serve(async (req: Request) => {
 
   try {
     const raw = await complete(SYSTEM, `Tone: ${toneInstr}\n\nFacts:\n${factLines}`)
+    // Anthropic (no JSON mode) may fence the JSON in ```...``` — strip before parsing.
+    const cleaned = (raw || '').trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '')
     let bio = ''
-    try { bio = (JSON.parse(raw).bio ?? '').trim() } catch { bio = (raw || '').trim() }
+    try { bio = (JSON.parse(cleaned).bio ?? '').trim() } catch { bio = cleaned }
     if (!bio) throw new Error('Empty bio returned')
     return j({ bio, tone: toneKey })
   } catch (err) {

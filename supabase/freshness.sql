@@ -136,18 +136,22 @@ where f.flagged_broken
    or f.effective_verified < (now() - interval '365 days')::date;
 
 -- ---------------------------------------------------------------------------
--- Layer 4 schedule: run the check-links Edge Function weekly. Project-specific
--- (needs your project ref + the CRON_SECRET you set on the function), so it is
--- left commented — uncomment and fill in to enable. Mirrors the daily-digest
--- pattern in followups.sql.
+-- Layer 4 schedule: run the check-links Edge Function weekly.
+-- APPLIED TO PRODUCTION (migration: schedule_digest_and_check_links_crons),
+-- sharing the 'demotrack_cron_secret' Vault secret with the digest cron; the
+-- function verifies the x-cron-secret header via the service-role-only
+-- verify_cron_secret RPC (defined in followups.sql), so no function env
+-- secret is required.
 --
 -- select cron.schedule(
 --   'demotrack_check_links', '0 6 * * 1',   -- Mondays 06:00 UTC
 --   $$ select net.http_post(
---        url     := 'https://<PROJECT_REF>.functions.supabase.co/check-links',
+--        url     := 'https://<PROJECT_REF>.supabase.co/functions/v1/check-links',
 --        headers := jsonb_build_object(
 --                     'Content-Type','application/json',
---                     'x-cron-secret', current_setting('app.cron_secret', true))
+--                     'x-cron-secret', (select decrypted_secret
+--                        from vault.decrypted_secrets where name = 'demotrack_cron_secret')),
+--        body    := '{}'::jsonb
 --      ); $$
 -- );
 -- ---------------------------------------------------------------------------

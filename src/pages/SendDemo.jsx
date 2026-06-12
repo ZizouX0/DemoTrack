@@ -6,6 +6,7 @@ import { norm } from '../lib/labelNorm'
 import { freshnessStatus, FRESHNESS_META, needsRecheck } from '../lib/freshness'
 import Badge, { trackStatusVariant, tierVariant } from '../components/Badge'
 import Field, { inputCls, selectCls } from '../components/Field'
+import { buildPressKitUrl } from '../lib/pressKit'
 
 /* ── constants ─────────────────────────────────────────────── */
 const STATUS_LABELS = {
@@ -84,7 +85,7 @@ function fillMergeFields(text, { track, contact, pressKit, artistName, hook }) {
   const key = track?.musical_key ?? null
   const listenLink = track?.listen_link ?? null
   const pressKitLink =
-    pressKit?.slug ? `https://press.demotrack.app/${pressKit.slug}` : null
+    pressKit?.slug ? buildPressKitUrl(pressKit.slug) : null
 
   let result = text
     .replace(/\{genre\}/g, genre)
@@ -111,9 +112,19 @@ function fillMergeFields(text, { track, contact, pressKit, artistName, hook }) {
   if (listenLink) {
     result = result.replace(/\{listen_link\}/g, listenLink)
   } else {
+    // Remove the token; only drop the whole line if nothing meaningful remains
+    // (i.e. only whitespace, punctuation, or a short label prefix like "Listen:").
     result = result
       .split('\n')
-      .filter((line) => !line.includes('{listen_link}'))
+      .map((line) => {
+        if (!line.includes('{listen_link}')) return line
+        const stripped = line.replace(/\{listen_link\}/g, '').trim()
+        // Drop line when it's empty or only a short label prefix remains
+        if (!stripped || /^(listen|link)\s*[:：]?\s*$/i.test(stripped)) return null
+        // Otherwise keep the line with the token replaced by an empty string
+        return line.replace(/\{listen_link\}/g, '')
+      })
+      .filter((line) => line !== null)
       .join('\n')
   }
 
@@ -639,8 +650,56 @@ function EmailReviewPanel({
     ? buildGmailUrl(emailAddress, filledSubject, filledBody)
     : null
 
+  // Warn when template references {listen_link} but track has no listen link
+  const templateRefsListenLink = Boolean(
+    selectedTemplate &&
+      (selectedTemplate.subject?.includes('{listen_link}') ||
+        selectedTemplate.body?.includes('{listen_link}'))
+  )
+  const listenLinkMissing = templateRefsListenLink && !track?.listen_link
+
+  // Fix 6: mailto length guard — some mail apps truncate at ~2000 chars
+  const MAILTO_SAFE_LIMIT = 1900
+  const mailtoTooLong = Boolean(mailtoUrl && mailtoUrl.length > MAILTO_SAFE_LIMIT)
+
+  // Fix 5: track whether the user has opened the email draft
+  const [emailOpened, setEmailOpened] = useState(false)
+  const [unsentWarn, setUnsentWarn] = useState(false)
+  // Fix 6: copy body state
+  const [bodyCopied, setBodyCopied] = useState(false)
+
   const hookIsEmpty = !hook.trim()
   const hasNoTemplates = !loadingTemplates && templates.length === 0
+
+  async function handleCopyBody() {
+    if (!filledBody) return
+    try {
+      await navigator.clipboard.writeText(filledBody)
+      setBodyCopied(true)
+      setTimeout(() => setBodyCopied(false), 2000)
+    } catch {
+      // Fallback: create a temporary textarea and copy from it
+      const ta = document.createElement('textarea')
+      ta.value = filledBody
+      ta.style.position = 'fixed'
+      ta.style.opacity = '0'
+      document.body.appendChild(ta)
+      ta.select()
+      try { document.execCommand('copy'); setBodyCopied(true); setTimeout(() => setBodyCopied(false), 2000) } catch { /* ignore */ }
+      document.body.removeChild(ta)
+    }
+  }
+
+  function handleConfirmWithHook() {
+    if (hookIsEmpty) return
+    // Fix 5: if they haven't opened the email draft, show a one-time inline warn
+    if (!emailOpened && emailAddress && selectedTemplate) {
+      if (!unsentWarn) { setUnsentWarn(true); return }
+    }
+    setUnsentWarn(false)
+    pushRecentHook(hook.trim())
+    onConfirm()
+  }
 
   async function handleSuggestHook() {
     setHookLoading(true)
@@ -708,12 +767,6 @@ function EmailReviewPanel({
       setHookError(err.message)
     }
     setHookLoading(false)
-  }
-
-  function handleConfirmWithHook() {
-    if (hookIsEmpty) return
-    pushRecentHook(hook.trim())
-    onConfirm()
   }
 
   return (
@@ -844,6 +897,21 @@ function EmailReviewPanel({
         )}
       </div>
 
+      {/* Fix 4: warn when template uses {listen_link} but track has none */}
+      {listenLinkMissing && (
+        <div className="flex items-start gap-2 rounded-lg border border-warn/40 bg-warn/10 p-3 text-xs text-warn">
+          <IconWarn className="mt-0.5 size-3.5 shrink-0" />
+          <span>
+            This template references <code className="font-mono">{'{listen_link}'}</code> but the
+            selected track has no listen link — the token will be removed from the email.{' '}
+            <Link to="/tracks" className="underline hover:no-underline">
+              Add a listen link to the track
+            </Link>
+            .
+          </span>
+        </div>
+      )}
+
       {/* Email preview */}
       {selectedTemplate && (
         <div className="space-y-2">
@@ -879,9 +947,19 @@ function EmailReviewPanel({
       {emailAddress && selectedTemplate && (
         <div className="space-y-2">
           <p className="text-xs font-medium uppercase tracking-wider text-accent">Open &amp; send</p>
+
+          {/* Fix 6: mailto length warning */}
+          {mailtoTooLong && (
+            <div className="flex items-start gap-2 rounded-lg border border-warn/40 bg-warn/10 p-2.5 text-xs text-warn">
+              <IconWarn className="mt-0.5 size-3.5 shrink-0" />
+              <span>Long email — some mail apps truncate. Use Gmail or copy the body.</span>
+            </div>
+          )}
+
           <div className="grid grid-cols-2 gap-2">
             <a
               href={mailtoUrl ?? '#'}
+              onClick={() => setEmailOpened(true)}
               className="flex items-center justify-center gap-2 rounded-lg border border-line bg-surface px-3 py-2.5 text-sm font-semibold text-text transition-colors hover:border-accent/40 hover:bg-surface-2"
             >
               <IconMail className="size-4 shrink-0" />
@@ -891,12 +969,26 @@ function EmailReviewPanel({
               href={gmailUrl ?? '#'}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => setEmailOpened(true)}
               className="flex items-center justify-center gap-2 rounded-lg border border-line bg-surface px-3 py-2.5 text-sm font-semibold text-text transition-colors hover:border-accent/40 hover:bg-surface-2"
             >
               <IconGmail className="size-4 shrink-0" />
               Gmail
             </a>
           </div>
+
+          {/* Fix 6: copy body button — shown whenever mailto is too long */}
+          {mailtoTooLong && (
+            <button
+              type="button"
+              onClick={handleCopyBody}
+              className="flex w-full items-center justify-center gap-2 rounded-lg border border-line bg-surface-2 py-2 text-xs font-semibold text-muted transition-colors hover:border-accent/40 hover:text-accent"
+            >
+              <IconCopy className="size-3.5 shrink-0" />
+              {bodyCopied ? 'Copied!' : 'Copy body'}
+            </button>
+          )}
+
           <p className="text-center text-[0.65rem] text-muted">
             Open, review in your mail client, then tap Confirm sent below.
           </p>
@@ -916,6 +1008,23 @@ function EmailReviewPanel({
         <p className="rounded-lg border border-danger/30 bg-danger/10 px-3 py-2 text-xs text-danger">
           {error}
         </p>
+      )}
+
+      {/* Fix 5: inline "haven't opened" nudge — shown once on first confirm attempt */}
+      {unsentWarn && (
+        <div className="rounded-lg border border-warn/40 bg-warn/10 px-3 py-2.5 text-xs text-warn">
+          You haven't opened the email draft yet — record as sent anyway?{' '}
+          <button
+            type="button"
+            onClick={() => {
+              pushRecentHook(hook.trim())
+              onConfirm()
+            }}
+            className="ml-1 font-semibold underline hover:no-underline"
+          >
+            Yes, record it
+          </button>
+        </div>
       )}
 
       <div className="flex gap-3 pt-1">
@@ -965,6 +1074,9 @@ function NonEmailReviewPanel({
   const [trackingLoading, setTrackingLoading] = useState(false)
   const [trackingError, setTrackingError] = useState(null)
   const [copied, setCopied] = useState(false)
+  // Fix 5: track whether the portal/DM link was opened
+  const [linkOpened, setLinkOpened] = useState(false)
+  const [unsentWarn, setUnsentWarn] = useState(false)
 
   const hasExclusiveHold =
     track.exclusive_hold_contact_id &&
@@ -977,7 +1089,16 @@ function NonEmailReviewPanel({
 
   function handleAction() {
     if (!actionHref) return
+    setLinkOpened(true)
     window.open(actionHref, '_blank', 'noopener,noreferrer')
+  }
+
+  function handleConfirmWithCheck() {
+    if (!linkOpened && actionHref) {
+      if (!unsentWarn) { setUnsentWarn(true); return }
+    }
+    setUnsentWarn(false)
+    onConfirm()
   }
 
   const requirements = contact.notes || null
@@ -1201,6 +1322,21 @@ function NonEmailReviewPanel({
         </p>
       )}
 
+      {/* Fix 5: inline "haven't opened" nudge */}
+      {unsentWarn && (
+        <div className="rounded-lg border border-warn/40 bg-warn/10 px-3 py-2.5 text-xs text-warn">
+          You haven't opened the{' '}
+          {method === 'form' ? 'submission portal' : 'DM link'} yet — record as sent anyway?{' '}
+          <button
+            type="button"
+            onClick={() => { setUnsentWarn(false); onConfirm() }}
+            className="ml-1 font-semibold underline hover:no-underline"
+          >
+            Yes, record it
+          </button>
+        </div>
+      )}
+
       <div className="flex gap-3 pt-1">
         <button
           type="button"
@@ -1212,7 +1348,7 @@ function NonEmailReviewPanel({
         <button
           type="button"
           disabled={confirming}
-          onClick={onConfirm}
+          onClick={handleConfirmWithCheck}
           className="flex-1 rounded-lg bg-accent py-2.5 text-sm font-semibold text-ink transition-opacity hover:opacity-90 disabled:opacity-50"
         >
           {confirming ? 'Recording…' : 'Confirm sent'}
@@ -1278,7 +1414,7 @@ function CheckItem({ done, children }) {
 }
 
 /* ── Step 4: success state ──────────────────────────────────── */
-function SuccessState({ track, contact, submission, onReset }) {
+function SuccessState({ track, contact, submission, onReset, secondaryWarn }) {
   const followUpDate = submission?.follow_up_due_at
     ? new Date(submission.follow_up_due_at).toLocaleDateString('en-GB', {
         day: 'numeric',
@@ -1298,6 +1434,14 @@ function SuccessState({ track, contact, submission, onReset }) {
           <span className="text-text font-medium">{contact.name}</span>
         </p>
       </div>
+
+      {/* Fix 3: surface non-blocking secondary write warnings */}
+      {secondaryWarn && (
+        <div className="flex items-start gap-2 rounded-lg border border-warn/40 bg-warn/10 p-3 text-xs text-warn text-left">
+          <IconWarn className="mt-0.5 size-3.5 shrink-0" />
+          <span>{secondaryWarn}</span>
+        </div>
+      )}
 
       <div className="rounded-card border border-line bg-surface p-4 text-left space-y-2">
         <p className="text-[0.65rem] font-medium uppercase tracking-wider text-accent">Send logged</p>
@@ -1452,6 +1596,8 @@ export default function SendDemo() {
   const [confirmError, setConfirmError] = useState(null)
   const [submission, setSubmission] = useState(null)
   const [pendingTrackingHash, setPendingTrackingHash] = useState(null)
+  // Fix 3: surface non-blocking secondary write warnings on the success screen
+  const [secondaryWarn, setSecondaryWarn] = useState(null)
 
   // Batch queue state
   const [batchSelected, setBatchSelected] = useState([]) // array of target objects
@@ -1575,6 +1721,19 @@ export default function SendDemo() {
   async function resolveContactId(target) {
     if (target.id) return target.id
 
+    // Fix 1: before inserting, check for an existing row to avoid duplicates
+    // when label-sourced targets are used in batch (or retried).
+    if (target.label_id) {
+      const { data: existing, error: lookupErr } = await supabase
+        .from('contacts')
+        .select('id')
+        .eq('user_id', user.id)
+        .eq('label_id', target.label_id)
+        .maybeSingle()
+      if (lookupErr) throw lookupErr
+      if (existing?.id) return existing.id
+    }
+
     const { data, error } = await supabase
       .from('contacts')
       .insert({
@@ -1629,29 +1788,44 @@ export default function SendDemo() {
 
     if (subErr) throw subErr
 
-    await supabase
+    // Fix 3: secondary writes — capture errors and surface as non-blocking warnings
+    const secondaryWarnings = []
+
+    const { error: contactUpdateErr } = await supabase
       .from('contacts')
       .update({ last_contacted_at: now, updated_at: now })
       .eq('id', contactId)
       .eq('user_id', user.id)
+    if (contactUpdateErr) {
+      console.warn('[recordSend] contact last_contacted_at update failed:', contactUpdateErr)
+      secondaryWarnings.push("couldn't update contact")
+    }
 
     if (selectedTrack.status === 'demo_ready') {
-      await supabase
+      const { error: trackStatusErr } = await supabase
         .from('tracks')
         .update({ status: 'submitted', updated_at: now })
         .eq('id', selectedTrack.id)
         .eq('user_id', user.id)
+      if (trackStatusErr) {
+        console.warn('[recordSend] track status bump failed:', trackStatusErr)
+        secondaryWarnings.push("couldn't update track status")
+      }
     }
 
     if (trackingHash) {
-      await supabase
+      const { error: linkErr } = await supabase
         .from('tracked_links')
         .update({ submission_id: submissionData.id })
         .eq('hash', trackingHash)
         .eq('user_id', user.id)
+      if (linkErr) {
+        console.warn('[recordSend] tracked_links association failed:', linkErr)
+        secondaryWarnings.push("couldn't link tracking link")
+      }
     }
 
-    return { submissionData, contactId }
+    return { submissionData, contactId, secondaryWarnings }
   }
 
   async function handleConfirm() {
@@ -1659,11 +1833,15 @@ export default function SendDemo() {
     setConfirming(true)
     setConfirmError(null)
     try {
-      const { submissionData, contactId } = await recordSend(selectedContact, pendingTrackingHash)
+      const { submissionData, contactId, secondaryWarnings } = await recordSend(selectedContact, pendingTrackingHash)
       if (!selectedContact.id) {
         setSelectedContact((prev) => ({ ...prev, id: contactId }))
       }
       setSubmission(submissionData)
+      // Fix 3: surface any non-blocking secondary write failures
+      if (secondaryWarnings.length > 0) {
+        setSecondaryWarn(`Logged, but ${secondaryWarnings.join(' and ')} — check your connection.`)
+      }
       setConfirming(false)
       setStep(4)
     } catch (err) {
@@ -1708,12 +1886,21 @@ export default function SendDemo() {
     setConfirming(true)
     setConfirmError(null)
     try {
-      await recordSend(target, pendingTrackingHash)
+      const { contactId } = await recordSend(target, pendingTrackingHash)
+      // Fix 2: write resolved contactId back onto the batch target so retries
+      // and any further processing won't create duplicate contacts.
+      if (!target.id) {
+        setBatchSelected((prev) =>
+          prev.map((t, i) => (i === batchIndex ? { ...t, id: contactId } : t))
+        )
+      }
       setConfirming(false)
       advanceBatch({ name: target.name, method: target.submission_method, status: 'sent' })
     } catch (err) {
+      // Fix 2: on error, keep user on the current target and show error with Retry
       setConfirmError(err.message ?? 'Something went wrong — please try again.')
       setConfirming(false)
+      // (batchIndex is NOT advanced — user stays on the current target to retry or skip)
     }
   }
 
@@ -1734,6 +1921,7 @@ export default function SendDemo() {
     setSelectedContact(null)
     setSubmission(null)
     setConfirmError(null)
+    setSecondaryWarn(null)
     setPendingTrackingHash(null)
     setBatchSelected([])
     setBatchIndex(0)
@@ -1862,6 +2050,30 @@ export default function SendDemo() {
                 onSkip={handleBatchSkip}
                 busy={confirming}
               />
+              {/* Fix 2: batch error with explicit Retry + Skip buttons */}
+              {confirmError && (
+                <div className="rounded-lg border border-danger/30 bg-danger/10 px-3 py-2.5 text-xs text-danger space-y-2">
+                  <p>{confirmError}</p>
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={handleBatchConfirm}
+                      disabled={confirming}
+                      className="rounded-md border border-danger/40 bg-danger/10 px-3 py-1.5 font-semibold text-danger transition-colors hover:bg-danger/20 disabled:opacity-40"
+                    >
+                      {confirming ? 'Retrying…' : 'Retry'}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleBatchSkip}
+                      disabled={confirming}
+                      className="rounded-md border border-line px-3 py-1.5 font-semibold text-muted transition-colors hover:border-text hover:text-text disabled:opacity-40"
+                    >
+                      Skip (nothing recorded)
+                    </button>
+                  </div>
+                </div>
+              )}
               <ReviewAndSend
                 key={targetKey(batchSelected[batchIndex])}
                 track={selectedTrack}
@@ -1872,7 +2084,7 @@ export default function SendDemo() {
                 user={user}
                 onConfirm={handleBatchConfirm}
                 confirming={confirming}
-                error={confirmError}
+                error={null}
                 onBack={() => setStep(2)}
                 onTrackingHashChange={setPendingTrackingHash}
               />
@@ -1886,6 +2098,7 @@ export default function SendDemo() {
               contact={selectedContact}
               submission={submission}
               onReset={handleReset}
+              secondaryWarn={secondaryWarn}
             />
           )}
 

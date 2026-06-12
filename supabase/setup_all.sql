@@ -1432,8 +1432,10 @@ begin
 end;
 $$;
 
--- Allow the Edge Function (anon/service) to call only this function.
-grant execute on function record_link_open(text, text) to anon, authenticated, service_role;
+-- Only the track-redirect Edge Function calls this, and it runs with the
+-- service role — client roles never need EXECUTE (security-advisor 0028/0029).
+revoke execute on function record_link_open(text, text) from public, anon, authenticated;
+grant execute on function record_link_open(text, text) to service_role;
 
 -- Per-submission open counts, for the UI (security_invoker => caller's RLS).
 create or replace view submission_open_counts
@@ -1588,3 +1590,67 @@ where f.flagged_broken
    or f.link_status = 'broken'
    or f.effective_verified is null
    or f.effective_verified < (now() - interval '365 days')::date;
+
+-- ============================================================================
+-- >>> restore_auth.sql (final state lock-down)
+-- ============================================================================
+-- Ensures a fresh setup ends in the same state as production: RLS enabled on
+-- every table and no broad anon grants (left over from the old no-login mode).
+-- The per-user views above are already defined against auth.uid(), so only the
+-- RLS re-assertion + anon revoke from restore_auth.sql are needed here.
+
+alter table contacts        enable row level security;
+alter table tracks          enable row level security;
+alter table submissions     enable row level security;
+alter table feedback        enable row level security;
+alter table templates       enable row level security;
+alter table ar_intel        enable row level security;
+alter table work_sessions   enable row level security;
+alter table goals           enable row level security;
+alter table link_events     enable row level security;
+alter table press_kit       enable row level security;
+alter table notifications   enable row level security;
+alter table tracked_links   enable row level security;
+alter table label_reports   enable row level security;
+alter table labels          enable row level security;
+alter table promo_contacts  enable row level security;
+
+revoke select, insert, update, delete on all tables in schema public from anon;
+revoke usage, select on all sequences in schema public from anon;
+
+-- ============================================================================
+-- >>> cron secret helpers (mirrors migration: cron_secret_verification_helpers)
+-- ============================================================================
+-- Service-role-only helpers the cron-triggered Edge Functions (daily-digest,
+-- check-links) use to authenticate against the 'demotrack_cron_secret' Vault
+-- secret and read mail config ('resend_api_key' / 'digest_from') without
+-- function env secrets.
+
+create or replace function public.verify_cron_secret(p_secret text)
+returns boolean
+language sql
+security definer
+set search_path = ''
+as $$
+  select p_secret is not null
+     and length(p_secret) > 0
+     and exists (
+       select 1 from vault.decrypted_secrets
+       where name = 'demotrack_cron_secret'
+         and decrypted_secret = p_secret
+     );
+$$;
+
+create or replace function public.get_vault_secret(p_name text)
+returns text
+language sql
+security definer
+set search_path = ''
+as $$
+  select decrypted_secret from vault.decrypted_secrets where name = p_name;
+$$;
+
+revoke execute on function public.verify_cron_secret(text) from public, anon, authenticated;
+revoke execute on function public.get_vault_secret(text) from public, anon, authenticated;
+grant execute on function public.verify_cron_secret(text) to service_role;
+grant execute on function public.get_vault_secret(text) to service_role;
