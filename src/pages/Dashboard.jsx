@@ -706,6 +706,8 @@ function FollowUpQueue() {
     const { data, error: qErr } = await supabase
       .from('follow_up_queue')
       .select('*')
+      // Fix 9: defense-in-depth user filter, consistent with all other queries
+      .eq('user_id', user.id)
     if (qErr) {
       setError(qErr.message)
     } else {
@@ -713,13 +715,14 @@ function FollowUpQueue() {
       setQueue(data ?? [])
     }
     setLoading(false)
-  }, [])
+  }, [user.id])
 
   useEffect(() => {
     load()
   }, [load])
 
-  // Optimistically remove an item after action
+  // Optimistically remove an item after action; callers keep their reference
+  // to the item so it can be re-inserted on failure
   function removeItem(submissionId) {
     setQueue((prev) => prev.filter((i) => i.submission_id !== submissionId))
   }
@@ -729,12 +732,17 @@ function FollowUpQueue() {
     removeItem(item.submission_id)
 
     const now = new Date().toISOString()
-    await supabase
+    const { error: snoozeErr } = await supabase
       .from('submissions')
       .update({ follow_up_due_at: addDays(7), updated_at: now })
       .eq('id', item.submission_id)
       .eq('user_id', user.id)
-    // No need to reload — item is already gone from the local list
+
+    // Fix 8: on failure, put the item back and show an error
+    if (snoozeErr) {
+      setQueue((prev) => [...prev, item])
+      setError(`Couldn't snooze "${item.track_title}" — ${snoozeErr.message}`)
+    }
   }
 
   function handleReplySuccess(submissionId) {
@@ -744,13 +752,14 @@ function FollowUpQueue() {
 
   if (loading) return <QueueSkeleton />
 
-  if (error) {
+  // Fatal load error — nothing to show yet
+  if (error && queue.length === 0) {
     return (
       <div className="rounded-card border border-danger/30 bg-danger/10 p-4 text-sm text-danger">
         Failed to load follow-ups: {error}
         <button
           type="button"
-          onClick={load}
+          onClick={() => { setError(null); load() }}
           className="mt-2 block text-xs underline hover:no-underline"
         >
           Retry
@@ -786,6 +795,20 @@ function FollowUpQueue() {
 
   return (
     <>
+      {/* Fix 8: show action errors (e.g. snooze failure) inline above the queue */}
+      {error && (
+        <div className="rounded-lg border border-danger/30 bg-danger/10 px-3 py-2.5 text-xs text-danger">
+          {error}{' '}
+          <button
+            type="button"
+            onClick={() => setError(null)}
+            className="ml-1 underline hover:no-underline"
+          >
+            Dismiss
+          </button>
+        </div>
+      )}
+
       <div className="space-y-4">
         {/* Overdue group */}
         {overdue.length > 0 && (

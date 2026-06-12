@@ -856,6 +856,9 @@ function ContactHistoryModal({ contact, user, onClose, onEdit, onDelete }) {
 
 /* ── Contact card ───────────────────────────────────────────── */
 function ContactCard({ contact, onEdit, onDelete, onViewHistory, sendCount }) {
+  // Fix 10: two-tap delete confirm, consistent with history-modal delete pattern
+  const [confirmingDelete, setConfirmingDelete] = useState(false)
+
   const contactLink =
     contact.submission_method === 'email'
       ? contact.email
@@ -925,14 +928,26 @@ function ContactCard({ contact, onEdit, onDelete, onViewHistory, sendCount }) {
           >
             <IconEdit className="size-4" />
           </button>
-          <button
-            type="button"
-            onClick={() => onDelete(contact.id)}
-            aria-label={`Delete ${contact.name}`}
-            className="grid size-8 place-items-center rounded-lg text-muted transition-colors hover:bg-surface-2 hover:text-danger"
-          >
-            <IconTrash className="size-4" />
-          </button>
+          {confirmingDelete ? (
+            <button
+              type="button"
+              onClick={() => onDelete(contact.id)}
+              aria-label={`Confirm delete ${contact.name}`}
+              title="Confirm — this deletes all history"
+              className="grid size-8 place-items-center rounded-lg bg-danger/10 text-danger transition-colors hover:bg-danger/20"
+            >
+              <IconCheck className="size-4" />
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setConfirmingDelete(true)}
+              aria-label={`Delete ${contact.name}`}
+              className="grid size-8 place-items-center rounded-lg text-muted transition-colors hover:bg-surface-2 hover:text-danger"
+            >
+              <IconTrash className="size-4" />
+            </button>
+          )}
         </div>
       </div>
 
@@ -1151,7 +1166,7 @@ export default function Contacts() {
               ? contacts.length > 0
                 ? `${contacts.length} contact${contacts.length !== 1 ? 's' : ''}`
                 : 'Your outreach CRM.'
-              : 'Browse 288 labels — add to your CRM instantly.'}
+              : 'Browse the label master — add to your CRM instantly.'}
           </p>
         </div>
         {activeTab === 'crm' && (
@@ -1244,7 +1259,7 @@ export default function Contacts() {
             <div className="rounded-card border border-dashed border-line bg-surface/40 p-8 text-center">
               <p className="font-display text-lg font-bold">No contacts yet</p>
               <p className="mt-1 text-sm text-muted">
-                Add a label manually or discover from 288 seeded labels.
+                Add a label manually or discover from the label master.
               </p>
               <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:justify-center">
                 <button
