@@ -57,8 +57,10 @@ begin
 end;
 $$;
 
--- Allow the Edge Function (anon/service) to call only this function.
-grant execute on function record_link_open(text, text) to anon, authenticated, service_role;
+-- Only the track-redirect Edge Function calls this, and it runs with the
+-- service role — client roles never need EXECUTE (security-advisor 0028/0029).
+revoke execute on function record_link_open(text, text) from public, anon, authenticated;
+grant execute on function record_link_open(text, text) to service_role;
 
 -- Per-submission open counts, for the UI (security_invoker => caller's RLS).
 create or replace view submission_open_counts

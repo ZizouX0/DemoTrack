@@ -8,8 +8,8 @@
 // Trigger: from pg_cron via pg_net (see supabase/followups.sql), or manually.
 //
 // Auth: not JWT-gated (cron has no user). Requires the Authorization bearer to
-// equal the service-role key or DIGEST_CRON_SECRET. If neither secret is set,
-// it still runs (dev convenience) but logs a warning.
+// equal the service-role key or DIGEST_CRON_SECRET. Fails closed: if neither
+// secret is configured the endpoint refuses to run.
 
 import { createClient } from 'npm:@supabase/supabase-js@2'
 
@@ -24,8 +24,8 @@ const json = (b: unknown, status = 200) =>
 
 function authorized(req: Request): boolean {
   const bearer = (req.headers.get('Authorization') ?? '').replace(/^Bearer\s+/i, '')
-  if (!SERVICE_KEY && !CRON_SECRET) return true // dev: nothing to check against
-  return bearer === SERVICE_KEY || (CRON_SECRET !== '' && bearer === CRON_SECRET)
+  if (!SERVICE_KEY && !CRON_SECRET) return false // fail closed: nothing to check against
+  return (SERVICE_KEY !== '' && bearer === SERVICE_KEY) || (CRON_SECRET !== '' && bearer === CRON_SECRET)
 }
 
 async function sendEmail(to: string, subject: string, text: string): Promise<boolean> {

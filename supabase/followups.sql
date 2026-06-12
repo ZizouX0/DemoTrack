@@ -169,16 +169,19 @@ $$;
 
 -- ---------------------------------------------------------------------------
 -- Email digest: the daily-digest Edge Function composes & sends the digest.
--- On Supabase, trigger it from the same daily tick via pg_net (uncomment and
--- fill your project ref + a service-role/anon JWT stored in Vault). Left
--- commented because it is project-specific.
+-- APPLIED TO PRODUCTION (migration: schedule_digest_and_check_links_crons):
+-- a random secret is stored in Vault as 'demotrack_cron_secret' and the cron
+-- below posts it as the bearer. The same value must be set as the function's
+-- DIGEST_CRON_SECRET secret (the function fails closed without a match).
 --
 -- select cron.schedule(
 --   'demotrack_daily_digest', '5 8 * * *',
 --   $$ select net.http_post(
---        url     := 'https://<PROJECT_REF>.functions.supabase.co/daily-digest',
+--        url     := 'https://<PROJECT_REF>.supabase.co/functions/v1/daily-digest',
 --        headers := jsonb_build_object('Content-Type','application/json',
---                     'Authorization','Bearer ' || current_setting('app.service_role_key', true))
+--                     'Authorization','Bearer ' || (select decrypted_secret
+--                        from vault.decrypted_secrets where name = 'demotrack_cron_secret')),
+--        body    := '{}'::jsonb
 --      ); $$
 -- );
 -- ---------------------------------------------------------------------------

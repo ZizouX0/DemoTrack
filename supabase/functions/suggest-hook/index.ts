@@ -53,11 +53,6 @@ async function complete(system: string, userMsg: string): Promise<string> {
     const resp = await client.messages.create({
       model: 'claude-opus-4-8',
       max_tokens: 256,
-      thinking: { type: 'disabled' },
-      output_config: {
-        effort: 'low',
-        format: { type: 'json_schema', schema: { type: 'object', properties: { hook: { type: 'string' } }, required: ['hook'], additionalProperties: false } },
-      },
       system,
       messages: [{ role: 'user', content: userMsg }],
     })
@@ -96,8 +91,10 @@ Deno.serve(async (req: Request) => {
 
   try {
     const raw = await complete(SYSTEM, `Write the hook from these facts:\n\n${facts}`)
+    // Anthropic (no JSON mode) may fence the JSON in ```...``` — strip before parsing.
+    const cleaned = (raw || '').trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '')
     let hook = ''
-    try { hook = (JSON.parse(raw).hook ?? '').trim() } catch { hook = (raw || '').trim().replace(/^["']|["']$/g, '') }
+    try { hook = (JSON.parse(cleaned).hook ?? '').trim() } catch { hook = cleaned.replace(/^["']|["']$/g, '') }
     if (!hook) throw new Error('Empty hook returned')
     return j({ hook })
   } catch (err) {
