@@ -13,7 +13,8 @@
 //
 // Deploy:  supabase functions deploy check-links --no-verify-jwt
 // Trigger: weekly via pg_cron + pg_net (see freshness.sql), or POST manually.
-//   Optional: set CRON_SECRET and send `x-cron-secret: <secret>` to gate it.
+//   Gated: `x-cron-secret` must match the CRON_SECRET function secret or the
+//   'demotrack_cron_secret' Vault secret (what the pg_cron trigger sends).
 
 import { createClient } from 'npm:@supabase/supabase-js@2'
 
@@ -77,13 +78,20 @@ Deno.serve(async (req: Request) => {
   if (!SUPABASE_URL || !SERVICE_KEY) {
     return new Response('Server not configured', { status: 500 })
   }
-  if (CRON_SECRET && req.headers.get('x-cron-secret') !== CRON_SECRET) {
-    return new Response('Forbidden', { status: 403 })
-  }
 
   const supabase = createClient(SUPABASE_URL, SERVICE_KEY, {
     auth: { persistSession: false },
   })
+
+  // Gate on the cron secret: env CRON_SECRET if set, else the Vault-stored
+  // secret (verified via the service-role-only verify_cron_secret RPC).
+  const provided = req.headers.get('x-cron-secret') ?? ''
+  if (CRON_SECRET) {
+    if (provided !== CRON_SECRET) return new Response('Forbidden', { status: 403 })
+  } else {
+    const { data: valid } = await supabase.rpc('verify_cron_secret', { p_secret: provided })
+    if (valid !== true) return new Response('Forbidden', { status: 403 })
+  }
 
   // Only labels whose contact_link is an actual URL (skip email routes).
   const { data: labels, error } = await supabase

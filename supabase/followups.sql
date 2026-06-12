@@ -169,11 +169,45 @@ $$;
 
 -- ---------------------------------------------------------------------------
 -- Email digest: the daily-digest Edge Function composes & sends the digest.
--- APPLIED TO PRODUCTION (migration: schedule_digest_and_check_links_crons):
--- a random secret is stored in Vault as 'demotrack_cron_secret' and the cron
--- below posts it as the bearer. The same value must be set as the function's
--- DIGEST_CRON_SECRET secret (the function fails closed without a match).
---
+-- APPLIED TO PRODUCTION (migrations: schedule_digest_and_check_links_crons,
+-- cron_secret_verification_helpers): a random secret is stored in Vault as
+-- 'demotrack_cron_secret' and the cron below posts it as the bearer; the
+-- function verifies it via the service-role-only verify_cron_secret RPC, so
+-- no function env secret is required. Mail config (Resend) can live in Vault
+-- too: 'resend_api_key' / 'digest_from'.
+
+-- Service-role-only helpers the cron-triggered functions use to authenticate
+-- against Vault (and read mail config) without function env secrets.
+create or replace function public.verify_cron_secret(p_secret text)
+returns boolean
+language sql
+security definer
+set search_path = ''
+as $$
+  select p_secret is not null
+     and length(p_secret) > 0
+     and exists (
+       select 1 from vault.decrypted_secrets
+       where name = 'demotrack_cron_secret'
+         and decrypted_secret = p_secret
+     );
+$$;
+
+create or replace function public.get_vault_secret(p_name text)
+returns text
+language sql
+security definer
+set search_path = ''
+as $$
+  select decrypted_secret from vault.decrypted_secrets where name = p_name;
+$$;
+
+revoke execute on function public.verify_cron_secret(text) from public, anon, authenticated;
+revoke execute on function public.get_vault_secret(text) from public, anon, authenticated;
+grant execute on function public.verify_cron_secret(text) to service_role;
+grant execute on function public.get_vault_secret(text) to service_role;
+
+-- The production cron (project-specific, shown for reference):
 -- select cron.schedule(
 --   'demotrack_daily_digest', '5 8 * * *',
 --   $$ select net.http_post(

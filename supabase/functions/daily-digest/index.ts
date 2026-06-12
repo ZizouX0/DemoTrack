@@ -3,47 +3,71 @@
 // recent replies) and emails it. Runs server-side with the service role.
 //
 // Deploy:  supabase functions deploy daily-digest --no-verify-jwt
-// Secrets: supabase secrets set RESEND_API_KEY=re_...   DIGEST_FROM="DemoTrack <digest@yourdomain>"
-//          (optional) DIGEST_CRON_SECRET=<random>   # extra auth for the cron caller
+// Config:  RESEND_API_KEY + DIGEST_FROM as function secrets, OR stored in
+//          Vault as 'resend_api_key' / 'digest_from' (no redeploy needed).
 // Trigger: from pg_cron via pg_net (see supabase/followups.sql), or manually.
 //
-// Auth: not JWT-gated (cron has no user). Requires the Authorization bearer to
-// equal the service-role key or DIGEST_CRON_SECRET. Fails closed: if neither
-// secret is configured the endpoint refuses to run.
+// Auth: not JWT-gated (cron has no user). The Authorization bearer must equal
+// the service-role key, the DIGEST_CRON_SECRET function secret, or the
+// 'demotrack_cron_secret' Vault secret (checked via the service-role-only
+// verify_cron_secret RPC — this is what the pg_cron trigger uses). Fails
+// closed on any mismatch.
 
 import { createClient } from 'npm:@supabase/supabase-js@2'
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? ''
 const SERVICE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY') ?? ''
-const DIGEST_FROM = Deno.env.get('DIGEST_FROM') ?? 'DemoTrack <onboarding@resend.dev>'
+const DIGEST_FROM_DEFAULT = 'DemoTrack <onboarding@resend.dev>'
+const DIGEST_FROM = Deno.env.get('DIGEST_FROM') ?? ''
 const CRON_SECRET = Deno.env.get('DIGEST_CRON_SECRET') ?? ''
 
 const json = (b: unknown, status = 200) =>
   new Response(JSON.stringify(b), { status, headers: { 'Content-Type': 'application/json' } })
 
-function authorized(req: Request): boolean {
+async function authorized(req: Request, supabase: ReturnType<typeof createClient>): Promise<boolean> {
   const bearer = (req.headers.get('Authorization') ?? '').replace(/^Bearer\s+/i, '')
-  if (!SERVICE_KEY && !CRON_SECRET) return false // fail closed: nothing to check against
-  return (SERVICE_KEY !== '' && bearer === SERVICE_KEY) || (CRON_SECRET !== '' && bearer === CRON_SECRET)
+  if (!bearer) return false
+  if (SERVICE_KEY && bearer === SERVICE_KEY) return true
+  if (CRON_SECRET && bearer === CRON_SECRET) return true
+  // Vault-stored cron secret — the pg_cron trigger sends this one.
+  const { data } = await supabase.rpc('verify_cron_secret', { p_secret: bearer })
+  return data === true
 }
 
-async function sendEmail(to: string, subject: string, text: string): Promise<boolean> {
-  if (!RESEND_API_KEY) return false
+// Mail config: env secrets win; otherwise fall back to Vault so the key can be
+// added with plain SQL and no function redeploy.
+async function mailConfig(supabase: ReturnType<typeof createClient>): Promise<{ key: string; from: string }> {
+  let key = RESEND_API_KEY
+  let from = DIGEST_FROM
+  if (!key) {
+    const { data } = await supabase.rpc('get_vault_secret', { p_name: 'resend_api_key' })
+    key = (data as string | null) ?? ''
+  }
+  if (!from) {
+    const { data } = await supabase.rpc('get_vault_secret', { p_name: 'digest_from' })
+    from = (data as string | null) ?? DIGEST_FROM_DEFAULT
+  }
+  return { key, from }
+}
+
+async function sendEmail(cfg: { key: string; from: string }, to: string, subject: string, text: string): Promise<boolean> {
+  if (!cfg.key) return false
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',
-    headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ from: DIGEST_FROM, to, subject, text }),
+    headers: { Authorization: `Bearer ${cfg.key}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ from: cfg.from, to, subject, text }),
   })
   return r.ok
 }
 
 Deno.serve(async (req: Request) => {
   if (req.method !== 'POST') return json({ error: 'Use POST' }, 405)
-  if (!authorized(req)) return json({ error: 'Unauthorized' }, 401)
   if (!SUPABASE_URL || !SERVICE_KEY) return json({ error: 'SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY not set' }, 500)
 
   const supabase = createClient(SUPABASE_URL, SERVICE_KEY, { auth: { persistSession: false } })
+  if (!(await authorized(req, supabase))) return json({ error: 'Unauthorized' }, 401)
+
   const nowIso = new Date().toISOString()
 
   // Optional: scope to a single user (manual test) via body { user_id }.
@@ -70,6 +94,8 @@ Deno.serve(async (req: Request) => {
     byUser.set(s.user_id, bucket)
   }
 
+  const cfg = await mailConfig(supabase)
+
   const results: Array<Record<string, unknown>> = []
   for (const [userId, b] of byUser) {
     // recent replies (last 7 days) for a little positive signal
@@ -91,7 +117,7 @@ Deno.serve(async (req: Request) => {
     try {
       const { data: u } = await supabase.auth.admin.getUserById(userId)
       const to = u?.user?.email
-      if (to) emailed = await sendEmail(to, subject, body)
+      if (to) emailed = await sendEmail(cfg, to, subject, body)
     } catch { /* ignore email lookup/send errors per-user */ }
 
     await supabase.from('notifications').insert({
