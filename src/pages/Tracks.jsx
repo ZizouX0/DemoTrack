@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
+import { GENRE_OPTIONS } from '../lib/genres'
+import { NOTE_SUGGESTIONS } from '../lib/noteSuggestions'
 import Modal from '../components/Modal'
 import Field, { inputCls, selectCls } from '../components/Field'
 import Badge, { trackStatusVariant } from '../components/Badge'
@@ -21,7 +23,7 @@ const RESPONSE_TYPE_LABELS = {
 
 const EMPTY_FORM = {
   title: '',
-  genre_tags: '',
+  genre_tags: [],   // now an array
   bpm: '',
   musical_key: '',
   status: 'idea',
@@ -31,24 +33,13 @@ const EMPTY_FORM = {
 }
 
 /* ── helpers ────────────────────────────────────────────────── */
-function parseTags(raw) {
-  return raw
-    .split(',')
-    .map((t) => t.trim())
-    .filter(Boolean)
-}
-
-function tagsToString(arr) {
-  return Array.isArray(arr) ? arr.join(', ') : ''
-}
-
 function formToRow(form, userId) {
   return {
     user_id: userId,
     title: form.title.trim(),
-    genre_tags: parseTags(form.genre_tags),
-    bpm: form.bpm ? parseInt(form.bpm, 10) : null,
-    musical_key: form.musical_key.trim() || null,
+    genre_tags: form.genre_tags,          // already an array
+    bpm: form.bpm !== '' && form.bpm !== null ? parseInt(form.bpm, 10) : null,
+    musical_key: (form.musical_key ?? '').trim() || null,
     status: form.status,
     listen_link: form.listen_link.trim() || null,
     link_type: form.listen_link.trim() ? form.link_type : null,
@@ -92,14 +83,260 @@ function submissionStatusVariant(status) {
   )
 }
 
+/* ── OptionalFieldToggle ────────────────────────────────────── */
+/**
+ * Renders a pill toggle. When `shown` is false, shows a "+  Add {label}" pill.
+ * When `shown` is true, renders the children (the actual input) plus a small
+ * "×  Remove" link to hide/clear the field.
+ */
+function OptionalField({ label, shown, onShow, onHide, children }) {
+  if (!shown) {
+    return (
+      <button
+        type="button"
+        onClick={onShow}
+        className="inline-flex items-center gap-1 rounded-full border border-dashed border-line px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-wider text-muted transition-colors hover:border-accent/50 hover:text-accent"
+      >
+        <IconPlus className="size-3" />
+        Add {label}
+      </button>
+    )
+  }
+
+  return (
+    <div className="space-y-1">
+      <div className="flex items-center justify-between">
+        <span className="block text-xs font-medium uppercase tracking-wider text-muted">
+          {label}
+        </span>
+        <button
+          type="button"
+          onClick={onHide}
+          className="text-[0.6rem] font-semibold uppercase tracking-wider text-muted/60 transition-colors hover:text-danger"
+          aria-label={`Remove ${label}`}
+        >
+          Remove
+        </button>
+      </div>
+      {children}
+    </div>
+  )
+}
+
+/* ── GenreChipPicker ────────────────────────────────────────── */
+function GenreChipPicker({ value, onChange }) {
+  // value is string[], onChange(newArray)
+  const [customInput, setCustomInput] = useState('')
+  const [showCustom, setShowCustom] = useState(false)
+
+  // Custom tags: ones in value not in GENRE_OPTIONS
+  const customTags = value.filter((t) => !GENRE_OPTIONS.includes(t))
+
+  function toggleGenre(genre) {
+    if (value.includes(genre)) {
+      onChange(value.filter((t) => t !== genre))
+    } else {
+      onChange([...value, genre])
+    }
+  }
+
+  function addCustom() {
+    const trimmed = customInput.trim()
+    if (!trimmed || value.includes(trimmed)) {
+      setCustomInput('')
+      setShowCustom(false)
+      return
+    }
+    onChange([...value, trimmed])
+    setCustomInput('')
+    setShowCustom(false)
+  }
+
+  function removeCustom(tag) {
+    onChange(value.filter((t) => t !== tag))
+  }
+
+  function handleCustomKeyDown(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      addCustom()
+    } else if (e.key === 'Escape') {
+      setCustomInput('')
+      setShowCustom(false)
+    }
+  }
+
+  return (
+    <div className="space-y-2.5">
+      {/* Canonical genre chips */}
+      <div
+        className="flex flex-wrap gap-1.5"
+        role="group"
+        aria-label="Genre tags"
+      >
+        {GENRE_OPTIONS.map((genre) => {
+          const selected = value.includes(genre)
+          return (
+            <button
+              key={genre}
+              type="button"
+              onClick={() => toggleGenre(genre)}
+              aria-pressed={selected}
+              className={[
+                'rounded-full border px-2.5 py-1 text-[0.65rem] font-semibold transition-colors',
+                selected
+                  ? 'border-accent bg-accent text-ink'
+                  : 'border-line bg-surface-2 text-muted hover:border-accent/50 hover:text-text',
+              ].join(' ')}
+            >
+              {genre}
+            </button>
+          )
+        })}
+      </div>
+
+      {/* Custom tags (any selected tags not in GENRE_OPTIONS) */}
+      {customTags.length > 0 && (
+        <div className="flex flex-wrap gap-1.5" aria-label="Custom tags">
+          {customTags.map((tag) => (
+            <span
+              key={tag}
+              className="inline-flex items-center gap-1 rounded-full border border-accent bg-accent text-ink px-2.5 py-1 text-[0.65rem] font-semibold"
+            >
+              {tag}
+              <button
+                type="button"
+                onClick={() => removeCustom(tag)}
+                aria-label={`Remove ${tag}`}
+                className="rounded-full hover:opacity-70 transition-opacity"
+              >
+                <IconX className="size-3" />
+              </button>
+            </span>
+          ))}
+        </div>
+      )}
+
+      {/* Add custom affordance */}
+      {showCustom ? (
+        <div className="flex items-center gap-1.5">
+          <input
+            type="text"
+            autoFocus
+            value={customInput}
+            onChange={(e) => setCustomInput(e.target.value)}
+            onKeyDown={handleCustomKeyDown}
+            placeholder="e.g. Hard Techno"
+            className="flex-1 rounded-lg border border-line bg-surface-2 px-2.5 py-1.5 text-xs text-text outline-none placeholder:text-muted/60 focus:border-accent transition-colors"
+            aria-label="Custom genre tag"
+          />
+          <button
+            type="button"
+            onClick={addCustom}
+            className="rounded-lg bg-accent px-2.5 py-1.5 text-xs font-semibold text-ink transition-opacity hover:opacity-90"
+          >
+            Add
+          </button>
+          <button
+            type="button"
+            onClick={() => { setCustomInput(''); setShowCustom(false) }}
+            className="rounded-lg border border-line px-2.5 py-1.5 text-xs text-muted transition-colors hover:text-text"
+          >
+            Cancel
+          </button>
+        </div>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setShowCustom(true)}
+          className="inline-flex items-center gap-1 text-[0.65rem] font-semibold uppercase tracking-wider text-muted/70 transition-colors hover:text-accent"
+        >
+          <IconPlus className="size-3" />
+          Add custom
+        </button>
+      )}
+    </div>
+  )
+}
+
+/* ── NoteSuggestions ────────────────────────────────────────── */
+function NoteSuggestions({ onAppend }) {
+  return (
+    <div className="space-y-2.5 rounded-lg border border-line/60 bg-surface-2/50 px-3 py-2.5">
+      <p className="text-[0.6rem] font-semibold uppercase tracking-wider text-muted/70">
+        Quick-add to notes
+      </p>
+      {NOTE_SUGGESTIONS.map(({ group, items }) => (
+        <div key={group} className="space-y-1.5">
+          <p className="text-[0.6rem] font-semibold uppercase tracking-wider text-muted/50">
+            {group}
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {items.map((item) => (
+              <button
+                key={item}
+                type="button"
+                onClick={() => onAppend(item)}
+                title={item}
+                className="rounded-full border border-line bg-surface-2 px-2.5 py-1 text-[0.65rem] text-muted transition-colors hover:border-accent/40 hover:bg-accent/10 hover:text-accent"
+              >
+                {item.length > 32 ? item.slice(0, 30) + '…' : item}
+              </button>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
 /* ── Track form modal ───────────────────────────────────────── */
 function TrackForm({ initial, onSave, onCancel, saving, error }) {
-  const [form, setForm] = useState(
-    initial ?? EMPTY_FORM
-  )
+  // Normalise initial to the new form shape
+  function normaliseInitial(raw) {
+    if (!raw) return EMPTY_FORM
+    return {
+      ...EMPTY_FORM,
+      ...raw,
+      // genre_tags must always be an array (DB gives array, legacy string → wrap)
+      genre_tags: Array.isArray(raw.genre_tags)
+        ? raw.genre_tags
+        : typeof raw.genre_tags === 'string' && raw.genre_tags.trim()
+          ? raw.genre_tags.split(',').map((t) => t.trim()).filter(Boolean)
+          : [],
+      bpm: raw.bpm ?? '',
+      musical_key: raw.musical_key ?? '',
+    }
+  }
+
+  const [form, setForm] = useState(() => normaliseInitial(initial))
+
+  // Optional-field toggles — start ON if the track already has a value
+  const [showBpm, setShowBpm] = useState(() => {
+    const init = normaliseInitial(initial)
+    return init.bpm !== '' && init.bpm !== null && init.bpm !== undefined
+  })
+  const [showKey, setShowKey] = useState(() => {
+    const init = normaliseInitial(initial)
+    return !!(init.musical_key && init.musical_key.trim())
+  })
 
   function set(field, value) {
     setForm((f) => ({ ...f, [field]: value }))
+  }
+
+  function hideBpm() {
+    setShowBpm(false)
+    set('bpm', '')
+  }
+
+  function hideKey() {
+    setShowKey(false)
+    set('musical_key', '')
+  }
+
+  function appendNote(text) {
+    set('notes', form.notes.trim() ? form.notes.trim() + '\n' + text : text)
   }
 
   function handleSubmit(e) {
@@ -122,41 +359,61 @@ function TrackForm({ initial, onSave, onCancel, saving, error }) {
         />
       </Field>
 
-      <div className="grid grid-cols-2 gap-3">
-        <Field id="track-bpm" label="BPM">
-          <input
-            id="track-bpm"
-            type="number"
-            min={60}
-            max={220}
-            className={inputCls}
-            value={form.bpm}
-            onChange={(e) => set('bpm', e.target.value)}
-            placeholder="128"
-          />
-        </Field>
-        <Field id="track-key" label="Key">
-          <input
-            id="track-key"
-            type="text"
-            className={inputCls}
-            value={form.musical_key}
-            onChange={(e) => set('musical_key', e.target.value)}
-            placeholder="Am"
-          />
-        </Field>
+      {/* BPM + Key as optional toggles */}
+      <div className="flex flex-wrap gap-3">
+        {/* BPM */}
+        <div className={showBpm ? 'flex-1 min-w-[100px]' : ''}>
+          <OptionalField
+            label="BPM"
+            shown={showBpm}
+            onShow={() => setShowBpm(true)}
+            onHide={hideBpm}
+          >
+            <input
+              id="track-bpm"
+              type="number"
+              min={60}
+              max={220}
+              className={inputCls}
+              value={form.bpm}
+              onChange={(e) => set('bpm', e.target.value)}
+              placeholder="128"
+              aria-label="BPM"
+            />
+          </OptionalField>
+        </div>
+
+        {/* Key */}
+        <div className={showKey ? 'flex-1 min-w-[100px]' : ''}>
+          <OptionalField
+            label="Key"
+            shown={showKey}
+            onShow={() => setShowKey(true)}
+            onHide={hideKey}
+          >
+            <input
+              id="track-key"
+              type="text"
+              className={inputCls}
+              value={form.musical_key}
+              onChange={(e) => set('musical_key', e.target.value)}
+              placeholder="Am"
+              aria-label="Key"
+            />
+          </OptionalField>
+        </div>
       </div>
 
-      <Field id="track-genre" label="Genre tags" hint="Comma-separated">
-        <input
-          id="track-genre"
-          type="text"
-          className={inputCls}
+      {/* Genre multi-select chips */}
+      <div className="space-y-1">
+        <p className="text-xs font-medium uppercase tracking-wider text-muted">
+          Genre tags
+        </p>
+        <GenreChipPicker
           value={form.genre_tags}
-          onChange={(e) => set('genre_tags', e.target.value)}
-          placeholder="tech house, minimal"
+          onChange={(tags) => set('genre_tags', tags)}
         />
-      </Field>
+      </div>
 
       <Field id="track-status" label="Status">
         <select
@@ -207,6 +464,9 @@ function TrackForm({ initial, onSave, onCancel, saving, error }) {
           onChange={(e) => set('notes', e.target.value)}
           placeholder="Vibe, reference, mixing notes…"
         />
+        <div className="mt-2">
+          <NoteSuggestions onAppend={appendNote} />
+        </div>
       </Field>
 
       {error && (
@@ -701,7 +961,8 @@ export default function Tracks() {
     setEditing({
       ...EMPTY_FORM,
       ...track,
-      genre_tags: tagsToString(track.genre_tags),
+      // Keep genre_tags as the DB array (TrackForm normalises further)
+      genre_tags: Array.isArray(track.genre_tags) ? track.genre_tags : [],
       bpm: track.bpm ?? '',
       musical_key: track.musical_key ?? '',
       listen_link: track.listen_link ?? '',
