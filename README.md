@@ -140,6 +140,33 @@ VITE_PRESS_BASE_URL=https://press.yourdomain  # optional (press kit)
 
 ---
 
+## Send demos from your own Gmail (1-click)
+
+When `VITE_GOOGLE_CLIENT_ID` is set, the Send Demo batch flow gains a **Gmail 1-click send** path: the app generates a personalised AI hook for every email-method target, lets you review and edit them, then sends all emails directly via the Gmail API — from your own address, so replies land in your inbox and deliverability is identical to sending manually.
+
+Without the variable the button is hidden and the existing `mailto:`/Gmail-compose behaviour is unchanged.
+
+### One-time setup
+
+1. **Create a Google Cloud project** at [console.cloud.google.com](https://console.cloud.google.com).
+2. **Enable the Gmail API**: APIs & Services → Enable APIs → search "Gmail API" → Enable.
+3. **Configure the OAuth consent screen** (APIs & Services → OAuth consent screen):
+   - User type: **External**
+   - Add yourself (your Gmail address) as a **test user** — required while the app is in testing mode.
+   - Add the scope **`https://www.googleapis.com/auth/gmail.send`** (only this scope; the app never reads mail).
+4. **Create an OAuth Client ID** (APIs & Services → Credentials → Create Credentials → OAuth client ID):
+   - Application type: **Web application**
+   - Authorised JavaScript origins: add `https://your-vercel-app.vercel.app` and `http://localhost:5173`.
+   - No redirect URI is needed (the token flow is fully client-side).
+   - Copy the **Client ID** (looks like `1234567890-abc….apps.googleusercontent.com`).
+5. **Set the variable**:
+   - Local: add `VITE_GOOGLE_CLIENT_ID=<your-client-id>` to `.env.local`.
+   - Production: add `VITE_GOOGLE_CLIENT_ID=<your-client-id>` to your Vercel project environment variables, then redeploy.
+
+> The app requests only the `gmail.send` scope. No mail is read, stored on any server, or routed through any relay. Google issues a short-lived access token (1 h) client-side; the token is never persisted to localStorage.
+
+---
+
 ## Data model — 12 tables (Supabase / PostgreSQL, RLS on every row)
 
 `contacts` · `tracks` · `submissions` · `feedback` · `templates` · `ar_intel` · `work_sessions` · `goals` · `link_events` · `press_kit` · `labels` (shared read-only master) · `notifications`. Plus Phase-11 `tracked_links` and the `follow_up_queue` / `contact_send_counts` / `submission_open_counts` views.

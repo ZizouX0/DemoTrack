@@ -7,6 +7,12 @@ import { freshnessStatus, FRESHNESS_META, needsRecheck } from '../lib/freshness'
 import Badge, { trackStatusVariant, tierVariant } from '../components/Badge'
 import Field, { inputCls, selectCls } from '../components/Field'
 import { buildPressKitUrl } from '../lib/pressKit'
+import {
+  isGmailConfigured,
+  isGmailConnected,
+  connectGmail,
+  sendGmail,
+} from '../lib/gmail'
 
 /* ── constants ─────────────────────────────────────────────── */
 const STATUS_LABELS = {
@@ -291,6 +297,51 @@ function targetKey(t) {
   return t?.id ?? `label-${t?.label_id}`
 }
 
+/* ── Derive canonical route category from a target ───────────── */
+// Returns 'email' | 'form' | 'dm' | 'none'
+function targetRouteKind(target) {
+  const m = target.submission_method
+  if (m === 'email' || target.email) return 'email'
+  if (m === 'form' || target.portal_url) return 'form'
+  if (m === 'dm' || target.dm_link) return 'dm'
+  return 'none'
+}
+
+function isTargetSelectable(target) {
+  return targetRouteKind(target) !== 'none'
+}
+
+/* ── Small method badge shown on each target row ─────────────── */
+function MethodBadge({ target }) {
+  const kind = targetRouteKind(target)
+  if (kind === 'email') {
+    return (
+      <span className="inline-flex items-center gap-1 rounded-full border border-ok/30 bg-ok/10 px-2 py-0.5 text-[0.6rem] font-semibold text-ok">
+        <span aria-hidden="true">✉</span> Email
+      </span>
+    )
+  }
+  if (kind === 'form') {
+    return (
+      <span className="inline-flex items-center gap-1 rounded-full border border-info/30 bg-surface-2 px-2 py-0.5 text-[0.6rem] font-semibold text-text">
+        <span aria-hidden="true">🔗</span> Form
+      </span>
+    )
+  }
+  if (kind === 'dm') {
+    return (
+      <span className="inline-flex items-center gap-1 rounded-full border border-accent/30 bg-accent/10 px-2 py-0.5 text-[0.6rem] font-semibold text-accent">
+        <span aria-hidden="true">💬</span> DM
+      </span>
+    )
+  }
+  return (
+    <span className="inline-flex items-center gap-1 rounded-full border border-line bg-surface-2 px-2 py-0.5 text-[0.6rem] font-semibold text-muted/70">
+      <span aria-hidden="true">—</span> No public route
+    </span>
+  )
+}
+
 /* ── Step 2: pick a target (contacts + all labels) ──────────── */
 function PickTarget({ targets, labelsLoading, selected, onSelect, multi = false, selectedKeys, onToggle, onProceed }) {
   const [search, setSearch] = useState('')
@@ -311,6 +362,9 @@ function PickTarget({ targets, labelsLoading, selected, onSelect, multi = false,
     return [...tags].sort((a, b) => norm(a).localeCompare(norm(b)))
   }, [targets])
 
+  // 'all' | 'email' | 'portal' (form+dm)
+  const [routeFilter, setRouteFilter] = useState('all')
+
   const filtered = useMemo(() => {
     const q = norm(search)
 
@@ -324,11 +378,23 @@ function PickTarget({ targets, labelsLoading, selected, onSelect, multi = false,
       if (accessFilter && (t.access_path ?? t._access_path) !== accessFilter) return false
       if (methodFilter && t.submission_method !== methodFilter) return false
       if (genreFilter && !(t._genres ?? []).includes(genreFilter)) return false
+      // Route kind filter: 'email' or 'portal' (form+dm)
+      if (routeFilter === 'email' && targetRouteKind(t) !== 'email') return false
+      if (routeFilter === 'portal') {
+        const k = targetRouteKind(t)
+        if (k !== 'form' && k !== 'dm') return false
+      }
       return true
     })
-  }, [targets, search, tierFilter, accessFilter, methodFilter, genreFilter])
+  }, [targets, search, tierFilter, accessFilter, methodFilter, genreFilter, routeFilter])
 
-  const hasActiveFilters = search || tierFilter || accessFilter || methodFilter || genreFilter
+  // Selectable = visible + has a route
+  const selectableFiltered = useMemo(
+    () => filtered.filter(isTargetSelectable),
+    [filtered]
+  )
+
+  const hasActiveFilters = search || tierFilter || accessFilter || methodFilter || genreFilter || routeFilter !== 'all'
 
   function clearFilters() {
     setSearch('')
@@ -336,8 +402,31 @@ function PickTarget({ targets, labelsLoading, selected, onSelect, multi = false,
     setAccessFilter('')
     setMethodFilter('')
     setGenreFilter('')
+    setRouteFilter('all')
     searchRef.current?.focus()
   }
+
+  function handleSelectAll() {
+    if (!onToggle || !selectedKeys) return
+    for (const t of selectableFiltered) {
+      if (!selectedKeys.has(targetKey(t))) {
+        onToggle(t)
+      }
+    }
+  }
+
+  function handleClearAll() {
+    if (!onToggle || !selectedKeys) return
+    for (const t of selectableFiltered) {
+      if (selectedKeys.has(targetKey(t))) {
+        onToggle(t)
+      }
+    }
+  }
+
+  const allVisibleSelected =
+    selectableFiltered.length > 0 &&
+    selectableFiltered.every((t) => selectedKeys?.has(targetKey(t)))
 
   return (
     <div className="space-y-3">
@@ -355,6 +444,30 @@ function PickTarget({ targets, labelsLoading, selected, onSelect, multi = false,
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+      </div>
+
+      {/* Route kind pills — All / Email / Portal */}
+      <div className="flex gap-1.5" role="group" aria-label="Filter by submission route">
+        {[
+          { val: 'all', label: 'All' },
+          { val: 'email', label: '✉ Email' },
+          { val: 'portal', label: '🔗 Portal' },
+        ].map(({ val, label }) => (
+          <button
+            key={val}
+            type="button"
+            onClick={() => setRouteFilter(val)}
+            aria-pressed={routeFilter === val}
+            className={[
+              'rounded-full border px-3 py-1 text-[0.65rem] font-semibold transition-colors',
+              routeFilter === val
+                ? 'border-accent/50 bg-accent/15 text-accent'
+                : 'border-line bg-surface-2 text-muted hover:border-accent/30 hover:text-text',
+            ].join(' ')}
+          >
+            {label}
+          </button>
+        ))}
       </div>
 
       {/* Filters */}
@@ -427,24 +540,48 @@ function PickTarget({ targets, labelsLoading, selected, onSelect, multi = false,
         </div>
       </div>
 
-      {/* Count + clear */}
-      <div className="flex items-center justify-between min-h-[1.25rem]">
+      {/* Count + Select-All/Clear + Clear-filters */}
+      <div className="flex items-center justify-between gap-2 min-h-[1.5rem]">
         {!labelsLoading && (
-          <p className="text-[0.65rem] text-muted">
+          <p className="text-[0.65rem] text-muted shrink-0">
             {filtered.length === targets.length
               ? `${targets.length} targets`
               : `${filtered.length} of ${targets.length}`}
+            {multi && selectedKeys && selectedKeys.size > 0 && (
+              <span className="ml-1 text-accent font-semibold">· {selectedKeys.size} selected</span>
+            )}
           </p>
         )}
-        {hasActiveFilters && (
-          <button
-            type="button"
-            onClick={clearFilters}
-            className="ml-auto text-[0.65rem] font-semibold uppercase tracking-wider text-muted/70 hover:text-muted transition-colors"
-          >
-            Clear filters
-          </button>
-        )}
+        <div className="flex items-center gap-2 ml-auto">
+          {multi && selectableFiltered.length > 0 && (
+            allVisibleSelected ? (
+              <button
+                type="button"
+                onClick={handleClearAll}
+                className="text-[0.65rem] font-semibold uppercase tracking-wider text-accent hover:text-accent/80 transition-colors"
+              >
+                Clear visible
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={handleSelectAll}
+                className="text-[0.65rem] font-semibold uppercase tracking-wider text-accent hover:text-accent/80 transition-colors"
+              >
+                Select all ({selectableFiltered.length})
+              </button>
+            )
+          )}
+          {hasActiveFilters && (
+            <button
+              type="button"
+              onClick={clearFilters}
+              className="text-[0.65rem] font-semibold uppercase tracking-wider text-muted/70 hover:text-muted transition-colors"
+            >
+              Clear filters
+            </button>
+          )}
+        </div>
       </div>
 
       {labelsLoading && (
@@ -477,6 +614,7 @@ function PickTarget({ targets, labelsLoading, selected, onSelect, multi = false,
       {!labelsLoading && filtered.length > 0 && (
         <div className="space-y-1.5 max-h-[60vh] overflow-y-auto pr-0.5" role="listbox" aria-label="Pick a target">
           {filtered.map((target) => {
+            const selectable = isTargetSelectable(target)
             const isSelected = multi
               ? Boolean(selectedKeys?.has(targetKey(target)))
               : selected
@@ -487,11 +625,12 @@ function PickTarget({ targets, labelsLoading, selected, onSelect, multi = false,
             const isInCRM = Boolean(target.id)
             const tier = target._tier
             const access = target.access_path ?? target._access_path
-            const method = target.submission_method
             // Freshness only applies to curated-master labels (have label_id),
             // not your own manually-added contacts.
             const freshStatus = freshnessStatus(target)
             const showFreshWarn = Boolean(target.label_id) && needsRecheck(freshStatus)
+            // In multi-mode, non-selectable targets are visually dimmed and not clickable
+            const disabled = multi && !selectable
 
             return (
               <button
@@ -499,12 +638,20 @@ function PickTarget({ targets, labelsLoading, selected, onSelect, multi = false,
                 type="button"
                 role="option"
                 aria-selected={isSelected}
-                onClick={() => (multi ? onToggle(target) : onSelect(target))}
+                aria-disabled={disabled}
+                disabled={disabled}
+                onClick={() => {
+                  if (disabled) return
+                  if (multi) onToggle(target)
+                  else onSelect(target)
+                }}
                 className={[
                   'w-full rounded-lg border p-3 text-left transition-colors',
-                  isSelected
-                    ? 'border-accent/50 bg-accent/10'
-                    : 'border-line bg-surface hover:border-line/60 hover:bg-surface-2',
+                  disabled
+                    ? 'border-line/40 bg-surface/50 opacity-50 cursor-not-allowed'
+                    : isSelected
+                      ? 'border-accent/50 bg-accent/10'
+                      : 'border-line bg-surface hover:border-line/60 hover:bg-surface-2',
                 ].join(' ')}
               >
                 <div className="flex items-start justify-between gap-2">
@@ -514,7 +661,11 @@ function PickTarget({ targets, labelsLoading, selected, onSelect, multi = false,
                         aria-hidden="true"
                         className={[
                           'flex size-4 shrink-0 items-center justify-center rounded border',
-                          isSelected ? 'border-accent bg-accent text-ink' : 'border-line bg-surface-2',
+                          disabled
+                            ? 'border-line/40 bg-surface/30'
+                            : isSelected
+                              ? 'border-accent bg-accent text-ink'
+                              : 'border-line bg-surface-2',
                         ].join(' ')}
                       >
                         {isSelected && <IconCheck className="size-3" />}
@@ -522,9 +673,10 @@ function PickTarget({ targets, labelsLoading, selected, onSelect, multi = false,
                     )}
                     <span className="truncate font-display font-bold text-sm leading-snug">{target.name}</span>
                   </span>
-                  {isInCRM && (
-                    <Badge variant="ok">In CRM</Badge>
-                  )}
+                  <span className="flex shrink-0 items-center gap-1.5">
+                    <MethodBadge target={target} />
+                    {isInCRM && <Badge variant="ok">In CRM</Badge>}
+                  </span>
                 </div>
                 <div className="mt-1.5 flex flex-wrap gap-1">
                   {tier && (
@@ -535,11 +687,6 @@ function PickTarget({ targets, labelsLoading, selected, onSelect, multi = false,
                   {access && (
                     <Badge variant="muted">
                       {ACCESS_LABELS[access] ?? access}
-                    </Badge>
-                  )}
-                  {method && (
-                    <Badge variant="muted">
-                      {method}
                     </Badge>
                   )}
                   {showFreshWarn && (
@@ -1577,6 +1724,438 @@ function BatchSummary({ track, results, onReset }) {
   )
 }
 
+/* ── Gmail 1-click batch send panel ────────────────────────── */
+// Only rendered when isGmailConfigured() AND the batch has email-method targets.
+// Handles: connect → generate hooks → send all, with per-target status.
+function GmailBatchPanel({
+  track,
+  emailTargets,    // subset of batchSelected that have .email
+  allTargets,      // full batchSelected (so we can report manual targets too)
+  pressKit,
+  artistName,
+  templates,
+  selectedTemplateId,
+  recordSend,      // shared async fn(target, trackingHash) from parent
+  onAutoSendComplete,  // called with { results } when the automated pass finishes
+}) {
+  const [gmailConnected, setGmailConnected] = useState(isGmailConnected())
+  const [connecting, setConnecting] = useState(false)
+  const [connectError, setConnectError] = useState(null)
+
+  // Per-target hook state: Map<key, string>
+  const [hooks, setHooks] = useState(() => {
+    const m = {}
+    for (const t of emailTargets) m[targetKey(t)] = ''
+    return m
+  })
+  const [hookPhase, setHookPhase] = useState('idle') // 'idle' | 'generating' | 'done'
+  const [hookProgress, setHookProgress] = useState(0) // index being generated
+
+  // Per-target send status: Map<key, 'queued'|'sending'|'sent'|'failed'>
+  const [sendStatus, setSendStatus] = useState(() => {
+    const m = {}
+    for (const t of emailTargets) m[targetKey(t)] = 'queued'
+    return m
+  })
+  const [sendPhase, setSendPhase] = useState('idle') // 'idle' | 'sending' | 'done'
+  const [sendProgress, setSendProgress] = useState(0)
+  const [sendErrors, setSendErrors] = useState({}) // key → error message
+
+  const selectedTemplate = templates.find((t) => t.id === selectedTemplateId) ?? null
+
+  async function handleConnectGmail() {
+    setConnecting(true)
+    setConnectError(null)
+    try {
+      await connectGmail()
+      setGmailConnected(true)
+    } catch (err) {
+      setConnectError(err.message ?? 'Could not connect Gmail.')
+    }
+    setConnecting(false)
+  }
+
+  async function handleGenerateHooks() {
+    setHookPhase('generating')
+    for (let i = 0; i < emailTargets.length; i++) {
+      setHookProgress(i)
+      const target = emailTargets[i]
+      const key = targetKey(target)
+      try {
+        const recentHooks = getRecentHooks()
+        const { data, error: fnErr } = await supabase.functions.invoke('suggest-hook', {
+          body: {
+            track: {
+              title: track.title,
+              genre_tags: track.genre_tags ?? [],
+              bpm: track.bpm,
+              key: track.musical_key,
+            },
+            label: {
+              name: target.name,
+              why: target._why ?? '',
+              requirements: target.notes ?? '',
+            },
+            ar_intel: '',
+            artist_name: artistName,
+            recent_hooks: recentHooks,
+          },
+        })
+        if (fnErr) throw new Error(fnErr.message ?? 'Edge function error')
+        const suggested = (data?.hook ?? '').trim()
+        if (!suggested) throw new Error('No hook returned')
+        setHooks((prev) => ({ ...prev, [key]: suggested }))
+      } catch {
+        // On failure: leave hook blank — user can type manually
+        setHooks((prev) => ({ ...prev, [key]: prev[key] ?? '' }))
+      }
+    }
+    setHookPhase('done')
+  }
+
+  function updateHook(target, value) {
+    setHooks((prev) => ({ ...prev, [targetKey(target)]: value }))
+  }
+
+  async function handleSendAll() {
+    setSendPhase('sending')
+    const results = []
+    const manualTargets = allTargets.filter((t) => targetRouteKind(t) !== 'email' || !t.email)
+
+    for (let i = 0; i < emailTargets.length; i++) {
+      setSendProgress(i)
+      const target = emailTargets[i]
+      const key = targetKey(target)
+      setSendStatus((prev) => ({ ...prev, [key]: 'sending' }))
+
+      const hook = hooks[key] ?? ''
+      const mergeCtx = { track, contact: target, pressKit: pressKit ?? null, artistName, hook }
+      const subject = fillMergeFields(selectedTemplate?.subject ?? '', mergeCtx)
+      const body = selectedTemplate
+        ? stripSubjectLine(fillMergeFields(selectedTemplate.body ?? '', mergeCtx))
+        : ''
+
+      try {
+        await sendGmail({ to: target.email, subject, body })
+        await recordSend(target, null)
+        pushRecentHook(hook.trim())
+        setSendStatus((prev) => ({ ...prev, [key]: 'sent' }))
+        results.push({ name: target.name, method: 'email', status: 'sent', via: 'gmail' })
+      } catch (err) {
+        setSendStatus((prev) => ({ ...prev, [key]: 'failed' }))
+        setSendErrors((prev) => ({ ...prev, [key]: err.message ?? 'Send failed' }))
+        results.push({ name: target.name, method: 'email', status: 'failed', via: 'gmail' })
+      }
+    }
+
+    // Mark manual targets as needing manual send (caller will handle them)
+    for (const t of manualTargets) {
+      results.push({ name: t.name, method: targetRouteKind(t), status: 'manual' })
+    }
+
+    setSendProgress(emailTargets.length)
+    setSendPhase('done')
+    onAutoSendComplete(results)
+  }
+
+  async function handleRetryFailed() {
+    const failedTargets = emailTargets.filter(
+      (t) => sendStatus[targetKey(t)] === 'failed'
+    )
+    for (const target of failedTargets) {
+      const key = targetKey(target)
+      setSendStatus((prev) => ({ ...prev, [key]: 'sending' }))
+      setSendErrors((prev) => { const n = { ...prev }; delete n[key]; return n })
+
+      const hook = hooks[key] ?? ''
+      const mergeCtx = { track, contact: target, pressKit: pressKit ?? null, artistName, hook }
+      const subject = fillMergeFields(selectedTemplate?.subject ?? '', mergeCtx)
+      const body = selectedTemplate
+        ? stripSubjectLine(fillMergeFields(selectedTemplate.body ?? '', mergeCtx))
+        : ''
+
+      try {
+        await sendGmail({ to: target.email, subject, body })
+        await recordSend(target, null)
+        pushRecentHook(hook.trim())
+        setSendStatus((prev) => ({ ...prev, [key]: 'sent' }))
+      } catch (err) {
+        setSendStatus((prev) => ({ ...prev, [key]: 'failed' }))
+        setSendErrors((prev) => ({ ...prev, [key]: err.message ?? 'Send failed' }))
+      }
+    }
+  }
+
+  const allSent = emailTargets.every((t) => sendStatus[targetKey(t)] === 'sent')
+  const anyFailed = emailTargets.some((t) => sendStatus[targetKey(t)] === 'failed')
+  const sentCount = emailTargets.filter((t) => sendStatus[targetKey(t)] === 'sent').length
+  const failedCount = emailTargets.filter((t) => sendStatus[targetKey(t)] === 'failed').length
+  const hooksReady = emailTargets.every((t) => (hooks[targetKey(t)] ?? '').trim().length > 0)
+
+  const manualCount = allTargets.filter((t) => targetRouteKind(t) !== 'email' || !t.email).length
+
+  return (
+    <div className="space-y-4 rounded-card border border-accent/30 bg-accent/5 p-4">
+      <div className="flex items-center gap-2">
+        <span className="flex size-6 items-center justify-center rounded-full bg-accent/20 text-accent">
+          <IconGmail className="size-3.5" />
+        </span>
+        <p className="text-xs font-semibold uppercase tracking-wider text-accent">
+          Gmail 1-click send
+        </p>
+        {gmailConnected && (
+          <Badge variant="ok">Connected</Badge>
+        )}
+      </div>
+
+      {manualCount > 0 && (
+        <div className="rounded-lg border border-line bg-surface-2 px-3 py-2 text-[0.65rem] text-muted">
+          <span className="font-semibold text-text">{manualCount} target{manualCount !== 1 ? 's' : ''}</span>{' '}
+          (Form/DM or no email) will remain in the manual queue below after auto-send.
+        </div>
+      )}
+
+      {/* Step 1: Connect Gmail */}
+      {!gmailConnected && (
+        <div className="space-y-2">
+          <p className="text-xs text-muted">
+            Connect your Gmail to send {emailTargets.length} email{emailTargets.length !== 1 ? 's' : ''} automatically — demos will come from your own address.
+          </p>
+          <button
+            type="button"
+            disabled={connecting}
+            onClick={handleConnectGmail}
+            className="flex items-center gap-2 rounded-lg border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition-colors hover:bg-accent/20 disabled:opacity-50"
+          >
+            {connecting ? (
+              <><IconSpinner className="size-4 animate-spin" /> Connecting…</>
+            ) : (
+              <><IconGmail className="size-4" /> Connect Gmail</>
+            )}
+          </button>
+          {connectError && (
+            <p className="text-xs text-danger">{connectError}</p>
+          )}
+        </div>
+      )}
+
+      {/* Step 2: Generate hooks */}
+      {gmailConnected && sendPhase === 'idle' && (
+        <div className="space-y-3">
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-xs text-muted">
+              {hookPhase === 'idle'
+                ? `Generate a personalised hook for each of the ${emailTargets.length} email target${emailTargets.length !== 1 ? 's' : ''}, then review before sending.`
+                : hookPhase === 'generating'
+                  ? `Writing hook ${hookProgress + 1} of ${emailTargets.length}…`
+                  : 'Hooks ready — review and edit below, then send all.'}
+            </p>
+            {hookPhase === 'idle' && (
+              <button
+                type="button"
+                onClick={handleGenerateHooks}
+                className="flex shrink-0 items-center gap-1.5 rounded-lg border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent transition-colors hover:bg-accent/20"
+              >
+                <IconSparkle className="size-3.5" />
+                Generate hooks for all
+              </button>
+            )}
+            {hookPhase === 'generating' && (
+              <div className="flex items-center gap-1.5 text-xs text-muted">
+                <IconSpinner className="size-3.5 animate-spin text-accent" />
+                {hookProgress + 1}/{emailTargets.length}
+              </div>
+            )}
+          </div>
+
+          {hookPhase !== 'idle' && (
+            <div className="h-1.5 w-full overflow-hidden rounded-full bg-surface-2">
+              <div
+                className="h-full rounded-full bg-accent transition-all duration-300"
+                style={{ width: `${Math.round((hookPhase === 'done' ? emailTargets.length : hookProgress) / emailTargets.length * 100)}%` }}
+              />
+            </div>
+          )}
+
+          {/* Editable hook list */}
+          {hookPhase !== 'idle' && (
+            <div className="space-y-2 max-h-[40vh] overflow-y-auto">
+              {emailTargets.map((target) => {
+                const key = targetKey(target)
+                return (
+                  <div key={key} className="rounded-lg border border-line bg-surface p-3 space-y-1.5">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-xs font-semibold text-text truncate">{target.name}</span>
+                      <span className="text-[0.6rem] text-muted shrink-0">{target.email}</span>
+                    </div>
+                    <textarea
+                      rows={2}
+                      aria-label={`Hook for ${target.name}`}
+                      className={`${inputCls} resize-none text-xs`}
+                      value={hooks[key] ?? ''}
+                      onChange={(e) => updateHook(target, e.target.value)}
+                      placeholder={hookPhase === 'generating' ? 'Generating…' : 'Type a hook or wait for AI…'}
+                    />
+                  </div>
+                )
+              })}
+            </div>
+          )}
+
+          {/* Send all button */}
+          {hookPhase === 'done' && (
+            <button
+              type="button"
+              disabled={!hooksReady}
+              title={!hooksReady ? 'Fill in all hooks first' : undefined}
+              onClick={handleSendAll}
+              className="w-full rounded-lg bg-accent py-2.5 text-sm font-semibold text-ink transition-opacity hover:opacity-90 disabled:opacity-40"
+            >
+              {!hooksReady ? 'Fill in all hooks first' : 'Send all via Gmail'}
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* Step 3: Sending progress */}
+      {sendPhase === 'sending' && (
+        <div className="space-y-3">
+          <div className="flex items-center gap-2 text-xs text-muted">
+            <IconSpinner className="size-3.5 animate-spin text-accent" />
+            Sending {sendProgress + 1} of {emailTargets.length}…
+          </div>
+          <div className="h-1.5 w-full overflow-hidden rounded-full bg-surface-2">
+            <div
+              className="h-full rounded-full bg-accent transition-all duration-300"
+              style={{ width: `${Math.round(sendProgress / emailTargets.length * 100)}%` }}
+            />
+          </div>
+          <div className="space-y-1">
+            {emailTargets.map((target) => {
+              const key = targetKey(target)
+              const st = sendStatus[key]
+              return (
+                <div key={key} className="flex items-center justify-between gap-2 text-xs py-0.5">
+                  <span className="truncate text-text">{target.name}</span>
+                  {st === 'queued' && <Badge variant="muted">Queued</Badge>}
+                  {st === 'sending' && (
+                    <span className="flex items-center gap-1 text-accent">
+                      <IconSpinner className="size-3 animate-spin" /> Sending
+                    </span>
+                  )}
+                  {st === 'sent' && <Badge variant="ok">Sent</Badge>}
+                  {st === 'failed' && <Badge variant="danger">Failed</Badge>}
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Step 4: Done summary */}
+      {sendPhase === 'done' && (
+        <div className="space-y-3">
+          <div className="flex items-center gap-2">
+            {allSent ? (
+              <Badge variant="ok">All sent</Badge>
+            ) : (
+              <Badge variant="warn">{sentCount} sent · {failedCount} failed</Badge>
+            )}
+          </div>
+          <div className="space-y-1">
+            {emailTargets.map((target) => {
+              const key = targetKey(target)
+              const st = sendStatus[key]
+              return (
+                <div key={key} className="space-y-0.5">
+                  <div className="flex items-center justify-between gap-2 text-xs">
+                    <span className="truncate text-text">{target.name}</span>
+                    {st === 'sent' && <Badge variant="ok">Sent</Badge>}
+                    {st === 'failed' && <Badge variant="danger">Failed</Badge>}
+                  </div>
+                  {st === 'failed' && sendErrors[key] && (
+                    <p className="text-[0.6rem] text-danger ml-0">{sendErrors[key]}</p>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+          {anyFailed && (
+            <button
+              type="button"
+              onClick={handleRetryFailed}
+              className="flex items-center gap-2 rounded-lg border border-danger/40 bg-danger/10 px-4 py-2 text-sm font-semibold text-danger transition-colors hover:bg-danger/20"
+            >
+              Retry failed
+            </button>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+
+/* ── Gmail batch summary (extends BatchSummary for auto-send) ── */
+function GmailBatchSummary({ track, autoResults, manualResults, onReset }) {
+  const allResults = [...autoResults, ...manualResults]
+  const sent = allResults.filter((r) => r.status === 'sent').length
+  const failed = allResults.filter((r) => r.status === 'failed').length
+  const manual = allResults.filter((r) => r.status === 'manual').length
+  const skipped = allResults.filter((r) => r.status === 'skipped').length
+
+  return (
+    <div className="space-y-4">
+      <div className="text-center">
+        <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-ok/15">
+          <IconCheck className="size-8 text-ok" />
+        </div>
+        <h2 className="mt-3 font-display text-xl font-extrabold">Batch complete</h2>
+        <p className="mt-1 text-sm text-muted">
+          <span className="text-text font-medium">{sent}</span> sent
+          {failed > 0 && <> · <span className="text-danger font-medium">{failed}</span> failed</>}
+          {manual > 0 && <> · <span className="text-text font-medium">{manual}</span> manual</>}
+          {skipped > 0 && <> · <span className="text-text font-medium">{skipped}</span> skipped</>}
+          {' '}· <span className="text-text font-medium">{track.title}</span>
+        </p>
+      </div>
+
+      <div className="rounded-card border border-line bg-surface divide-y divide-line/50">
+        {allResults.map((r, i) => (
+          <div key={i} className="flex items-center justify-between gap-2 px-4 py-2.5 text-sm">
+            <span className="truncate text-text">{r.name}</span>
+            <span className="flex items-center gap-2 shrink-0">
+              <span className="text-[0.65rem] uppercase tracking-wider text-muted">
+                {r.via === 'gmail' ? 'Gmail' : r.method}
+              </span>
+              {r.status === 'sent' && <Badge variant="ok">Sent</Badge>}
+              {r.status === 'failed' && <Badge variant="danger">Failed</Badge>}
+              {r.status === 'manual' && <Badge variant="info">Manual</Badge>}
+              {r.status === 'skipped' && <Badge variant="muted">Skipped</Badge>}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex flex-col gap-2 pt-1">
+        <button
+          type="button"
+          onClick={onReset}
+          className="w-full rounded-lg bg-accent py-2.5 text-sm font-semibold text-ink transition-opacity hover:opacity-90"
+        >
+          New send
+        </button>
+        <Link
+          to="/"
+          className="block w-full rounded-lg border border-line py-2.5 text-center text-sm text-muted transition-colors hover:border-text hover:text-text"
+        >
+          Back to home
+        </Link>
+      </div>
+    </div>
+  )
+}
+
 /* ── Main page ──────────────────────────────────────────────── */
 export default function SendDemo() {
   const { user } = useAuth()
@@ -1603,6 +2182,12 @@ export default function SendDemo() {
   const [batchSelected, setBatchSelected] = useState([]) // array of target objects
   const [batchIndex, setBatchIndex] = useState(0)
   const [batchResults, setBatchResults] = useState([])
+
+  // Gmail batch state — only used when isGmailConfigured() and batch has email targets
+  const [gmailBatchMode, setGmailBatchMode] = useState(false)
+  const [gmailBatchTemplates, setGmailBatchTemplates] = useState([])
+  const [gmailBatchTemplateId, setGmailBatchTemplateId] = useState(null)
+  const [gmailAutoResults, setGmailAutoResults] = useState([]) // results from auto-send
 
   const load = useCallback(async () => {
     setLoadingData(true)
@@ -1860,12 +2445,34 @@ export default function SendDemo() {
     )
   }
 
-  function startBatch() {
+  async function startBatch() {
     if (batchSelected.length === 0) return
     setBatchIndex(0)
     setBatchResults([])
     setPendingTrackingHash(null)
     setConfirmError(null)
+    setGmailAutoResults([])
+
+    // Determine if Gmail 1-click mode should be offered
+    const hasEmailTargets = batchSelected.some(
+      (t) => targetRouteKind(t) === 'email' && t.email
+    )
+    if (isGmailConfigured() && hasEmailTargets) {
+      // Load templates for the Gmail panel
+      const { data } = await supabase
+        .from('templates')
+        .select('id, name, kind, subject, body')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: true })
+      const rows = data ?? []
+      setGmailBatchTemplates(rows)
+      const auto = rows.find((t) => t.kind === 'cold_email') ?? rows[0]
+      setGmailBatchTemplateId(auto?.id ?? null)
+      setGmailBatchMode(true)
+    } else {
+      setGmailBatchMode(false)
+    }
+
     setStep(3)
   }
 
@@ -1926,6 +2533,10 @@ export default function SendDemo() {
     setBatchSelected([])
     setBatchIndex(0)
     setBatchResults([])
+    setGmailBatchMode(false)
+    setGmailBatchTemplates([])
+    setGmailBatchTemplateId(null)
+    setGmailAutoResults([])
     load()
   }
 
@@ -2006,7 +2617,10 @@ export default function SendDemo() {
               </div>
               {mode === 'batch' && (
                 <p className="px-0.5 text-[0.65rem] text-muted">
-                  Select several labels — you’ll write a tailored hook and send to each, one after another.
+                  Select several labels — you&apos;ll write a tailored hook and send to each, one after another.
+                  {isGmailConfigured() && (
+                    <span className="ml-1 text-accent font-semibold">Gmail 1-click send available for email targets.</span>
+                  )}
                 </p>
               )}
 
@@ -2040,8 +2654,72 @@ export default function SendDemo() {
             />
           )}
 
-          {/* Step 3 — batch queue */}
-          {step === 3 && mode === 'batch' && selectedTrack && batchSelected[batchIndex] && (
+          {/* Step 3 — Gmail batch (auto-send email targets, then manual for rest) */}
+          {step === 3 && mode === 'batch' && selectedTrack && gmailBatchMode && (
+            <div className="space-y-4">
+              {/* Template selector for Gmail batch */}
+              {gmailBatchTemplates.length > 0 && (
+                <div className="space-y-1.5">
+                  <p className="text-xs font-medium uppercase tracking-wider text-accent">Email Preset</p>
+                  <div className="space-y-1" role="listbox" aria-label="Choose an email preset">
+                    {gmailBatchTemplates.map((t) => (
+                      <button
+                        key={t.id}
+                        type="button"
+                        role="option"
+                        aria-selected={gmailBatchTemplateId === t.id}
+                        onClick={() => setGmailBatchTemplateId(t.id)}
+                        className={[
+                          'flex w-full items-center gap-2 rounded-lg border px-3 py-2 text-left text-sm transition-colors',
+                          gmailBatchTemplateId === t.id
+                            ? 'border-accent/50 bg-accent/10'
+                            : 'border-line bg-surface hover:border-line/80 hover:bg-surface-2',
+                        ].join(' ')}
+                      >
+                        <span className="flex-1 truncate font-medium">{t.name}</span>
+                        <Badge variant={KIND_VARIANT[t.kind] ?? 'muted'}>
+                          {KIND_LABELS[t.kind] ?? t.kind}
+                        </Badge>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <GmailBatchPanel
+                track={selectedTrack}
+                emailTargets={batchSelected.filter(
+                  (t) => targetRouteKind(t) === 'email' && t.email
+                )}
+                allTargets={batchSelected}
+                pressKit={pressKit}
+                artistName={artistName}
+                templates={gmailBatchTemplates}
+                selectedTemplateId={gmailBatchTemplateId}
+                recordSend={recordSend}
+                onAutoSendComplete={(results) => {
+                  setGmailAutoResults(results)
+                  // Extract manual targets (form/dm or email-with-no-address)
+                  const manualTs = batchSelected.filter(
+                    (t) => targetRouteKind(t) !== 'email' || !t.email
+                  )
+                  if (manualTs.length === 0) {
+                    // Nothing manual — jump straight to summary
+                    setStep(4)
+                  } else {
+                    // Start manual queue for remaining targets
+                    setBatchSelected(manualTs)
+                    setBatchIndex(0)
+                    setBatchResults([])
+                    setGmailBatchMode(false) // switch to regular batch queue for remainder
+                  }
+                }}
+              />
+            </div>
+          )}
+
+          {/* Step 3 — manual batch queue (original flow; also used for remainder after Gmail auto-send) */}
+          {step === 3 && mode === 'batch' && selectedTrack && !gmailBatchMode && batchSelected[batchIndex] && (
             <div className="space-y-4">
               <BatchProgress
                 index={batchIndex}
@@ -2102,8 +2780,18 @@ export default function SendDemo() {
             />
           )}
 
-          {/* Step 4 — batch summary */}
-          {step === 4 && mode === 'batch' && selectedTrack && (
+          {/* Step 4 — Gmail batch summary (auto + manual combined) */}
+          {step === 4 && mode === 'batch' && selectedTrack && gmailAutoResults.length > 0 && (
+            <GmailBatchSummary
+              track={selectedTrack}
+              autoResults={gmailAutoResults}
+              manualResults={batchResults}
+              onReset={handleReset}
+            />
+          )}
+
+          {/* Step 4 — regular batch summary */}
+          {step === 4 && mode === 'batch' && selectedTrack && gmailAutoResults.length === 0 && (
             <BatchSummary
               track={selectedTrack}
               results={batchResults}
