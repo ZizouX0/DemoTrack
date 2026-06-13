@@ -1,0 +1,30 @@
+// Canonical genre options for the track genre multi-select.
+// Curated and de-duplicated from the 288-label master (data/labels.json),
+// ordered by relevance to a house / tech-house producer. Used as the picker
+// list in the Add/Edit Track form; stored on tracks as `genre_tags` (text[]).
+export const GENRE_OPTIONS = [
+  'Tech House',
+  'House',
+  'Deep House',
+  'Minimal / Deep Tech',
+  'Melodic House',
+  'Melodic Techno',
+  'Afro House',
+  'Afro Tech',
+  'Organic House',
+  'Progressive House',
+  'Techno',
+  'Minimal',
+  'Nu-Disco',
+  'Disco House',
+  'Soulful House',
+  'Bass House',
+  "Jackin' House",
+  'Indie Dance',
+  'Classic House',
+  'Funky House',
+  'Latin Tech House',
+  'UK Garage',
+  'Electronica',
+  'Downtempo',
+]

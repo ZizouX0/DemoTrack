@@ -17,13 +17,23 @@ const cors = {
 const j = (b: unknown, status = 200) =>
   new Response(JSON.stringify(b), { status, headers: { ...cors, 'Content-Type': 'application/json' } })
 
-const SYSTEM = `You write ONE sentence: the single personalized line ("the hook") a house / tech-house producer drops into a cold demo email to a record label, saying why THIS track fits THIS label.
+const SYSTEM = `You write ONE sentence — "the hook" — the single personalized line a house / tech-house producer drops into a cold demo email to a record label. It must make the A&R feel this track was sent to THEM specifically, not blasted to 50 labels.
+
+What makes a great hook:
+- It names a CONCRETE point of fit between this exact track and this exact label — the sound, the energy, a signed artist or release the label is known for (only if that fact is provided), or where it would sit in their catalogue.
+- It is specific and quietly confident. A&Rs read hundreds of these; vagueness reads as spam.
 
 Hard rules:
-- Maximum 30 words. Exactly ONE sentence. Plain text — no greeting, no sign-off, no quotation marks, no emoji.
-- Use ONLY the facts provided about the track and the label. NEVER invent a release, chart stat, signing, artist name, event, or any "angle" that isn't in the input.
-- If you don't have a specific angle, write an honest, non-generic line grounded in the track's genre/energy and the label's stated focus — do not fabricate to sound impressive.
-- No hype clichés ("huge fan", "check it out", "I think you'll love"). Be specific and confident, not fawning.
+- Output EXACTLY ONE sentence, maximum 30 words. Plain text — no greeting, no sign-off, no quotation marks, no emoji, no hashtags.
+- Use ONLY the facts provided. NEVER invent a release, chart stat, signing, collaborator, event, play count, or "angle" that isn't in the input.
+- If the only facts are genre / BPM / energy, write an honest line grounded in those and the label's stated focus — do not fabricate to sound impressive.
+- Ban these clichés and self-centred openers: "huge fan", "big fan", "check out", "I think you'll love", "I'd love for you to", "hope you're well", "I've been making music". Lead with the track and the fit, not with yourself.
+
+Good examples (mimic the STYLE only — never reuse their facts):
+- "This rolling, hypnotic 126 BPM tech-house cut with a stripped late-night groove would sit naturally between your recent minimal deep-tech releases."
+- "Built on a warm organic-house groove and tribal percussion, it carries the sun-down terrace energy your label is known for."
+- "A driving peak-time techno roller with a dark modular lead — exactly the after-midnight weight your A&R has been signing."
+
 Respond strictly as JSON: {"hook": "<sentence>"}.`
 
 // ---- Provider call: returns the raw model text (expected to be JSON) ----
@@ -82,7 +92,9 @@ Deno.serve(async (req: Request) => {
     Array.isArray(track.genre_tags) && track.genre_tags.length ? `Track genres: ${(track.genre_tags as string[]).join(', ')}.` : '',
     track.bpm ? `BPM: ${track.bpm}.` : '',
     track.key ? `Key: ${track.key}.` : '',
+    track.notes ? `Track vibe / reference / mix notes (use for the sound description): ${track.notes}` : '',
     `Label: ${label.name ?? 'this label'}.`,
+    Array.isArray(label.genre_tags) && label.genre_tags.length ? `Label genres / focus: ${(label.genre_tags as string[]).join(', ')}.` : '',
     label.why ? `Why the label matters: ${label.why}` : '',
     label.requirements ? `Label submission notes: ${label.requirements}` : '',
     arIntel ? `A&R intel / personal angle: ${arIntel}` : '',
