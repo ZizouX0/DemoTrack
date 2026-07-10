@@ -374,10 +374,10 @@ function PickTarget({ targets, labelsLoading, selected, onSelect, multi = false,
         const matchGenre = (t._genres ?? []).some((g) => norm(g).includes(q))
         if (!matchName && !matchGenre) return false
       }
-      if (tierFilter && t._tier !== tierFilter) return false
+      if (tierFilter && t._tier && t._tier !== tierFilter) return false
       if (accessFilter && (t.access_path ?? t._access_path) !== accessFilter) return false
       if (methodFilter && t.submission_method !== methodFilter) return false
-      if (genreFilter && !(t._genres ?? []).includes(genreFilter)) return false
+      if (genreFilter && (t._genres?.length ?? 0) > 0 && !t._genres.includes(genreFilter)) return false
       // Route kind filter: 'email' or 'portal' (form+dm)
       if (routeFilter === 'email' && targetRouteKind(t) !== 'email') return false
       if (routeFilter === 'portal') {
@@ -2182,6 +2182,7 @@ export default function SendDemo() {
   const [batchSelected, setBatchSelected] = useState([]) // array of target objects
   const [batchIndex, setBatchIndex] = useState(0)
   const [batchResults, setBatchResults] = useState([])
+  const batchRunKeysRef = useRef(null) // selection snapshot of the active batch run (for safe resume)
 
   // Gmail batch state — only used when isGmailConfigured() and batch has email targets
   const [gmailBatchMode, setGmailBatchMode] = useState(false)
@@ -2264,15 +2265,21 @@ export default function SendDemo() {
           }
         : {}
 
-    // Enrich existing contacts with _tier / _genres / _access_path for filtering
-    const crmTargets = contacts.map((c) => ({
-      ...c,
-      _tier: c._tier ?? null,
-      _genres: c.genre_tags ?? [],
-      _access_path: c.access_path ?? null,
-      _why: c._why ?? '',
-      ...pickFresh(c.label_id ? freshByLabel.get(c.label_id) : null),
-    }))
+    // Enrich existing contacts with _tier / _genres / _access_path for filtering.
+    // Contacts carry no tier/genre columns of their own — inherit them from the
+    // linked label so tier/genre filters don't silently hide CRM targets.
+    const labelById = new Map(labels.map((l) => [l.id, l]))
+    const crmTargets = contacts.map((c) => {
+      const lbl = c.label_id ? labelById.get(c.label_id) : null
+      return {
+        ...c,
+        _tier: c._tier ?? lbl?.tier ?? null,
+        _genres: c.genre_tags ?? lbl?.genre_tags ?? [],
+        _access_path: c.access_path ?? lbl?.access_path ?? null,
+        _why: c._why ?? lbl?.why ?? '',
+        ...pickFresh(c.label_id ? freshByLabel.get(c.label_id) : null),
+      }
+    })
 
     // Labels not yet in CRM
     const labelTargets = labels
@@ -2347,6 +2354,7 @@ export default function SendDemo() {
   }
 
   function handleSelectTarget(target) {
+    setPendingTrackingHash(null) // a tracking link made for a previous target must not attach to this one
     setSelectedContact(target)
     setStep(3)
   }
@@ -2447,10 +2455,27 @@ export default function SendDemo() {
 
   async function startBatch() {
     if (batchSelected.length === 0) return
-    setBatchIndex(0)
-    setBatchResults([])
+
+    // Resume a partially-completed run instead of restarting from index 0 —
+    // otherwise Back → "Review targets" re-runs the queue from the top and
+    // re-sends to already-confirmed labels (duplicate submissions + emails).
+    // Only resume when the selection is unchanged since the run started.
+    const runKeys = batchSelected.map((t) => targetKey(t)).join('|')
+    const resuming =
+      batchRunKeysRef.current === runKeys &&
+      batchResults.length > 0 &&
+      batchResults.length < batchSelected.length
+    batchRunKeysRef.current = runKeys
     setPendingTrackingHash(null)
     setConfirmError(null)
+    if (resuming) {
+      setBatchIndex(batchResults.length)
+      setGmailBatchMode(false) // continue the manual queue where it left off
+      setStep(3)
+      return
+    }
+    setBatchIndex(0)
+    setBatchResults([])
     setGmailAutoResults([])
 
     // Determine if Gmail 1-click mode should be offered
@@ -2483,6 +2508,7 @@ export default function SendDemo() {
     if (batchIndex + 1 < batchSelected.length) {
       setBatchIndex((i) => i + 1)
     } else {
+      batchRunKeysRef.current = null
       setStep(4)
     }
   }
@@ -2537,6 +2563,7 @@ export default function SendDemo() {
     setGmailBatchTemplates([])
     setGmailBatchTemplateId(null)
     setGmailAutoResults([])
+    batchRunKeysRef.current = null
     load()
   }
 

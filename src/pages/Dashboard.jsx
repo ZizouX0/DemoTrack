@@ -282,7 +282,9 @@ function AnalyticsBlock() {
   const byGenre = computeByGenre(submissions)
   const byTier = computeByTier(submissions)
   const totalSent = funnel.sent
-  const totalResponded = funnel.replied + funnel.considering + funnel.signed
+  // funnel counts are cumulative (replied = rank>=2), so replied already
+  // includes considering + signed — summing them triple-counts advanced stages
+  const totalResponded = funnel.replied
   const overallRate = totalSent > 0 ? Math.round((totalResponded / totalSent) * 100) : null
 
   return (
@@ -732,9 +734,12 @@ function FollowUpQueue() {
     removeItem(item.submission_id)
 
     const now = new Date().toISOString()
+    // Re-baseline BOTH clocks: the queue view marks anything with
+    // overdue_at <= now as 'overdue', so pushing only follow_up_due_at
+    // would make snoozed overdue items reappear on the next load.
     const { error: snoozeErr } = await supabase
       .from('submissions')
-      .update({ follow_up_due_at: addDays(7), updated_at: now })
+      .update({ follow_up_due_at: addDays(7), overdue_at: addDays(14), updated_at: now })
       .eq('id', item.submission_id)
       .eq('user_id', user.id)
 
