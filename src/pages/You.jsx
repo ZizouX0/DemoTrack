@@ -747,16 +747,21 @@ function todayStr() {
   return new Date().toISOString().slice(0, 10)
 }
 
-/** Return the ISO date string (YYYY-MM-DD) for the start of the current period */
+/**
+ * Start of the current period in the USER'S timezone.
+ * Returns { ts, dateStr }: `ts` is the exact local-midnight instant (for
+ * timestamptz columns); `dateStr` is the local YYYY-MM-DD (for DATE columns).
+ * Slicing toISOString() here would shift the boundary a day early for any
+ * timezone ahead of UTC (e.g. Tunis), bleeding the prior period into this one.
+ */
 function periodStart(period) {
   const now = new Date()
   let d
   if (period === 'week') {
-    // Monday of current week
+    // Monday of current week, local midnight
     const day = now.getDay() // 0=Sun
     const diff = day === 0 ? -6 : 1 - day
-    d = new Date(now)
-    d.setDate(now.getDate() + diff)
+    d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + diff)
   } else if (period === 'month') {
     d = new Date(now.getFullYear(), now.getMonth(), 1)
   } else if (period === 'quarter') {
@@ -766,7 +771,11 @@ function periodStart(period) {
     // year
     d = new Date(now.getFullYear(), 0, 1)
   }
-  return d.toISOString().slice(0, 10)
+  const pad = (n) => String(n).padStart(2, '0')
+  return {
+    ts: d.toISOString(),
+    dateStr: `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`,
+  }
 }
 
 /** Compute streak from an array of objects with a session_date property */
@@ -1321,7 +1330,7 @@ async function fetchActual(userId, metric, period) {
         .from('submissions')
         .select('id', { count: 'exact', head: true })
         .eq('user_id', userId)
-        .gte('sent_at', `${start}T00:00:00.000Z`)
+        .gte('sent_at', start.ts)
       return count ?? 0
     }
     if (metric === 'sessions') {
@@ -1329,7 +1338,7 @@ async function fetchActual(userId, metric, period) {
         .from('work_sessions')
         .select('id', { count: 'exact', head: true })
         .eq('user_id', userId)
-        .gte('session_date', start)
+        .gte('session_date', start.dateStr)
       return count ?? 0
     }
     if (metric === 'follow_ups') {
@@ -1337,7 +1346,8 @@ async function fetchActual(userId, metric, period) {
         .from('feedback')
         .select('id', { count: 'exact', head: true })
         .eq('user_id', userId)
-        .gte('created_at', `${start}T00:00:00.000Z`)
+        .neq('response_type', 'no_response') // auto-logged silence is not a follow-up you did
+        .gte('created_at', start.ts)
       return count ?? 0
     }
     if (metric === 'tracks_finished') {
@@ -1346,7 +1356,7 @@ async function fetchActual(userId, metric, period) {
         .select('id', { count: 'exact', head: true })
         .eq('user_id', userId)
         .in('status', ['demo_ready', 'submitted', 'signed'])
-        .gte('updated_at', `${start}T00:00:00.000Z`)
+        .gte('updated_at', start.ts)
       return count ?? 0
     }
   } catch {
